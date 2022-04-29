@@ -11,6 +11,7 @@ namespace GarageLogic
         private readonly StringBuilder r_LicenceID;
         private readonly float r_Energyercentage;
         private readonly List<Wheel> r_VehicleWheels;
+        private readonly Energy energy;
 
         public Vehicle(StringBuilder i_ModelName, StringBuilder i_LicenceID, float i_EnergyPercentage, int i_NumOfWheels)
         {
