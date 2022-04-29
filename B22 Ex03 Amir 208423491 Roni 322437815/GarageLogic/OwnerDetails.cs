@@ -5,9 +5,7 @@ using System.Text;
 
 namespace GarageLogic
 {
-    public class Garage
+    class OwnerDetails
     {
-        private readonly VehicleManufactor r_vehicleManufactor = new VehicleManufactor(); 
-
     }
 }
