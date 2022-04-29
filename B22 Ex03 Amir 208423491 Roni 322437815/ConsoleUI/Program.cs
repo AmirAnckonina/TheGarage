@@ -9,7 +9,9 @@ namespace ConsoleUI
     {
         public static void Main()
         {
+            GarageManager garageManager = new GarageManager();
 
+            garageManager.Run();
         }
     }
 }

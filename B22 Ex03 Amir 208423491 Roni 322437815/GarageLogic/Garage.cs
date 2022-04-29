@@ -7,6 +7,13 @@ namespace GarageLogic
 {
     public class Garage
     {
-        private readonly VehicleManufactor r_vehicleManufactor = new VehicleManufactor(); 
+        /// private readonly VehicleManufacturer r_vehicleManufactor = new VehicleManufacturer();
+        private Dictionary<StringBuilder, Vehicle> r_AllGarageVehicles;
+
+        public Garage()
+        {
+            r_AllGarageVehicles = new Dictionary<Vehicle, OwnerDetails>();
+        }
+
     }
 }

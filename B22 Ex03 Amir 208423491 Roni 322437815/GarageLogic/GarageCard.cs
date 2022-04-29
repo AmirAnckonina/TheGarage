@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GarageLogic
 {
-    public class VehicleManufactor
+    public class GarageCard
     {
 
     }

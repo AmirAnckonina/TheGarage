@@ -32,8 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ConsoleIOManager.cs" />
     <Compile Include="GarageManager.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="VehicleRawDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GarageLogic">

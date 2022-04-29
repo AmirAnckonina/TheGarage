@@ -36,7 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Garage.cs" />
-    <Compile Include="VehicleManufactor.cs" />
+    <Compile Include="GarageCard.cs" />
+    <Compile Include="VehicleManufacturer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
