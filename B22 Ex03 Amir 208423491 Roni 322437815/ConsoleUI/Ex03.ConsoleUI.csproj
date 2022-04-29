@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{149A13B9-C898-4DD7-8ECC-51EA50C7BED2}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoleUI</RootNamespace>
-    <AssemblyName>ConsoleUI</AssemblyName>
+    <RootNamespace>Ex03.ConsoleUI</RootNamespace>
+    <AssemblyName>Ex03.ConsoleUI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,12 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ConsoleIOManager.cs" />
     <Compile Include="GarageManager.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="VehicleRawDetails.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="GarageLogic">
-      <HintPath>..\GarageLogic\bin\Debug\GarageLogic.dll</HintPath>
+    <Reference Include="Ex03.GarageLogic">
+      <HintPath>..\GarageLogic\bin\Debug\Ex03.GarageLogic.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
