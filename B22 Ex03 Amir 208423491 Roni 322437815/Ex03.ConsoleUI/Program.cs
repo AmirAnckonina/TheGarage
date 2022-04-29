@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ConsoleUI
+namespace Ex03.ConsoleUI
 {
     class Program
     {
@@ -11,7 +11,7 @@ namespace ConsoleUI
         {
             GarageManager garageManager = new GarageManager();
 
-            garageManager.Run();
+           garageManager.Run();
         }
     }
 }

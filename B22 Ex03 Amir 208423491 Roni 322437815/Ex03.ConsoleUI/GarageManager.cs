@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GarageLogic;
+using Ex03.GarageLogic;
 
-namespace ConsoleUI
+namespace Ex03.ConsoleUI
 {
     public class GarageManager
     {
@@ -43,7 +43,7 @@ namespace ConsoleUI
             /// EnergyType
             /// Switch (userChoice == 
 
-            r_VehicleManufacturer.CreateCar();
+           /// r_VehicleManufacturer.CreateCar();
 
         }
     }
