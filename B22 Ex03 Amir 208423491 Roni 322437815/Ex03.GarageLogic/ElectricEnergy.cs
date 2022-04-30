@@ -10,5 +10,7 @@ namespace Ex03.GarageLogic
         public ElectricEnergy(float i_BatteryLeft, float i_MaxBatteryCapacity)
             : base(i_BatteryLeft, i_MaxBatteryCapacity)
         { }
+
+       
     }
 }
