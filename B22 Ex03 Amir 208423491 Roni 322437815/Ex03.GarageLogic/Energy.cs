@@ -5,6 +5,12 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
+    public enum eEnergyType
+    {
+        Fuel,
+        Electric
+    }
+
     public abstract class Energy
     {
         private float m_EnergyLeft;
@@ -17,4 +23,9 @@ namespace Ex03.GarageLogic
         }
 
     }
+
+    /*public void LoadEnergy(float i_EnergyAmount)
+    {
+        m_EnergyLeft += i_EnergyAmount;
+    }*/
 }

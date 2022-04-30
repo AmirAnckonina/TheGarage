@@ -14,5 +14,23 @@ namespace Ex03.GarageLogic
             Truck
         }
 
+        /*public Car ManufactureCar()
+        {
+
+        }
+
+        public Vehicle ManufactureMotorcycle()
+        {
+
+        }
+
+        public Vehicle ManufactureTruck()
+        {
+
+        }*/
+
+
+
+
     }
 }

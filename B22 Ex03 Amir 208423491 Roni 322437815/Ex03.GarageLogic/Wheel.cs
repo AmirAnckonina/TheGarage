@@ -7,7 +7,6 @@ namespace Ex03.GarageLogic
 {
     public class Wheel
     {
-
         private readonly StringBuilder r_Manufacturer;
         private float m_currentPSI;
         private readonly float r_MaxPSI;
@@ -44,6 +43,10 @@ namespace Ex03.GarageLogic
             }*/
         }
 
+        public void InflateWheelToMax()
+        {
+            m_currentPSI = r_MaxPSI;
+        }
 
     }
 }

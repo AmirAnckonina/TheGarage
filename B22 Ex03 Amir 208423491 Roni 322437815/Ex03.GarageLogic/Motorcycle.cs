@@ -26,6 +26,13 @@ namespace Ex03.GarageLogic
             r_EngineVolumeCC = i_EngineVolumeCC;
         }
 
+        /*public override void InflateAllWheelsToMax()
+        {
+            foreach (Wheel wheel in VehicleWheels)
+            {
+                wheel.
+            }
+        }*/
 
 
     }

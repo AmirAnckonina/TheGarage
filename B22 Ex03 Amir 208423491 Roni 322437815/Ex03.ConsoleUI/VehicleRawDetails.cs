@@ -7,7 +7,7 @@ namespace Ex03.ConsoleUI
 {
     public class VehicleRawDetails
     {
-        private int m_VehicleTypeChoice;
+       /* private int m_VehicleTypeChoice;
         private StringBuilder m_LicenceID;
         private StringBuilder m_VehicleOwnerName;
         private StringBuilder m_VehicleOwnerPhone;
@@ -17,7 +17,7 @@ namespace Ex03.ConsoleUI
         private int m_MotorcycleLicenceTypeChoice;
         private float m_MotorcycleEngineVolume;
         private bool m_HasCoolingCargo;
-
+*/
         /// Properties
     }
 }
