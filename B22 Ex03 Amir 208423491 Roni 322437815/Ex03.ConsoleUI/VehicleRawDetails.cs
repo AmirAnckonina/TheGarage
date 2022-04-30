@@ -18,7 +18,8 @@ namespace Ex03.ConsoleUI
         private int m_MotorcycleLicenceTypeChoice;
         private float m_MotorcycleEngineVolume;
 
-        
-
+        private bool m_HasCoolingCargo;
+        */
+        /// Properties
     }
 }
