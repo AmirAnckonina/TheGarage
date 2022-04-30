@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
         private readonly StringBuilder r_ModelName;
         private readonly StringBuilder r_LicenceID;
         private float m_EnergyPercentage;
-        private readonly Energy r_VehicleEnergy;
+        private Energy r_VehicleEnergy;
         private List<Wheel> m_VehicleWheels;
 
         public Vehicle(StringBuilder i_ModelName, StringBuilder i_LicenceID, float i_EnergyPercentage, int i_NumOfWheels)
@@ -41,6 +41,19 @@ namespace Ex03.GarageLogic
             {
                 return r_ModelName;
             }
+        }
+
+        public Energy VehicleEnergy
+        {
+            get
+            {
+                return r_VehicleEnergy;
+            }
+
+/*            set
+            {
+                r_VehicleEnergy = value;
+            }*/
         }
 
         public float EnergyPercentage
@@ -77,7 +90,6 @@ namespace Ex03.GarageLogic
             }
         }
         
-
         public void InflateAllWheelsToMax()
         {
             foreach (Wheel wheel in m_VehicleWheels)

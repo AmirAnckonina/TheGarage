@@ -12,6 +12,16 @@ namespace Ex03.GarageLogic
         private Garage.eVehicleStatus m_VehicleStatus;
         private Vehicle m_Vehicle;
 
+        public GarageCard(StringBuilder i_VehicleOwnerName, StringBuilder i_VehicleOwnerPhone, Garage.eVehicleStatus i_VehicleStatus, Vehicle i_Vehicle)
+        {
+            m_VehicleOwnerName = new StringBuilder();
+            m_VehicleOwnerPhone = new StringBuilder();
+            m_VehicleOwnerName = i_VehicleOwnerName;
+            m_VehicleOwnerPhone = i_VehicleOwnerPhone;
+            m_VehicleStatus = i_VehicleStatus;
+            m_Vehicle = i_Vehicle;
+        }
+
         public StringBuilder VehicleOwnerName
         {
             get

@@ -5,27 +5,27 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public enum eEnergyType
-    {
-        Fuel,
-        Electric
-    }
-
     public abstract class Energy
     {
-        private float m_EnergyLeft;
-        private readonly float r_MaxEnergyCapacity;
+        public enum eEnergyType
+        {
+            Fuel,
+            Electric
+        }
+
+        private float m_EnergyLeftInHours;
+        private readonly float r_MaxEnergyCapacityInHours;
 
         public Energy(float i_EnergyLeft, float i_MaxEnergyCapacity)
         {
-            m_EnergyLeft = i_EnergyLeft;
-            r_MaxEnergyCapacity = i_MaxEnergyCapacity;
+            m_EnergyLeftInHours = i_EnergyLeft;
+            r_MaxEnergyCapacityInHours = i_MaxEnergyCapacity;
+        }
+
+        public void LoadEnergy(float i_EnergyAmountInHours)
+        {
+            m_EnergyLeftInHours += i_EnergyAmountInHours;
         }
 
     }
-
-    /*public void LoadEnergy(float i_EnergyAmount)
-    {
-        m_EnergyLeft += i_EnergyAmount;
-    }*/
 }
