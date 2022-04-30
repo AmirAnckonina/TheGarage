@@ -9,29 +9,31 @@ namespace Ex03.ConsoleUI
     public class GarageManager
     {
         private readonly Garage r_Garage;
-        private readonly VehicleRawDetails r_VehicleRawDetails;
         private readonly ConsoleIOManager r_ConsoleIoManager;
-        private readonly VehicleManufacturer r_VehicleManufacturer;
+
         public GarageManager()
         {
             r_Garage = new Garage();
-            r_VehicleRawDetails = new VehicleRawDetails();
+            ///r_VehicleRawDetails = new VehicleRawDetails();
             r_ConsoleIoManager = new ConsoleIOManager();
-            r_VehicleManufacturer = new VehicleManufacturer();
         }
 
         public void Run()
-        {
-            /// Get input of vehchiles details.
-            /// 1. Vehcile type
-            /// 2. EnergyType (in case of Car, Motorcycle)
-            /// For each vehicle we want to get the special details for each type
+        { 
 
             /// Manufacturer vehicles ()
             /// 
         }
         public void VehcilesManufactureringProcedure()
         {
+            StringBuilder vehicleLicenseNumber = new StringBuilder();
+            vehicleLicenseNumber = r_ConsoleIoManager.GetVehicleLicenseNumber();
+            //if(!IsAlreadyInTheGarage(vehicleLicenseNumber))
+            //{
+            //   r_ConsoleIoManager.GetVehicleType();
+            //}
+
+
             /// Get input of vehchiles details.
             /// 1. Vehcile type
             /// 2. EnergyType (in case of Car, Motorcycle)
