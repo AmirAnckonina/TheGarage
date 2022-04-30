@@ -10,8 +10,20 @@ namespace Ex03.GarageLogic
         private readonly bool r_HasCoolingCargo;
         private readonly float r_CargoCapcity;
 
-        public Truck(StringBuilder i_ModelName, StringBuilder i_LicenceID, float i_EnergyPercentage, int i_NumOfWheels, bool i_HasCoolingCargo, float i_CargoCapacity)
-            : base(i_ModelName, i_LicenceID, i_EnergyPercentage, i_NumOfWheels)
+        public Truck(
+            StringBuilder i_ModelName,
+            StringBuilder i_LicenceID,
+            Energy.eEnergyType i_EnergyType,
+            StringBuilder i_WheelManufacturerName,
+            bool i_HasCoolingCargo,
+            float i_CargoCapacity)
+            : base(
+                  i_ModelName,
+                  i_LicenceID
+                  , i_EnergyType,
+                  i_WheelManufacturerName,
+                  0,
+                  0)
         {
             r_HasCoolingCargo = i_HasCoolingCargo;
             r_CargoCapcity = i_CargoCapacity;

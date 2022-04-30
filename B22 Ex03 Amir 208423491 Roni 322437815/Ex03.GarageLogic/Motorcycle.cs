@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
     public class Motorcycle : Vehicle
     {
 
-        public enum eLicenceType
+        public enum eMotorcycleLicenceType
         {
             A,
             A1,
@@ -16,27 +16,33 @@ namespace Ex03.GarageLogic
             BB
         }
 
-        private readonly eLicenceType r_LicenceType;
-        private readonly int r_EngineCapacityCC;
+        private readonly eMotorcycleLicenceType r_LicenceType;
+        private readonly int r_EngineCapacity;
 
         public Motorcycle(
             StringBuilder i_ModelName,
             StringBuilder i_LicenceID,
-            float i_EnergyPercentage,
-            int i_NumOfWheels,
-            eLicenceType i_LicenceType,
-            int i_EngineCapacityCC)
-            : base(i_ModelName, i_LicenceID, i_EnergyPercentage, i_NumOfWheels)
+            Energy.eEnergyType i_EnergyType,
+            StringBuilder i_WheelManufacturerName,
+            eMotorcycleLicenceType i_MCLicenceType,
+            int i_EngineCapacity)
+            : base(
+                  i_ModelName,
+                  i_LicenceID
+                  , i_EnergyType,
+                  i_WheelManufacturerName,
+                  0,
+                  0)
         {
-            r_LicenceType = i_LicenceType;
-            r_EngineCapacityCC = i_EngineCapacityCC;
+            r_LicenceType = i_MCLicenceType;
+            r_EngineCapacity = i_EngineCapacity;
         }
 
         /*public override void InflateAllWheelsToMax()
         {
             foreach (Wheel wheel in VehicleWheels)
             {
-                wheel.
+                wheel.InflateWheelToMax()
             }
         }*/
 

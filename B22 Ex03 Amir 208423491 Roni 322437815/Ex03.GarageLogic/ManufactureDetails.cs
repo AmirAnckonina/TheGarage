@@ -14,9 +14,9 @@ namespace Ex03.GarageLogic
         private StringBuilder m_VehicleOwnerPhoneNumber;
         private Energy.eEnergyType m_EnergyType;
         private Car.eColor m_CarColor;
-        private Car.eDoorsNumber m_CarDoorsNumber;
-        private Motorcycle.eLicenceType m_MotorcycleLicenceType;
-        private float m_MotorcycleEngineCapacityCC;
+        private Car.eDoorsNumber m_DoorsNumberInCar;
+        private Motorcycle.eMotorcycleLicenceType m_MotorcycleLicenceType;
+        private float m_MotorcycleEngineCapacity;
         private bool m_HasCoolingCargo;
         private float m_CargoCapacity;
         private StringBuilder m_WheelManufacturerName;
@@ -30,7 +30,7 @@ namespace Ex03.GarageLogic
             m_WheelManufacturerName = new StringBuilder();
         }
 
-        public VehicleManufacturer.eVehicleType VehicleTypeChoice
+        public VehicleManufacturer.eVehicleType VehicleType
         {
             get
             {
@@ -95,7 +95,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public Energy.eEnergyType EnergyTypeChoice
+        public Energy.eEnergyType EnergyType
         {
             get
             {
@@ -108,7 +108,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public Car.eColor CarColorChioce
+        public Car.eColor CarColor
         {
             get
             {
@@ -121,20 +121,20 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public Car.eDoorsNumber CarDoorsNumberChoice
+        public Car.eDoorsNumber DoorsNumberInCar
         {
             get
             {
-                return m_CarDoorsNumber;
+                return m_DoorsNumberInCar;
             }
 
             set
             {
-                m_CarDoorsNumber = value;
+                m_DoorsNumberInCar = value;
             }
         }
 
-        public Motorcycle.eLicenceType MotorcycleLicenceTypeChoice
+        public Motorcycle.eMotorcycleLicenceType MotorcycleLicenceType
         {
             get
             {
@@ -147,16 +147,16 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public float MotorcycleEngineVolume
+        public float MotorcycleEngineCapacity
         {
             get
             {
-                return m_MotorcycleEngineCapacityCC;
+                return m_MotorcycleEngineCapacity;
             }
 
             set
             {
-                m_MotorcycleEngineCapacityCC = value;
+                m_MotorcycleEngineCapacity = value;
             }
         }
 

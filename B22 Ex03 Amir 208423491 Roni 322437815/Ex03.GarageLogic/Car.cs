@@ -23,11 +23,25 @@ namespace Ex03.GarageLogic
             Five = 5
         }
 
+        private static readonly int sr_CarNumOfWheels = 4;
+        private static readonly float sr_CarWheelMaxPSI = 4;
         private readonly eColor r_Color;
         private readonly eDoorsNumber r_DoorsNumber;
 
-        public Car(StringBuilder i_ModelName, StringBuilder i_LicenceID, float i_EnergyPercentage, int i_NumOfWheels, eColor i_Color, eDoorsNumber i_DoorsNumber)
-            : base(i_ModelName, i_LicenceID, i_EnergyPercentage, i_NumOfWheels)
+        public Car(
+            StringBuilder i_ModelName,
+            StringBuilder i_LicenceID,
+            Energy.eEnergyType i_EnergyType,
+            StringBuilder i_WheelManufacturerName,
+            eColor i_Color,
+            eDoorsNumber i_DoorsNumber)
+            : base(
+                  i_ModelName,
+                  i_LicenceID
+                  , i_EnergyType,
+                  i_WheelManufacturerName,
+                  sr_CarNumOfWheels,
+                  sr_CarWheelMaxPSI)
         {
             r_Color = i_Color;
             r_DoorsNumber = i_DoorsNumber;

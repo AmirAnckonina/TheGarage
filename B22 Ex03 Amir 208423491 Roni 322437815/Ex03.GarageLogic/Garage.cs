@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
 
         public enum eVehicleStatus
         {
-            InRepairProgress,
+            InRepair,
             Repaired,
             Paid
         }
@@ -27,22 +27,27 @@ namespace Ex03.GarageLogic
         ///1
         public void AddVehicleToGarage(ManufactureDetails i_ManufactureDetails)
         {
+            Vehicle newVehicle;
             GarageCard newGarageCard;
 
-           /* if (!LicenceIDExist(i_ManufactureDetails.LicenceID))
+            if (!LicenceIDExist(i_ManufactureDetails.LicenceID))
             {
                 /// manufacturing.
-                r_VehicleManufacturer.ManufactureNewVehicle(i_ManufactureDetails);
+                newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_ManufactureDetails);
                 /// creation of GarageCard.
-                /// newGarageCard = new GarageCard(/// All relevantDetails);
-                /// r_GarageVehicles.Add(i_ManufactureDetails.LicenceID, newGarageCard);
+                newGarageCard = new GarageCard(
+                    i_ManufactureDetails.VehicleOwnerName,
+                    i_ManufactureDetails.VehicleOwnerPhoneNumber,
+                    eVehicleStatus.InRepair,
+                    newVehicle);
+                r_GarageVehicles.Add(i_ManufactureDetails.LicenceID, newGarageCard);
 
             }
 
             else
             {
                 /// Change status to InRepair
-            }*/
+            }
         }
 
         /// 2 -> Should give the consoleUI this List and she fill print it.
