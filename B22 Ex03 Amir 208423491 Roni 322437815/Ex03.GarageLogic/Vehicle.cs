@@ -7,8 +7,8 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        private readonly StringBuilder r_ModelName;
         private readonly StringBuilder r_LicenceID;
+        private readonly StringBuilder r_ModelName;
         private float m_EnergyPercentage;
         private Energy r_VehicleEnergy;
         private List<Wheel> m_VehicleWheels;
