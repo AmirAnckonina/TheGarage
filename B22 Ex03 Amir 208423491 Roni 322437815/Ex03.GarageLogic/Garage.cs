@@ -88,7 +88,7 @@ namespace Ex03.GarageLogic
         {
             ElectricEnergy electricEnergyOfCurrentVehicle;
 
-            if (LicenceIDExist(i_LicenceID)
+            if (LicenceIDExist(i_LicenceID))
             {
                 electricEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as ElectricEnergy;
                 electricEnergyOfCurrentVehicle.ChargeBattery(i_TimeToChargeInMinutes);
@@ -102,7 +102,7 @@ namespace Ex03.GarageLogic
         {
             FuelEnergy fuelEnergyOfCurrentVehicle;
 
-            if (LicenceIDExist(i_LicenceID)
+            if (LicenceIDExist(i_LicenceID))
             {
                 fuelEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as FuelEnergy;
                 fuelEnergyOfCurrentVehicle.Refuel(i_FuelAmount, i_FuelType);  

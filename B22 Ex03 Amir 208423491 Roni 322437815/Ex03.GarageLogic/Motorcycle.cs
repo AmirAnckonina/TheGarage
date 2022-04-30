@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
         }
 
         private readonly eLicenceType r_LicenceType;
-        private readonly int r_EngineVolumeCC;
+        private readonly int r_EngineCapacityCC;
 
         public Motorcycle(
             StringBuilder i_ModelName,
@@ -25,11 +25,11 @@ namespace Ex03.GarageLogic
             float i_EnergyPercentage,
             int i_NumOfWheels,
             eLicenceType i_LicenceType,
-            int i_EngineVolumeCC)
+            int i_EngineCapacityCC)
             : base(i_ModelName, i_LicenceID, i_EnergyPercentage, i_NumOfWheels)
         {
             r_LicenceType = i_LicenceType;
-            r_EngineVolumeCC = i_EngineVolumeCC;
+            r_EngineCapacityCC = i_EngineCapacityCC;
         }
 
         /*public override void InflateAllWheelsToMax()

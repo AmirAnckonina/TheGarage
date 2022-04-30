@@ -21,32 +21,37 @@ namespace Ex03.GarageLogic
 
         public Vehicle ManufactureNewVehicle(ManufactureDetails i_ManufactureDetails)
         {
-            Vehicle newVehicle;
+            Vehicle newVehicle = null;
 
-            if (i_ManufactureDetails.VehicleType == eVehicleType.Car)
-            {
-                newVehicle = ManufactureNewCar(i_ManufactureDetails);
-            }
+            /*  if (i_ManufactureDetails.VehicleType == eVehicleType.Car)
+              {
+                  newVehicle = ManufactureNewCar(i_ManufactureDetails);
+              }
 
-            else if (i_ManufactureDetails.VehicleType == eVehicleType.Motorcycle)
-            {
+              else if (i_ManufactureDetails.VehicleType == eVehicleType.Motorcycle)
+              {
 
-            }
+              }
 
-            else if (i_ManufactureDetails.VehicleType == eVehicleType.Truck)
-            {
+              else if (i_ManufactureDetails.VehicleType == eVehicleType.Truck)
+              {
 
-            }
+              }
 
-            else
-            {
-                /// Throw Exception (Argument?)
-            }
+              else
+              {
+                  /// Throw Exception (Argument?)
+              }*/
+
+            return newVehicle;
         }
 
         public Car ManufactureNewCar(ManufactureDetails i_ManufactureDetails)
         {
+            Car newCar = null;
             ///Car newCar = new Car(i_ManufactureDetails.LicenceID, i_ManufactureDetails.)
+
+            return newCar;
         }
 
 

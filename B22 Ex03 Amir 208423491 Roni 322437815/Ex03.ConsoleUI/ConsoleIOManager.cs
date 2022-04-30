@@ -9,32 +9,36 @@ namespace Ex03.ConsoleUI
     using GarageLogic;
     class ConsoleIOManager
     {
-        public const int k_MaximumNameLength = 20;
+        public const int k_MaximumOwnerNameLength = 20;
+        public const int k_PhoneNumberLength = 10;
+        public const int k_MaximumModelNameLength = 20;
+        public const int k_MaximumWheelManufacturerNameLength = 20;
 
         public void Welcome()
         {
             StringBuilder welcomeMessage = new StringBuilder();
 
-            welcomeMessage.Append("Welcome to the Gerage!");
+            welcomeMessage.Append("Welcome to the Garage!");
             Console.WriteLine(welcomeMessage);
         }
 
-        public int GetVehicleType()
+        public VehicleManufacturer.eVehicleType GetVehicleType()
         {
-            int vehicleType;
-            VehicleManufacturer.eVehicleType chosenVehicleType;
-            bool vehicleTypeIsValid;
+            int vehicleTypeChoice;
+            VehicleManufacturer.eVehicleType vehicleType;
+            bool inputIsValid;
 
             PrintRequestOfVehicleType();
-            vehicleTypeIsValid = int.TryParse(Console.ReadLine(), out vehicleType);
-            while (!vehicleTypeIsValid || !VehicleTypeValidation(vehicleType))
+            inputIsValid = int.TryParse(Console.ReadLine(), out vehicleTypeChoice);
+            while (!inputIsValid || !VehicleTypeValidation(vehicleTypeChoice))
             {
                 PrintInvalidInputMessage();
                 PrintRequestOfVehicleType();
-                vehicleTypeIsValid = int.TryParse(Console.ReadLine(), out vehicleType);
+                inputIsValid = int.TryParse(Console.ReadLine(), out vehicleTypeChoice);
             }
 
-            chosenVehicleType = VehicleTypeConvertToEnum(vehicleType);
+            vehicleType = ConvertChoiceToVehicleType(vehicleTypeChoice);
+
             return vehicleType;
         }
 
@@ -43,13 +47,13 @@ namespace Ex03.ConsoleUI
             StringBuilder ownerName = new StringBuilder();
 
             PrintRequestForTheOwnerName();
-            ownerName.Append(System.Console.ReadLine());
+            ownerName.Append(Console.ReadLine());
 
-            while (!NameValidation(ownerName))
+            while (!NameLengthValidation(ownerName))
             {
                 PrintInvalidInputMessage();
                 PrintRequestForTheOwnerName();
-                ownerName.Append(System.Console.ReadLine());
+                ownerName.Append(Console.ReadLine());
             }
 
             return ownerName;
@@ -70,9 +74,9 @@ namespace Ex03.ConsoleUI
             return ownerPhoneNumber;
         }
 
-        public eEnergyType GetEnergType()
+        public Energy.eEnergyType GetEnergyType()
         {
-            eEnergyType energyTypeEnum;
+            Energy.eEnergyType energyTypeEnum;
             int energyType;
             bool isenergyTypeValid;
 
@@ -115,18 +119,18 @@ namespace Ex03.ConsoleUI
             return isEnergyTypeValid;
         }
 
-        public eEnergyType EnergyTypeConvertToEnum(int i_energyType)
+        public Energy.eEnergyType EnergyTypeConvertToEnum(int i_energyType)
         {
-            eEnergyType energyTypeEnum;
+            Energy.eEnergyType energyTypeEnum;
 
             if(i_energyType == 1)
             {
-                energyTypeEnum = eEnergyType.Fuel;
+                energyTypeEnum = Energy.eEnergyType.Fuel;
             }
 
             else
             {
-                energyTypeEnum = eEnergyType.Electric;
+                energyTypeEnum = Energy.eEnergyType.Electric;
             }
 
             return energyTypeEnum;
@@ -146,30 +150,30 @@ namespace Ex03.ConsoleUI
                 carColerIsValid = int.TryParse(Console.ReadLine(), out carColorChoose);
             }
 
-            carColor = CarColerConverToEnum(carColorChoose);
+            carColor = ConvertChoiceToCarColor(carColorChoose);
             return carColor;
         }
 
-        public Car.eDoorsNumber GetDoorsCar()
+        public Car.eDoorsNumber GetDoorsNumberInCar()
         {
             int numberOfDoors;
             bool carDoorsNumberIsValid;
             Car.eDoorsNumber doorsCar;
 
-            PrintRequesrForDoorsCar();
+            PrintRequesrForDoorsNumberInCar();
             carDoorsNumberIsValid = int.TryParse(Console.ReadLine(), out numberOfDoors);
-            while (!carDoorsNumberIsValid || !DoorsCarValidation(numberOfDoors))
+            while (!carDoorsNumberIsValid || !DoorsNumberInCarValidation(numberOfDoors))
             {
 
-                PrintRequesrForDoorsCar();
+                PrintRequesrForDoorsNumberInCar();
                 carDoorsNumberIsValid = int.TryParse(Console.ReadLine(), out numberOfDoors);
             }
 
-            doorsCar = DoorsCarConvertToEnum(numberOfDoors);
+            doorsCar = DoorsNumbersInCarConvertToEnum(numberOfDoors);
             return doorsCar;
         }
 
-        public void PrintRequesrForDoorsCar()
+        public void PrintRequesrForDoorsNumberInCar()
         {
             StringBuilder doorsCarMessage = new StringBuilder();
 
@@ -177,7 +181,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(doorsCarMessage);
         }
 
-        public bool DoorsCarValidation(int i_DoorsCar)
+        public bool DoorsNumberInCarValidation(int i_DoorsCar)
         {
             bool isDoorValid;
 
@@ -194,7 +198,7 @@ namespace Ex03.ConsoleUI
             return isDoorValid;
         }
 
-        public Car.eDoorsNumber DoorsCarConvertToEnum(int i_DoorsCarNumber)
+        public Car.eDoorsNumber DoorsNumbersInCarConvertToEnum(int i_DoorsCarNumber)
         {
             Car.eDoorsNumber doorsCarEnum;
 
@@ -220,6 +224,7 @@ namespace Ex03.ConsoleUI
 
             return doorsCarEnum;
         }
+
         public void PrintRequestOfVehicleType()
         {
             StringBuilder vehicleTypeMessage = new StringBuilder();
@@ -256,7 +261,7 @@ namespace Ex03.ConsoleUI
             return IsVehicleTypeValid;
         }
 
-        public VehicleManufacturer.eVehicleType VehicleTypeConvertToEnum (int i_VehicleType)
+        public VehicleManufacturer.eVehicleType ConvertChoiceToVehicleType(int i_VehicleType)
         {
             VehicleManufacturer.eVehicleType enumVehicleType;
 
@@ -328,11 +333,11 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(ownerNameMessage);
         }
 
-        public bool NameValidation(StringBuilder i_Name)
+        public bool NameLengthValidation(StringBuilder i_Name)
         {
             bool isNameValid;
 
-            if (i_Name.Length <= k_MaximumNameLength)
+            if (i_Name.Length <= k_MaximumOwnerNameLength)
             {
                 isNameValid = true;
             }
@@ -357,7 +362,7 @@ namespace Ex03.ConsoleUI
         {
             bool isPhoneNumberValid;
 
-            if(i_OwnerPhoneNumber.Length == 10)
+            if(i_OwnerPhoneNumber.Length == k_PhoneNumberLength)
             {
                 isPhoneNumberValid = true;
             }
@@ -399,7 +404,7 @@ namespace Ex03.ConsoleUI
             return isCarColorValid;
         }
 
-        public Car.eColor CarColerConverToEnum(int i_CarColor)
+        public Car.eColor ConvertChoiceToCarColor(int i_CarColor)
         {
             Car.eColor carColorEnum;
 
@@ -426,28 +431,267 @@ namespace Ex03.ConsoleUI
             return carColorEnum;
         }
 
-        //public Motorcycle.eLicenceType MotorcycleLicenceType()
-        //{
-        //    int licenceType;
-        //    bool isLicenceTypeValid;
-        //    Motorcycle.eLicenceType licenceTypeEnum;
+        public Motorcycle.eLicenceType GetMotorcycleLicenceType()
+        {
+            int licenceTypeChoice;
+            bool inputIsValid;
+            Motorcycle.eLicenceType licenceType;
 
-        //    PrintRequestForLicenceType();
-        //    isLicenceTypeValid = int.TryParse(Console.ReadLine(), out licenceType);
-        //    while (!isLicenceTypeValid || !LicenceTypeValidation(licenceType))
-        //    {
-        //        PrintRequestForLicenceType();
-        //        isLicenceTypeValid = int.TryParse(Console.ReadLine(), out licenceType);
-        //    }
+            PrintRequestForLicenceType();
+            inputIsValid = int.TryParse(Console.ReadLine(), out licenceTypeChoice);
+            while (!inputIsValid || !LicenceTypeChoiceValidation(licenceTypeChoice))
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForLicenceType();
+                inputIsValid = int.TryParse(Console.ReadLine(), out licenceTypeChoice);
+            }
 
-        //    licenceTypeEnum = LicenceTypeConvertToEnum();
-        //    return licenceTypeEnum;
-        //}
+            licenceType = ConvertChoiceToLicenceType(licenceTypeChoice);
+            return licenceType;
+        }
+
+        public bool LicenceTypeChoiceValidation(int i_LicenceTypeChoice)
+        {
+            bool licenceTypeChoiceIsValid;
+
+            if (i_LicenceTypeChoice >= 1 && i_LicenceTypeChoice <= 4)
+            {
+                licenceTypeChoiceIsValid = true;
+            }
+
+            else
+            {
+                licenceTypeChoiceIsValid = false;
+            }
+
+            return licenceTypeChoiceIsValid;
+        }
+
+        public Motorcycle.eLicenceType ConvertChoiceToLicenceType(int i_LicenceTypeChoice)
+        {
+            Motorcycle.eLicenceType licenceType;
+
+            switch (i_LicenceTypeChoice)
+            {
+                case 1:
+                    licenceType = Motorcycle.eLicenceType.A;
+                    break;
+
+                case 2:
+                    licenceType = Motorcycle.eLicenceType.A1;
+                    break;
+
+                case 3:
+                    licenceType = Motorcycle.eLicenceType.B1;
+                    break;
+
+                case 4:
+                default:
+                    licenceType = Motorcycle.eLicenceType.BB;
+                    break;
+
+            }
+
+            return licenceType;
+        }
 
         public void PrintRequestForLicenceType()
         {
             StringBuilder licenceTypeMessage = new StringBuilder();
+
+            licenceTypeMessage.AppendLine("Please enter the motorcycle licence type: ");
+            licenceTypeMessage.AppendLine("1 - A");
+            licenceTypeMessage.AppendLine("2 - A1");
+            licenceTypeMessage.AppendLine("3 - B1");
+            licenceTypeMessage.Append("3 - BB");
+            Console.WriteLine(licenceTypeMessage);
         }
 
+        public int GetMotorcycleEngineCapacity()
+        {
+            int engineCapacityCC;
+            bool inputIsValid;
+
+            PrintRequestForEngineCapacity();
+            inputIsValid = int.TryParse(Console.ReadLine(), out engineCapacityCC);
+            while (!inputIsValid)
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForEngineCapacity();
+                inputIsValid = int.TryParse(Console.ReadLine(), out engineCapacityCC);
+            }
+
+            return engineCapacityCC;
+        }
+
+        public void PrintRequestForEngineCapacity()
+        {
+            StringBuilder engineCapacityMessage = new StringBuilder();
+
+            engineCapacityMessage.Append("Please enter the motorcycle engine capcity: ");
+            Console.WriteLine(engineCapacityMessage);
+        }
+
+        public bool GetIfTruckHasCoolingCargo()
+        {
+            bool hasCoolingCargo;
+            int coolingCargoChoice;
+            bool inputIsValid;
+
+            PrintRequestForCoolingCargoOption();
+            inputIsValid = int.TryParse(Console.ReadLine(), out coolingCargoChoice);
+            while (!inputIsValid || !CoolingCargoChoiceValidation(coolingCargoChoice))
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForCoolingCargoOption();
+                inputIsValid = int.TryParse(Console.ReadLine(), out coolingCargoChoice);
+            }
+
+            if (coolingCargoChoice == 1)
+            {
+                hasCoolingCargo = true;
+            }
+
+            else // == 2
+            {
+                hasCoolingCargo = false;
+            }
+
+            return hasCoolingCargo;
+        }
+
+        public bool CoolingCargoChoiceValidation(int i_CoolingCargoChoice)
+        {
+            bool coolingCargoChoiceIsValid;
+
+            if (i_CoolingCargoChoice == 1 || i_CoolingCargoChoice == 2)
+            {
+                coolingCargoChoiceIsValid = true;
+            }
+
+            else
+            {
+                coolingCargoChoiceIsValid = false;
+            }
+
+            return coolingCargoChoiceIsValid;
+        }
+
+        public void PrintRequestForCoolingCargoOption()
+        {
+            StringBuilder CoolingCargoMessage = new StringBuilder();
+
+            CoolingCargoMessage.AppendLine("Please enter whether the truck has cooling cargo or not ");
+            CoolingCargoMessage.AppendLine("1 - Add cooling cargo in truck");
+            CoolingCargoMessage.AppendLine("2 - Do not add cooling cargo in truck");
+            Console.WriteLine(CoolingCargoMessage);
+        }
+
+        public float GetCargoCapacity()
+        {
+            float cargoCapacity;
+            bool inputIsValid;
+
+            PrintRequestForCargoCapacity();
+            inputIsValid = float.TryParse(Console.ReadLine(), out cargoCapacity);
+            while (!inputIsValid)
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForCargoCapacity();
+                inputIsValid = float.TryParse(Console.ReadLine(), out cargoCapacity);
+            }
+
+            return cargoCapacity;
+        }
+
+        public void PrintRequestForCargoCapacity()
+        {
+            StringBuilder cargoCapacityMessage = new StringBuilder();
+
+            cargoCapacityMessage.Append("Please enter the motorcycle engine capcity: ");
+            Console.WriteLine(cargoCapacityMessage);
+        }
+
+        public StringBuilder GetVehicleModelName()
+        {
+            StringBuilder vehicleModelName = new StringBuilder();
+
+            PrintRequestForVehicleModelName();
+            vehicleModelName.Append(Console.ReadLine());
+            while (!ModelNameLengthValidation(vehicleModelName))
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForVehicleModelName();
+                vehicleModelName.Append(Console.ReadLine());
+            }
+
+            return vehicleModelName;
+        }
+
+        public bool ModelNameLengthValidation(StringBuilder i_ModelName)
+        {
+            bool modelNameLengthIsValid;
+
+            if (i_ModelName.Length < k_MaximumModelNameLength)
+            {
+                modelNameLengthIsValid = true;
+            }
+
+            else
+            {
+                modelNameLengthIsValid = false; 
+            }
+
+            return modelNameLengthIsValid;
+        }
+
+        public void PrintRequestForVehicleModelName()
+        {
+            StringBuilder modelNameMessage = new StringBuilder();
+
+            modelNameMessage.Append("Please enter the vehicle model name: ");
+            Console.WriteLine(modelNameMessage);
+        }
+
+        public StringBuilder GetWheelManufacturerName()
+        {
+            StringBuilder wheelManufacturerName = new StringBuilder();
+
+            PrintRequestForWheelManufacturerName();
+            wheelManufacturerName.Append(Console.ReadLine());
+            while (!WheelManufacturerNameLengthValidation(wheelManufacturerName))
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForWheelManufacturerName();
+                wheelManufacturerName.Append(Console.ReadLine());
+            }
+
+            return wheelManufacturerName;
+        }
+
+        public bool WheelManufacturerNameLengthValidation(StringBuilder i_WheelManufacturerName)
+        {
+            bool wheelManufacturerNameLengthIsValid;
+
+            if (i_WheelManufacturerName.Length <= k_MaximumWheelManufacturerNameLength)
+            {
+                wheelManufacturerNameLengthIsValid = true;
+            }
+
+            else
+            {
+                wheelManufacturerNameLengthIsValid = false;
+            }
+
+            return wheelManufacturerNameLengthIsValid;
+        }
+
+        public void PrintRequestForWheelManufacturerName()
+        {
+            StringBuilder wheelManufacturerNameMessage = new StringBuilder();
+
+            wheelManufacturerNameMessage.Append("Please enter the wheel manufacturer name: ");
+            Console.WriteLine(wheelManufacturerNameMessage);
+        }
     }
 }
