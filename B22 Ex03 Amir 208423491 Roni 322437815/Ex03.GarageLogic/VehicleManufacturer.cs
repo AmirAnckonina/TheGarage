@@ -14,44 +14,66 @@ namespace Ex03.GarageLogic
             Truck
         }
 
-/*        public VehicleManufacturer()
-        {
-            
-        }*/
-
         public Vehicle ManufactureNewVehicle(ManufactureDetails i_ManufactureDetails)
         {
             Vehicle newVehicle = null;
+            
 
-            /*  if (i_ManufactureDetails.VehicleType == eVehicleType.Car)
-              {
-                  newVehicle = ManufactureNewCar(i_ManufactureDetails);
-              }
+            switch (i_ManufactureDetails.VehicleType)
+            {
+                case eVehicleType.Car:
+                    newVehicle = ManufactureNewCar(i_ManufactureDetails);
+                    break;
 
-              else if (i_ManufactureDetails.VehicleType == eVehicleType.Motorcycle)
-              {
+                case eVehicleType.Motorcycle:
+                    newVehicle = ManufactureNewMotorcycle(i_ManufactureDetails);
+                    break;
+                case eVehicleType.Truck:
+                    newVehicle = ManufactureNewTruck(i_ManufactureDetails);
+                    break;
 
-              }
+                default:
+                    newVehicle = null;
+                    break;
+            }
 
-              else if (i_ManufactureDetails.VehicleType == eVehicleType.Truck)
-              {
+            if (i_ManufactureDetails.VehicleType == eVehicleType.Car)
+            {
+                newVehicle = ManufactureNewCar(i_ManufactureDetails);
+            }
 
-              }
-
-              else
-              {
-                  /// Throw Exception (Argument?)
-              }*/
+            
 
             return newVehicle;
         }
 
         public Car ManufactureNewCar(ManufactureDetails i_ManufactureDetails)
         {
-            Car newCar = null;
-            ///Car newCar = new Car(i_ManufactureDetails.LicenceID, i_ManufactureDetails.)
+            Car newCar = new Car(
+                i_ManufactureDetails.ModelName,
+                i_ManufactureDetails.LicenceID,
+                i_ManufactureDetails.EnergyType,
+                i_ManufactureDetails.WheelManufacturerName,
+                i_ManufactureDetails.CarColor,
+                i_ManufactureDetails.DoorsNumberInCar);
 
             return newCar;
+        }
+        
+        public Motorcycle ManufactureNewMotorcycle(ManufactureDetails i_ManufactureDetails)
+        {
+            Motorcycle newMotorcycle = null;
+            ///Car newCar = new Car(i_ManufactureDetails.LicenceID, i_ManufactureDetails.)
+
+            return newMotorcycle;
+        }
+        
+        public Truck ManufactureNewTruck(ManufactureDetails i_ManufactureDetails)
+        {
+            Truck newTruck = null;
+            ///Car newCar = new Car(i_ManufactureDetails.LicenceID, i_ManufactureDetails.)
+
+            return newTruck;
         }
 
 

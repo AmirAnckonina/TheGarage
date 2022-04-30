@@ -7,22 +7,25 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
+        
         private readonly StringBuilder r_LicenceID;
         private readonly StringBuilder r_ModelName;
-        private float m_EnergyPercentage;
         private Energy r_VehicleEnergy;
         private List<Wheel> m_VehicleWheels;
 
-        public Vehicle(StringBuilder i_ModelName, StringBuilder i_LicenceID, float i_EnergyPercentage, int i_NumOfWheels)
+        public Vehicle(StringBuilder i_ModelName,
+            StringBuilder i_LicenceID,
+            Energy.eEnergyType i_EnergyType,
+            StringBuilder i_WheelManufacturerName,
+            int i_NumOfWheels,
+            float i_WheelMaxPSI)
         {
             r_ModelName = i_ModelName;
             r_LicenceID = i_LicenceID;
-            m_EnergyPercentage = i_EnergyPercentage;
             m_VehicleWheels = new List<Wheel>(i_NumOfWheels);
             for (int idx = 0; idx < i_NumOfWheels; idx++)
             {
-                ///r_VehicleWheels[idx] = new Wheel(r_ModelName, (float)(3.2), (float)(5.5));
-                /// r_VehicleWheels[idx] = new Wheel));
+                m_VehicleWheels[idx] = new Wheel(i_WheelManufacturerName, i_WheelMaxPSI);
             }
 
         }
@@ -54,14 +57,6 @@ namespace Ex03.GarageLogic
             {
                 r_VehicleEnergy = value;
             }*/
-        }
-
-        public float EnergyPercentage
-        {
-            get
-            {
-                return m_EnergyPercentage;
-            }
         }
 
         public List<Wheel> VehicleWheels

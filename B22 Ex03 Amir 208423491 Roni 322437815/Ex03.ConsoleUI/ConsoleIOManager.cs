@@ -177,7 +177,7 @@ namespace Ex03.ConsoleUI
         {
             StringBuilder doorsCarMessage = new StringBuilder();
 
-            doorsCarMessage.Append("Please enter the numbers of your vehicle");
+            doorsCarMessage.Append("Please enter the doors number in your car: ");
             Console.WriteLine(doorsCarMessage);
         }
 
@@ -431,11 +431,11 @@ namespace Ex03.ConsoleUI
             return carColorEnum;
         }
 
-        public Motorcycle.eLicenceType GetMotorcycleLicenceType()
+        public Motorcycle.eMotorcycleLicenceType GetMotorcycleLicenceType()
         {
             int licenceTypeChoice;
             bool inputIsValid;
-            Motorcycle.eLicenceType licenceType;
+            Motorcycle.eMotorcycleLicenceType licenceType;
 
             PrintRequestForLicenceType();
             inputIsValid = int.TryParse(Console.ReadLine(), out licenceTypeChoice);
@@ -467,27 +467,27 @@ namespace Ex03.ConsoleUI
             return licenceTypeChoiceIsValid;
         }
 
-        public Motorcycle.eLicenceType ConvertChoiceToLicenceType(int i_LicenceTypeChoice)
+        public Motorcycle.eMotorcycleLicenceType ConvertChoiceToLicenceType(int i_LicenceTypeChoice)
         {
-            Motorcycle.eLicenceType licenceType;
+            Motorcycle.eMotorcycleLicenceType licenceType;
 
             switch (i_LicenceTypeChoice)
             {
                 case 1:
-                    licenceType = Motorcycle.eLicenceType.A;
+                    licenceType = Motorcycle.eMotorcycleLicenceType.A;
                     break;
 
                 case 2:
-                    licenceType = Motorcycle.eLicenceType.A1;
+                    licenceType = Motorcycle.eMotorcycleLicenceType.A1;
                     break;
 
                 case 3:
-                    licenceType = Motorcycle.eLicenceType.B1;
+                    licenceType = Motorcycle.eMotorcycleLicenceType.B1;
                     break;
 
                 case 4:
                 default:
-                    licenceType = Motorcycle.eLicenceType.BB;
+                    licenceType = Motorcycle.eMotorcycleLicenceType.BB;
                     break;
 
             }
@@ -587,7 +587,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(CoolingCargoMessage);
         }
 
-        public float GetCargoCapacity()
+        public float GetTruckCargoCapacity()
         {
             float cargoCapacity;
             bool inputIsValid;

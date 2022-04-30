@@ -7,40 +7,14 @@ namespace Ex03.GarageLogic
 {
     public class Wheel
     {
-        private readonly StringBuilder r_Manufacturer;
+        private readonly StringBuilder r_WheelManufacturerName;
         private float m_currentPSI;
         private readonly float r_MaxPSI;
 
-        public Wheel(StringBuilder i_Manufacturer, float i_CurrentPSI, float i_MaxPSI)
+        public Wheel(StringBuilder i_WheelManufacturerName, float i_WheelMaxPSI)
         {
-            r_Manufacturer = i_Manufacturer;
-            m_currentPSI = i_CurrentPSI;
-            r_MaxPSI = i_MaxPSI;
-        }
-
-        public Wheel(Type vehicleType)
-        {
-
-            /*if(vehicleType == typeof(Motorcycle))
-            {
-                r_Manufacturer = i_Manufacturer;
-                m_currentPSI = i_CurrentPSI;
-                r_MaxPSI = i_MaxPSI;
-            }
-
-            else if (vehicleType == typeof(Car))
-            {
-                r_Manufacturer = i_Manufacturer;
-                m_currentPSI = i_CurrentPSI;
-                r_MaxPSI = i_MaxPSI;
-            }
-
-            else /// vehicleType == typeof(Truck)
-            {
-                r_Manufacturer = i_Manufacturer;
-                m_currentPSI = 20; /// ?
-                r_MaxPSI = 24;
-            }*/
+            r_WheelManufacturerName = i_WheelManufacturerName;
+            r_MaxPSI = i_WheelMaxPSI;
         }
 
         public void InflateWheelToMax()
