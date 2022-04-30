@@ -40,6 +40,7 @@
     <Compile Include="Energy.cs" />
     <Compile Include="FuelEnergy.cs" />
     <Compile Include="Garage.cs" />
+    <Compile Include="ManufactureDetails.cs" />
     <Compile Include="Motorcycle.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="Vehicle.cs" />

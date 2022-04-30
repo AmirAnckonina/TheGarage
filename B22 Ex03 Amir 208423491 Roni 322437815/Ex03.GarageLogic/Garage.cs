@@ -15,18 +15,37 @@ namespace Ex03.GarageLogic
             Paid
         }
 
-        private Dictionary<StringBuilder, GarageCard> r_GarageVehicles;
+        private readonly Dictionary<StringBuilder, GarageCard> r_GarageVehicles;
+        private readonly VehicleManufacturer r_VehicleManufacturer;
 
         public Garage()
         {
-            ///r_AllGarageVehicles = new Dictionary<Vehicle, OwnerDetails>();
+            r_GarageVehicles = new Dictionary<StringBuilder, GarageCard>();
+            r_VehicleManufacturer = new VehicleManufacturer();
         }
 
         ///1
-        /// AddVehicleToGarage -> Waiting for guy answer
+        public void AddVehicleToGarage(ManufactureDetails i_ManufactureDetails)
+        {
+            GarageCard newGarageCard;
 
-        /// 2
-        /// Should give the consoleUI this List and she fill print it.
+           /* if (!LicenceIDExist(i_ManufactureDetails.LicenceID))
+            {
+                /// manufacturing.
+                r_VehicleManufacturer.ManufactureNewVehicle(i_ManufactureDetails);
+                /// creation of GarageCard.
+                /// newGarageCard = new GarageCard(/// All relevantDetails);
+                /// r_GarageVehicles.Add(i_ManufactureDetails.LicenceID, newGarageCard);
+
+            }
+
+            else
+            {
+                /// Change status to InRepair
+            }*/
+        }
+
+        /// 2 -> Should give the consoleUI this List and she fill print it.
         public List<StringBuilder> GetAllGarageVehiclesIDByStatus(eVehicleStatus i_VehicleStatusFilter)
         {
             List<StringBuilder> garageVehiclesIDByStatus = new List<StringBuilder>();
@@ -44,12 +63,11 @@ namespace Ex03.GarageLogic
         /// 3
         public void ChangeVehicleStatus(StringBuilder i_LicenceID, eVehicleStatus i_NewVehicleStatus)
         {
-            bool licenceIDKeyExists = r_GarageVehicles.ContainsKey(i_LicenceID);
 
-            if (licenceIDKeyExists)
+            /*f (LicenceIDExist(i_LicenceID)
             {
                 r_GarageVehicles[i_LicenceID].VehicleStatus = i_NewVehicleStatus;
-            }
+            }*/
 
             /// ArgumentException ?
         }
@@ -57,59 +75,45 @@ namespace Ex03.GarageLogic
         /// 4
         public void InflateVehicleWheels(StringBuilder i_LicenceID)
         {
-            bool licenceIDKeyExists = r_GarageVehicles.ContainsKey(i_LicenceID);
-
-            if (licenceIDKeyExists)
+            /*if (LicenceIDExist(i_LicenceID)
             {
                 r_GarageVehicles[i_LicenceID].Vehicle.InflateAllWheelsToMax();
             }
-
+*/
             /// ArgumentException ?
         }
 
         /// 5
         public void ChargeVehicle(StringBuilder i_LicenceID, float i_TimeToChargeInMinutes)
         {
-            bool licenceIDKeyExists = r_GarageVehicles.ContainsKey(i_LicenceID);
+            ElectricEnergy electricEnergyOfCurrentVehicle;
 
-            if (licenceIDKeyExists)
+            if (LicenceIDExist(i_LicenceID)
             {
-                /// r_GarageVehicles[i_LicenceID].Vehicle.LoadEnergy(i_TimeToChargeInMinutes);
+                electricEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as ElectricEnergy;
+                electricEnergyOfCurrentVehicle.ChargeBattery(i_TimeToChargeInMinutes);
             }
 
             /// ArgumentException ?
         }
 
         /// 6 
-        public void FuelVehicle(StringBuilder i_LicenceID, float i_FuelAmount, FuelEnergy.eFuelType i_FuelType)
+        public void RefuelVehicle(StringBuilder i_LicenceID, float i_FuelAmount, FuelEnergy.eFuelType i_FuelType)
         {
-            bool licenceIDKeyExists = r_GarageVehicles.ContainsKey(i_LicenceID);
+            FuelEnergy fuelEnergyOfCurrentVehicle;
 
-            if (licenceIDKeyExists)
+            if (LicenceIDExist(i_LicenceID)
             {
-                /// ...
+                fuelEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as FuelEnergy;
+                fuelEnergyOfCurrentVehicle.Refuel(i_FuelAmount, i_FuelType);  
             }
 
             /// ArgumentException ?
         }
 
-        public bool LicenceIDExistenceValidation(StringBuilder i_LicenceID)
-        {
-            bool licenceIDKeyExists;
-            
-            if (r_GarageVehicles.ContainsKey(i_LicenceID))
-            {
-                licenceIDKeyExists = true;
-            }
-
-            else
-            {
-                licenceIDKeyExists = false;
-            }
-
-            return licenceIDKeyExists;
+        public bool LicenceIDExist(StringBuilder i_LicenceID)
+        {    
+            return r_GarageVehicles.ContainsKey(i_LicenceID);
         }
-
-
     }
 }

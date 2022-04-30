@@ -20,5 +20,18 @@ namespace Ex03.GarageLogic
         public FuelEnergy(float i_FuelLeft, float i_MaxFuelCapacity)
             : base(i_FuelLeft, i_MaxFuelCapacity)
         { }
+
+        public void Refuel(float i_FuelAmount, eFuelType i_FuelType)
+        {
+            if (i_FuelType != r_FuelType)
+            {
+
+            }
+
+            else
+            {
+
+            }
+        }
     }
 }
