@@ -70,6 +70,68 @@ namespace Ex03.ConsoleUI
             return ownerPhoneNumber;
         }
 
+        public eEnergyType GetEnergType()
+        {
+            eEnergyType energyTypeEnum;
+            int energyType;
+            bool isenergyTypeValid;
+
+            PrintRequestForEnergyType();
+            isenergyTypeValid = int.TryParse(Console.ReadLine(), out energyType);
+            while(!isenergyTypeValid || !EnergyTypeValidation(energyType))
+            {
+                PrintRequestForEnergyType();
+                isenergyTypeValid = int.TryParse(Console.ReadLine(), out energyType);
+            }
+
+            energyTypeEnum = EnergyTypeConvertToEnum(energyType);
+            return energyTypeEnum;
+        }
+
+        public void PrintRequestForEnergyType()
+        {
+            StringBuilder EnergyTypeMessage = new StringBuilder();
+
+            EnergyTypeMessage.AppendLine("Please enter the energy type of yout vehicle");
+            EnergyTypeMessage.AppendLine("1 - Fuel");
+            EnergyTypeMessage.AppendLine("2 - Electric");
+            Console.WriteLine(EnergyTypeMessage);
+        }
+
+        public bool EnergyTypeValidation(int i_EnergyType)
+        {
+            bool isEnergyTypeValid;
+
+            if(i_EnergyType == 1 || i_EnergyType == 2)
+            {
+                isEnergyTypeValid = true;
+            }
+
+            else
+            {
+                isEnergyTypeValid = false;
+            }
+
+            return isEnergyTypeValid;
+        }
+
+        public eEnergyType EnergyTypeConvertToEnum(int i_energyType)
+        {
+            eEnergyType energyTypeEnum;
+
+            if(i_energyType == 1)
+            {
+                energyTypeEnum = eEnergyType.Fuel;
+            }
+
+            else
+            {
+                energyTypeEnum = eEnergyType.Electric;
+            }
+
+            return energyTypeEnum;
+        }
+
         public Car.eColor GetCarColor()
         {
             int carColorChoose;
@@ -96,16 +158,68 @@ namespace Ex03.ConsoleUI
 
             PrintRequesrForDoorsCar();
             carDoorsNumberIsValid = int.TryParse(Console.ReadLine(), out numberOfDoors);
-            while (!carDoorsNumberIsValid || !DoorsCarValidation(numberOfDoors)) 
+            while (!carDoorsNumberIsValid || !DoorsCarValidation(numberOfDoors))
             {
 
                 PrintRequesrForDoorsCar();
                 carDoorsNumberIsValid = int.TryParse(Console.ReadLine(), out numberOfDoors);
             }
 
-            doorsCar = DoorsCarConvertToEnum();
+            doorsCar = DoorsCarConvertToEnum(numberOfDoors);
+            return doorsCar;
         }
 
+        public void PrintRequesrForDoorsCar()
+        {
+            StringBuilder doorsCarMessage = new StringBuilder();
+
+            doorsCarMessage.Append("Please enter the numbers of your vehicle");
+            Console.WriteLine(doorsCarMessage);
+        }
+
+        public bool DoorsCarValidation(int i_DoorsCar)
+        {
+            bool isDoorValid;
+
+            if(i_DoorsCar == 2 || i_DoorsCar ==3 || i_DoorsCar == 4 || i_DoorsCar == 5 )
+            {
+                isDoorValid = true;
+            }
+
+            else
+            {
+                isDoorValid = false;
+            }
+
+            return isDoorValid;
+        }
+
+        public Car.eDoorsNumber DoorsCarConvertToEnum(int i_DoorsCarNumber)
+        {
+            Car.eDoorsNumber doorsCarEnum;
+
+            if(i_DoorsCarNumber == 2)
+            {
+                doorsCarEnum = Car.eDoorsNumber.Two;
+            }
+
+            else if (i_DoorsCarNumber == 3)
+            {
+                doorsCarEnum = Car.eDoorsNumber.Three;
+            }
+
+            else if (i_DoorsCarNumber == 4)
+            {
+                doorsCarEnum = Car.eDoorsNumber.Four;
+            }
+
+            else /// i_DoorsCarNumber = 5
+            {
+                doorsCarEnum = Car.eDoorsNumber.Five;
+            }
+
+            return doorsCarEnum;
+        }
         public void PrintRequestOfVehicleType()
         {
             StringBuilder vehicleTypeMessage = new StringBuilder();
@@ -164,47 +278,47 @@ namespace Ex03.ConsoleUI
             return enumVehicleType;
         }
 
-        //public string GetVehicleLicenseNumber()
-        //{
-        //    string vehicleLicenseNumber;
+        public StringBuilder GetVehicleLicenseNumber()
+        {
+            StringBuilder vehicleLicenseNumber = new StringBuilder();
 
-        //    PrintRequesOfVehicleLicenseNumber();
-        //    vehicleLicenseNumber = Console.ReadLine();
+            PrintRequesOfVehicleLicenseNumber();
+            vehicleLicenseNumber.Append(Console.ReadLine());
 
-        //    while (!VehicleLicenseNumberValidation(vehicleLicenseNumber))
-        //    {
-        //        PrintInvalidInputMessage();
-        //        PrintRequesOfVehicleLicenseNumber();
-        //        vehicleLicenseNumber = Console.ReadLine();
-        //    }
+            while (!VehicleLicenseNumberValidation(vehicleLicenseNumber))
+            {
+                PrintInvalidInputMessage();
+                PrintRequesOfVehicleLicenseNumber();
+                vehicleLicenseNumber.Append(Console.ReadLine());
+            }
 
-        //    return vehicleLicenseNumber;
-        //}
+            return vehicleLicenseNumber;
+        }
 
-        //public void PrintRequesOfVehicleLicenseNumber()
-        //{
-        //    StringBuilder vehicleLicenseNumberMessage = new StringBuilder();
+        public void PrintRequesOfVehicleLicenseNumber()
+        {
+            StringBuilder vehicleLicenseNumberMessage = new StringBuilder();
 
-        //    vehicleLicenseNumberMessage.Append("Pleas enter the license number of your vehicle");
-        //    Console.WriteLine(vehicleLicenseNumberMessage);
-        //}
+            vehicleLicenseNumberMessage.Append("Pleas enter the license number of your vehicle");
+            Console.WriteLine(vehicleLicenseNumberMessage);
+        }
 
-        //public bool VehicleLicenseNumberValidation(string i_VehicleLicenseNumber) ///check if the chars are numbers?
-        //{
-        //    bool IsLicenseNumberValid;
+        public bool VehicleLicenseNumberValidation(StringBuilder i_VehicleLicenseNumber) ///check if the chars are numbers?
+        {
+            bool IsLicenseNumberValid;
 
-        //    if (i_VehicleLicenseNumber.Length == 7 || i_VehicleLicenseNumber.Length == 8)
-        //    {
-        //        IsLicenseNumberValid = true;
-        //    }
+            if (i_VehicleLicenseNumber.Length == 7 || i_VehicleLicenseNumber.Length == 8)
+            {
+                IsLicenseNumberValid = true;
+            }
 
-        //    else
-        //    {
-        //        IsLicenseNumberValid = false;
-        //    }
+            else
+            {
+                IsLicenseNumberValid = false;
+            }
 
-        //    return IsLicenseNumberValid;
-        //}
+            return IsLicenseNumberValid;
+        }
 
         public void PrintRequestForTheOwnerName()
         {
@@ -311,5 +425,29 @@ namespace Ex03.ConsoleUI
 
             return carColorEnum;
         }
+
+        //public Motorcycle.eLicenceType MotorcycleLicenceType()
+        //{
+        //    int licenceType;
+        //    bool isLicenceTypeValid;
+        //    Motorcycle.eLicenceType licenceTypeEnum;
+
+        //    PrintRequestForLicenceType();
+        //    isLicenceTypeValid = int.TryParse(Console.ReadLine(), out licenceType);
+        //    while (!isLicenceTypeValid || !LicenceTypeValidation(licenceType))
+        //    {
+        //        PrintRequestForLicenceType();
+        //        isLicenceTypeValid = int.TryParse(Console.ReadLine(), out licenceType);
+        //    }
+
+        //    licenceTypeEnum = LicenceTypeConvertToEnum();
+        //    return licenceTypeEnum;
+        //}
+
+        public void PrintRequestForLicenceType()
+        {
+            StringBuilder licenceTypeMessage = new StringBuilder();
+        }
+
     }
 }
