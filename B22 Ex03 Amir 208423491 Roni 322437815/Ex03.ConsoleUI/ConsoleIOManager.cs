@@ -768,5 +768,136 @@ namespace Ex03.ConsoleUI
 
             return fuleTypeEnum;              
         }
+
+        public int GetTimeToChargeInMinutes()
+        {
+            int timeToChargeInMinutes;
+            bool inputIsValid;
+
+            PrintRequestForTimeToCharge();
+            inputIsValid = int.TryParse(Console.ReadLine(), out timeToChargeInMinutes);
+            while(!inputIsValid)
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForTimeToCharge();
+                inputIsValid = int.TryParse(Console.ReadLine(), out timeToChargeInMinutes);
+            }
+
+            return timeToChargeInMinutes;
+        }
+
+        public void PrintRequestForTimeToCharge()
+        {
+            StringBuilder TimeToChargeMessage = new StringBuilder();
+
+            TimeToChargeMessage.Append("Please enter the number of minutes to charge your vehicle");
+            Console.WriteLine(TimeToChargeMessage);
+        }
+
+        public float GetFuelAmount()
+        {
+            float fuleAmount;
+            bool isInputValid;
+
+            PrintRequestForFuleAmount();
+            isInputValid = float.TryParse(Console.ReadLine(), out fuleAmount);
+            while (!isInputValid) 
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForFuleAmount();
+                isInputValid = float.TryParse(Console.ReadLine(), out fuleAmount);
+            }
+
+            return fuleAmount;
+        }
+
+        public void PrintRequestForFuleAmount()
+        {
+            StringBuilder fuleAmountMessage = new StringBuilder();
+
+            fuleAmountMessage.Append("Please enter the fule amount");
+            Console.WriteLine(fuleAmountMessage);
+        }
+
+        public void PrintAllGarageVehiclesID(List<StringBuilder> i_GarageVehiclesID)
+        {
+            StringBuilder printVehicleID;
+
+            foreach(StringBuilder vehicleID in i_GarageVehiclesID)
+            {
+                printVehicleID = new StringBuilder();
+                printVehicleID.Append(string.Format("{0}",vehicleID));
+                Console.WriteLine(printVehicleID);
+            }
+        }
+
+        public Garage.eVehicleStatus GetVehicleStatus()
+        {
+            Garage.eVehicleStatus vehicleStatusEnum;
+            int vehicleStatus;
+            bool isInputValid;
+
+            PrintRequestForVehicleStatus();
+            isInputValid = int.TryParse(Console.ReadLine(), out vehicleStatus);
+            while(!isInputValid || !VehicleStatusValidation(vehicleStatus))
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForVehicleStatus();
+                isInputValid = int.TryParse(Console.ReadLine(), out vehicleStatus);
+            }
+
+            vehicleStatusEnum = VehicleStatusConvertToEnum(vehicleStatus);
+            return vehicleStatusEnum;
+        }
+
+        public void PrintRequestForVehicleStatus()
+        {
+            StringBuilder vehicleStatusMessage = new StringBuilder();
+
+            vehicleStatusMessage.AppendLine("Pleae enter the status of your vehicle");
+            vehicleStatusMessage.AppendLine("1 - InRepair");
+            vehicleStatusMessage.AppendLine("2 - Repaired");
+            vehicleStatusMessage.Append("3 - Paid");
+            Console.WriteLine(vehicleStatusMessage);
+        }
+
+        public bool VehicleStatusValidation(int i_VehicleStatus)
+        {
+            bool isVehicleStatusValid;
+
+            if (i_VehicleStatus >= 1 && i_VehicleStatus <= 3)
+            {
+                isVehicleStatusValid = true;
+            }
+
+            else
+            {
+                isVehicleStatusValid = false;
+            }
+
+            return isVehicleStatusValid;
+        }
+
+        public Garage.eVehicleStatus VehicleStatusConvertToEnum(int i_VehicleStatus)
+        {
+            Garage.eVehicleStatus vehicleStatusEnum;
+
+            switch (i_VehicleStatus)
+            {
+                case 1:
+                    vehicleStatusEnum = Garage.eVehicleStatus.InRepair;
+                    break;
+                case 2:
+                    vehicleStatusEnum = Garage.eVehicleStatus.Repaired;
+                    break;
+                case 3:
+                default:
+                    vehicleStatusEnum = Garage.eVehicleStatus.Paid;
+                    break;
+            }
+
+            return vehicleStatusEnum;
+        }
     }
+
 }
