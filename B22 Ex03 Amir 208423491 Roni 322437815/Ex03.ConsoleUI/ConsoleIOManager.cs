@@ -67,6 +67,7 @@ namespace Ex03.ConsoleUI
             ownerPhoneNumber.Append(Console.ReadLine());
             while(!OwnerPhoneNumberValidation(ownerPhoneNumber))
             {
+                PrintInvalidInputMessage();
                 PrintRequestForOwnerPhoneNumber();
                 ownerPhoneNumber.Append(Console.ReadLine());
             }
@@ -84,6 +85,7 @@ namespace Ex03.ConsoleUI
             isenergyTypeValid = int.TryParse(Console.ReadLine(), out energyType);
             while(!isenergyTypeValid || !EnergyTypeValidation(energyType))
             {
+                PrintInvalidInputMessage();
                 PrintRequestForEnergyType();
                 isenergyTypeValid = int.TryParse(Console.ReadLine(), out energyType);
             }
@@ -146,6 +148,7 @@ namespace Ex03.ConsoleUI
             carColerIsValid = int.TryParse(Console.ReadLine(), out carColorChoose);
             while (!carColerIsValid || !CarColorValidation(carColorChoose)) 
             {
+                PrintInvalidInputMessage();
                 PrintRequestForCarColor();
                 carColerIsValid = int.TryParse(Console.ReadLine(), out carColorChoose);
             }
@@ -164,7 +167,7 @@ namespace Ex03.ConsoleUI
             carDoorsNumberIsValid = int.TryParse(Console.ReadLine(), out numberOfDoors);
             while (!carDoorsNumberIsValid || !DoorsNumberInCarValidation(numberOfDoors))
             {
-
+                PrintInvalidInputMessage();
                 PrintRequesrForDoorsNumberInCar();
                 carDoorsNumberIsValid = int.TryParse(Console.ReadLine(), out numberOfDoors);
             }
@@ -692,6 +695,78 @@ namespace Ex03.ConsoleUI
 
             wheelManufacturerNameMessage.Append("Please enter the wheel manufacturer name: ");
             Console.WriteLine(wheelManufacturerNameMessage);
+        }
+
+        public FuelEnergy.eFuelType GetFuleType()
+        {
+            int fuleType;
+            bool inputIsValid;
+            FuelEnergy.eFuelType fuleTypeEnum;
+
+            PrintFuleTypeMessage();
+            inputIsValid = int.TryParse(Console.ReadLine(), out fuleType);
+            while(!inputIsValid || !FuleTypeValidation(fuleType))
+            {
+                PrintInvalidInputMessage();
+                PrintFuleTypeMessage();
+                inputIsValid = int.TryParse(Console.ReadLine(), out fuleType);
+            }
+
+            fuleTypeEnum = FuleTypeConvertToEnum(fuleType);
+            return fuleTypeEnum;
+        }
+
+        public void PrintFuleTypeMessage()
+        {
+            StringBuilder fuleTypeMessage = new StringBuilder();
+
+            fuleTypeMessage.AppendLine("Please enter the fule type of your vehicle");
+            fuleTypeMessage.AppendLine("1 - Soler");
+            fuleTypeMessage.AppendLine("2 - Octan95");
+            fuleTypeMessage.AppendLine("3 - Octan96");
+            fuleTypeMessage.Append("4 - Octan98");
+            Console.WriteLine(fuleTypeMessage);
+        }
+
+        public bool FuleTypeValidation(int i_FuleTyoe)
+        {
+            bool isFuleTypeValid;
+
+            if (i_FuleTyoe >= 1 && i_FuleTyoe <= 4)
+            {
+                isFuleTypeValid = true;
+            }
+
+            else
+            {
+                isFuleTypeValid = false;
+            }
+
+            return isFuleTypeValid;
+        }
+
+        public FuelEnergy.eFuelType FuleTypeConvertToEnum(int i_FuleType)
+        {
+            FuelEnergy.eFuelType fuleTypeEnum;
+
+            switch(i_FuleType)
+            {
+                case 1:
+                    fuleTypeEnum = FuelEnergy.eFuelType.Soler;
+                    break;
+                case 2:
+                    fuleTypeEnum = FuelEnergy.eFuelType.Octan95;
+                    break;
+                case 3:
+                    fuleTypeEnum = FuelEnergy.eFuelType.Octan96;
+                    break;
+                case 4:
+                default:
+                    fuleTypeEnum = FuelEnergy.eFuelType.Octan98;
+                    break;
+            }
+
+            return fuleTypeEnum;              
         }
     }
 }
