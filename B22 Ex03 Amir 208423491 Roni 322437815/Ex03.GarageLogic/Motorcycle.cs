@@ -13,7 +13,8 @@ namespace Ex03.GarageLogic
             A,
             A1,
             B1,
-            BB
+            BB,
+            None
         }
 
         internal static class MotorcycleWheelSpecifications

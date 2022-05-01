@@ -198,5 +198,22 @@ namespace Ex03.GarageLogic
                 m_WheelManufacturerName = value;
             }
         }
+
+        public void ClearForm()
+        {
+            m_LicenceID.Clear();
+            m_VehicleType = VehicleManufacturer.eVehicleType.None;
+            m_VehicleModelName.Clear();
+            m_VehicleOwnerName.Clear();
+            m_VehicleOwnerPhoneNumber.Clear();
+            m_EnergyType = Energy.eEnergyType.None;
+            m_CarColor = Car.eColor.None;
+            m_DoorsNumberInCar = Car.eDoorsNumber.None;
+            m_MotorcycleLicenceType = Motorcycle.eMotorcycleLicenceType.None;
+            m_MotorcycleEngineCapacity = 0;
+            m_HasCoolingCargo = false;
+            m_CargoCapacity = 0;
+            m_WheelManufacturerName.Clear();
+        }
     }
 }

@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
-    using GarageLogic;
     class ConsoleIOManager
     {
         public const int k_MaximumOwnerNameLength = 20;
@@ -68,6 +67,7 @@ namespace Ex03.ConsoleUI
             while(!OwnerPhoneNumberValidation(ownerPhoneNumber))
             {
                 PrintInvalidInputMessage();
+                ownerPhoneNumber.Clear();
                 PrintRequestForOwnerPhoneNumber();
                 ownerPhoneNumber.Append(Console.ReadLine());
             }
@@ -697,7 +697,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(wheelManufacturerNameMessage);
         }
 
-        public FuelEnergy.eFuelType GetFuleType()
+        public FuelEnergy.eFuelType GetFuelType()
         {
             int fuleType;
             bool inputIsValid;
@@ -821,13 +821,14 @@ namespace Ex03.ConsoleUI
 
         public void PrintAllGarageVehiclesID(List<StringBuilder> i_GarageVehiclesID)
         {
-            StringBuilder printVehicleID;
+            StringBuilder vehicleLicenceIDSingleEntityMessage = new StringBuilder();
 
-            foreach(StringBuilder vehicleID in i_GarageVehiclesID)
+            foreach(StringBuilder currLicenceID in i_GarageVehiclesID)
             {
-                printVehicleID = new StringBuilder();
-                printVehicleID.Append(string.Format("{0}",vehicleID));
-                Console.WriteLine(printVehicleID);
+                vehicleLicenceIDSingleEntityMessage.AppendFormat("LicenceID: {0}", currLicenceID);
+                Console.WriteLine(vehicleLicenceIDSingleEntityMessage);
+                vehicleLicenceIDSingleEntityMessage.Clear();
+
             }
         }
 
@@ -897,6 +898,116 @@ namespace Ex03.ConsoleUI
             }
 
             return vehicleStatusEnum;
+        }
+
+        public bool AskToEndWorkday()
+        {
+            bool endWorkDay;
+            bool inputIsValid;
+            int endWorkDayChoice;
+
+            PrintRequestForEndWorkDay();
+            inputIsValid = int.TryParse(Console.ReadLine(), out endWorkDayChoice);
+            while (!inputIsValid || !EndWorkDayChoiceValidaition(endWorkDayChoice))
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForEndWorkDay();
+                inputIsValid = int.TryParse(Console.ReadLine(), out endWorkDayChoice);
+            }
+
+            if (endWorkDayChoice == 1)
+            {
+                endWorkDay = true;
+            }
+
+            else // == 2
+            {
+                endWorkDay = false;
+            }
+
+            return endWorkDay;
+        }
+
+        public void PrintRequestForEndWorkDay()
+        {
+            StringBuilder endWorkDayMessage = new StringBuilder();
+
+            endWorkDayMessage.AppendLine("Do you want to finish your work day in the garage?");
+            endWorkDayMessage.AppendLine("1 - Yes, I want to go home.");
+            endWorkDayMessage.Append("2 - No - I have more vehicles to fix.");
+            Console.WriteLine(endWorkDayMessage);
+        }
+
+        public bool EndWorkDayChoiceValidaition(int i_FinishWorkDayChoice)
+        {
+            bool endWorkDayChoiceIsValid;
+
+            if (i_FinishWorkDayChoice == 1 || i_FinishWorkDayChoice == 2)
+            {
+                endWorkDayChoiceIsValid = true;
+            }
+
+            else
+            {
+                endWorkDayChoiceIsValid = false;
+            }
+
+            return endWorkDayChoiceIsValid;
+        }
+
+        public bool AskToEndAddingVehiclesToGarage()
+        {
+            bool endAddingVehiclesToGarage;
+            bool inputIsValid;
+            int endAddingToGarageChoice;
+
+            PrintRequestForEndAddingToGarage();
+            inputIsValid = int.TryParse(Console.ReadLine(), out endAddingToGarageChoice);
+            while (!inputIsValid || !EndAddingToGarageChoiceValidaition(endAddingToGarageChoice))
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForEndAddingToGarage();
+                inputIsValid = int.TryParse(Console.ReadLine(), out endAddingToGarageChoice);
+            }
+
+            if (endAddingToGarageChoice == 1)
+            {
+                endAddingVehiclesToGarage = true;
+            }
+
+            else // == 2
+            {
+                endAddingVehiclesToGarage = false;
+            }
+
+            return endAddingVehiclesToGarage;
+        }
+
+        public static void PrintRequestForEndAddingToGarage()
+        {
+            StringBuilder endAddingToGarageMessage = new StringBuilder();
+
+            endAddingToGarageMessage.AppendLine("Do you want to finish to add vehicles to the garage?");
+            endAddingToGarageMessage.AppendLine("1 - Yes, full capacity for today");
+            endAddingToGarageMessage.Append("2 - No - I have more places for today");
+            Console.WriteLine(endAddingToGarageMessage);
+        }
+
+        public bool EndAddingToGarageChoiceValidaition(int i_EndAddingToGarageChoice)
+        {
+            bool endAddingToGarageChoiceIsValid;
+
+            if (i_EndAddingToGarageChoice == 1 || i_EndAddingToGarageChoice == 2)
+            {
+                endAddingToGarageChoiceIsValid = true;
+            }
+
+            else
+            {
+                endAddingToGarageChoiceIsValid = false;
+            }
+
+            return endAddingToGarageChoiceIsValid;
         }
     }
 

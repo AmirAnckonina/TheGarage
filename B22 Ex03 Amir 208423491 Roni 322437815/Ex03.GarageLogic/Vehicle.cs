@@ -7,20 +7,11 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        
+
         private readonly StringBuilder r_LicenceID;
         private readonly StringBuilder r_ModelName;
         private Energy r_VehicleEnergy;
         private List<Wheel> m_VehicleWheels;
-
-
-    /*            i_ModelName,
-                  i_LicenceID,
-                  i_CarEnergy,
-                  i_WheelManufacturerName,
-                  i_NumOfWheels,
-                  i_CarWheelMaxPSI,
-                  i_CarWheelPSIAfterManufacture*/
 
         public Vehicle(
             StringBuilder i_ModelName,
@@ -37,7 +28,7 @@ namespace Ex03.GarageLogic
             m_VehicleWheels = new List<Wheel>(i_NumOfWheels);
             for (int idx = 0; idx < i_NumOfWheels; idx++)
             {
-                m_VehicleWheels[idx] = new Wheel(i_WheelManufacturerName, i_WheelMaxPSI, i_WheelPSIAfterManufacture);
+                m_VehicleWheels.Add(new Wheel(i_WheelManufacturerName, i_WheelMaxPSI, i_WheelPSIAfterManufacture));
             }
 
         }
@@ -65,10 +56,10 @@ namespace Ex03.GarageLogic
                 return r_VehicleEnergy;
             }
 
-/*            set
-            {
-                r_VehicleEnergy = value;
-            }*/
+            /*            set
+                        {
+                            r_VehicleEnergy = value;
+                        }*/
         }
 
         public List<Wheel> VehicleWheels
@@ -96,7 +87,7 @@ namespace Ex03.GarageLogic
                 m_VehicleWheels[wheelIdx] = value;
             }
         }
-        
+
         public void InflateAllWheelsToMax()
         {
             foreach (Wheel wheel in m_VehicleWheels)
@@ -104,8 +95,5 @@ namespace Ex03.GarageLogic
                 wheel.InflateWheelToMax();
             }
         }
-
-        
-
     }
 }

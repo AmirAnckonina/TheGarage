@@ -22,32 +22,40 @@ namespace Ex03.ConsoleUI
         public void Run()
         {
             ManufactureVehiclesAndAddingToGarageProcedure();
+            GarageWorkDay();
         }
         public void ManufactureVehiclesAndAddingToGarageProcedure()
         {
             VehicleManufacturer.eVehicleType vehicleTypeChoice;
+            bool endOfAddingVehiclesToGarage;
 
-            m_ManufactureDetails.LicenceID = r_ConsoleIOManager.GetVehicleLicenseNumber();
-            if (!r_Garage.LicenceIDExist(m_ManufactureDetails.LicenceID))
+            do
             {
-                BasicDetailsInputsProcedure();
-                vehicleTypeChoice = m_ManufactureDetails.VehicleType;
-                switch(vehicleTypeChoice)
+                m_ManufactureDetails.LicenceID = r_ConsoleIOManager.GetVehicleLicenseNumber();
+                if (!r_Garage.LicenceIDExist(m_ManufactureDetails.LicenceID))
                 {
-                    case VehicleManufacturer.eVehicleType.Car:
-                        CarDetailsInputsProcedure();
-                        break;
-                    case VehicleManufacturer.eVehicleType.Motorcycle:
-                        MotorcycleDetailsInputsProcedure();
-                        break;
-                    case VehicleManufacturer.eVehicleType.Truck:
-                    default:
-                        TruckDetailsInputsProcedure();
-                        break;
+                    BasicDetailsInputsProcedure();
+                    vehicleTypeChoice = m_ManufactureDetails.VehicleType;
+                    switch (vehicleTypeChoice)
+                    {
+                        case VehicleManufacturer.eVehicleType.Car:
+                            CarDetailsInputsProcedure();
+                            break;
+                        case VehicleManufacturer.eVehicleType.Motorcycle:
+                            MotorcycleDetailsInputsProcedure();
+                            break;
+                        case VehicleManufacturer.eVehicleType.Truck:
+                        default:
+                            TruckDetailsInputsProcedure();
+                            break;
+                    }
                 }
-            }
 
-            r_Garage.AddVehicleToGarage(m_ManufactureDetails);
+                r_Garage.AddVehicleToGarage(m_ManufactureDetails);
+                m_ManufactureDetails.ClearForm();
+                endOfAddingVehiclesToGarage = r_ConsoleIOManager.AskToEndAddingVehiclesToGarage();
+
+            } while (!endOfAddingVehiclesToGarage);
         }
 
         public void BasicDetailsInputsProcedure()
@@ -78,21 +86,28 @@ namespace Ex03.ConsoleUI
             m_ManufactureDetails.CargoCapacity = r_ConsoleIOManager.GetTruckCargoCapacity();
         }
 
-
-        public void Testing()
+        public void GarageWorkDay()
         {
-            Console.WriteLine("Add vehicle to the garage");
-            r_Garage.AddVehicleToGarage(m_ManufactureDetails);
-            Console.WriteLine("Print all tha vehicles that have the status: paid");
-            r_Garage.GetAllGarageVehiclesIDByStatus(r_ConsoleIOManager.GetVehicleStatus());
-            Console.WriteLine("Change vehicle status");
-            r_Garage.ChangeVehicleStatus(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetVehicleStatus());
-            Console.WriteLine("Inflate Vehicle Wheels");
-            r_Garage.InflateVehicleWheels(m_ManufactureDetails.LicenceID);
-            Console.WriteLine("Charge Vehicle");
-            r_Garage.ChargeVehicle(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetTimeToChargeInMinutes());
-            Console.WriteLine("Refuel Vehicle");
-            r_Garage.RefuelVehicle(m_ManufactureDetails.LicenceID,r_ConsoleIOManager.GetFuelAmount(),r_ConsoleIOManager.GetFuleType());
+            bool endOfWorkDay;
+
+            do
+            {
+                Console.WriteLine("Add vehicle to the garage");
+                r_Garage.AddVehicleToGarage(m_ManufactureDetails);
+                Console.WriteLine("Print all tha vehicles that have the status: paid");
+                r_ConsoleIOManager.PrintAllGarageVehiclesID(r_Garage.GetAllGarageVehiclesIDByStatus(r_ConsoleIOManager.GetVehicleStatus()));
+                Console.WriteLine("Change vehicle status");
+                r_Garage.ChangeVehicleStatus(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetVehicleStatus());
+                Console.WriteLine("Inflate Vehicle Wheels");
+                r_Garage.InflateVehicleWheels(m_ManufactureDetails.LicenceID);
+                Console.WriteLine("Charge Vehicle");
+                r_Garage.ChargeVehicle(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetTimeToChargeInMinutes());
+                Console.WriteLine("Refuel Vehicle");
+                r_Garage.RefuelVehicle(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetFuelAmount(), r_ConsoleIOManager.GetFuelType());
+
+                endOfWorkDay = r_ConsoleIOManager.AskToEndWorkday();
+
+            } while (!endOfWorkDay);
         }
     }
 }

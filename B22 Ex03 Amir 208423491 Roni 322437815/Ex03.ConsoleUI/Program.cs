@@ -10,8 +10,8 @@ namespace Ex03.ConsoleUI
         public static void Main()
         {
             GarageManager garageManager = new GarageManager();
-            garageManager.Testing();
-          // garageManager.Run();
+           
+            garageManager.Run();
         }
     }
 }

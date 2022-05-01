@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
        public void ChargeBattery(float i_TimeToChargeInMinutes)
         {
             /// Convert minutes to hours.
-            base.LoadEnergy(i_TimeToChargeInMinutes / 60);
+            base.LoadEnergy(i_TimeToChargeInMinutes / 60f);
         }
     }
 }
