@@ -17,10 +17,11 @@ namespace Ex03.GarageLogic
         private float m_EnergyLeftPercentage;
         private readonly float r_MaxEnergyCapacity;
 
-        public Energy(float i_EnergyLeft, float i_MaxEnergyCapacity)
+        public Energy(float i_MaxEnergyCapacity, float i_EnergyLeft)
         {
-            m_EnergyLeft = i_EnergyLeft;
             r_MaxEnergyCapacity = i_MaxEnergyCapacity;
+            m_EnergyLeft = i_EnergyLeft;
+            /// m_EnergyLeftPercentage
         }
 
 

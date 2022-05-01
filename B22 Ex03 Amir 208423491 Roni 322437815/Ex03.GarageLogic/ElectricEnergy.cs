@@ -7,8 +7,8 @@ namespace Ex03.GarageLogic
 {
     public class ElectricEnergy : Energy
     {
-        public ElectricEnergy(float i_BatteryLeft, float i_MaxBatteryCapacity)
-            : base(i_BatteryLeft, i_MaxBatteryCapacity)
+        public ElectricEnergy(float i_MaxBatteryCapacity, float i_BatteryLeft)
+            : base(i_MaxBatteryCapacity, i_BatteryLeft)
         { }
 
        public void ChargeBattery(float i_TimeToChargeInMinutes)

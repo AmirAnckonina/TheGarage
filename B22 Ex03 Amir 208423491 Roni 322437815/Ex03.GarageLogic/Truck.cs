@@ -7,23 +7,31 @@ namespace Ex03.GarageLogic
 {
     public class Truck : Vehicle
     {
+        internal static class TruckWheelSpecifications
+        {
+            internal const int k_TruckNumOfWheels = 16;
+            internal const float k_TruckWheelMaxPSI = 24;
+            internal const float k_TruckWheelPSIAfterManufacture = 20;
+        }
+        
         private readonly bool r_HasCoolingCargo;
         private readonly float r_CargoCapcity;
 
         public Truck(
             StringBuilder i_ModelName,
             StringBuilder i_LicenceID,
-            Energy.eEnergyType i_EnergyType,
+            Energy i_TruckEnergy,
             StringBuilder i_WheelManufacturerName,
             bool i_HasCoolingCargo,
             float i_CargoCapacity)
             : base(
                   i_ModelName,
-                  i_LicenceID
-                  , i_EnergyType,
+                  i_LicenceID,
+                  i_TruckEnergy,
                   i_WheelManufacturerName,
-                  0,
-                  0)
+                  TruckWheelSpecifications.k_TruckNumOfWheels,
+                  TruckWheelSpecifications.k_TruckWheelMaxPSI,
+                  TruckWheelSpecifications.k_TruckWheelPSIAfterManufacture)
         {
             r_HasCoolingCargo = i_HasCoolingCargo;
             r_CargoCapcity = i_CargoCapacity;
