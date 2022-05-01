@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
     public class ManufactureDetails
     {
         private StringBuilder m_LicenceID;
-        private VehicleManufacturer.eVehicleType m_VehicleTypeChoice;
+        private VehicleManufacturer.eVehicleType m_VehicleType;
         private StringBuilder m_VehicleModelName;
         private StringBuilder m_VehicleOwnerName;
         private StringBuilder m_VehicleOwnerPhoneNumber;
@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
         private Car.eColor m_CarColor;
         private Car.eDoorsNumber m_DoorsNumberInCar;
         private Motorcycle.eMotorcycleLicenceType m_MotorcycleLicenceType;
-        private float m_MotorcycleEngineCapacity;
+        private int m_MotorcycleEngineCapacity;
         private bool m_HasCoolingCargo;
         private float m_CargoCapacity;
         private StringBuilder m_WheelManufacturerName;
@@ -34,12 +34,12 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_VehicleTypeChoice;
+                return m_VehicleType;
             }
 
             set
             {
-                m_VehicleTypeChoice = value;
+                m_VehicleType = value;
             }
         }
 
@@ -147,7 +147,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public float MotorcycleEngineCapacity
+        public int MotorcycleEngineCapacity
         {
             get
             {

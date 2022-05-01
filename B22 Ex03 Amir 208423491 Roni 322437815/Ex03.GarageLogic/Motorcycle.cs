@@ -16,23 +16,31 @@ namespace Ex03.GarageLogic
             BB
         }
 
+        internal static class MotorcycleWheelSpecifications
+        {
+            internal const int k_MotorcycleNumOfWheels = 2;
+            internal const float k_MotorcycleWheelMaxPSI = 31;
+            internal const float k_MotorcycleWheelPSIAfterManufacture = 20;
+        }
+
         private readonly eMotorcycleLicenceType r_LicenceType;
         private readonly int r_EngineCapacity;
 
         public Motorcycle(
             StringBuilder i_ModelName,
             StringBuilder i_LicenceID,
-            Energy.eEnergyType i_EnergyType,
+            Energy i_MotorcycleEnergy,
             StringBuilder i_WheelManufacturerName,
             eMotorcycleLicenceType i_MCLicenceType,
             int i_EngineCapacity)
             : base(
                   i_ModelName,
-                  i_LicenceID
-                  , i_EnergyType,
+                  i_LicenceID,
+                  i_MotorcycleEnergy,
                   i_WheelManufacturerName,
-                  0,
-                  0)
+                  MotorcycleWheelSpecifications.k_MotorcycleNumOfWheels,
+                  MotorcycleWheelSpecifications.k_MotorcycleWheelMaxPSI,
+                  MotorcycleWheelSpecifications.k_MotorcycleWheelPSIAfterManufacture)
         {
             r_LicenceType = i_MCLicenceType;
             r_EngineCapacity = i_EngineCapacity;

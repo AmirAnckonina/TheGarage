@@ -13,19 +13,31 @@ namespace Ex03.GarageLogic
         private Energy r_VehicleEnergy;
         private List<Wheel> m_VehicleWheels;
 
-        public Vehicle(StringBuilder i_ModelName,
+
+    /*            i_ModelName,
+                  i_LicenceID,
+                  i_CarEnergy,
+                  i_WheelManufacturerName,
+                  i_NumOfWheels,
+                  i_CarWheelMaxPSI,
+                  i_CarWheelPSIAfterManufacture*/
+
+        public Vehicle(
+            StringBuilder i_ModelName,
             StringBuilder i_LicenceID,
-            Energy.eEnergyType i_EnergyType,
+            Energy i_VehicleEnergy,
             StringBuilder i_WheelManufacturerName,
             int i_NumOfWheels,
-            float i_WheelMaxPSI)
+            float i_WheelMaxPSI,
+            float i_WheelPSIAfterManufacture)
         {
             r_ModelName = i_ModelName;
             r_LicenceID = i_LicenceID;
+            r_VehicleEnergy = i_VehicleEnergy;
             m_VehicleWheels = new List<Wheel>(i_NumOfWheels);
             for (int idx = 0; idx < i_NumOfWheels; idx++)
             {
-                m_VehicleWheels[idx] = new Wheel(i_WheelManufacturerName, i_WheelMaxPSI);
+                m_VehicleWheels[idx] = new Wheel(i_WheelManufacturerName, i_WheelMaxPSI, i_WheelPSIAfterManufacture);
             }
 
         }

@@ -23,25 +23,32 @@ namespace Ex03.GarageLogic
             Five = 5
         }
 
-        private static readonly int sr_CarNumOfWheels = 4;
-        private static readonly float sr_CarWheelMaxPSI = 4;
+        internal static class CarWheelSpecifications
+        {
+            internal const int k_CarNumOfWheels = 4;
+            internal const float k_CarWheelMaxPSI = 29;
+            internal const float k_CarWheelPSIAfterManufacture = 20;
+        }
+
+        
         private readonly eColor r_Color;
         private readonly eDoorsNumber r_DoorsNumber;
 
         public Car(
             StringBuilder i_ModelName,
             StringBuilder i_LicenceID,
-            Energy.eEnergyType i_EnergyType,
+            Energy i_CarEnergy,
             StringBuilder i_WheelManufacturerName,
             eColor i_Color,
             eDoorsNumber i_DoorsNumber)
             : base(
                   i_ModelName,
-                  i_LicenceID
-                  , i_EnergyType,
+                  i_LicenceID,
+                  i_CarEnergy,
                   i_WheelManufacturerName,
-                  sr_CarNumOfWheels,
-                  sr_CarWheelMaxPSI)
+                  CarWheelSpecifications.k_CarNumOfWheels,
+                  CarWheelSpecifications.k_CarWheelMaxPSI,
+                  CarWheelSpecifications.k_CarWheelPSIAfterManufacture)
         {
             r_Color = i_Color;
             r_DoorsNumber = i_DoorsNumber;
