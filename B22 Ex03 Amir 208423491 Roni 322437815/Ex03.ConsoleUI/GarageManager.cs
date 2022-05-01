@@ -77,5 +77,22 @@ namespace Ex03.ConsoleUI
             m_ManufactureDetails.HasCoolingCargo = r_ConsoleIOManager.GetIfTruckHasCoolingCargo();
             m_ManufactureDetails.CargoCapacity = r_ConsoleIOManager.GetTruckCargoCapacity();
         }
+
+
+        public void Testing()
+        {
+            Console.WriteLine("Add vehicle to the garage");
+            r_Garage.AddVehicleToGarage(m_ManufactureDetails);
+            Console.WriteLine("Print all tha vehicles that have the status: paid");
+            r_Garage.GetAllGarageVehiclesIDByStatus(r_ConsoleIOManager.GetVehicleStatus());
+            Console.WriteLine("Change vehicle status");
+            r_Garage.ChangeVehicleStatus(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetVehicleStatus());
+            Console.WriteLine("Inflate Vehicle Wheels");
+            r_Garage.InflateVehicleWheels(m_ManufactureDetails.LicenceID);
+            Console.WriteLine("Charge Vehicle");
+            r_Garage.ChargeVehicle(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetTimeToChargeInMinutes());
+            Console.WriteLine("Refuel Vehicle");
+            r_Garage.RefuelVehicle(m_ManufactureDetails.LicenceID,r_ConsoleIOManager.GetFuelAmount(),r_ConsoleIOManager.GetFuleType());
+        }
     }
 }
