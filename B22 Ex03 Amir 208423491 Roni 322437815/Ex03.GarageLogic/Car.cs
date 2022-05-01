@@ -12,7 +12,8 @@ namespace Ex03.GarageLogic
             Red,
             White,
             Green,
-            Blue
+            Blue,
+            None
         }
 
         public enum eDoorsNumber
@@ -20,17 +21,17 @@ namespace Ex03.GarageLogic
             Two = 2,
             Three = 3,
             Four = 4,
-            Five = 5
+            Five = 5,
+            None
         }
 
-        internal static class CarWheelSpecifications
+        private static class CarWheelSpecifications
         {
             internal const int k_CarNumOfWheels = 4;
             internal const float k_CarWheelMaxPSI = 29;
             internal const float k_CarWheelPSIAfterManufacture = 20;
         }
 
-        
         private readonly eColor r_Color;
         private readonly eDoorsNumber r_DoorsNumber;
 

@@ -11,9 +11,9 @@ namespace Ex03.GarageLogic
         {
             Car,
             Motorcycle,
-            Truck
+            Truck,
+            None
         }
-
 
         private static class MotorcycleFuelSpecifications
         {
@@ -41,7 +41,6 @@ namespace Ex03.GarageLogic
             internal const float k_CarBatteryInHoursAfterManufacture = 1.0f;
         }
 
-
         private static class TruckFuelSpecifications
         {
             internal const FuelEnergy.eFuelType k_TruckFuelType = FuelEnergy.eFuelType.Soler;
@@ -53,7 +52,6 @@ namespace Ex03.GarageLogic
         {
             Vehicle newVehicle = null;
             
-
             switch (i_ManufactureDetails.VehicleType)
             {
                 case eVehicleType.Car:
@@ -72,13 +70,6 @@ namespace Ex03.GarageLogic
                     break;
             }
 
-            if (i_ManufactureDetails.VehicleType == eVehicleType.Car)
-            {
-                newVehicle = ManufactureNewCar(i_ManufactureDetails);
-            }
-
-            
-
             return newVehicle;
         }
 
@@ -95,7 +86,7 @@ namespace Ex03.GarageLogic
                     CarFuelSpecifications.k_CarFuelAfterManufacture);
             }
 
-            else
+            else /// Electric
             {
                 energySource = new ElectricEnergy(
                     CarElectricSpecifications.k_CarMaxBatteryLoadInHours,

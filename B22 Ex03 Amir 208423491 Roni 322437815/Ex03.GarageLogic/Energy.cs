@@ -10,7 +10,8 @@ namespace Ex03.GarageLogic
         public enum eEnergyType
         {
             Fuel,
-            Electric
+            Electric,
+            None
         }
 
         private float m_EnergyLeft;
@@ -27,7 +28,13 @@ namespace Ex03.GarageLogic
 
         public void LoadEnergy(float i_EnergyAmountInHours)
         {
-            m_EnergyLeft += i_EnergyAmountInHours;
+            float newEnergyAmount = m_EnergyLeft + i_EnergyAmountInHours;
+            if (newEnergyAmount <= r_MaxEnergyCapacity)
+            {
+                m_EnergyLeft = newEnergyAmount;
+            }
+
+            ///ValueOutOfRangeException
         }
 
     }
