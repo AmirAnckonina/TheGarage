@@ -1153,6 +1153,100 @@ namespace Ex03.ConsoleUI
             treatmentCompliteMessage.Append("The treatment completed!");
             Console.WriteLine(treatmentCompliteMessage);
         }
+        
+         public void PrintAllVehicleGarageCardDetails(GarageCard i_VehicleGarageCard)
+        {
+            StringBuilder vehicleGarageCardDetails = new StringBuilder();
+
+            vehicleGarageCardDetails.AppendFormat("The garage is currently holding {0} vehicle", i_VehicleGarageCard.Vehicle.LicenceID).AppendLine();
+            vehicleGarageCardDetails.AppendFormat("Vehicle model name: {0}", i_VehicleGarageCard.Vehicle.ModelName).AppendLine();
+            vehicleGarageCardDetails.AppendFormat("Vehicle owner name: {0}", i_VehicleGarageCard.VehicleOwnerName).AppendLine();
+            vehicleGarageCardDetails.AppendFormat("Vehicle owner phone: {0}", i_VehicleGarageCard.VehicleOwnerPhone).AppendLine();
+            vehicleGarageCardDetails.AppendFormat("Vehicle status: {0}", ConvertVehicleStatusToString(i_VehicleGarageCard.VehicleStatus)).AppendLine();
+            vehicleGarageCardDetails.AppendFormat("Vehicle wheels manufacturer name {0}", i_VehicleGarageCard.Vehicle.VehicleWheels[0].WheelManufacturerName).AppendLine();
+            vehicleGarageCardDetails.Append(AllWheelsCurrentPSI(i_VehicleGarageCard.Vehicle.VehicleWheels));
+            vehicleGarageCardDetails.AppendFormat("Vehicle energy status: {0}", i_VehicleGarageCard.Vehicle.VehicleEnergy.EnergyLeftPercentage).AppendLine();
+            FuelEnergy fEnergy = i_VehicleGarageCard.Vehicle.VehicleEnergy as FuelEnergy;
+            if (fEnergy != null)
+            {
+                vehicleGarageCardDetails.AppendFormat("Vehicle fuel type: {0}", ConvertFuelTypeToString(fEnergy.FuelType)).AppendLine();
+            }
+
+
+
+            Console.WriteLine(vehicleGarageCardDetails);
+        }
+
+        public StringBuilder ConvertVehicleStatusToString(Garage.eVehicleStatus i_VehicleStatus)
+        {
+            StringBuilder vehicleStatus = new StringBuilder();
+
+            switch (i_VehicleStatus)
+            {
+                case Garage.eVehicleStatus.InRepair:
+                    vehicleStatus.Append("Currently in repair.");
+                    break;
+
+                case Garage.eVehicleStatus.Repaired:
+                    vehicleStatus.Append("Vehicle Already repaired, waiting for the owner payment.");
+                    break;
+
+                case Garage.eVehicleStatus.Paid:
+                    vehicleStatus.Append("Vehicle Already repaired and paid, waiting for the owner pick-up.");
+                    break;
+
+                default:
+                    vehicleStatus.Append("Unknown");
+                    break;
+            }
+
+            return vehicleStatus;
+        }
+
+        public StringBuilder AllWheelsCurrentPSI(List<Wheel> i_AllVehicleWheels)
+        {
+            StringBuilder vehicleWheelsCurrentPSI = new StringBuilder();
+            int wheelNum = 1;
+
+            foreach (Wheel wheel in i_AllVehicleWheels)
+            {
+                vehicleWheelsCurrentPSI.AppendFormat("Wheel number {0} current PSI: ", wheel.CurrentPSI).AppendLine();
+                wheelNum++;
+            }
+
+            return vehicleWheelsCurrentPSI;
+        }
+
+        public StringBuilder ConvertFuelTypeToString(FuelEnergy.eFuelType i_FuelType)
+        {
+            StringBuilder fuelType = new StringBuilder();
+
+            switch (i_FuelType)
+            {
+                case FuelEnergy.eFuelType.Octan95:
+                    fuelType.AppendLine("Octan95");
+                    break;
+
+                case FuelEnergy.eFuelType.Octan96:
+                    fuelType.AppendLine("Octan96");
+                    break;
+
+                case FuelEnergy.eFuelType.Octan98:
+                    fuelType.AppendLine("Octan98");
+                     break;
+
+                case FuelEnergy.eFuelType.Soler:
+                    fuelType.AppendLine("Soler");
+                    break;
+
+                default:
+                    fuelType.AppendLine("Unkown");
+                    break;
+            }
+
+            return fuelType;
+
+        }
     }
 
 }
