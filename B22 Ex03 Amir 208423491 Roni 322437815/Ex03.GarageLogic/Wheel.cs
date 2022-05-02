@@ -18,6 +18,27 @@ namespace Ex03.GarageLogic
             m_currentPSI = i_WheelPSIAfterManufacture;
         }
 
+        public StringBuilder WheelManufacturerName
+        {
+            get
+            {
+                return r_WheelManufacturerName;
+            }
+        }
+
+        public float CurrentPSI
+        {
+            get
+            {
+                return m_currentPSI;
+            }
+
+            set
+            {
+                m_currentPSI = value;
+            }
+        }
+
         public void InflateWheelToMax()
         {
             m_currentPSI = r_MaxPSI;

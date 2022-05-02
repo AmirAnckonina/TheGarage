@@ -12,7 +12,8 @@ namespace Ex03.GarageLogic
             Soler,
             Octan95,
             Octan96,
-            Octan98
+            Octan98,
+            None
         }
 
         private readonly eFuelType r_FuelType;
@@ -21,6 +22,14 @@ namespace Ex03.GarageLogic
             : base(i_MaxFuelCapacity, i_FuelLeft)
         {
             r_FuelType = i_FuelType;
+        }
+
+        public eFuelType FuelType
+        {
+            get
+            {
+                return r_FuelType;
+            }
         }
 
         public void Refuel(float i_FuelAmount, eFuelType i_FuelType)
