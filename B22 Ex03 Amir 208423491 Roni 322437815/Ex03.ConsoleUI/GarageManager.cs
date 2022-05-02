@@ -52,6 +52,7 @@ namespace Ex03.ConsoleUI
                 }
 
                 r_Garage.AddVehicleToGarage(m_ManufactureDetails);
+                GarageWorkDay();
                 m_ManufactureDetails.ClearForm();
                 endOfAddingVehiclesToGarage = r_ConsoleIOManager.AskToEndAddingVehiclesToGarage();
 
@@ -90,22 +91,45 @@ namespace Ex03.ConsoleUI
         public void GarageWorkDay()
         {
             bool endOfWorkDay;
+            bool printAllVehicleID;
+            Garage.eGarageOperations vehicleTreatment;
 
             do
             {
+                vehicleTreatment = r_ConsoleIOManager.GetVehicleTreatment();
+                switch(vehicleTreatment)
+                {
+                    case Garage.eGarageOperations.Refuel:
+                        r_Garage.RefuelVehicle(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetFuelAmount(),r_ConsoleIOManager.GetFuelType());
+                        r_ConsoleIOManager.TreatmentComplitedMessage();
+                        break;
+                    case Garage.eGarageOperations.ChargeBattery:
+                        r_Garage.ChargeVehicle(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetTimeToChargeInMinutes());
+                        r_ConsoleIOManager.TreatmentComplitedMessage();
+                        break;
+                    case Garage.eGarageOperations.InflateWheels:
+                        r_Garage.InflateVehicleWheels(m_ManufactureDetails.LicenceID);
+                        r_ConsoleIOManager.TreatmentComplitedMessage();
+                        break;
+                    case Garage.eGarageOperations.ChangeStatus:
+                        r_Garage.ChangeVehicleStatus(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetVehicleStatus());
+                        r_ConsoleIOManager.TreatmentComplitedMessage();
+                        break;
+                    case Garage.eGarageOperations.ExistenceCheck:
+                        r_Garage.LicenceIDExist(m_ManufactureDetails.LicenceID);
+                        r_ConsoleIOManager.TreatmentComplitedMessage();
+                        break;
+                    case Garage.eGarageOperations.None:
+                    default:
+                        break;                 
+                }
 
-                Console.WriteLine("Add vehicle to the garage");
-                r_Garage.AddVehicleToGarage(m_ManufactureDetails);
-                Console.WriteLine("Print all tha vehicles that have the status: paid");
-               /// r_ConsoleIOManager.PrintAllGarageVehiclesID(r_Garage.GetAllGarageVehiclesIDByStatus(r_ConsoleIOManager.GetVehicleStatus()));
-                Console.WriteLine("Change vehicle status");
-                r_Garage.ChangeVehicleStatus(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetVehicleStatus());
-                Console.WriteLine("Inflate Vehicle Wheels");
-                r_Garage.InflateVehicleWheels(m_ManufactureDetails.LicenceID);
-                Console.WriteLine("Charge Vehicle");
-                r_Garage.ChargeVehicle(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetTimeToChargeInMinutes());
-                Console.WriteLine("Refuel Vehicle");
-                r_Garage.RefuelVehicle(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetFuelAmount(), r_ConsoleIOManager.GetFuelType());
+                printAllVehicleID = r_ConsoleIOManager.AskForPrintAllVehicleID();
+                if(printAllVehicleID)
+                {
+                    List<StringBuilder> garageVehiclesID = r_Garage.GetAllGarageVehiclesIDByStatus(r_ConsoleIOManager.GetVehicleStatus());
+                    r_ConsoleIOManager.PrintAllGarageVehiclesID(garageVehiclesID);
+                }
 
                 endOfWorkDay = r_ConsoleIOManager.AskToEndWorkday();
 

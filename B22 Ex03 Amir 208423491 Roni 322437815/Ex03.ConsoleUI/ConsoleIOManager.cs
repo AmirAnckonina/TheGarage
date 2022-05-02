@@ -819,7 +819,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(fuleAmountMessage);
         }
 
-        public static void PrintAllGarageVehiclesID(List<StringBuilder> i_GarageVehiclesID)
+        public void PrintAllGarageVehiclesID(List<StringBuilder> i_GarageVehiclesID)
         {
             StringBuilder vehicleLicenceIDSingleEntityMessage = new StringBuilder();
 
@@ -1010,10 +1010,149 @@ namespace Ex03.ConsoleUI
             return endAddingToGarageChoiceIsValid;
         }
 
-        //public GetCareTreatment()
-        //{
+        public Garage.eGarageOperations GetVehicleTreatment()
+        {
+            int vehicleTreatment;
+            Garage.eGarageOperations vehicleTreatmentEnum;
+            bool isInputValid;
 
-        //}
+            PrintVehicleTreatmentMessage();
+            isInputValid = int.TryParse(Console.ReadLine(), out vehicleTreatment);
+            while(!isInputValid || !VehicleTreeatmentValidation(vehicleTreatment))
+            {
+                PrintInvalidInputMessage();
+                PrintVehicleTreatmentMessage();
+                isInputValid = int.TryParse(Console.ReadLine(), out vehicleTreatment);
+            }
+
+            vehicleTreatmentEnum = VehicleTreatmentConvertToEnum(vehicleTreatment);
+            return vehicleTreatmentEnum;
+        }
+
+        public static void PrintVehicleTreatmentMessage()
+        {
+            StringBuilder vehicleTreatmentMessage = new StringBuilder();
+
+            vehicleTreatmentMessage.AppendLine("Enter the vehicle care that you want:");
+            vehicleTreatmentMessage.AppendLine("1 - Refuel");
+            vehicleTreatmentMessage.AppendLine("2 - Charge battery");
+            vehicleTreatmentMessage.AppendLine("3 - Inflate wheels");
+            vehicleTreatmentMessage.AppendLine("4 - Change status");
+            vehicleTreatmentMessage.AppendLine("5 - Existence check");
+            vehicleTreatmentMessage.AppendLine("6 - None");
+            Console.WriteLine(vehicleTreatmentMessage);
+        }
+
+        public bool VehicleTreeatmentValidation(int i_VehicleTreatment)
+        {
+            bool isVehicleTreatmentValid;
+
+            if (i_VehicleTreatment >= 1 && i_VehicleTreatment <= 5)
+            {
+                isVehicleTreatmentValid = true;
+            }
+
+            else
+            {
+                isVehicleTreatmentValid = false;
+            }
+
+            return isVehicleTreatmentValid;
+        }
+
+        public Garage.eGarageOperations VehicleTreatmentConvertToEnum(int i_VehicleTreatment)
+        {
+            Garage.eGarageOperations VehicleTreatmentEnum;
+
+            switch(i_VehicleTreatment)
+            {
+                case 1:
+                    VehicleTreatmentEnum = Garage.eGarageOperations.Refuel;
+                    break;
+                case 2:
+                    VehicleTreatmentEnum = Garage.eGarageOperations.ChargeBattery;
+                    break;
+                case 3:
+                    VehicleTreatmentEnum = Garage.eGarageOperations.InflateWheels;
+                    break;
+                case 4:
+                    VehicleTreatmentEnum = Garage.eGarageOperations.ChangeStatus;
+                    break;
+                case 5:
+                    VehicleTreatmentEnum = Garage.eGarageOperations.ExistenceCheck; ;
+                    break;
+                case 6:
+                default:
+                    VehicleTreatmentEnum = Garage.eGarageOperations.None;
+                    break;
+            }
+
+            return VehicleTreatmentEnum;
+        }
+
+        public bool AskForPrintAllVehicleID()
+        {
+           
+            bool isInputValid;
+            bool PrintAllVehicle;
+            int printAllVehicleChoise;
+
+            PrintRequesOfVehicleLicenseNumber();
+            isInputValid = int.TryParse(Console.ReadLine(), out printAllVehicleChoise);
+            while (!isInputValid || !PrintAllVehicleValidation(printAllVehicleChoise)) 
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForPrintAllVehicle();
+                isInputValid = int.TryParse(Console.ReadLine(), out printAllVehicleChoise);
+            }
+            
+            if(printAllVehicleChoise ==1)
+            {
+                PrintAllVehicle = true;
+            }
+
+            else
+            {
+                PrintAllVehicle = false;
+            }
+
+            return PrintAllVehicle;
+        }
+
+        public void PrintRequestForPrintAllVehicle()
+        {
+            StringBuilder printAllVehicleIDMessage = new StringBuilder();
+
+            printAllVehicleIDMessage.AppendLine("Do you want to print the all vehicle ID taht in the garage?");
+            printAllVehicleIDMessage.AppendLine("press 1 - to print");
+            printAllVehicleIDMessage.AppendLine("press 2 - not print");
+            Console.WriteLine(printAllVehicleIDMessage);
+        }
+
+        public bool PrintAllVehicleValidation(int i_PrintAllVehicleChois)
+        {
+            bool isPrintAllVehicleChoisValid;
+
+            if (i_PrintAllVehicleChois == 1 || i_PrintAllVehicleChois == 2)
+            {
+                isPrintAllVehicleChoisValid = true;
+            }
+
+            else
+            {
+                isPrintAllVehicleChoisValid = false;
+            }
+
+            return isPrintAllVehicleChoisValid;
+        }
+
+        public void TreatmentComplitedMessage()
+        {
+            StringBuilder treatmentCompliteMessage = new StringBuilder();
+
+            treatmentCompliteMessage.Append("The treatment completed!");
+            Console.WriteLine(treatmentCompliteMessage);
+        }
     }
 
 }
