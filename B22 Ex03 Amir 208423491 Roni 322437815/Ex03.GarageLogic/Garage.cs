@@ -15,6 +15,16 @@ namespace Ex03.GarageLogic
             Paid
         }
 
+        public enum eGarageOperations
+        {
+            Refuel,
+            ChargeBattery,
+            InflateWheels,
+            ChangeStatus,
+            ExistenceCheck,
+            None
+        }
+
         private readonly Dictionary<StringBuilder, GarageCard> r_GarageVehicles;
         private readonly VehicleManufacturer r_VehicleManufacturer;
 
