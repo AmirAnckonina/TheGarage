@@ -63,19 +63,20 @@ namespace Ex03.ConsoleUI
             m_ManufactureDetails.VehicleType = r_ConsoleIOManager.GetVehicleType();
             m_ManufactureDetails.ModelName = r_ConsoleIOManager.GetVehicleModelName();
             m_ManufactureDetails.VehicleOwnerName = r_ConsoleIOManager.GetOwnerName();
-            m_ManufactureDetails.VehicleOwnerPhoneNumber = r_ConsoleIOManager.GetVehicleOwnerPhoneNumber();
-            m_ManufactureDetails.EnergyType = r_ConsoleIOManager.GetEnergyType();
+            m_ManufactureDetails.VehicleOwnerPhoneNumber = r_ConsoleIOManager.GetVehicleOwnerPhoneNumber();         
             m_ManufactureDetails.WheelManufacturerName = r_ConsoleIOManager.GetWheelManufacturerName();
         }
 
         public void CarDetailsInputsProcedure()
         {
+            m_ManufactureDetails.EnergyType = r_ConsoleIOManager.GetEnergyType();
             m_ManufactureDetails.CarColor = r_ConsoleIOManager.GetCarColor();
             m_ManufactureDetails.DoorsNumberInCar = r_ConsoleIOManager.GetDoorsNumberInCar();
         }
 
         public void MotorcycleDetailsInputsProcedure()
         {
+            m_ManufactureDetails.EnergyType = r_ConsoleIOManager.GetEnergyType();
             m_ManufactureDetails.MotorcycleLicenceType = r_ConsoleIOManager.GetMotorcycleLicenceType();
             m_ManufactureDetails.MotorcycleEngineCapacity = r_ConsoleIOManager.GetMotorcycleEngineCapacity();       
         }
@@ -92,10 +93,11 @@ namespace Ex03.ConsoleUI
 
             do
             {
+
                 Console.WriteLine("Add vehicle to the garage");
                 r_Garage.AddVehicleToGarage(m_ManufactureDetails);
                 Console.WriteLine("Print all tha vehicles that have the status: paid");
-                r_ConsoleIOManager.PrintAllGarageVehiclesID(r_Garage.GetAllGarageVehiclesIDByStatus(r_ConsoleIOManager.GetVehicleStatus()));
+               /// r_ConsoleIOManager.PrintAllGarageVehiclesID(r_Garage.GetAllGarageVehiclesIDByStatus(r_ConsoleIOManager.GetVehicleStatus()));
                 Console.WriteLine("Change vehicle status");
                 r_Garage.ChangeVehicleStatus(m_ManufactureDetails.LicenceID, r_ConsoleIOManager.GetVehicleStatus());
                 Console.WriteLine("Inflate Vehicle Wheels");
