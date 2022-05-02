@@ -41,7 +41,7 @@ namespace Ex03.ConsoleUI
             return vehicleType;
         }
 
-        public StringBuilder GetOwnerName()
+        public string GetOwnerName()
         {
             StringBuilder ownerName = new StringBuilder();
 
@@ -55,10 +55,10 @@ namespace Ex03.ConsoleUI
                 ownerName.Append(Console.ReadLine());
             }
 
-            return ownerName;
+            return ownerName.ToString();
         }
 
-        public StringBuilder GetVehicleOwnerPhoneNumber()
+        public string GetVehicleOwnerPhoneNumber()
         {
             StringBuilder ownerPhoneNumber = new StringBuilder();
 
@@ -72,7 +72,7 @@ namespace Ex03.ConsoleUI
                 ownerPhoneNumber.Append(Console.ReadLine());
             }
 
-            return ownerPhoneNumber;
+            return ownerPhoneNumber.ToString();
         }
 
         public Energy.eEnergyType GetEnergyType()
@@ -100,7 +100,7 @@ namespace Ex03.ConsoleUI
 
             EnergyTypeMessage.AppendLine("Please enter the energy type of yout vehicle");
             EnergyTypeMessage.AppendLine("1 - Fuel");
-            EnergyTypeMessage.AppendLine("2 - Electric");
+            EnergyTypeMessage.Append("2 - Electric");
             Console.WriteLine(EnergyTypeMessage);
         }
 
@@ -286,7 +286,7 @@ namespace Ex03.ConsoleUI
             return enumVehicleType;
         }
 
-        public StringBuilder GetVehicleLicenseNumber()
+        public string GetVehicleLicenceID()
         {
             StringBuilder vehicleLicenseNumber = new StringBuilder();
 
@@ -300,14 +300,14 @@ namespace Ex03.ConsoleUI
                 vehicleLicenseNumber.Append(Console.ReadLine());
             }
 
-            return vehicleLicenseNumber;
+            return vehicleLicenseNumber.ToString();
         }
 
         public static void PrintRequesOfVehicleLicenseNumber()
         {
             StringBuilder vehicleLicenseNumberMessage = new StringBuilder();
 
-            vehicleLicenseNumberMessage.Append("Pleas enter the license number of your vehicle");
+            vehicleLicenseNumberMessage.Append("Please enter the license number of your vehicle");
             Console.WriteLine(vehicleLicenseNumberMessage);
         }
 
@@ -611,11 +611,11 @@ namespace Ex03.ConsoleUI
         {
             StringBuilder cargoCapacityMessage = new StringBuilder();
 
-            cargoCapacityMessage.Append("Please enter the motorcycle engine capcity: ");
+            cargoCapacityMessage.Append("Please enter the truck cargo capcity: ");
             Console.WriteLine(cargoCapacityMessage);
         }
 
-        public StringBuilder GetVehicleModelName()
+        public string GetVehicleModelName()
         {
             StringBuilder vehicleModelName = new StringBuilder();
 
@@ -628,7 +628,7 @@ namespace Ex03.ConsoleUI
                 vehicleModelName.Append(Console.ReadLine());
             }
 
-            return vehicleModelName;
+            return vehicleModelName.ToString();
         }
 
         public bool ModelNameLengthValidation(StringBuilder i_ModelName)
@@ -656,7 +656,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(modelNameMessage);
         }
 
-        public StringBuilder GetWheelManufacturerName()
+        public string GetWheelManufacturerName()
         {
             StringBuilder wheelManufacturerName = new StringBuilder();
 
@@ -669,7 +669,7 @@ namespace Ex03.ConsoleUI
                 wheelManufacturerName.Append(Console.ReadLine());
             }
 
-            return wheelManufacturerName;
+            return wheelManufacturerName.ToString();
         }
 
         public bool WheelManufacturerNameLengthValidation(StringBuilder i_WheelManufacturerName)
@@ -819,16 +819,15 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(fuleAmountMessage);
         }
 
-        public void PrintAllGarageVehiclesID(List<StringBuilder> i_GarageVehiclesID)
+        public void PrintAllGarageVehiclesID(List<string> i_GarageVehiclesID)
         {
             StringBuilder vehicleLicenceIDSingleEntityMessage = new StringBuilder();
 
-            foreach(StringBuilder currLicenceID in i_GarageVehiclesID)
+            foreach(string currLicenceID in i_GarageVehiclesID)
             {
                 vehicleLicenceIDSingleEntityMessage.AppendFormat("LicenceID: {0}", currLicenceID);
                 Console.WriteLine(vehicleLicenceIDSingleEntityMessage);
                 vehicleLicenceIDSingleEntityMessage.Clear();
-
             }
         }
 
@@ -1010,7 +1009,7 @@ namespace Ex03.ConsoleUI
             return endAddingToGarageChoiceIsValid;
         }
 
-        public Garage.eGarageOperations GetVehicleTreatment()
+        public Garage.eGarageOperations GetVehicleGarageOperation()
         {
             int vehicleTreatment;
             Garage.eGarageOperations vehicleTreatmentEnum;
@@ -1079,7 +1078,7 @@ namespace Ex03.ConsoleUI
                     VehicleTreatmentEnum = Garage.eGarageOperations.ChangeStatus;
                     break;
                 case 5:
-                    VehicleTreatmentEnum = Garage.eGarageOperations.ExistenceCheck; ;
+                    VehicleTreatmentEnum = Garage.eGarageOperations.ExistenceCheck;
                     break;
                 case 6:
                 default:
@@ -1092,21 +1091,20 @@ namespace Ex03.ConsoleUI
 
         public bool AskForPrintAllVehicleID()
         {
-           
             bool isInputValid;
             bool PrintAllVehicle;
-            int printAllVehicleChoise;
+            int printAllVehicleChoice;
 
-            PrintRequesOfVehicleLicenseNumber();
-            isInputValid = int.TryParse(Console.ReadLine(), out printAllVehicleChoise);
-            while (!isInputValid || !PrintAllVehicleValidation(printAllVehicleChoise)) 
+            PrintRequestForPrintAllVehicle();
+            isInputValid = int.TryParse(Console.ReadLine(), out printAllVehicleChoice);
+            while (!isInputValid || !PrintAllVehicleValidation(printAllVehicleChoice)) 
             {
                 PrintInvalidInputMessage();
                 PrintRequestForPrintAllVehicle();
-                isInputValid = int.TryParse(Console.ReadLine(), out printAllVehicleChoise);
+                isInputValid = int.TryParse(Console.ReadLine(), out printAllVehicleChoice);
             }
             
-            if(printAllVehicleChoise ==1)
+            if(printAllVehicleChoice == 1)
             {
                 PrintAllVehicle = true;
             }

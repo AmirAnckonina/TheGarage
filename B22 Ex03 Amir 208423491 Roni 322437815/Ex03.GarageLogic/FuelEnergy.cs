@@ -36,13 +36,10 @@ namespace Ex03.GarageLogic
         {
             if (i_FuelType != r_FuelType)
             {
-
+                throw new ArgumentException("The inserted fuel type isn't matching the car fuel type");
             }
 
-            else
-            {
-
-            }
+            base.LoadEnergy(i_FuelAmount);
         }
     }
 }

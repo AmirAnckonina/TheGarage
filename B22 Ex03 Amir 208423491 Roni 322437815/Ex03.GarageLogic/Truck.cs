@@ -13,15 +13,39 @@ namespace Ex03.GarageLogic
             internal const float k_TruckWheelMaxPSI = 24;
             internal const float k_TruckWheelPSIAfterManufacture = 20;
         }
-        
+
+        internal static class TruckFuelSpecifications
+        {
+            internal const FuelEnergy.eFuelType k_TruckFuelType = FuelEnergy.eFuelType.Soler;
+            internal const float k_TruckMaxFuelCapacity = 120;
+            internal const float k_TruckFuelAfterManufacture = 40;
+        }
+
+        /*private enum eTruckManufactureDetails
+        {
+            CoolingCargo,
+            CargoCapacity
+        }*/
+
         private readonly bool r_HasCoolingCargo;
         private readonly float r_CargoCapcity;
+       /* private eTruckManufactureDetails[] sr_TruckManufactureDetails;
+        private Dictionary<eTruckManufactureDetails, string> m_RequestedTruckManufactureDetails;*/
+
+        public Truck(string i_LicenceID, Energy i_TruckEnergy)
+            : base(i_LicenceID, i_TruckEnergy)
+        {
+           /* sr_TruckManufactureDetails[0] = eTruckManufactureDetails.CoolingCargo;
+            sr_TruckManufactureDetails[1] = eTruckManufactureDetails.CargoCapacity;
+            m_RequestedTruckManufactureDetails.Add(eTruckManufactureDetails.CoolingCargo, "Cooling cargo");
+            m_RequestedTruckManufactureDetails.Add(eTruckManufactureDetails.CargoCapacity, "Cargo capacity");*/
+        }
 
         public Truck(
-            StringBuilder i_ModelName,
-            StringBuilder i_LicenceID,
+            string i_ModelName,
+            string i_LicenceID,
             Energy i_TruckEnergy,
-            StringBuilder i_WheelManufacturerName,
+            string i_WheelManufacturerName,
             bool i_HasCoolingCargo,
             float i_CargoCapacity)
             : base(
