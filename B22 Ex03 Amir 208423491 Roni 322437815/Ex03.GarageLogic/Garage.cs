@@ -12,7 +12,8 @@ namespace Ex03.GarageLogic
         {
             InRepair,
             Repaired,
-            Paid
+            Paid,
+            None
         }
 
         public enum eGarageOperations
@@ -44,7 +45,7 @@ namespace Ex03.GarageLogic
             {
                 /// manufacturing.
                 newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_ManufactureDetails);
-                /// creation of GarageCard.
+                /// creation of new GarageCard.
                 newGarageCard = new GarageCard(
                     i_ManufactureDetails.VehicleOwnerName,
                     i_ManufactureDetails.VehicleOwnerPhoneNumber,
@@ -74,15 +75,15 @@ namespace Ex03.GarageLogic
 
             return garageVehiclesIDByStatus;
         }
-        
+
         /// 3
         public void ChangeVehicleStatus(StringBuilder i_LicenceID, eVehicleStatus i_NewVehicleStatus)
         {
 
-            /*f (LicenceIDExist(i_LicenceID)
+            if(LicenceIDExist(i_LicenceID))
             {
                 r_GarageVehicles[i_LicenceID].VehicleStatus = i_NewVehicleStatus;
-            }*/
+            }
 
             /// ArgumentException ?
         }
@@ -90,11 +91,11 @@ namespace Ex03.GarageLogic
         /// 4
         public void InflateVehicleWheels(StringBuilder i_LicenceID)
         {
-            /*if (LicenceIDExist(i_LicenceID)
+            if (LicenceIDExist(i_LicenceID))
             {
                 r_GarageVehicles[i_LicenceID].Vehicle.InflateAllWheelsToMax();
             }
-*/
+
             /// ArgumentException ?
         }
 
@@ -120,10 +121,22 @@ namespace Ex03.GarageLogic
             if (LicenceIDExist(i_LicenceID))
             {
                 fuelEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as FuelEnergy;
-                fuelEnergyOfCurrentVehicle.Refuel(i_FuelAmount, i_FuelType);  
+                fuelEnergyOfCurrentVehicle.Refuel(i_FuelAmount, i_FuelType);
             }
 
             /// ArgumentException ?
+        }
+
+        public GarageCard GetVehicleGargaeCardByLicenceID(StringBuilder i_LicenceID)
+        {
+            GarageCard vehicleGarageCard = null; //= new GarageCard();
+
+            if(LicenceIDExist(i_LicenceID))
+            {
+                vehicleGarageCard = r_GarageVehicles[i_LicenceID];
+            }
+
+            return vehicleGarageCard;
         }
 
         public bool LicenceIDExist(StringBuilder i_LicenceID)

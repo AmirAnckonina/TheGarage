@@ -12,6 +12,11 @@ namespace Ex03.GarageLogic
         private Garage.eVehicleStatus m_VehicleStatus;
         private Vehicle m_Vehicle;
 
+        public GarageCard()
+        { 
+            /// empty C'tor
+        }
+
         public GarageCard(StringBuilder i_VehicleOwnerName, StringBuilder i_VehicleOwnerPhone, Garage.eVehicleStatus i_VehicleStatus, Vehicle i_Vehicle)
         {
             m_VehicleOwnerName = new StringBuilder();
