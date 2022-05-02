@@ -94,7 +94,7 @@ namespace Ex03.ConsoleUI
             return energyTypeEnum;
         }
 
-        public void PrintRequestForEnergyType()
+        public static void PrintRequestForEnergyType()
         {
             StringBuilder EnergyTypeMessage = new StringBuilder();
 
@@ -176,7 +176,7 @@ namespace Ex03.ConsoleUI
             return doorsCar;
         }
 
-        public void PrintRequesrForDoorsNumberInCar()
+        public static void PrintRequesrForDoorsNumberInCar()
         {
             StringBuilder doorsCarMessage = new StringBuilder();
 
@@ -228,7 +228,7 @@ namespace Ex03.ConsoleUI
             return doorsCarEnum;
         }
 
-        public void PrintRequestOfVehicleType()
+        public static void PrintRequestOfVehicleType()
         {
             StringBuilder vehicleTypeMessage = new StringBuilder();
 
@@ -239,7 +239,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(vehicleTypeMessage);
         }
 
-        public void PrintInvalidInputMessage()
+        public static void PrintInvalidInputMessage()
         {
             StringBuilder invalidInputMessage = new StringBuilder();
 
@@ -303,7 +303,7 @@ namespace Ex03.ConsoleUI
             return vehicleLicenseNumber;
         }
 
-        public void PrintRequesOfVehicleLicenseNumber()
+        public static void PrintRequesOfVehicleLicenseNumber()
         {
             StringBuilder vehicleLicenseNumberMessage = new StringBuilder();
 
@@ -328,11 +328,11 @@ namespace Ex03.ConsoleUI
             return IsLicenseNumberValid;
         }
 
-        public void PrintRequestForTheOwnerName()
+        public static void PrintRequestForTheOwnerName()
         {
             StringBuilder ownerNameMessage = new StringBuilder();
 
-            ownerNameMessage.Append("Please enter the owner of the vehicle");
+            ownerNameMessage.Append("Please enter the owner name of the vehicle");
             Console.WriteLine(ownerNameMessage);
         }
 
@@ -353,7 +353,7 @@ namespace Ex03.ConsoleUI
             return isNameValid;
         }
 
-        public void PrintRequestForOwnerPhoneNumber()
+        public static void PrintRequestForOwnerPhoneNumber()
         {
             StringBuilder ownerPhoneNumberMessage = new StringBuilder();
 
@@ -378,7 +378,7 @@ namespace Ex03.ConsoleUI
             return isPhoneNumberValid;
         }
 
-        public void PrintRequestForCarColor()
+        public static void PrintRequestForCarColor()
         {
             StringBuilder carColorMessage = new StringBuilder();
 
@@ -498,7 +498,7 @@ namespace Ex03.ConsoleUI
             return licenceType;
         }
 
-        public void PrintRequestForLicenceType()
+        public static void PrintRequestForLicenceType()
         {
             StringBuilder licenceTypeMessage = new StringBuilder();
 
@@ -527,7 +527,7 @@ namespace Ex03.ConsoleUI
             return engineCapacityCC;
         }
 
-        public void PrintRequestForEngineCapacity()
+        public static void PrintRequestForEngineCapacity()
         {
             StringBuilder engineCapacityMessage = new StringBuilder();
 
@@ -580,7 +580,7 @@ namespace Ex03.ConsoleUI
             return coolingCargoChoiceIsValid;
         }
 
-        public void PrintRequestForCoolingCargoOption()
+        public static void PrintRequestForCoolingCargoOption()
         {
             StringBuilder CoolingCargoMessage = new StringBuilder();
 
@@ -607,7 +607,7 @@ namespace Ex03.ConsoleUI
             return cargoCapacity;
         }
 
-        public void PrintRequestForCargoCapacity()
+        public static void PrintRequestForCargoCapacity()
         {
             StringBuilder cargoCapacityMessage = new StringBuilder();
 
@@ -648,7 +648,7 @@ namespace Ex03.ConsoleUI
             return modelNameLengthIsValid;
         }
 
-        public void PrintRequestForVehicleModelName()
+        public static void PrintRequestForVehicleModelName()
         {
             StringBuilder modelNameMessage = new StringBuilder();
 
@@ -689,7 +689,7 @@ namespace Ex03.ConsoleUI
             return wheelManufacturerNameLengthIsValid;
         }
 
-        public void PrintRequestForWheelManufacturerName()
+        public static void PrintRequestForWheelManufacturerName()
         {
             StringBuilder wheelManufacturerNameMessage = new StringBuilder();
 
@@ -716,7 +716,7 @@ namespace Ex03.ConsoleUI
             return fuleTypeEnum;
         }
 
-        public void PrintFuleTypeMessage()
+        public static void PrintFuleTypeMessage()
         {
             StringBuilder fuleTypeMessage = new StringBuilder();
 
@@ -786,7 +786,7 @@ namespace Ex03.ConsoleUI
             return timeToChargeInMinutes;
         }
 
-        public void PrintRequestForTimeToCharge()
+        public static void PrintRequestForTimeToCharge()
         {
             StringBuilder TimeToChargeMessage = new StringBuilder();
 
@@ -811,7 +811,7 @@ namespace Ex03.ConsoleUI
             return fuleAmount;
         }
 
-        public void PrintRequestForFuleAmount()
+        public static void PrintRequestForFuleAmount()
         {
             StringBuilder fuleAmountMessage = new StringBuilder();
 
@@ -819,7 +819,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(fuleAmountMessage);
         }
 
-        public void PrintAllGarageVehiclesID(List<StringBuilder> i_GarageVehiclesID)
+        public static void PrintAllGarageVehiclesID(List<StringBuilder> i_GarageVehiclesID)
         {
             StringBuilder vehicleLicenceIDSingleEntityMessage = new StringBuilder();
 
@@ -851,7 +851,7 @@ namespace Ex03.ConsoleUI
             return vehicleStatusEnum;
         }
 
-        public void PrintRequestForVehicleStatus()
+        public static void PrintRequestForVehicleStatus()
         {
             StringBuilder vehicleStatusMessage = new StringBuilder();
 
@@ -928,7 +928,7 @@ namespace Ex03.ConsoleUI
             return endWorkDay;
         }
 
-        public void PrintRequestForEndWorkDay()
+        public static void PrintRequestForEndWorkDay()
         {
             StringBuilder endWorkDayMessage = new StringBuilder();
 
@@ -1009,6 +1009,11 @@ namespace Ex03.ConsoleUI
 
             return endAddingToGarageChoiceIsValid;
         }
+
+        //public GetCareTreatment()
+        //{
+
+        //}
     }
 
 }
