@@ -7,18 +7,18 @@ namespace Ex03.GarageLogic
 {
     public class Wheel
     {
-        private readonly StringBuilder r_WheelManufacturerName;
+        private readonly string r_WheelManufacturerName;
         private float m_currentPSI;
         private readonly float r_MaxPSI;
 
-        public Wheel(StringBuilder i_WheelManufacturerName, float i_WheelMaxPSI, float i_WheelPSIAfterManufacture)
+        public Wheel(string i_WheelManufacturerName, float i_WheelMaxPSI, float i_WheelPSIAfterManufacture)
         {
             r_WheelManufacturerName = i_WheelManufacturerName;
             r_MaxPSI = i_WheelMaxPSI;
             m_currentPSI = i_WheelPSIAfterManufacture;
         }
 
-        public StringBuilder WheelManufacturerName
+        public string WheelManufacturerName
         {
             get
             {

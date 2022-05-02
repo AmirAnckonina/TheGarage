@@ -8,16 +8,22 @@ namespace Ex03.GarageLogic
     public abstract class Vehicle
     {
 
-        private readonly StringBuilder r_LicenceID;
-        private readonly StringBuilder r_ModelName;
+        private readonly string r_LicenceID;
+        private readonly string r_ModelName;
         private Energy r_VehicleEnergy;
         private List<Wheel> m_VehicleWheels;
 
+        public Vehicle(string i_LicenceID, Energy i_VehicleEnergy)
+        {
+            r_LicenceID = i_LicenceID;
+            r_VehicleEnergy = i_VehicleEnergy;
+        }
+
         public Vehicle(
-            StringBuilder i_ModelName,
-            StringBuilder i_LicenceID,
+            string i_ModelName,
+            string i_LicenceID,
             Energy i_VehicleEnergy,
-            StringBuilder i_WheelManufacturerName,
+            string i_WheelManufacturerName,
             int i_NumOfWheels,
             float i_WheelMaxPSI,
             float i_WheelPSIAfterManufacture)
@@ -33,7 +39,7 @@ namespace Ex03.GarageLogic
 
         }
 
-        public StringBuilder ModelName
+        public string ModelName
         {
             get
             {
@@ -41,7 +47,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public StringBuilder LicenceID
+        public string LicenceID
         {
             get
             {
@@ -56,10 +62,6 @@ namespace Ex03.GarageLogic
                 return r_VehicleEnergy;
             }
 
-            /*            set
-                        {
-                            r_VehicleEnergy = value;
-                        }*/
         }
 
         public List<Wheel> VehicleWheels
@@ -88,12 +90,5 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void InflateAllWheelsToMax()
-        {
-            foreach (Wheel wheel in m_VehicleWheels)
-            {
-                wheel.InflateWheelToMax();
-            }
-        }
     }
 }

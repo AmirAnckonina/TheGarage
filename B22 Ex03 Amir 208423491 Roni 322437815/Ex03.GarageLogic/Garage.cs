@@ -7,7 +7,6 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-
         public enum eVehicleStatus
         {
             InRepair,
@@ -26,15 +25,35 @@ namespace Ex03.GarageLogic
             None
         }
 
-        private readonly Dictionary<StringBuilder, GarageCard> r_GarageVehicles;
+        private readonly Dictionary<string, GarageCard> r_GarageVehicles;
         private readonly VehicleManufacturer r_VehicleManufacturer;
 
         public Garage()
         {
-            r_GarageVehicles = new Dictionary<StringBuilder, GarageCard>();
+            r_GarageVehicles = new Dictionary<string, GarageCard>();
             r_VehicleManufacturer = new VehicleManufacturer();
         }
 
+       /* public void ManufactureNewVehicleAndAddToGarage(ManufactureDetails i_ManufactureDetails)
+        {
+            Vehicle newVehicle;
+            GarageCard newGarageCard;
+
+            if (!LicenceIDExist(i_ManufactureDetails.LicenceID))
+            {
+                /// manufacturing.
+                newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_ManufactureDetails);
+                /// creation of new GarageCard.
+                newGarageCard = new GarageCard(
+                    i_ManufactureDetails.VehicleOwnerName,
+                    i_ManufactureDetails.VehicleOwnerPhoneNumber,
+                    eVehicleStatus.InRepair,
+                    newVehicle);
+                r_GarageVehicles.Add(i_ManufactureDetails.LicenceID, newGarageCard);
+
+            }
+        }
+*/
         ///1
         public void AddVehicleToGarage(ManufactureDetails i_ManufactureDetails)
         {
@@ -62,10 +81,10 @@ namespace Ex03.GarageLogic
         }
 
         /// 2 -> Should give the consoleUI this List and she fill print it.
-        public List<StringBuilder> GetAllGarageVehiclesIDByStatus(eVehicleStatus i_VehicleStatusFilter)
+        public List<string> GetAllGarageVehiclesIDByStatus(eVehicleStatus i_VehicleStatusFilter)
         {
-            List<StringBuilder> garageVehiclesIDByStatus = new List<StringBuilder>();
-            foreach (KeyValuePair<StringBuilder, GarageCard> vehicleInGarage in r_GarageVehicles)
+            List<string> garageVehiclesIDByStatus = new List<string>();
+            foreach (KeyValuePair<string, GarageCard> vehicleInGarage in r_GarageVehicles)
             {
                 if (vehicleInGarage.Value.VehicleStatus == i_VehicleStatusFilter)
                 {
@@ -77,69 +96,79 @@ namespace Ex03.GarageLogic
         }
 
         /// 3
-        public void ChangeVehicleStatus(StringBuilder i_LicenceID, eVehicleStatus i_NewVehicleStatus)
+        public void ChangeVehicleStatus(string i_LicenceID, eVehicleStatus i_NewVehicleStatus)
         {
 
-            if(LicenceIDExist(i_LicenceID))
+            if(!LicenceIDExist(i_LicenceID))
             {
-                r_GarageVehicles[i_LicenceID].VehicleStatus = i_NewVehicleStatus;
+                /// throw new ArgumentException LicenceID not found.
             }
 
-            /// ArgumentException ?
+            r_GarageVehicles[i_LicenceID].VehicleStatus = i_NewVehicleStatus;
         }
 
         /// 4
-        public void InflateVehicleWheels(StringBuilder i_LicenceID)
+        public void InflateVehicleWheels(string i_LicenceID)
         {
-            if (LicenceIDExist(i_LicenceID))
+            if (!LicenceIDExist(i_LicenceID))
             {
-                r_GarageVehicles[i_LicenceID].Vehicle.InflateAllWheelsToMax();
+                /// throw new ArgumentException LicenceID not found.
             }
 
-            /// ArgumentException ?
+            foreach (Wheel wheel in r_GarageVehicles[i_LicenceID].Vehicle.VehicleWheels)
+            {
+                wheel.InflateWheelToMax();
+            }
         }
 
         /// 5
-        public void ChargeVehicle(StringBuilder i_LicenceID, float i_TimeToChargeInMinutes)
+        public void ChargeVehicle(string i_LicenceID, float i_TimeToChargeInMinutes)
         {
             ElectricEnergy electricEnergyOfCurrentVehicle;
 
-            if (LicenceIDExist(i_LicenceID))
+            if (!LicenceIDExist(i_LicenceID))
             {
-                electricEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as ElectricEnergy;
-                electricEnergyOfCurrentVehicle.ChargeBattery(i_TimeToChargeInMinutes);
+                /// throw new ArgumentException LicenceID not found.
             }
 
-            /// ArgumentException ?
+            electricEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as ElectricEnergy;
+            if (electricEnergyOfCurrentVehicle == null)
+            {
+                /// throw new ArgumentException(); EnergyType
+            }
+
+            electricEnergyOfCurrentVehicle.ChargeBattery(i_TimeToChargeInMinutes);
         }
 
         /// 6 
-        public void RefuelVehicle(StringBuilder i_LicenceID, float i_FuelAmount, FuelEnergy.eFuelType i_FuelType)
+        public void RefuelVehicle(string i_LicenceID, float i_FuelAmount, FuelEnergy.eFuelType i_FuelType)
         {
             FuelEnergy fuelEnergyOfCurrentVehicle;
 
-            if (LicenceIDExist(i_LicenceID))
+            if (!LicenceIDExist(i_LicenceID))
             {
-                fuelEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as FuelEnergy;
-                fuelEnergyOfCurrentVehicle.Refuel(i_FuelAmount, i_FuelType);
+                /// throw new ArgumentException LicenceID not found.
             }
 
-            /// ArgumentException ?
+            fuelEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as FuelEnergy;
+            fuelEnergyOfCurrentVehicle.Refuel(i_FuelAmount, i_FuelType);
         }
 
-        public GarageCard GetVehicleGargaeCardByLicenceID(StringBuilder i_LicenceID)
+        public GarageCard GetVehicleGargaeCardByLicenceID(string i_LicenceID)
         {
-            GarageCard vehicleGarageCard = null; //= new GarageCard();
+            GarageCard vehicleGarageCard = null;
 
-            if(LicenceIDExist(i_LicenceID))
+            if(!LicenceIDExist(i_LicenceID))
             {
-                vehicleGarageCard = r_GarageVehicles[i_LicenceID];
+                /// throw new ArgumentException LicenceID not found.
             }
+
+            vehicleGarageCard = r_GarageVehicles[i_LicenceID];
 
             return vehicleGarageCard;
         }
 
-        public bool LicenceIDExist(StringBuilder i_LicenceID)
+        public bool LicenceIDExist(string i_LicenceID)
         {    
             return r_GarageVehicles.ContainsKey(i_LicenceID);
         }

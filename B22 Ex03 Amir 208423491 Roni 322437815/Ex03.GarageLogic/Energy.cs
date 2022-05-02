@@ -40,13 +40,13 @@ namespace Ex03.GarageLogic
         public void LoadEnergy(float i_EnergyAmountInHours)
         {
             float newEnergyAmount = m_EnergyLeft + i_EnergyAmountInHours;
-            if (newEnergyAmount <= r_MaxEnergyCapacity)
+            if (newEnergyAmount > r_MaxEnergyCapacity)
             {
-                m_EnergyLeft = newEnergyAmount;
-                m_EnergyLeftPercentage = (m_EnergyLeft / r_MaxEnergyCapacity) * 100;
+                /// throw new ValueOutOfRangeException
             }
 
-            ///ValueOutOfRangeException
+            m_EnergyLeft = newEnergyAmount;
+            m_EnergyLeftPercentage = (m_EnergyLeft / r_MaxEnergyCapacity) * 100;  
         }
 
     }

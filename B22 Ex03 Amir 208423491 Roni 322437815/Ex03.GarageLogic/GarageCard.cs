@@ -7,8 +7,8 @@ namespace Ex03.GarageLogic
 {
     public class GarageCard
     {
-        private StringBuilder m_VehicleOwnerName;
-        private StringBuilder m_VehicleOwnerPhone;
+        private string m_VehicleOwnerName;
+        private string m_VehicleOwnerPhone;
         private Garage.eVehicleStatus m_VehicleStatus;
         private Vehicle m_Vehicle;
 
@@ -17,17 +17,15 @@ namespace Ex03.GarageLogic
             /// empty C'tor
         }
 
-        public GarageCard(StringBuilder i_VehicleOwnerName, StringBuilder i_VehicleOwnerPhone, Garage.eVehicleStatus i_VehicleStatus, Vehicle i_Vehicle)
+        public GarageCard(string i_VehicleOwnerName, string i_VehicleOwnerPhone, Garage.eVehicleStatus i_VehicleStatus, Vehicle i_Vehicle)
         {
-            m_VehicleOwnerName = new StringBuilder();
-            m_VehicleOwnerPhone = new StringBuilder();
             m_VehicleOwnerName = i_VehicleOwnerName;
             m_VehicleOwnerPhone = i_VehicleOwnerPhone;
             m_VehicleStatus = i_VehicleStatus;
             m_Vehicle = i_Vehicle;
         }
 
-        public StringBuilder VehicleOwnerName
+        public string VehicleOwnerName
         {
             get
             {
@@ -40,7 +38,7 @@ namespace Ex03.GarageLogic
             }
         }
         
-        public StringBuilder VehicleOwnerPhone
+        public string VehicleOwnerPhone
         {
             get
             {

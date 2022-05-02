@@ -7,11 +7,11 @@ namespace Ex03.GarageLogic
 {
     public class ManufactureDetails
     {
-        private StringBuilder m_LicenceID;
+        private string m_LicenceID;
         private VehicleManufacturer.eVehicleType m_VehicleType;
-        private StringBuilder m_VehicleModelName;
-        private StringBuilder m_VehicleOwnerName;
-        private StringBuilder m_VehicleOwnerPhoneNumber;
+        private string m_VehicleModelName;
+        private string m_VehicleOwnerName;
+        private string m_VehicleOwnerPhoneNumber;
         private Energy.eEnergyType m_EnergyType;
         private Car.eColor m_CarColor;
         private Car.eDoorsNumber m_DoorsNumberInCar;
@@ -19,16 +19,7 @@ namespace Ex03.GarageLogic
         private int m_MotorcycleEngineCapacity;
         private bool m_HasCoolingCargo;
         private float m_CargoCapacity;
-        private StringBuilder m_WheelManufacturerName;
-
-        public ManufactureDetails()
-        {
-            m_LicenceID = new StringBuilder();
-            m_VehicleModelName = new StringBuilder();
-            m_VehicleOwnerName = new StringBuilder();
-            m_VehicleOwnerPhoneNumber = new StringBuilder();
-            m_WheelManufacturerName = new StringBuilder();
-        }
+        private string m_WheelManufacturerName;
 
         public VehicleManufacturer.eVehicleType VehicleType
         {
@@ -43,7 +34,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public StringBuilder LicenceID
+        public string LicenceID
         {
             get
             {
@@ -56,7 +47,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public StringBuilder ModelName
+        public string ModelName
         {
             get
             {
@@ -69,7 +60,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public StringBuilder VehicleOwnerName
+        public string VehicleOwnerName
         {
             get
             {
@@ -82,7 +73,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public StringBuilder VehicleOwnerPhoneNumber
+        public string VehicleOwnerPhoneNumber
         {
             get
             {
@@ -186,7 +177,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public StringBuilder WheelManufacturerName
+        public string WheelManufacturerName
         {
             get
             {
@@ -201,11 +192,7 @@ namespace Ex03.GarageLogic
 
         public void ClearForm()
         {
-            m_LicenceID.Clear();
             m_VehicleType = VehicleManufacturer.eVehicleType.None;
-            m_VehicleModelName.Clear();
-            m_VehicleOwnerName.Clear();
-            m_VehicleOwnerPhoneNumber.Clear();
             m_EnergyType = Energy.eEnergyType.None;
             m_CarColor = Car.eColor.None;
             m_DoorsNumberInCar = Car.eDoorsNumber.None;
@@ -213,7 +200,6 @@ namespace Ex03.GarageLogic
             m_MotorcycleEngineCapacity = 0;
             m_HasCoolingCargo = false;
             m_CargoCapacity = 0;
-            m_WheelManufacturerName.Clear();
         }
     }
 }

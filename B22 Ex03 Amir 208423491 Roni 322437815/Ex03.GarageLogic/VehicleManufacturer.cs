@@ -15,43 +15,10 @@ namespace Ex03.GarageLogic
             None
         }
 
-        private static class MotorcycleFuelSpecifications
-        {
-            internal const FuelEnergy.eFuelType k_MotorcycleFuelType = FuelEnergy.eFuelType.Octan98;
-            internal const float k_MotorcycleMaxFuelCapacity = 6.2f;
-            internal const float k_MotorcycleFuelAfterManufacture = 2;
-        }
-
-        private static class MotorcycleElectricSpecifications
-        {
-            internal const float k_MotorcycleMaxBatteryLoadInHours = 2.5f;
-            internal const float k_MotorcycleBatteryInHoursAfterManufacture = 1.0f;
-        }
-
-        private static class CarFuelSpecifications
-        {
-            internal const FuelEnergy.eFuelType k_CarFuelType = FuelEnergy.eFuelType.Octan95;
-            internal const float k_CarMaxFuelCapacity = 38;
-            internal const float k_CarFuelAfterManufacture = 20;
-        }
-
-        private static class CarElectricSpecifications
-        {
-            internal const float k_CarMaxBatteryLoadInHours = 3.3f;
-            internal const float k_CarBatteryInHoursAfterManufacture = 1.0f;
-        }
-
-        private static class TruckFuelSpecifications
-        {
-            internal const FuelEnergy.eFuelType k_TruckFuelType = FuelEnergy.eFuelType.Soler;
-            internal const float k_TruckMaxFuelCapacity = 120;
-            internal const float k_TruckFuelAfterManufacture= 40;
-        }
-
         public Vehicle ManufactureNewVehicle(ManufactureDetails i_ManufactureDetails)
         {
-            Vehicle newVehicle = null;
-            
+            Vehicle newVehicle;
+
             switch (i_ManufactureDetails.VehicleType)
             {
                 case eVehicleType.Car:
@@ -76,27 +43,29 @@ namespace Ex03.GarageLogic
         public Car ManufactureNewCar(ManufactureDetails i_ManufactureDetails)
         {
             Car newCar;
-            Energy energySource;
+            Energy newEnergySource;
 
             if (i_ManufactureDetails.EnergyType == Energy.eEnergyType.Fuel)
             {
-                    energySource = new FuelEnergy(
-                    CarFuelSpecifications.k_CarFuelType,
-                    CarFuelSpecifications.k_CarMaxFuelCapacity,
-                    CarFuelSpecifications.k_CarFuelAfterManufacture);
+                    newEnergySource = new FuelEnergy(
+                    Car.CarFuelSpecifications.k_CarFuelType,
+                    Car.CarFuelSpecifications.k_CarMaxFuelCapacity,
+                    Car.CarFuelSpecifications.k_CarFuelAfterManufacture);
             }
 
             else /// Electric
             {
-                energySource = new ElectricEnergy(
-                    CarElectricSpecifications.k_CarMaxBatteryLoadInHours,
-                    CarElectricSpecifications.k_CarBatteryInHoursAfterManufacture);
+                newEnergySource = new ElectricEnergy(
+                    Car.CarElectricSpecifications.k_CarMaxBatteryLoadInHours,
+                    Car.CarElectricSpecifications.k_CarBatteryInHoursAfterManufacture);
             }
+
+           // newCar = new Car(i_ManufactureDetails.LicenceID, newEnergySource);
 
             newCar = new Car(
                  i_ManufactureDetails.ModelName,
                  i_ManufactureDetails.LicenceID,
-                 energySource,
+                 newEnergySource,
                  i_ManufactureDetails.WheelManufacturerName,
                  i_ManufactureDetails.CarColor,
                  i_ManufactureDetails.DoorsNumberInCar);
@@ -107,27 +76,29 @@ namespace Ex03.GarageLogic
         public Motorcycle ManufactureNewMotorcycle(ManufactureDetails i_ManufactureDetails)
         {
             Motorcycle newMotorcycle;
-            Energy energySource;
+            Energy newEnergySource;
 
             if (i_ManufactureDetails.EnergyType == Energy.eEnergyType.Fuel)
             {
-                energySource = new FuelEnergy(
-                MotorcycleFuelSpecifications.k_MotorcycleFuelType,
-                MotorcycleFuelSpecifications.k_MotorcycleMaxFuelCapacity,
-                MotorcycleFuelSpecifications.k_MotorcycleFuelAfterManufacture);
+                newEnergySource = new FuelEnergy(
+                Motorcycle.MCFuelSpecifications.k_MotorcycleFuelType,
+                Motorcycle.MCFuelSpecifications.k_MotorcycleMaxFuelCapacity,
+                Motorcycle.MCFuelSpecifications.k_MotorcycleFuelAfterManufacture);
             }
 
             else
             {
-                energySource = new ElectricEnergy(
-                   MotorcycleElectricSpecifications.k_MotorcycleMaxBatteryLoadInHours,
-                   MotorcycleElectricSpecifications.k_MotorcycleBatteryInHoursAfterManufacture);
+                newEnergySource = new ElectricEnergy(
+                   Motorcycle.MCElectricSpecifications.k_MotorcycleMaxBatteryLoadInHours,
+                   Motorcycle.MCElectricSpecifications.k_MotorcycleBatteryInHoursAfterManufacture);
             }
+
+            /// newMotorcycle = new Motorcycle(i_ManufactureDetails.LicenceID, newEnergySource);
 
             newMotorcycle = new Motorcycle(
                  i_ManufactureDetails.ModelName,
                  i_ManufactureDetails.LicenceID,
-                 energySource,
+                 newEnergySource,
                  i_ManufactureDetails.WheelManufacturerName,
                  i_ManufactureDetails.MotorcycleLicenceType,
                  i_ManufactureDetails.MotorcycleEngineCapacity);
@@ -138,18 +109,19 @@ namespace Ex03.GarageLogic
         public Truck ManufactureNewTruck(ManufactureDetails i_ManufactureDetails)
         {
             Truck newTruck;
-            Energy energySource;
+            Energy newEnergySource;
 
-            energySource = new FuelEnergy(
-            TruckFuelSpecifications.k_TruckFuelType,
-            TruckFuelSpecifications.k_TruckMaxFuelCapacity,
-            TruckFuelSpecifications.k_TruckFuelAfterManufacture);
+            newEnergySource = new FuelEnergy(
+            Truck.TruckFuelSpecifications.k_TruckFuelType,
+            Truck.TruckFuelSpecifications.k_TruckMaxFuelCapacity,
+            Truck.TruckFuelSpecifications.k_TruckFuelAfterManufacture);
 
-            
+            /// newTruck = new Truck(i_ManufactureDetails.LicenceID, newEnergySource);
+
             newTruck = new Truck(
                  i_ManufactureDetails.ModelName,
                  i_ManufactureDetails.LicenceID,
-                 energySource,
+                 newEnergySource,
                  i_ManufactureDetails.WheelManufacturerName,
                  i_ManufactureDetails.HasCoolingCargo,
                  i_ManufactureDetails.CargoCapacity);
