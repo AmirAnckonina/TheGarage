@@ -7,25 +7,21 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        public enum eBasicDetails
-        {
-            ModelName,
-            WheelManufacturerName,
-        }
 
         private readonly string r_LicenceID;
-        private readonly string r_ModelName;
+        private string m_ModelName;
         private Energy r_VehicleEnergy;
         private List<Wheel> m_VehicleWheels;
-        protected Dictionary<string, string> m_AdditionalVehicleDetails;
+        protected Dictionary<string, string> m_AdditionalVehicleDetails; /// Should be static
 
         public Vehicle(string i_LicenceID, Energy i_VehicleEnergy)
         {
             r_LicenceID = i_LicenceID;
             r_VehicleEnergy = i_VehicleEnergy;
+            InitDictionary();
         }
 
-        public Vehicle(
+       /* public Vehicle(
             string i_ModelName,
             string i_LicenceID,
             Energy i_VehicleEnergy,
@@ -44,12 +40,17 @@ namespace Ex03.GarageLogic
             }
 
         }
-
+*/
         public string ModelName
         {
             get
             {
-                return r_ModelName;
+                return m_ModelName;
+            }
+
+            set
+            {
+                m_ModelName = value;
             }
         }
 
@@ -107,5 +108,36 @@ namespace Ex03.GarageLogic
                 m_AdditionalVehicleDetails = value;
             }
         }
+
+        public void InitDictionary()
+        {
+            m_AdditionalVehicleDetails.Add("ModelName", "Vehicle model name");
+            m_AdditionalVehicleDetails.Add("WheelManufcaturer", "");
+        }
+
+        public virtual void SetSingleDetail(string i_Key, string i_InsertedValue)
+        {
+            bool parseValueSucceed;
+            string wheelManufacturer; 
+
+            if (!m_AdditionalVehicleDetails.ContainsKey(i_Key))
+            {
+                /// throw exception 
+            }
+
+        }
+
+        public void InitVehicleWheels(int i_NumOfWheels, string i_WheelManufacturerName, float i_WheelMaxPSI, float i_WheelPSIAfterManufacture)
+        {
+            m_VehicleWheels = new List<Wheel>(i_NumOfWheels);
+
+            for (int idx = 0; idx < i_NumOfWheels; idx++)
+            {
+                m_VehicleWheels.Add(new Wheel(i_WheelManufacturerName, i_WheelMaxPSI, i_WheelPSIAfterManufacture));
+            }
+
+        }
+
+
     }
 }

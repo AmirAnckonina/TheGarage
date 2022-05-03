@@ -33,10 +33,10 @@ namespace Ex03.GarageLogic
         public Truck(string i_LicenceID, Energy i_TruckEnergy)
             : base(i_LicenceID, i_TruckEnergy)
         {
-            initDictionaries();
+            AddAddtionalDetailsToDictionary();
         }
 
-        public Truck(
+     /*   public Truck(
             string i_ModelName,
             string i_LicenceID,
             Energy i_TruckEnergy,
@@ -54,12 +54,17 @@ namespace Ex03.GarageLogic
         {
             r_HasCoolingCargo = i_HasCoolingCargo;
             r_CargoCapcity = i_CargoCapacity;
+        }*/
+
+        private void AddAddtionalDetailsToDictionary()
+        {
+            m_AdditionalVehicleDetails.Add("Cooling cargo", "If the truck has cooling cargo option: ");
+            m_AdditionalVehicleDetails.Add("Cargo capacity", "Truck Cargo Capacity");
         }
 
-        private void InitDictionary()
+        public override void SetSingleDetail(string i_Key, string i_InsertedValue)
         {
-            m_AdditionalVehicleDetails.Add("Has Cooling cargo", "");
-            m_AdditionalVehicleDetails.Add("Cargo capacity", "");
+            
         }
     }
 }

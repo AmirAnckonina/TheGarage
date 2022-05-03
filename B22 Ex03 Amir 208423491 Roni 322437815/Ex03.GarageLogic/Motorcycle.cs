@@ -49,7 +49,7 @@ namespace Ex03.GarageLogic
         public Motorcycle(string i_LicenceID, Energy i_MCEnergy)
             : base(i_LicenceID, i_MCEnergy)
         {
-            InitDictionary();
+            AddAddtionalDetailsToDictionary();
         }
 
         public Motorcycle(
@@ -72,10 +72,15 @@ namespace Ex03.GarageLogic
             r_EngineCapacity = i_EngineCapacity;
         }
 
-        private void InitDictionary()
+        private void AddAddtionalDetailsToDictionary()
         {
             m_AdditionalVehicleDetails.Add("Motorcycle licence ID", "");
             m_AdditionalVehicleDetails.Add("Motorcycle engine capacity", "");
+        }
+
+        public override void SetSingleDetail(string i_Key, string i_InsertedValue)
+        {
+
         }
     }
 }

@@ -34,31 +34,31 @@ namespace Ex03.GarageLogic
             r_VehicleManufacturer = new VehicleManufacturer();
         }
 
-        public void AddNewVehicleToTheGarage(string i_LicneseID, string i_VehicleTypr)
+        public Vehicle GetVehicleByLicenceID(string i_LicenceID)
         {
+            if (!LicenceIDExist(i_LicenceID))
+            {
+                /// throw
+            }
 
+            return r_GarageVehicles[i_LicenceID].Vehicle;
         }
 
-       /* public void ManufactureNewVehicleAndAddToGarage(ManufactureDetails i_ManufactureDetails)
+        public void AddNewVehicleToTheGarage(string i_LicneseID, string i_VehicleType, string i_EnergyType)
         {
             Vehicle newVehicle;
             GarageCard newGarageCard;
 
-            if (!LicenceIDExist(i_ManufactureDetails.LicenceID))
+            if (LicenceIDExist(i_LicneseID))
             {
-                /// manufacturing.
-                newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_ManufactureDetails);
-                /// creation of new GarageCard.
-                newGarageCard = new GarageCard(
-                    i_ManufactureDetails.VehicleOwnerName,
-                    i_ManufactureDetails.VehicleOwnerPhoneNumber,
-                    eVehicleStatus.InRepair,
-                    newVehicle);
-                r_GarageVehicles.Add(i_ManufactureDetails.LicenceID, newGarageCard);
-
+                /// throw argument expception
             }
+
+            newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_LicneseID, i_VehicleType, i_EnergyType);
+
+
         }
-*/
+
         ///1
         public void AddVehicleToGarage(ManufactureDetails i_ManufactureDetails)
         {

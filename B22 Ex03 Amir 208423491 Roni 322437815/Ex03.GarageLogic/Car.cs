@@ -57,7 +57,7 @@ namespace Ex03.GarageLogic
         public Car(string i_LicenceID, Energy i_CarEnergy)
             : base(i_LicenceID, i_CarEnergy)
         {
-            initDictionaries();
+            AddAddtionalDetailsToDictionary();
         }
 
         public Car(
@@ -80,26 +80,52 @@ namespace Ex03.GarageLogic
             m_DoorsNumber = i_DoorsNumber;
         }
 
-        /*public override Dictionary<dynamic, string> DetailMessagePairs
+        private void AddAddtionalDetailsToDictionary()
         {
-            get
-            {
-                return sr_DetailMessagePairs;
-            }
+            m_AdditionalVehicleDetails.Add("CarColor", "Message");
+            m_AdditionalVehicleDetails.Add("CarDoorsNumber", "Message");
         }
 
-        public override Dictionary<dynamic, Type> DetailTypePairs
+        public override void SetSingleDetail(string i_Key, string i_InsertedValue)
         {
-            get
+            bool parseValueSucceed = false;
+            if (!m_AdditionalVehicleDetails.ContainsKey(i_Key))
             {
-                return sr_DetailTypePairs;
+                /// throw exception 
             }
-        }*/
 
-        private void InitDictionary()
-        {
-            m_AdditionalVehicleDetails.Add("Car color", "");
-            m_AdditionalVehicleDetails.Add("Car doors number", "");
+            if (i_Key == "CarColor")
+            {
+                parseValueSucceed = Enum.TryParse(i_InsertedValue, out m_CarColor);
+            }
+
+            else if (i_Key == "CarDoorsNumber")
+            {
+                parseValueSucceed = Enum.TryParse(i_InsertedValue, out m_DoorsNumber);
+            }
+
+            else if (i_Key == "ModelName")
+            {
+                parseValueSucceed = true;
+                ModelName = i_InsertedValue;
+            }
+
+            else if (i_Key == "WheelManufcaturer")
+            {
+                parseValueSucceed = true;
+                InitVehicleWheels(
+                    CarWheelSpecifications.k_CarNumOfWheels,
+                    i_InsertedValue,
+                    CarWheelSpecifications.k_CarWheelMaxPSI,
+                    CarWheelSpecifications.k_CarWheelPSIAfterManufacture);
+            }
+
+            if (!parseValueSucceed)
+            {
+                /// throw
+            }
+
+            
         }
 
     }
