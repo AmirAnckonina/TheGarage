@@ -36,17 +36,41 @@ namespace Ex03.ConsoleUI
         ///     -> update GarageCard details
         /// 
         /// </summary>
+
         public void addNewVehiclesToTheGarageProcedure()
         {
             bool endOfAddingVehiclesToGarage;
+            string vehicleLicenceID, vehicleType, energyType;
+            Vehicle currVehicle;
 
             do
             {
                 /// Get CarType by string
                 /// Get LicenceID by string
-                r_Garage.AddVehicleToGarage();
+               /* vehicleLicenceID = r_ConsoleIOManager.GetVehicleLicenceID();
+                vehicleType = r_ConsoleIOManager.GetVehicleType();*/
+                if (!r_Garage.LicenceIDExist(vehicleLicenceID))
+                {
+                    r_Garage.AddVehicleToGarage(vehicleLicenceID, vehicleType, energyType);
+                    currVehicle = GetVehicleByLicenceID(vehicleLicenceID);
+                    AdditionalVehicleDetailsProcedure(currVehicle.AdditionalVehicleDetails);
+
+
+                }
 
             } while (!endOfAddingVehiclesToGarage);
+        }
+
+        public void AdditionalVehicleDetailsProcedure(Dictionary<string, string> i_DetailsDictionary)
+        {
+
+            foreach (KeyValuePair<string, string> currPair in i_DetailsDictionary)
+            {
+                string insertedInput;
+
+                insertedInput = r_ConsoleIOManager.GetSingleDetail(currPair.Value);
+                r_Garage.SetSingleDetail(currPair.Key, insertedInput);
+            }
         }
 
         public void ManufactureVehiclesAndAddingToGarageProcedure()
