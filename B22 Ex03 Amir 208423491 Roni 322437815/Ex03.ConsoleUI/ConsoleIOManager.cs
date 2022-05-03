@@ -297,6 +297,7 @@ namespace Ex03.ConsoleUI
             {
                 PrintInvalidInputMessage();
                 PrintRequesOfVehicleLicenseNumber();
+                vehicleLicenseNumber.Clear();
                 vehicleLicenseNumber.Append(Console.ReadLine());
             }
 

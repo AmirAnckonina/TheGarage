@@ -25,11 +25,11 @@ namespace Ex03.GarageLogic
             None
         }
 
-        /*public enum eCarManufactureDetails
+        public enum eCarManufactureDetails
         {
             Color,
             DoorsNumber
-        }*/
+        }
 
         internal static class CarFuelSpecifications
         {
@@ -51,20 +51,13 @@ namespace Ex03.GarageLogic
             internal const float k_CarWheelPSIAfterManufacture = 20;
         }
 
-
-
-        private readonly eColor r_Color;
-        private readonly eDoorsNumber r_DoorsNumber;
-        /// private readonly eCarManufactureDetails[] sr_CarManufactureDetails;
-        /// private Dictionary<string, string> m_RequestedCarManufactureDetails;
+        private eColor m_CarColor;
+        private eDoorsNumber m_DoorsNumber;
 
         public Car(string i_LicenceID, Energy i_CarEnergy)
             : base(i_LicenceID, i_CarEnergy)
         {
-            /*sr_CarManufactureDetails[0] = eCarManufactureDetails.Color;
-            sr_CarManufactureDetails[1] = eCarManufactureDetails.DoorsNumber;
-            m_RequestedCarManufactureDetails.Add("Car color", "");
-            m_RequestedCarManufactureDetails.Add("Car doors number", "");*/
+            initDictionaries();
         }
 
         public Car(
@@ -83,10 +76,33 @@ namespace Ex03.GarageLogic
                   CarWheelSpecifications.k_CarWheelMaxPSI,
                   CarWheelSpecifications.k_CarWheelPSIAfterManufacture)
         {
-            r_Color = i_Color;
-            r_DoorsNumber = i_DoorsNumber;
+            m_CarColor = i_Color;
+            m_DoorsNumber = i_DoorsNumber;
         }
 
+        /*public override Dictionary<dynamic, string> DetailMessagePairs
+        {
+            get
+            {
+                return sr_DetailMessagePairs;
+            }
+        }
+
+        public override Dictionary<dynamic, Type> DetailTypePairs
+        {
+            get
+            {
+                return sr_DetailTypePairs;
+            }
+        }*/
+
+        private void initDictionaries()
+        {
+            sr_DetailMessagePairs.Add(eCarManufactureDetails.Color, "Car color");
+            sr_DetailVariablePairs.Add(eCarManufactureDetails.Color, typeof(eColor));
+            sr_DetailMessagePairs.Add(eCarManufactureDetails.Color, "Doors number");
+            sr_DetailVariablePairs.Add(eCarManufactureDetails.Color, typeof(eDoorsNumber));
+        }
 
     }
 }
