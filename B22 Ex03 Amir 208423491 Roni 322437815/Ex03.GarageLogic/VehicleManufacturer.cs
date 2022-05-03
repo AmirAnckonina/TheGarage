@@ -85,16 +85,16 @@ namespace Ex03.GarageLogic
             if (i_EnergyType == Energy.eEnergyType.Fuel)
             {
                 newEnergySource = new FuelEnergy(
-                Motorcycle.MCFuelSpecifications.k_MotorcycleFuelType,
-                Motorcycle.MCFuelSpecifications.k_MotorcycleMaxFuelCapacity,
-                Motorcycle.MCFuelSpecifications.k_MotorcycleFuelAfterManufacture);
+                Motorcycle.MCFuelSpecifications.k_MCFuelType,
+                Motorcycle.MCFuelSpecifications.k_MCMaxFuelCapacity,
+                Motorcycle.MCFuelSpecifications.k_MCFuelAfterManufacture);
             }
 
             else
             {
                 newEnergySource = new ElectricEnergy(
-                   Motorcycle.MCElectricSpecifications.k_MotorcycleMaxBatteryLoadInHours,
-                   Motorcycle.MCElectricSpecifications.k_MotorcycleBatteryInHoursAfterManufacture);
+                   Motorcycle.MCElectricSpecifications.k_MCMaxBatteryLoadInHours,
+                   Motorcycle.MCElectricSpecifications.k_MCBatteryInHoursAfterManufacture);
             }
 
             newMotorcycle = new Motorcycle(i_LicenceID, newEnergySource);

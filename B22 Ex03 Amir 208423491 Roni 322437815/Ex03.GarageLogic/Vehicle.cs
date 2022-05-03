@@ -115,17 +115,7 @@ namespace Ex03.GarageLogic
             m_AdditionalVehicleDetails.Add("WheelManufcaturer", "");
         }
 
-        public virtual void SetSingleDetail(string i_Key, string i_InsertedValue)
-        {
-            bool parseValueSucceed;
-            string wheelManufacturer; 
-
-            if (!m_AdditionalVehicleDetails.ContainsKey(i_Key))
-            {
-                /// throw exception 
-            }
-
-        }
+        public abstract void SetSingleDetail(string i_Key, string i_InsertedValue);
 
         public void InitVehicleWheels(int i_NumOfWheels, string i_WheelManufacturerName, float i_WheelMaxPSI, float i_WheelPSIAfterManufacture)
         {

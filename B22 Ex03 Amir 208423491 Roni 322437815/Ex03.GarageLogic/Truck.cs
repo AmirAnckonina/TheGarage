@@ -27,8 +27,14 @@ namespace Ex03.GarageLogic
             CargoCapacity
         }
 
-        private readonly bool r_HasCoolingCargo;
-        private readonly float r_CargoCapcity;
+        private enum eHasCoolingCargo
+        {
+            Yes = 1,
+            No = 2
+        }
+
+        private eHasCoolingCargo m_HasCoolingCargo;
+        private  float m_CargoCapcity;
 
         public Truck(string i_LicenceID, Energy i_TruckEnergy)
             : base(i_LicenceID, i_TruckEnergy)
@@ -58,13 +64,57 @@ namespace Ex03.GarageLogic
 
         private void AddAddtionalDetailsToDictionary()
         {
-            m_AdditionalVehicleDetails.Add("Cooling cargo", "If the truck has cooling cargo option: ");
-            m_AdditionalVehicleDetails.Add("Cargo capacity", "Truck Cargo Capacity");
+            m_AdditionalVehicleDetails.Add("CoolingCargo", "If the truck has cooling cargo option: ");
+            m_AdditionalVehicleDetails.Add("CargoCapacity", "Truck Cargo Capacity");
         }
 
         public override void SetSingleDetail(string i_Key, string i_InsertedValue)
         {
-            
+            bool parseValueSucceed = false;
+            if (!m_AdditionalVehicleDetails.ContainsKey(i_Key))
+            {
+                /// throw exception 
+            }
+
+            /// <==================================================================>
+            /// <==================================================================>
+
+
+            if (i_Key == "CoolingCargo")
+            {
+                parseValueSucceed = Enum.TryParse(i_InsertedValue, out m_HasCoolingCargo);
+            }
+
+            else if (i_Key == "CargoCapacity")
+            {
+                parseValueSucceed = float.TryParse(i_InsertedValue, out m_CargoCapcity);
+            }
+
+            else if (i_Key == "ModelName")
+            {
+                parseValueSucceed = true;
+                ModelName = i_InsertedValue;
+            }
+
+            else if (i_Key == "WheelManufcaturer")
+            {
+                parseValueSucceed = true;
+                InitVehicleWheels(
+                    TruckWheelSpecifications.k_TruckNumOfWheels,
+                    i_InsertedValue,
+                    TruckWheelSpecifications.k_TruckWheelMaxPSI,
+                    TruckWheelSpecifications.k_TruckWheelPSIAfterManufacture);
+            }
+
+            /// <==================================================================>
+            /// <==================================================================>
+
+            if (!parseValueSucceed)
+            {
+                /// throw
+            }
+
+
         }
     }
 }
