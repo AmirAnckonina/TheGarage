@@ -21,24 +21,13 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(welcomeMessage);
         }
 
-        public VehicleManufacturer.eVehicleType GetVehicleType()
+        public string GetVehicleType()
         {
-            StringBuilder vehicleTypeChoice = new StringBuilder(); /// vehicleTypeChoice;
-            VehicleManufacturer.eVehicleType vehicleType;
-            bool inputIsValid;
+            string vehicleTypeChoice;
 
             PrintRequestOfVehicleType();
-            inputIsValid = int.TryParse(Console.ReadLine(), out vehicleTypeChoice);
-            while (!inputIsValid || !VehicleTypeValidation(vehicleTypeChoice))
-            {
-                PrintInvalidInputMessage();
-                PrintRequestOfVehicleType();
-                inputIsValid = int.TryParse(Console.ReadLine(), out vehicleTypeChoice);
-            }
-
-            vehicleType = ConvertChoiceToVehicleType(vehicleTypeChoice);
-
-            return vehicleType;
+            vehicleTypeChoice = Console.ReadLine();
+            return vehicleTypeChoice;
         }
 
         public string GetOwnerName()
@@ -75,23 +64,14 @@ namespace Ex03.ConsoleUI
             return ownerPhoneNumber.ToString();
         }
 
-        public Energy.eEnergyType GetEnergyType()
+        public string GetEnergyType()
         {
-            Energy.eEnergyType energyTypeEnum;
-            int energyType;
-            bool isenergyTypeValid;
-
+            string energyType;
+           
             PrintRequestForEnergyType();
-            isenergyTypeValid = int.TryParse(Console.ReadLine(), out energyType);
-            while(!isenergyTypeValid || !EnergyTypeValidation(energyType))
-            {
-                PrintInvalidInputMessage();
-                PrintRequestForEnergyType();
-                isenergyTypeValid = int.TryParse(Console.ReadLine(), out energyType);
-            }
-
-            energyTypeEnum = EnergyTypeConvertToEnum(energyType);
-            return energyTypeEnum;
+            energyType = Console.ReadLine();
+          
+            return energyType;
         }
 
         public static void PrintRequestForEnergyType()
@@ -99,8 +79,7 @@ namespace Ex03.ConsoleUI
             StringBuilder EnergyTypeMessage = new StringBuilder();
 
             EnergyTypeMessage.AppendLine("Please enter the energy type of yout vehicle");
-            EnergyTypeMessage.AppendLine("1 - Fuel");
-            EnergyTypeMessage.Append("2 - Electric");
+            EnergyTypeMessage.Append("Fuel/Electric");
             Console.WriteLine(EnergyTypeMessage);
         }
 
@@ -1244,7 +1223,17 @@ namespace Ex03.ConsoleUI
             }
 
             return fuelType;
+        }
 
+        public string GetSingleDetail(string i_MessageValue)
+        {
+            StringBuilder getDetailMessage = new StringBuilder();
+            string insertedInput;
+
+            getDetailMessage.Append(string.Format("Please enter the {0} of your vehicle", i_MessageValue));
+            Console.WriteLine(getDetailMessage);
+            insertedInput = Console.ReadLine();
+            return insertedInput;
         }
     }
 
