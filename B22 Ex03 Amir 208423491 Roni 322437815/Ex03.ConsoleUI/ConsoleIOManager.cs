@@ -27,8 +27,82 @@ namespace Ex03.ConsoleUI
 
             PrintRequestOfVehicleType();
             vehicleTypeChoice = Console.ReadLine();
+
             return vehicleTypeChoice;
         }
+
+        public static void PrintRequestOfVehicleType()
+        {
+            StringBuilder vehicleTypeMessage = new StringBuilder();
+
+            vehicleTypeMessage.AppendLine("Enter the type of your vehicle:");
+            vehicleTypeMessage.AppendLine("1 - Car");
+            vehicleTypeMessage.AppendLine("2 - Motorcycle");
+            vehicleTypeMessage.Append("3 - Truck");
+            Console.WriteLine(vehicleTypeMessage);
+        }
+
+        public string GetEnergyType()
+        {
+            string energyType;
+           
+            PrintRequestForEnergyType();
+            energyType = Console.ReadLine();
+          
+            return energyType;
+        }
+
+        public static void PrintRequestForEnergyType()
+        {
+            StringBuilder EnergyTypeMessage = new StringBuilder();
+
+            EnergyTypeMessage.AppendLine("Please specify the energy source type of your vehicle");
+            EnergyTypeMessage.AppendLine("1 - Fuel");
+            EnergyTypeMessage.Append("2 - Electric");
+            Console.WriteLine(EnergyTypeMessage);
+        }
+
+        public string GetVehicleLicenseID()
+        {
+            StringBuilder vehicleLicenseNumber = new StringBuilder();
+
+            PrintRequesOfVehicleLicenseNumber();
+            vehicleLicenseNumber.Append(Console.ReadLine());
+
+           /* while (!VehicleLicenseNumberValidation(vehicleLicenseNumber))
+            {
+                PrintInvalidInputMessage();
+                PrintRequesOfVehicleLicenseNumber();
+                vehicleLicenseNumber.Clear();
+                vehicleLicenseNumber.Append(Console.ReadLine());
+            }*/
+
+            return vehicleLicenseNumber.ToString();
+        }
+
+        public static void PrintRequesOfVehicleLicenseNumber()
+        {
+            StringBuilder vehicleLicenseNumberMessage = new StringBuilder();
+
+            vehicleLicenseNumberMessage.Append("Please enter the license number of the vehicle:");
+            Console.WriteLine(vehicleLicenseNumberMessage);
+        }
+
+        public string GetSingleDetail(string i_RequestMessageValue)
+        {
+            /// StringBuilder getDetailMessage = new StringBuilder();
+            string insertedInput;
+
+
+            /* getDetailMessage.Append(string.Format("Please enter the {0} of your vehicle", i_RequestMessageValue));
+             Console.WriteLine(getDetailMessage);*/
+
+            Console.WriteLine(i_RequestMessageValue);
+            insertedInput = Console.ReadLine();
+
+            return insertedInput;
+        }
+
 
         public string GetOwnerName()
         {
@@ -64,24 +138,7 @@ namespace Ex03.ConsoleUI
             return ownerPhoneNumber.ToString();
         }
 
-        public string GetEnergyType()
-        {
-            string energyType;
-           
-            PrintRequestForEnergyType();
-            energyType = Console.ReadLine();
-          
-            return energyType;
-        }
 
-        public static void PrintRequestForEnergyType()
-        {
-            StringBuilder EnergyTypeMessage = new StringBuilder();
-
-            EnergyTypeMessage.AppendLine("Please enter the energy type of yout vehicle");
-            EnergyTypeMessage.Append("Fuel/Electric");
-            Console.WriteLine(EnergyTypeMessage);
-        }
 
         public bool EnergyTypeValidation(int i_EnergyType)
         {
@@ -207,16 +264,6 @@ namespace Ex03.ConsoleUI
             return doorsCarEnum;
         }
 
-        public static void PrintRequestOfVehicleType()
-        {
-            StringBuilder vehicleTypeMessage = new StringBuilder();
-
-            vehicleTypeMessage.AppendLine("Enter the type of your vehicle:");
-            vehicleTypeMessage.AppendLine("1 - Car");
-            vehicleTypeMessage.AppendLine("2 - Motorcycle");
-            vehicleTypeMessage.Append("3 - Truck");
-            Console.WriteLine(vehicleTypeMessage);
-        }
 
         public static void PrintInvalidInputMessage()
         {
@@ -265,31 +312,6 @@ namespace Ex03.ConsoleUI
             return enumVehicleType;
         }
 
-        public string GetVehicleLicenceID()
-        {
-            StringBuilder vehicleLicenseNumber = new StringBuilder();
-
-            PrintRequesOfVehicleLicenseNumber();
-            vehicleLicenseNumber.Append(Console.ReadLine());
-
-            while (!VehicleLicenseNumberValidation(vehicleLicenseNumber))
-            {
-                PrintInvalidInputMessage();
-                PrintRequesOfVehicleLicenseNumber();
-                vehicleLicenseNumber.Clear();
-                vehicleLicenseNumber.Append(Console.ReadLine());
-            }
-
-            return vehicleLicenseNumber.ToString();
-        }
-
-        public static void PrintRequesOfVehicleLicenseNumber()
-        {
-            StringBuilder vehicleLicenseNumberMessage = new StringBuilder();
-
-            vehicleLicenseNumberMessage.Append("Please enter the license number of your vehicle");
-            Console.WriteLine(vehicleLicenseNumberMessage);
-        }
 
         public bool VehicleLicenseNumberValidation(StringBuilder i_VehicleLicenseNumber) ///check if the chars are numbers?
         {
@@ -414,11 +436,11 @@ namespace Ex03.ConsoleUI
             return carColorEnum;
         }
 
-        public Motorcycle.eMotorcycleLicenceType GetMotorcycleLicenceType()
+       /* public Motorcycle.eMCLicenceType GetMotorcycleLicenceType()
         {
             int licenceTypeChoice;
             bool inputIsValid;
-            Motorcycle.eMotorcycleLicenceType licenceType;
+            Motorcycle.eMCLicenceType licenceType;
 
             PrintRequestForLicenceType();
             inputIsValid = int.TryParse(Console.ReadLine(), out licenceTypeChoice);
@@ -431,7 +453,7 @@ namespace Ex03.ConsoleUI
 
             licenceType = ConvertChoiceToLicenceType(licenceTypeChoice);
             return licenceType;
-        }
+        }*/
 
         public bool LicenceTypeChoiceValidation(int i_LicenceTypeChoice)
         {
@@ -450,27 +472,27 @@ namespace Ex03.ConsoleUI
             return licenceTypeChoiceIsValid;
         }
 
-        public Motorcycle.eMotorcycleLicenceType ConvertChoiceToLicenceType(int i_LicenceTypeChoice)
+        public Motorcycle.eMCLicenceType ConvertChoiceToLicenceType(int i_LicenceTypeChoice)
         {
-            Motorcycle.eMotorcycleLicenceType licenceType;
+            Motorcycle.eMCLicenceType licenceType;
 
             switch (i_LicenceTypeChoice)
             {
                 case 1:
-                    licenceType = Motorcycle.eMotorcycleLicenceType.A;
+                    licenceType = Motorcycle.eMCLicenceType.A;
                     break;
 
                 case 2:
-                    licenceType = Motorcycle.eMotorcycleLicenceType.A1;
+                    licenceType = Motorcycle.eMCLicenceType.A1;
                     break;
 
                 case 3:
-                    licenceType = Motorcycle.eMotorcycleLicenceType.B1;
+                    licenceType = Motorcycle.eMCLicenceType.B1;
                     break;
 
                 case 4:
                 default:
-                    licenceType = Motorcycle.eMotorcycleLicenceType.BB;
+                    licenceType = Motorcycle.eMCLicenceType.BB;
                     break;
 
             }
@@ -478,17 +500,13 @@ namespace Ex03.ConsoleUI
             return licenceType;
         }
 
-        public static void PrintRequestForLicenceType()
+        /*public static void PrintRequestForLicenceType()
         {
             StringBuilder licenceTypeMessage = new StringBuilder();
 
-            licenceTypeMessage.AppendLine("Please enter the motorcycle licence type: ");
-            licenceTypeMessage.AppendLine("1 - A");
-            licenceTypeMessage.AppendLine("2 - A1");
-            licenceTypeMessage.AppendLine("3 - B1");
-            licenceTypeMessage.Append("3 - BB");
+            "Please enter the motorcycle licence type: \n 1 - A \n 2 - A1 \n 3 - B1 \n 4 - BB \n"
             Console.WriteLine(licenceTypeMessage);
-        }
+        }*/
 
         public int GetMotorcycleEngineCapacity()
         {
@@ -1138,8 +1156,8 @@ namespace Ex03.ConsoleUI
 
             vehicleGarageCardDetails.AppendFormat("The garage is currently holding {0} vehicle", i_VehicleGarageCard.Vehicle.LicenceID).AppendLine();
             vehicleGarageCardDetails.AppendFormat("Vehicle model name: {0}", i_VehicleGarageCard.Vehicle.ModelName).AppendLine();
-            vehicleGarageCardDetails.AppendFormat("Vehicle owner name: {0}", i_VehicleGarageCard.VehicleOwnerName).AppendLine();
-            vehicleGarageCardDetails.AppendFormat("Vehicle owner phone: {0}", i_VehicleGarageCard.VehicleOwnerPhone).AppendLine();
+            vehicleGarageCardDetails.AppendFormat("Vehicle owner name: {0}", i_VehicleGarageCard.OwnerName).AppendLine();
+            vehicleGarageCardDetails.AppendFormat("Vehicle owner phone: {0}", i_VehicleGarageCard.OwnerPhone).AppendLine();
             vehicleGarageCardDetails.AppendFormat("Vehicle status: {0}", ConvertVehicleStatusToString(i_VehicleGarageCard.VehicleStatus)).AppendLine();
             vehicleGarageCardDetails.AppendFormat("Vehicle wheels manufacturer name {0}", i_VehicleGarageCard.Vehicle.VehicleWheels[0].WheelManufacturerName).AppendLine();
             vehicleGarageCardDetails.Append(AllWheelsCurrentPSI(i_VehicleGarageCard.Vehicle.VehicleWheels));
@@ -1225,16 +1243,7 @@ namespace Ex03.ConsoleUI
             return fuelType;
         }
 
-        public string GetSingleDetail(string i_MessageValue)
-        {
-            StringBuilder getDetailMessage = new StringBuilder();
-            string insertedInput;
-
-            getDetailMessage.Append(string.Format("Please enter the {0} of your vehicle", i_MessageValue));
-            Console.WriteLine(getDetailMessage);
-            insertedInput = Console.ReadLine();
-            return insertedInput;
-        }
+        
     }
 
 }

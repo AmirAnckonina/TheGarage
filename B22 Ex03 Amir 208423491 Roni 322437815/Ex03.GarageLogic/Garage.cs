@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
     {
         public enum eVehicleStatus
         {
-            InRepair,
+            InRepair = 1,
             Repaired,
             Paid,
             None
@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
 
         public enum eGarageOperations
         {
-            Refuel,
+            Refuel = 1,
             ChargeBattery,
             InflateWheels,
             ChangeStatus,
@@ -34,16 +34,27 @@ namespace Ex03.GarageLogic
             r_VehicleManufacturer = new VehicleManufacturer();
         }
 
-        public Vehicle GetVehicleByLicenceID(string i_LicenceID)
+        public Dictionary<string, GarageCard> GarageVehicles
         {
-            if (!LicenceIDExist(i_LicenceID))
+            get
             {
-                /// throw
+                return r_GarageVehicles;
             }
-
-            return r_GarageVehicles[i_LicenceID].Vehicle;
         }
 
+        public GarageCard this[string i_LicenseID]
+        {
+            get
+            {
+                return r_GarageVehicles[i_LicenseID];
+            }
+            set 
+            {
+                r_GarageVehicles[i_LicenseID] = value;
+            }
+        }
+        
+        /// 1
         public void AddNewVehicleToTheGarage(string i_LicneseID, string i_VehicleType, string i_EnergyType)
         {
             Vehicle newVehicle;
@@ -55,39 +66,16 @@ namespace Ex03.GarageLogic
             }
 
             newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_LicneseID, i_VehicleType, i_EnergyType);
-
-
+            newGarageCard = new GarageCard(newVehicle, eVehicleStatus.InRepair);
+            r_GarageVehicles.Add(i_LicneseID, newGarageCard);
         }
 
-        ///1
-        public void AddVehicleToGarage(ManufactureDetails i_ManufactureDetails)
+        /// 2 
+       /* public List<string> GetAllGarageVehiclesIDByStatus(string i_VehicleStatusFilter)
         {
-            Vehicle newVehicle;
-            GarageCard newGarageCard;
+            eVehicleStatus vehicleStatus;
 
-            if (!LicenceIDExist(i_ManufactureDetails.LicenceID))
-            {
-                /// manufacturing.
-                newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_ManufactureDetails);
-                /// creation of new GarageCard.
-                newGarageCard = new GarageCard(
-                    i_ManufactureDetails.VehicleOwnerName,
-                    i_ManufactureDetails.VehicleOwnerPhoneNumber,
-                    eVehicleStatus.InRepair,
-                    newVehicle);
-                r_GarageVehicles.Add(i_ManufactureDetails.LicenceID, newGarageCard);
-
-            }
-
-            else
-            {
-                /// Change status to InRepair
-            }
-        }
-
-        /// 2 -> Should give the consoleUI this List and she fill print it.
-        public List<string> GetAllGarageVehiclesIDByStatus(eVehicleStatus i_VehicleStatusFilter)
-        {
+            VehicleStatusSetup(ref vehicleStatus ,i_VehicleStatusFilter);
             List<string> garageVehiclesIDByStatus = new List<string>();
             foreach (KeyValuePair<string, GarageCard> vehicleInGarage in r_GarageVehicles)
             {
@@ -98,7 +86,7 @@ namespace Ex03.GarageLogic
             }
 
             return garageVehiclesIDByStatus;
-        }
+        }*/
 
         /// 3
         public void ChangeVehicleStatus(string i_LicenceID, eVehicleStatus i_NewVehicleStatus)
@@ -176,6 +164,38 @@ namespace Ex03.GarageLogic
         public bool LicenceIDExist(string i_LicenceID)
         {    
             return r_GarageVehicles.ContainsKey(i_LicenceID);
+        }
+
+        public Vehicle GetVehicleByLicenceID(string i_LicenceID)
+        {
+            if (!LicenceIDExist(i_LicenceID))
+            {
+                /// throw
+            }
+
+            return r_GarageVehicles[i_LicenceID].Vehicle;
+        }
+
+        public GarageCard GetVehicleGarageCardByLicenceID(string i_LicenceID)
+        {
+            if (!LicenceIDExist(i_LicenceID))
+            {
+                /// throw
+            }
+
+            return r_GarageVehicles[i_LicenceID];
+        }
+
+        private void VehicleStatusSetup(ref eVehicleStatus o_VehicleStatus, string i_InsertedValue)
+        {
+            bool parseValueSucceed;
+            int numOfEnergySources = Enum.GetValues(typeof(eVehicleStatus)).Length;
+
+            parseValueSucceed = Enum.TryParse(i_InsertedValue, out o_VehicleStatus);
+            if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfEnergySources, (int)o_VehicleStatus))
+            {
+                throw new FormatException("Invalid car color selection.");
+            }
         }
     }
 }

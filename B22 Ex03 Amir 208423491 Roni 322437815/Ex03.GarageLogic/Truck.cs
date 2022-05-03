@@ -21,12 +21,6 @@ namespace Ex03.GarageLogic
             internal const float k_TruckFuelAfterManufacture = 40;
         }
 
-        private enum eTruckManufactureDetails
-        {
-            CoolingCargo,
-            CargoCapacity
-        }
-
         private enum eHasCoolingCargo
         {
             Yes = 1,
@@ -42,63 +36,26 @@ namespace Ex03.GarageLogic
             AddAddtionalDetailsToDictionary();
         }
 
-     /*   public Truck(
-            string i_ModelName,
-            string i_LicenceID,
-            Energy i_TruckEnergy,
-            string i_WheelManufacturerName,
-            bool i_HasCoolingCargo,
-            float i_CargoCapacity)
-            : base(
-                  i_ModelName,
-                  i_LicenceID,
-                  i_TruckEnergy,
-                  i_WheelManufacturerName,
-                  TruckWheelSpecifications.k_TruckNumOfWheels,
-                  TruckWheelSpecifications.k_TruckWheelMaxPSI,
-                  TruckWheelSpecifications.k_TruckWheelPSIAfterManufacture)
-        {
-            r_HasCoolingCargo = i_HasCoolingCargo;
-            r_CargoCapcity = i_CargoCapacity;
-        }*/
-
         private void AddAddtionalDetailsToDictionary()
         {
-            m_AdditionalVehicleDetails.Add("CoolingCargo", "If the truck has cooling cargo option: ");
-            m_AdditionalVehicleDetails.Add("CargoCapacity", "Truck Cargo Capacity");
+            m_AdditionalVehicleDetails.Add("CoolingCargo", "Please enter if the truck has cooling cargo: ");
+            m_AdditionalVehicleDetails.Add("CargoCapacity", "Please enter the truck cargo capacity: ");
         }
 
         public override void SetSingleDetail(string i_Key, string i_InsertedValue)
         {
-            bool parseValueSucceed = false;
-            if (!m_AdditionalVehicleDetails.ContainsKey(i_Key))
-            {
-                /// throw exception 
-            }
-
-            /// <==================================================================>
-            /// <==================================================================>
-
-
             if (i_Key == "CoolingCargo")
             {
-                parseValueSucceed = Enum.TryParse(i_InsertedValue, out m_HasCoolingCargo);
+                EHasCoolingCargoSetup(i_InsertedValue);
             }
 
             else if (i_Key == "CargoCapacity")
             {
-                parseValueSucceed = float.TryParse(i_InsertedValue, out m_CargoCapcity);
-            }
-
-            else if (i_Key == "ModelName")
-            {
-                parseValueSucceed = true;
-                ModelName = i_InsertedValue;
+                CargoCapacitySetup(i_InsertedValue);
             }
 
             else if (i_Key == "WheelManufcaturer")
             {
-                parseValueSucceed = true;
                 InitVehicleWheels(
                     TruckWheelSpecifications.k_TruckNumOfWheels,
                     i_InsertedValue,
@@ -106,14 +63,37 @@ namespace Ex03.GarageLogic
                     TruckWheelSpecifications.k_TruckWheelPSIAfterManufacture);
             }
 
-            /// <==================================================================>
-            /// <==================================================================>
-
-            if (!parseValueSucceed)
+            else 
             {
-                /// throw
+                base.SetSingleDetail(i_Key, i_InsertedValue);
+            }
+        }
+
+
+        private void EHasCoolingCargoSetup(string i_InsertedValue)
+        {
+            bool parseValueSucceed;
+            eHasCoolingCargo coolinCargoChoice;
+            int numOfOptions = Enum.GetValues(typeof(eHasCoolingCargo)).Length;
+
+            parseValueSucceed = Enum.TryParse(i_InsertedValue, out coolinCargoChoice);
+            if (!parseValueSucceed || !EnumRangeValidation(1, numOfOptions, (int)coolinCargoChoice))
+            {
+                throw new FormatException("Invalid car color selection.");
             }
 
+            m_HasCoolingCargo = coolinCargoChoice;
+        }
+
+        private void CargoCapacitySetup(string i_InsertedValue)
+        {
+            bool parseValueSucceed;
+
+            parseValueSucceed = float.TryParse(i_InsertedValue, out m_CargoCapcity);
+            if (!parseValueSucceed)
+            {
+                throw new FormatException("Invalid cargo capacity selection.");
+            }
 
         }
     }

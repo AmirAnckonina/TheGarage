@@ -11,33 +11,32 @@ namespace Ex03.GarageLogic
         {
             Car = 1,
             Motorcycle = 2,
-            Truck = 3,
-            None
+            Truck = 3
         }
+
+        private eVehicleType m_VehicleType;
+        private Energy.eEnergyType m_EnergyType;
 
         public Vehicle ManufactureNewVehicle(string i_LicenceID, string i_VehicleType, string i_EnergyType)
         {
             Vehicle newVehicle;
             eVehicleType vehicleType;
-            Energy.eEnergyType energyType;
-            bool parseVehicleTypeSucceed;
-            bool parseEnergyTypeSucceed;
 
-            parseVehicleTypeSucceed = Enum.TryParse(i_VehicleType , out vehicleType);
-            parseEnergyTypeSucceed = Enum.TryParse(i_EnergyType, out energyType);
-            if (!parseVehicleTypeSucceed || !parseEnergyTypeSucceed)
+            VehicleTypeSetup(i_VehicleType);
+            EnergyTypeSetup(i_EnergyType);
+            if (!LicenceIDFormatValidation(i_LicenceID))
             {
-                /// throw new FromatException
+                throw new FormatException("Invalid licenseID.");
             }
-
-            switch (vehicleType)
+           
+            switch (m_VehicleType)
             {
                 case eVehicleType.Car:
-                    newVehicle = ManufactureNewCar(i_LicenceID, energyType);
+                    newVehicle = ManufactureNewCar(i_LicenceID, m_EnergyType);
                     break;
 
                 case eVehicleType.Motorcycle:
-                    newVehicle = ManufactureNewMotorcycle(i_LicenceID, energyType);
+                    newVehicle = ManufactureNewMotorcycle(i_LicenceID, m_EnergyType);
                     break;
 
                 case eVehicleType.Truck:
@@ -117,5 +116,51 @@ namespace Ex03.GarageLogic
             return newTruck;
         }
 
+        private bool LicenceIDFormatValidation(string i_LicenseID)
+        {
+            bool licenceIDIsValid;
+
+            if(i_LicenseID.Length >= 5 && i_LicenseID.Length <= 8 && i_LicenseID.All(char.IsDigit))
+            {
+                licenceIDIsValid = true;
+            }
+
+            else
+            {
+                licenceIDIsValid = false;
+            }
+
+            return licenceIDIsValid;
+        }
+
+        private void VehicleTypeSetup(string i_InsertedValue)
+        {
+            bool parseValueSucceed;
+            eVehicleType vehicleTypeChoice;
+            int numOfVehicleTypes = Enum.GetValues(typeof(eVehicleType)).Length;
+
+            parseValueSucceed = Enum.TryParse(i_InsertedValue, out vehicleTypeChoice);
+            if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfVehicleTypes, (int)vehicleTypeChoice))
+            {
+                throw new FormatException("Invalid car color selection.");
+            }
+
+            m_VehicleType = vehicleTypeChoice;
+        }
+
+        private void EnergyTypeSetup(string i_InsertedValue)
+        {
+            bool parseValueSucceed;
+            Energy.eEnergyType energyTypeChoice;
+            int numOfEnergySources = Enum.GetValues(typeof(eVehicleType)).Length;
+
+            parseValueSucceed = Enum.TryParse(i_InsertedValue, out energyTypeChoice);
+            if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfEnergySources, (int)energyTypeChoice))
+            {
+                throw new FormatException("Invalid car color selection.");
+            }
+
+            m_EnergyType = energyTypeChoice;
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 {
     public class ManufactureDetails
     {
-        private string m_LicenceID;
+        /*private string m_LicenceID;
         private VehicleManufacturer.eVehicleType m_VehicleType;
         private string m_VehicleModelName;
         private string m_VehicleOwnerName;
@@ -19,9 +19,9 @@ namespace Ex03.GarageLogic
         private int m_MotorcycleEngineCapacity;
         private bool m_HasCoolingCargo;
         private float m_CargoCapacity;
-        private string m_WheelManufacturerName;
+        private string m_WheelManufacturerName;*/
 
-        public VehicleManufacturer.eVehicleType VehicleType
+        /*public VehicleManufacturer.eVehicleType VehicleType
         {
             get
             {
@@ -200,6 +200,6 @@ namespace Ex03.GarageLogic
             m_MotorcycleEngineCapacity = 0;
             m_HasCoolingCargo = false;
             m_CargoCapacity = 0;
-        }
+        }*/
     }
 }
