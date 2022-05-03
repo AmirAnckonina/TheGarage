@@ -10,31 +10,30 @@ namespace Ex03.GarageLogic
 
         public enum eMotorcycleLicenceType
         {
-            A,
+            A = 1,
             A1,
             B1,
-            BB,
-            None
+            BB
         }
 
         internal static class MCFuelSpecifications
         {
-            internal const FuelEnergy.eFuelType k_MotorcycleFuelType = FuelEnergy.eFuelType.Octan98;
-            internal const float k_MotorcycleMaxFuelCapacity = 6.2f;
-            internal const float k_MotorcycleFuelAfterManufacture = 2;
+            internal const FuelEnergy.eFuelType k_MCFuelType = FuelEnergy.eFuelType.Octan98;
+            internal const float k_MCMaxFuelCapacity = 6.2f;
+            internal const float k_MCFuelAfterManufacture = 2;
         }
 
         internal static class MCElectricSpecifications
         {
-            internal const float k_MotorcycleMaxBatteryLoadInHours = 2.5f;
-            internal const float k_MotorcycleBatteryInHoursAfterManufacture = 1.0f;
+            internal const float k_MCMaxBatteryLoadInHours = 2.5f;
+            internal const float k_MCBatteryInHoursAfterManufacture = 1.0f;
         }
 
-        internal static class MotorcycleWheelSpecifications
+        internal static class MCWheelSpecifications
         {
-            internal const int k_MotorcycleNumOfWheels = 2;
-            internal const float k_MotorcycleWheelMaxPSI = 31;
-            internal const float k_MotorcycleWheelPSIAfterManufacture = 20;
+            internal const int k_MCNumOfWheels = 2;
+            internal const float k_MCWheelMaxPSI = 31;
+            internal const float k_MCWheelPSIAfterManufacture = 20;
         }
 
         public enum eMCManufactureDetails
@@ -43,8 +42,8 @@ namespace Ex03.GarageLogic
             EngineCapacity
         }
 
-        private readonly eMotorcycleLicenceType r_LicenceType;
-        private readonly int r_EngineCapacity;
+        private eMotorcycleLicenceType m_LicenceType;
+        private int m_EngineCapacity;
 
         public Motorcycle(string i_LicenceID, Energy i_MCEnergy)
             : base(i_LicenceID, i_MCEnergy)
@@ -52,7 +51,7 @@ namespace Ex03.GarageLogic
             AddAddtionalDetailsToDictionary();
         }
 
-        public Motorcycle(
+     /*   public Motorcycle(
             string i_ModelName,
             string i_LicenceID,
             Energy i_MotorcycleEnergy,
@@ -64,22 +63,65 @@ namespace Ex03.GarageLogic
                   i_LicenceID,
                   i_MotorcycleEnergy,
                   i_WheelManufacturerName,
-                  MotorcycleWheelSpecifications.k_MotorcycleNumOfWheels,
-                  MotorcycleWheelSpecifications.k_MotorcycleWheelMaxPSI,
-                  MotorcycleWheelSpecifications.k_MotorcycleWheelPSIAfterManufacture)
+                  MCWheelSpecifications.k_MotorcycleNumOfWheels,
+                  MCWheelSpecifications.k_MotorcycleWheelMaxPSI,
+                  MCWheelSpecifications.k_MotorcycleWheelPSIAfterManufacture)
         {
-            r_LicenceType = i_MCLicenceType;
-            r_EngineCapacity = i_EngineCapacity;
-        }
+            m_LicenceType = i_MCLicenceType;
+            m_EngineCapacity = i_EngineCapacity;
+        }*/
 
         private void AddAddtionalDetailsToDictionary()
         {
-            m_AdditionalVehicleDetails.Add("Motorcycle licence ID", "");
-            m_AdditionalVehicleDetails.Add("Motorcycle engine capacity", "");
+            m_AdditionalVehicleDetails.Add("MClicenseID", "Message");
+            m_AdditionalVehicleDetails.Add("MCEngineCapacity", "Message");
         }
 
         public override void SetSingleDetail(string i_Key, string i_InsertedValue)
         {
+            bool parseValueSucceed = false;
+            if (!m_AdditionalVehicleDetails.ContainsKey(i_Key))
+            {
+                /// throw exception 
+            }
+
+            /// <==================================================================>
+            /// <==================================================================>
+
+
+            if (i_Key == "MClicenseID")
+            {
+                parseValueSucceed = Enum.TryParse(i_InsertedValue, out m_LicenceType);
+            }
+
+            else if (i_Key == "MCEngineCapacity")
+            {
+                parseValueSucceed = int.TryParse(i_InsertedValue, out m_EngineCapacity);
+            }
+
+            else if (i_Key == "ModelName")
+            {
+                parseValueSucceed = true;
+                ModelName = i_InsertedValue;
+            }
+
+            else if (i_Key == "WheelManufcaturer")
+            {
+                parseValueSucceed = true;
+                InitVehicleWheels(
+                    MCWheelSpecifications.k_MCNumOfWheels,
+                    i_InsertedValue,
+                    MCWheelSpecifications.k_MCWheelMaxPSI,
+                    MCWheelSpecifications.k_MCWheelPSIAfterManufacture);
+            }
+
+            /// <==================================================================>
+            /// <==================================================================>
+
+            if (!parseValueSucceed)
+            {
+                /// throw
+            }
 
         }
     }
