@@ -37,24 +37,19 @@ namespace Ex03.GarageLogic
             internal const float k_MotorcycleWheelPSIAfterManufacture = 20;
         }
 
-        /*public enum eMotorcyclerManufactureDetails
+        public enum eMCManufactureDetails
         {
             MCLicenceType,
             EngineCapacity
-        }*/
+        }
 
         private readonly eMotorcycleLicenceType r_LicenceType;
         private readonly int r_EngineCapacity;
-        /*private readonly eMotorcyclerManufactureDetails[] sr_MCManufactureDetails;
-        private Dictionary<string, string> m_RequestedMCManufactureDetails;
-*/
+
         public Motorcycle(string i_LicenceID, Energy i_MCEnergy)
             : base(i_LicenceID, i_MCEnergy)
         {
-           /* sr_MCManufactureDetails[0] = eMotorcyclerManufactureDetails.MCLicenceType;
-            sr_MCManufactureDetails[1] = eMotorcyclerManufactureDetails.MCLicenceType;
-            m_RequestedMCManufactureDetails.Add("Motorcycle licence type", "");
-            m_RequestedMCManufactureDetails.Add("Motorcycle engine capacity", "");*/
+            initDictionaries();
         }
 
         public Motorcycle(
@@ -77,5 +72,12 @@ namespace Ex03.GarageLogic
             r_EngineCapacity = i_EngineCapacity;
         }
 
+        private void initDictionaries()
+        {
+            sr_DetailMessagePairs.Add(eMCManufactureDetails.MCLicenceType, "Motorcycle Licence type");
+            sr_DetailVariablePairs.Add(eMCManufactureDetails.MCLicenceType, typeof(eMotorcycleLicenceType));
+            sr_DetailMessagePairs.Add(eMCManufactureDetails.EngineCapacity, "Engine Capacity");
+            sr_DetailVariablePairs.Add(eMCManufactureDetails.EngineCapacity, typeof(int));
+        }
     }
 }

@@ -7,11 +7,19 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
+        public enum eBasicDetails
+        {
+            ModelName,
+            WheelManufacturerName,
+        }
 
         private readonly string r_LicenceID;
         private readonly string r_ModelName;
         private Energy r_VehicleEnergy;
         private List<Wheel> m_VehicleWheels;
+        protected static readonly Dictionary<eBasicDetails, "Model Name"> sr_DetailMessagePairs;
+        protected static readonly Dictionary<object, string> sr_DetailMessagePairs;
+        protected static readonly Dictionary<object, object> sr_DetailVariablePairs;
 
         public Vehicle(string i_LicenceID, Energy i_VehicleEnergy)
         {
@@ -90,5 +98,20 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public Dictionary<object, string> DetailMessagePairs
+        {
+            get
+            {
+                return sr_DetailMessagePairs;
+            }
+        }
+
+        public Dictionary<object, object> DetailTypePairs
+        {
+            get
+            {
+                return sr_DetailVariablePairs;
+            }
+        }
     }
 }

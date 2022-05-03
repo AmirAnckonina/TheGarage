@@ -24,6 +24,22 @@ namespace Ex03.ConsoleUI
             ManufactureVehiclesAndAddingToGarageProcedure();
             GarageWorkDay();
         }
+        /// <summary>
+        /// Ask the user for Vehicle type,  LicenceID
+        /// Check if licenceID is Exist 
+        /// -> If yes, so ignore and get the next vehicle
+        /// -> If no, Crease basic vehicle with LicenceID, string VehicleType 
+        ///     -> AddVehicleToGarage (store in the dictionary)
+        ///     -> Complete manufacturing
+        ///     Continue with basic VehicleDetails 
+        ///     -> Specific manufacture details according to the vehicle type
+        ///     -> update GarageCard details
+        /// 
+        /// </summary>
+        public void addNewVehiclesToTheGarageProcedure()
+        {
+            
+        }
 
         public void ManufactureVehiclesAndAddingToGarageProcedure()
         {
@@ -184,6 +200,11 @@ namespace Ex03.ConsoleUI
                 default:
                     break;
             }
+        }
+
+        public void AdditionalVehicleDetailsProcedure()
+        {
+           /* foreach ()*/
         }
     } 
 }

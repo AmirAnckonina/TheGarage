@@ -21,24 +21,19 @@ namespace Ex03.GarageLogic
             internal const float k_TruckFuelAfterManufacture = 40;
         }
 
-        /*private enum eTruckManufactureDetails
+        private enum eTruckManufactureDetails
         {
             CoolingCargo,
             CargoCapacity
-        }*/
+        }
 
         private readonly bool r_HasCoolingCargo;
         private readonly float r_CargoCapcity;
-       /* private eTruckManufactureDetails[] sr_TruckManufactureDetails;
-        private Dictionary<eTruckManufactureDetails, string> m_RequestedTruckManufactureDetails;*/
 
         public Truck(string i_LicenceID, Energy i_TruckEnergy)
             : base(i_LicenceID, i_TruckEnergy)
         {
-           /* sr_TruckManufactureDetails[0] = eTruckManufactureDetails.CoolingCargo;
-            sr_TruckManufactureDetails[1] = eTruckManufactureDetails.CargoCapacity;
-            m_RequestedTruckManufactureDetails.Add(eTruckManufactureDetails.CoolingCargo, "Cooling cargo");
-            m_RequestedTruckManufactureDetails.Add(eTruckManufactureDetails.CargoCapacity, "Cargo capacity");*/
+            initDictionaries();
         }
 
         public Truck(
@@ -59,6 +54,14 @@ namespace Ex03.GarageLogic
         {
             r_HasCoolingCargo = i_HasCoolingCargo;
             r_CargoCapcity = i_CargoCapacity;
+        }
+
+        private void initDictionaries()
+        {
+            sr_DetailMessagePairs.Add(eTruckManufactureDetails.CoolingCargo, "Has Colling cargo");
+            sr_DetailVariablePairs.Add(eTruckManufactureDetails.CoolingCargo, typeof(bool));
+            sr_DetailMessagePairs.Add(eTruckManufactureDetails.CargoCapacity, "Cargo capacity");
+            sr_DetailVariablePairs.Add(eTruckManufactureDetails.CargoCapacity, typeof(float));
         }
     }
 }
