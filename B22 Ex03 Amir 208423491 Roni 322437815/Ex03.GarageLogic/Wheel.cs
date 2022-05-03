@@ -7,13 +7,18 @@ namespace Ex03.GarageLogic
 {
     public class Wheel
     {
-        private readonly string r_WheelManufacturerName;
+        private string m_WheelManufacturerName;
         private float m_currentPSI;
         private readonly float r_MaxPSI;
 
+        public Wheel()
+        {
+
+        }
+
         public Wheel(string i_WheelManufacturerName, float i_WheelMaxPSI, float i_WheelPSIAfterManufacture)
         {
-            r_WheelManufacturerName = i_WheelManufacturerName;
+            WheelManufacturerNameSetup(i_WheelManufacturerName);
             r_MaxPSI = i_WheelMaxPSI;
             m_currentPSI = i_WheelPSIAfterManufacture;
         }
@@ -22,7 +27,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_WheelManufacturerName;
+                return m_WheelManufacturerName;
             }
         }
 
@@ -44,5 +49,15 @@ namespace Ex03.GarageLogic
             m_currentPSI = r_MaxPSI;
         }
 
+        private void WheelManufacturerNameSetup(string i_WheelManufacturerName)
+        {
+           /* if (i_WheelManufacturerName.Length > k_MaxWheelManufacturerNameLength)
+            {
+                throw new FormatException("Invalid Wheel manfacturer name.");
+            }*/
+
+            m_WheelManufacturerName = i_WheelManufacturerName;
+        }
+        
     }
 }

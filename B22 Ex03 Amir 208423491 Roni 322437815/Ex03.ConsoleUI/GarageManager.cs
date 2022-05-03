@@ -21,9 +21,10 @@ namespace Ex03.ConsoleUI
 
         public void Run()
         {
-            ManufactureVehiclesAndAddingToGarageProcedure();
-            GarageWorkDay();
+            AddNewVehiclesToTheGarageProcedure();
+            /// GarageWorkDay();
         }
+
         /// <summary>
         /// Ask the user for Vehicle type,  LicenceID
         /// Check if licenceID is Exist 
@@ -36,83 +37,53 @@ namespace Ex03.ConsoleUI
         ///     -> update GarageCard details
         /// 
         /// </summary>
-
-        public void addNewVehiclesToTheGarageProcedure()
+        public void AddNewVehiclesToTheGarageProcedure()
         {
             bool endOfAddingVehiclesToGarage;
             string vehicleLicenceID, vehicleType, energyType;
-            Vehicle currVehicle;
 
             do
             {
-                /// Get CarType by string
-                /// Get LicenceID by string
-                vehicleLicenceID = r_ConsoleIOManager.GetVehicleLicenceID();
                 vehicleType = r_ConsoleIOManager.GetVehicleType();
                 energyType = r_ConsoleIOManager.GetEnergyType();
-                if (!r_Garage.LicenceIDExist(vehicleLicenceID))
-                {
-                    r_Garage.AddNewVehicleToTheGarage(vehicleLicenceID, vehicleType, energyType);
-                    currVehicle = r_Garage.GetVehicleByLicenceID(vehicleLicenceID);
-                    AdditionalVehicleDetailsProcedure(currVehicle.AdditionalVehicleDetails, currVehicle);
-                }
+                vehicleLicenceID = r_ConsoleIOManager.GetVehicleLicenseID();
+                /// if (!r_Garage.LicenceIDExist(vehicleLicenceID))
+                /// {
+                r_Garage.AddNewVehicleToTheGarage(vehicleLicenceID, vehicleType, energyType); 
+                CompleteVehicleDetailsProcedure(vehicleLicenceID);
+                /// }
 
-                m_ManufactureDetails.ClearForm();
                 endOfAddingVehiclesToGarage = r_ConsoleIOManager.AskToEndAddingVehiclesToGarage();
+
             } while (!endOfAddingVehiclesToGarage);
         }
 
-        public void AdditionalVehicleDetailsProcedure(Dictionary<string, string> i_DetailsDictionary,Vehicle i_CurrVehicle)
+        public void CompleteVehicleDetailsProcedure(string i_VehicleLicenceID)
         {
+            Vehicle currVehicle;
+            GarageCard currGarageCard;
+            string insertedInput;
 
-            foreach (KeyValuePair<string, string> currPair in i_DetailsDictionary)
+            currVehicle = r_Garage.GetVehicleByLicenceID(i_VehicleLicenceID);
+            /// currVehicle = r_Garage[i_VehicleLicenceID].Vehicle;
+            foreach (KeyValuePair<string, string> currVehicleDetail in currVehicle.AdditionalVehicleDetails)
             {
-                string insertedInput;
-
-                insertedInput = r_ConsoleIOManager.GetSingleDetail(currPair.Value);
-                i_CurrVehicle.SetSingleDetail(currPair.Key, insertedInput);
+                /// try - catch
+                insertedInput = r_ConsoleIOManager.GetSingleDetail(currVehicleDetail.Value);
+                currVehicle.SetSingleDetail(currVehicleDetail.Key, insertedInput);
             }
-        }
 
-        public void ManufactureVehiclesAndAddingToGarageProcedure()
-        {
-            VehicleManufacturer.eVehicleType vehicleTypeChoice;
-            bool endOfAddingVehiclesToGarage;
-
-            do
+            currGarageCard = r_Garage.GetVehicleGarageCardByLicenceID(i_VehicleLicenceID);
+            foreach (KeyValuePair<string, string> currGarageCardDetail in currGarageCard.GarageCardDetails)
             {
-                m_ManufactureDetails.LicenceID = r_ConsoleIOManager.GetVehicleLicenceID();
-                if (!r_Garage.LicenceIDExist(m_ManufactureDetails.LicenceID))
-                {
-                    /// m_ManufactureDetails.VehicleType = r_ConsoleIOManager.GetVehicleType();
-                    /// r_Garage.ManufactureNewVehicleAndAddToGarage(m_ManufactureDetails);
-                    BasicDetailsInputsProcedure();
-                    vehicleTypeChoice = m_ManufactureDetails.VehicleType;
-                    switch (vehicleTypeChoice)
-                    {
-                        case VehicleManufacturer.eVehicleType.Car:
-                            CarDetailsInputsProcedure();
-                            break;
+                insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
+                currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
+            }
 
-                        case VehicleManufacturer.eVehicleType.Motorcycle:
-                            MotorcycleDetailsInputsProcedure();
-                            break;
-
-                        case VehicleManufacturer.eVehicleType.Truck:
-                        default:
-                            TruckDetailsInputsProcedure();
-                            break;
-                    }
-                }
-
-                r_Garage.AddVehicleToGarage(m_ManufactureDetails);
-                m_ManufactureDetails.ClearForm();
-                endOfAddingVehiclesToGarage = r_ConsoleIOManager.AskToEndAddingVehiclesToGarage();
-
-            } while (!endOfAddingVehiclesToGarage);
         }
 
-        public void BasicDetailsInputsProcedure()
+
+       /* public void BasicDetailsInputsProcedure()
         {
             m_ManufactureDetails.VehicleType = r_ConsoleIOManager.GetVehicleType();
             m_ManufactureDetails.ModelName = r_ConsoleIOManager.GetVehicleModelName();
@@ -139,9 +110,9 @@ namespace Ex03.ConsoleUI
         {
             m_ManufactureDetails.HasCoolingCargo = r_ConsoleIOManager.GetIfTruckHasCoolingCargo();
             m_ManufactureDetails.CargoCapacity = r_ConsoleIOManager.GetTruckCargoCapacity();
-        }
+        }*/
 
-        public void GarageWorkDay()
+        /*public void GarageWorkDay()
         {
             bool endOfWorkDay;
             bool printAllVehicleID;
@@ -237,7 +208,7 @@ namespace Ex03.ConsoleUI
 
         public void AdditionalVehicleDetailsProcedure()
         {
-           /* foreach ()*/
-        }
+           *//* foreach ()*//*
+        }*/
     } 
 }

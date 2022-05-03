@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
     {
         public enum eColor
         {
-            Red,
+            Red = 1,
             White,
             Green,
             Blue,
@@ -18,10 +18,10 @@ namespace Ex03.GarageLogic
 
         public enum eDoorsNumber
         {
-            Two = 2,
-            Three = 3,
-            Four = 4,
-            Five = 5,
+            Two = 1,
+            Three,
+            Four,
+            Five,
             None
         }
 
@@ -60,59 +60,26 @@ namespace Ex03.GarageLogic
             AddAddtionalDetailsToDictionary();
         }
 
-        public Car(
-            string i_ModelName,
-            string i_LicenceID,
-            Energy i_CarEnergy,
-            string i_WheelManufacturerName,
-            eColor i_Color,
-            eDoorsNumber i_DoorsNumber)
-            : base(
-                  i_ModelName,
-                  i_LicenceID,
-                  i_CarEnergy,
-                  i_WheelManufacturerName,
-                  CarWheelSpecifications.k_CarNumOfWheels,
-                  CarWheelSpecifications.k_CarWheelMaxPSI,
-                  CarWheelSpecifications.k_CarWheelPSIAfterManufacture)
-        {
-            m_CarColor = i_Color;
-            m_DoorsNumber = i_DoorsNumber;
-        }
-
         private void AddAddtionalDetailsToDictionary()
         {
-            m_AdditionalVehicleDetails.Add("CarColor", "Message");
-            m_AdditionalVehicleDetails.Add("CarDoorsNumber", "Message");
+            m_AdditionalVehicleDetails.Add("CarColor", "Please enter the Car Color: ");
+            m_AdditionalVehicleDetails.Add("CarDoorsNumber", "Please enter the Doors numbers in car: ");
         }
 
         public override void SetSingleDetail(string i_Key, string i_InsertedValue)
         {
-            bool parseValueSucceed = false;
-            if (!m_AdditionalVehicleDetails.ContainsKey(i_Key))
-            {
-                /// throw exception 
-            }
-
             if (i_Key == "CarColor")
             {
-                parseValueSucceed = Enum.TryParse(i_InsertedValue, out m_CarColor);
+                EcolorSetup(i_InsertedValue);
             }
 
             else if (i_Key == "CarDoorsNumber")
             {
-                parseValueSucceed = Enum.TryParse(i_InsertedValue, out m_DoorsNumber);
-            }
-
-            else if (i_Key == "ModelName")
-            {
-                parseValueSucceed = true;
-                ModelName = i_InsertedValue;
+                EDoorsNumberSetup(i_InsertedValue);
             }
 
             else if (i_Key == "WheelManufcaturer")
             {
-                parseValueSucceed = true;
                 InitVehicleWheels(
                     CarWheelSpecifications.k_CarNumOfWheels,
                     i_InsertedValue,
@@ -120,13 +87,45 @@ namespace Ex03.GarageLogic
                     CarWheelSpecifications.k_CarWheelPSIAfterManufacture);
             }
 
-            if (!parseValueSucceed)
+            else 
             {
-                /// throw
+                base.SetSingleDetail(i_Key, i_InsertedValue);
+            }
+        }
+
+        private void EcolorSetup(string i_InsertedValue)
+        {
+            bool parseValueSucceed;
+            eColor colorChoice;
+            int numOfColors = Enum.GetValues(typeof(eColor)).Length;
+
+            parseValueSucceed = Enum.TryParse(i_InsertedValue, out colorChoice);
+            if (!parseValueSucceed || !EnumRangeValidation(1, numOfColors, (int)colorChoice)) /// To Check Parser
+            {
+                throw new FormatException("Invalid car color selection.");
             }
 
-            
+            m_CarColor = colorChoice;
         }
+        
+        private void EDoorsNumberSetup(string i_InsertedValue)
+        {
+            bool parseValueSucceed;
+            eDoorsNumber doorsNumberChoice;
+            int numOfDoorsNumberOptions = Enum.GetValues(typeof(eDoorsNumber)).Length;
+
+            parseValueSucceed = Enum.TryParse(i_InsertedValue, out doorsNumberChoice);
+            if (!parseValueSucceed || !EnumRangeValidation(1, numOfDoorsNumberOptions, (int)doorsNumberChoice))
+            {
+                throw new FormatException("Invalid car doors number selection.");
+            }
+
+            m_DoorsNumber = doorsNumberChoice;
+        }
+
+        
+
+
 
     }
 }

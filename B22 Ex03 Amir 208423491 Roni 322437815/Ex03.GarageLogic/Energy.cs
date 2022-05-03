@@ -9,9 +9,8 @@ namespace Ex03.GarageLogic
     {
         public enum eEnergyType
         {
-            Fuel,
-            Electric,
-            None
+            Fuel = 1,
+            Electric = 2
         }
 
         private float m_EnergyLeft;
@@ -22,6 +21,7 @@ namespace Ex03.GarageLogic
         {
             r_MaxEnergyCapacity = i_MaxEnergyCapacity;
             m_EnergyLeft = i_EnergyLeft;
+            /// Percentage representaion.
             m_EnergyLeftPercentage = (i_EnergyLeft / r_MaxEnergyCapacity) * 100;
         }
 
@@ -42,7 +42,9 @@ namespace Ex03.GarageLogic
             float newEnergyAmount = m_EnergyLeft + i_EnergyAmountInHours;
             if (newEnergyAmount > r_MaxEnergyCapacity)
             {
-                /// throw new ValueOutOfRangeException
+                float currentMaxAmountToFill = r_MaxEnergyCapacity - m_EnergyLeft;
+                string errMessage = string.Format("You've reached the maximum energy, please enter valid amount between {0} - {1}", 0f, currentMaxAmountToFill);
+                throw new ValueOutOfRangeException(errMessage, currentMaxAmountToFill, 0f);
             }
 
             m_EnergyLeft = newEnergyAmount;

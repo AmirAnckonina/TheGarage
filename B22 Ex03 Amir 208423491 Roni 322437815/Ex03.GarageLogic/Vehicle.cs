@@ -12,7 +12,7 @@ namespace Ex03.GarageLogic
         private string m_ModelName;
         private Energy r_VehicleEnergy;
         private List<Wheel> m_VehicleWheels;
-        protected Dictionary<string, string> m_AdditionalVehicleDetails; /// Should be static
+        protected static Dictionary<string, string> m_AdditionalVehicleDetails; /// Should be static
 
         public Vehicle(string i_LicenceID, Energy i_VehicleEnergy)
         {
@@ -21,26 +21,6 @@ namespace Ex03.GarageLogic
             InitDictionary();
         }
 
-       /* public Vehicle(
-            string i_ModelName,
-            string i_LicenceID,
-            Energy i_VehicleEnergy,
-            string i_WheelManufacturerName,
-            int i_NumOfWheels,
-            float i_WheelMaxPSI,
-            float i_WheelPSIAfterManufacture)
-        {
-            r_ModelName = i_ModelName;
-            r_LicenceID = i_LicenceID;
-            r_VehicleEnergy = i_VehicleEnergy;
-            m_VehicleWheels = new List<Wheel>(i_NumOfWheels);
-            for (int idx = 0; idx < i_NumOfWheels; idx++)
-            {
-                m_VehicleWheels.Add(new Wheel(i_WheelManufacturerName, i_WheelMaxPSI, i_WheelPSIAfterManufacture));
-            }
-
-        }
-*/
         public string ModelName
         {
             get
@@ -58,7 +38,7 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return r_ModelName;
+                return m_ModelName;
             }
         }
 
@@ -111,11 +91,33 @@ namespace Ex03.GarageLogic
 
         public void InitDictionary()
         {
-            m_AdditionalVehicleDetails.Add("ModelName", "Vehicle model name");
-            m_AdditionalVehicleDetails.Add("WheelManufcaturer", "");
+            m_AdditionalVehicleDetails = new Dictionary<string, string>();
+            m_AdditionalVehicleDetails.Add("ModelName", "Please enter the vehicle model name: ");
+            m_AdditionalVehicleDetails.Add("WheelManufcaturer", "Please enter the wheel manufacturer name: ");
         }
 
-        public abstract void SetSingleDetail(string i_Key, string i_InsertedValue);
+        public virtual void SetSingleDetail(string i_Key, string i_InsertedValue)
+        {
+            if (!m_AdditionalVehicleDetails.ContainsKey(i_Key))
+            {
+                throw new FormatException("Detail not found in car manufacture required details.");
+            }
+
+            if (i_Key == "ModelName")
+            {
+                ModelNameSetup(i_InsertedValue);
+            }
+        }
+
+        private void ModelNameSetup(string i_InsertedValue)
+        {
+            /* if (i_InsertedValue.Length >= k_MaxModelNameLength)
+             {
+                 throw new FormatException("Invalid Model name");
+             }*/
+
+            m_ModelName = i_InsertedValue;
+        }
 
         public void InitVehicleWheels(int i_NumOfWheels, string i_WheelManufacturerName, float i_WheelMaxPSI, float i_WheelPSIAfterManufacture)
         {
@@ -128,6 +130,22 @@ namespace Ex03.GarageLogic
 
         }
 
+        public bool EnumRangeValidation(int i_MinValue, int i_MaxValue, int i_ColorChoice)
+        {
+            bool inRange;
+
+            if (i_ColorChoice >= i_MinValue && i_ColorChoice <= i_MaxValue)
+            {
+                inRange = true;
+            }
+
+            else
+            {
+                inRange = false;
+            }
+
+            return inRange;
+        }
 
     }
 }

@@ -7,8 +7,7 @@ namespace Ex03.GarageLogic
 {
     public class Motorcycle : Vehicle
     {
-
-        public enum eMotorcycleLicenceType
+        public enum eMCLicenceType
         {
             A = 1,
             A1,
@@ -36,13 +35,7 @@ namespace Ex03.GarageLogic
             internal const float k_MCWheelPSIAfterManufacture = 20;
         }
 
-        public enum eMCManufactureDetails
-        {
-            MCLicenceType,
-            EngineCapacity
-        }
-
-        private eMotorcycleLicenceType m_LicenceType;
+        private eMCLicenceType m_MCLicenceType;
         private int m_EngineCapacity;
 
         public Motorcycle(string i_LicenceID, Energy i_MCEnergy)
@@ -51,63 +44,28 @@ namespace Ex03.GarageLogic
             AddAddtionalDetailsToDictionary();
         }
 
-     /*   public Motorcycle(
-            string i_ModelName,
-            string i_LicenceID,
-            Energy i_MotorcycleEnergy,
-            string i_WheelManufacturerName,
-            eMotorcycleLicenceType i_MCLicenceType,
-            int i_EngineCapacity)
-            : base(
-                  i_ModelName,
-                  i_LicenceID,
-                  i_MotorcycleEnergy,
-                  i_WheelManufacturerName,
-                  MCWheelSpecifications.k_MotorcycleNumOfWheels,
-                  MCWheelSpecifications.k_MotorcycleWheelMaxPSI,
-                  MCWheelSpecifications.k_MotorcycleWheelPSIAfterManufacture)
-        {
-            m_LicenceType = i_MCLicenceType;
-            m_EngineCapacity = i_EngineCapacity;
-        }*/
-
         private void AddAddtionalDetailsToDictionary()
         {
-            m_AdditionalVehicleDetails.Add("MClicenseID", "Message");
-            m_AdditionalVehicleDetails.Add("MCEngineCapacity", "Message");
+            m_AdditionalVehicleDetails.Add(
+                "MClicenseID", 
+                "Please enter the motorcycle licence type: \n 1 - A \n 2 - A1 \n 3 - B1 \n 4 - BB \n");
+            m_AdditionalVehicleDetails.Add("MCEngineCapacity", "Please enter the motorcycle engine capacity: ");
         }
 
         public override void SetSingleDetail(string i_Key, string i_InsertedValue)
         {
-            bool parseValueSucceed = false;
-            if (!m_AdditionalVehicleDetails.ContainsKey(i_Key))
-            {
-                /// throw exception 
-            }
-
-            /// <==================================================================>
-            /// <==================================================================>
-
-
             if (i_Key == "MClicenseID")
             {
-                parseValueSucceed = Enum.TryParse(i_InsertedValue, out m_LicenceType);
+                EMCLicenceTypeSetup(i_InsertedValue);
             }
 
             else if (i_Key == "MCEngineCapacity")
             {
-                parseValueSucceed = int.TryParse(i_InsertedValue, out m_EngineCapacity);
-            }
-
-            else if (i_Key == "ModelName")
-            {
-                parseValueSucceed = true;
-                ModelName = i_InsertedValue;
+                EngineCapacitySetup(i_InsertedValue);
             }
 
             else if (i_Key == "WheelManufcaturer")
             {
-                parseValueSucceed = true;
                 InitVehicleWheels(
                     MCWheelSpecifications.k_MCNumOfWheels,
                     i_InsertedValue,
@@ -115,14 +73,36 @@ namespace Ex03.GarageLogic
                     MCWheelSpecifications.k_MCWheelPSIAfterManufacture);
             }
 
-            /// <==================================================================>
-            /// <==================================================================>
-
-            if (!parseValueSucceed)
+            else
             {
-                /// throw
+                base.SetSingleDetail(i_Key, i_InsertedValue);
+            }
+        }
+
+        private void EMCLicenceTypeSetup(string i_InsertedValue)
+        {
+            bool parseValueSucceed;
+            eMCLicenceType MCLicenseTypeChoice;
+            int numOfOptions = Enum.GetValues(typeof(eMCLicenceType)).Length;
+
+            parseValueSucceed = Enum.TryParse(i_InsertedValue, out MCLicenseTypeChoice);
+            if (!parseValueSucceed || !EnumRangeValidation(1, numOfOptions, (int)MCLicenseTypeChoice))
+            {
+                throw new FormatException("Invalid car color selection.");
             }
 
+            m_MCLicenceType = MCLicenseTypeChoice;
+        }
+
+        private void EngineCapacitySetup(string i_InsertedValue)
+        {
+            bool parseValueSucceed;
+
+            parseValueSucceed = int.TryParse(i_InsertedValue, out m_EngineCapacity);
+            if (!parseValueSucceed)
+            {
+                throw new FormatException("Invalid engine capacity selection.");
+            }
         }
     }
 }
