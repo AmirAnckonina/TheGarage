@@ -56,12 +56,10 @@ namespace Ex03.GarageLogic
             r_CargoCapcity = i_CargoCapacity;
         }
 
-        private void initDictionaries()
+        private void InitDictionary()
         {
-            sr_DetailMessagePairs.Add(eTruckManufactureDetails.CoolingCargo, "Has Colling cargo");
-            sr_DetailVariablePairs.Add(eTruckManufactureDetails.CoolingCargo, typeof(bool));
-            sr_DetailMessagePairs.Add(eTruckManufactureDetails.CargoCapacity, "Cargo capacity");
-            sr_DetailVariablePairs.Add(eTruckManufactureDetails.CargoCapacity, typeof(float));
+            m_AdditionalVehicleDetails.Add("Has Cooling cargo", "");
+            m_AdditionalVehicleDetails.Add("Cargo capacity", "");
         }
     }
 }

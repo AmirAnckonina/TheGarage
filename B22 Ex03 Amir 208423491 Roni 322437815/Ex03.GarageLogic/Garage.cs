@@ -34,6 +34,11 @@ namespace Ex03.GarageLogic
             r_VehicleManufacturer = new VehicleManufacturer();
         }
 
+        public void AddNewVehicleToTheGarage(string i_LicneseID, string i_VehicleTypr)
+        {
+
+        }
+
        /* public void ManufactureNewVehicleAndAddToGarage(ManufactureDetails i_ManufactureDetails)
         {
             Vehicle newVehicle;
