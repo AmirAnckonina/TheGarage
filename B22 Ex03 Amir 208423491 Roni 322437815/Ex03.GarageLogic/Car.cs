@@ -96,12 +96,10 @@ namespace Ex03.GarageLogic
             }
         }*/
 
-        private void initDictionaries()
+        private void InitDictionary()
         {
-            sr_DetailMessagePairs.Add(eCarManufactureDetails.Color, "Car color");
-            sr_DetailVariablePairs.Add(eCarManufactureDetails.Color, typeof(eColor));
-            sr_DetailMessagePairs.Add(eCarManufactureDetails.Color, "Doors number");
-            sr_DetailVariablePairs.Add(eCarManufactureDetails.Color, typeof(eDoorsNumber));
+            m_AdditionalVehicleDetails.Add("Car color", "");
+            m_AdditionalVehicleDetails.Add("Car doors number", "");
         }
 
     }

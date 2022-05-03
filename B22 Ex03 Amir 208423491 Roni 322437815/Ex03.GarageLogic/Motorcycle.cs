@@ -49,7 +49,7 @@ namespace Ex03.GarageLogic
         public Motorcycle(string i_LicenceID, Energy i_MCEnergy)
             : base(i_LicenceID, i_MCEnergy)
         {
-            initDictionaries();
+            InitDictionary();
         }
 
         public Motorcycle(
@@ -72,12 +72,10 @@ namespace Ex03.GarageLogic
             r_EngineCapacity = i_EngineCapacity;
         }
 
-        private void initDictionaries()
+        private void InitDictionary()
         {
-            sr_DetailMessagePairs.Add(eMCManufactureDetails.MCLicenceType, "Motorcycle Licence type");
-            sr_DetailVariablePairs.Add(eMCManufactureDetails.MCLicenceType, typeof(eMotorcycleLicenceType));
-            sr_DetailMessagePairs.Add(eMCManufactureDetails.EngineCapacity, "Engine Capacity");
-            sr_DetailVariablePairs.Add(eMCManufactureDetails.EngineCapacity, typeof(int));
+            m_AdditionalVehicleDetails.Add("Motorcycle licence ID", "");
+            m_AdditionalVehicleDetails.Add("Motorcycle engine capacity", "");
         }
     }
 }

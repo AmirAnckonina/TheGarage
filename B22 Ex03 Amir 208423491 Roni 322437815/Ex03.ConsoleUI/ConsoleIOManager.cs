@@ -23,7 +23,7 @@ namespace Ex03.ConsoleUI
 
         public VehicleManufacturer.eVehicleType GetVehicleType()
         {
-            int vehicleTypeChoice;
+            StringBuilder vehicleTypeChoice = new StringBuilder(); /// vehicleTypeChoice;
             VehicleManufacturer.eVehicleType vehicleType;
             bool inputIsValid;
 

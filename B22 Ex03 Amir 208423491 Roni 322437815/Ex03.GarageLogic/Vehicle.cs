@@ -17,9 +17,7 @@ namespace Ex03.GarageLogic
         private readonly string r_ModelName;
         private Energy r_VehicleEnergy;
         private List<Wheel> m_VehicleWheels;
-        protected static readonly Dictionary<eBasicDetails, "Model Name"> sr_DetailMessagePairs;
-        protected static readonly Dictionary<object, string> sr_DetailMessagePairs;
-        protected static readonly Dictionary<object, object> sr_DetailVariablePairs;
+        protected Dictionary<string, string> m_AdditionalVehicleDetails;
 
         public Vehicle(string i_LicenceID, Energy i_VehicleEnergy)
         {
@@ -98,19 +96,15 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public Dictionary<object, string> DetailMessagePairs
+        public Dictionary<string, string> AdditionalVehicleDetails
         {
             get
             {
-                return sr_DetailMessagePairs;
+                return m_AdditionalVehicleDetails;
             }
-        }
-
-        public Dictionary<object, object> DetailTypePairs
-        {
-            get
+            set
             {
-                return sr_DetailVariablePairs;
+                m_AdditionalVehicleDetails = value;
             }
         }
     }

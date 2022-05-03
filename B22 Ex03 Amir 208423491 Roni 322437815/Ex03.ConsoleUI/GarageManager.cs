@@ -38,7 +38,15 @@ namespace Ex03.ConsoleUI
         /// </summary>
         public void addNewVehiclesToTheGarageProcedure()
         {
-            
+            bool endOfAddingVehiclesToGarage;
+
+            do
+            {
+                /// Get CarType by string
+                /// Get LicenceID by string
+                r_Garage.AddVehicleToGarage();
+
+            } while (!endOfAddingVehiclesToGarage);
         }
 
         public void ManufactureVehiclesAndAddingToGarageProcedure()
