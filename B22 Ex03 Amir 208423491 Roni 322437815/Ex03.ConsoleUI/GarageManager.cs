@@ -47,21 +47,22 @@ namespace Ex03.ConsoleUI
             {
                 /// Get CarType by string
                 /// Get LicenceID by string
-               /* vehicleLicenceID = r_ConsoleIOManager.GetVehicleLicenceID();
-                vehicleType = r_ConsoleIOManager.GetVehicleType();*/
+                vehicleLicenceID = r_ConsoleIOManager.GetVehicleLicenceID();
+                vehicleType = r_ConsoleIOManager.GetVehicleType();
+                energyType = r_ConsoleIOManager.GetEnergyType();
                 if (!r_Garage.LicenceIDExist(vehicleLicenceID))
                 {
-                    r_Garage.AddVehicleToGarage(vehicleLicenceID, vehicleType, energyType);
-                    currVehicle = GetVehicleByLicenceID(vehicleLicenceID);
-                    AdditionalVehicleDetailsProcedure(currVehicle.AdditionalVehicleDetails);
-
-
+                    r_Garage.AddNewVehicleToTheGarage(vehicleLicenceID, vehicleType, energyType);
+                    currVehicle = r_Garage.GetVehicleByLicenceID(vehicleLicenceID);
+                    AdditionalVehicleDetailsProcedure(currVehicle.AdditionalVehicleDetails, currVehicle);
                 }
 
+                m_ManufactureDetails.ClearForm();
+                endOfAddingVehiclesToGarage = r_ConsoleIOManager.AskToEndAddingVehiclesToGarage();
             } while (!endOfAddingVehiclesToGarage);
         }
 
-        public void AdditionalVehicleDetailsProcedure(Dictionary<string, string> i_DetailsDictionary)
+        public void AdditionalVehicleDetailsProcedure(Dictionary<string, string> i_DetailsDictionary,Vehicle i_CurrVehicle)
         {
 
             foreach (KeyValuePair<string, string> currPair in i_DetailsDictionary)
@@ -69,7 +70,7 @@ namespace Ex03.ConsoleUI
                 string insertedInput;
 
                 insertedInput = r_ConsoleIOManager.GetSingleDetail(currPair.Value);
-                r_Garage.SetSingleDetail(currPair.Key, insertedInput);
+                i_CurrVehicle.SetSingleDetail(currPair.Key, insertedInput);
             }
         }
 
