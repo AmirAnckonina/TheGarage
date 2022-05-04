@@ -12,7 +12,6 @@ namespace Ex03.GarageLogic
             InRepair = 1,
             Repaired,
             Paid,
-            None
         }
 
         public enum eGarageOperations
@@ -27,22 +26,13 @@ namespace Ex03.GarageLogic
 
         private readonly Dictionary<string, GarageCard> r_GarageVehicles;
         private readonly VehicleManufacturer r_VehicleManufacturer;
-        private static string s_GarageMenu;
-        
+        private static string s_LicenceIdNotFound;
+
         public Garage()
         {
             r_GarageVehicles = new Dictionary<string, GarageCard>();
             r_VehicleManufacturer = new VehicleManufacturer();
-            /// InitGarageMenu();
-            /// InitOperationsMessages();
-        }
-
-        public string GarageMenu
-        {
-            get
-            {
-                return s_GarageMenu;
-            }
+            s_LicenceIdNotFound = "LicenceID not found.";
         }
 
         public Dictionary<string, GarageCard> GarageVehicles
@@ -59,35 +49,43 @@ namespace Ex03.GarageLogic
             {
                 return r_GarageVehicles[i_LicenseID];
             }
-            set 
+            set
             {
                 r_GarageVehicles[i_LicenseID] = value;
             }
         }
-        
+
         /// 1
         public void AddNewVehicleToTheGarage(string i_LicneseID, string i_VehicleType, string i_EnergyType)
         {
             Vehicle newVehicle;
             GarageCard newGarageCard;
 
-                newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_LicneseID, i_VehicleType, i_EnergyType);
-                newGarageCard = new GarageCard(newVehicle, eVehicleStatus.InRepair);
-                r_GarageVehicles.Add(i_LicneseID, newGarageCard);
+            newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_LicneseID, i_VehicleType, i_EnergyType);
+            newGarageCard = new GarageCard(newVehicle, eVehicleStatus.InRepair);
+            r_GarageVehicles.Add(i_LicneseID, newGarageCard);
         }
 
         /// 2 
         public List<string> GetAllGarageVehiclesIDByStatus(int i_VehicleStatusFilter)
         {
             eVehicleStatus vehicleStatusFilter;
-
             vehicleStatusFilter = VehicleStatusSetup(i_VehicleStatusFilter);
             List<string> garageVehiclesIDByStatus = new List<string>();
-            foreach (KeyValuePair<string, GarageCard> vehicleInGarage in r_GarageVehicles)
+
+            if (r_GarageVehicles.Count == 0)
             {
-                if (vehicleInGarage.Value.VehicleStatus == vehicleStatusFilter)
+                garageVehiclesIDByStatus.Add("No vehicles in the garage.");
+            }
+
+            else
+            {
+                foreach (KeyValuePair<string, GarageCard> vehicleInGarage in r_GarageVehicles)
                 {
-                    garageVehiclesIDByStatus.Add(vehicleInGarage.Key);
+                    if (vehicleInGarage.Value.VehicleStatus == vehicleStatusFilter)
+                    {
+                        garageVehiclesIDByStatus.Add(vehicleInGarage.Key);
+                    }
                 }
             }
 
@@ -97,14 +95,14 @@ namespace Ex03.GarageLogic
         /// 3
         public void ChangeVehicleStatus(string i_LicenceID, int i_NewVehicleStatus)
         {
-            eVehicleStatus vehicleStatus = 0;
+            eVehicleStatus vehicleStatus;
 
-            if(!LicenceIDExist(i_LicenceID))
+            if (!LicenceIDExist(i_LicenceID))
             {
-                /// throw new ArgumentException LicenceID not found.
+                throw new ArgumentException(s_LicenceIdNotFound);
             }
 
-            vehicleStatus = VehicleStatusConvertToEnum(i_NewVehicleStatus);
+            vehicleStatus = VehicleStatusSetup(i_NewVehicleStatus);
             r_GarageVehicles[i_LicenceID].VehicleStatus = vehicleStatus;
         }
 
@@ -113,7 +111,7 @@ namespace Ex03.GarageLogic
         {
             if (!LicenceIDExist(i_LicenceID))
             {
-                /// throw new ArgumentException LicenceID not found.
+                throw new ArgumentException(s_LicenceIdNotFound);
             }
 
             foreach (Wheel wheel in r_GarageVehicles[i_LicenceID].Vehicle.VehicleWheels)
@@ -129,13 +127,13 @@ namespace Ex03.GarageLogic
 
             if (!LicenceIDExist(i_LicenceID))
             {
-                /// throw new ArgumentException LicenceID not found.
+                throw new ArgumentException(s_LicenceIdNotFound);
             }
 
             electricEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as ElectricEnergy;
             if (electricEnergyOfCurrentVehicle == null)
             {
-                throw new ArgumentException("The vehicle does not have electric energy."); 
+                throw new ArgumentException("The vehicle does not have electric energy.");
             }
 
             electricEnergyOfCurrentVehicle.ChargeBattery(i_TimeToChargeInMinutes);
@@ -148,7 +146,7 @@ namespace Ex03.GarageLogic
 
             if (!LicenceIDExist(i_LicenceID))
             {
-                /// throw new ArgumentException LicenceID not found.
+                throw new ArgumentException(s_LicenceIdNotFound);
             }
 
             fuelEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as FuelEnergy;
@@ -160,34 +158,18 @@ namespace Ex03.GarageLogic
         {
             StringBuilder allVehicleInfo = new StringBuilder();
 
-           /* if (!LicenceIDExist(i_LicenceID))
+            if (!LicenceIDExist(i_LicneseID))
             {
-                /// throw new ArgumentException LicenceID not found.
+                throw new ArgumentException(s_LicenceIdNotFound);
             }
 
-          allVehicleInfo.AppendLine(
-                r_GarageVehicles[i_LicneseID].Vehicle.GetVehicleInfo() + r_GarageVehicles[i_LicneseID].);*/
+            allVehicleInfo.Append(r_GarageVehicles[i_LicneseID].GetGarageCardInfo());
 
             return allVehicleInfo.ToString();
         }
-     
-
-        public GarageCard GetVehicleGargaeCardByLicenceID(string i_LicenceID)
-        {
-            GarageCard vehicleGarageCard = null;
-
-            if(!LicenceIDExist(i_LicenceID))
-            {
-                /// throw new ArgumentException LicenceID not found.
-            }
-
-            vehicleGarageCard = r_GarageVehicles[i_LicenceID];
-
-            return vehicleGarageCard;
-        }
 
         public bool LicenceIDExist(string i_LicenceID)
-        {    
+        {
             return r_GarageVehicles.ContainsKey(i_LicenceID);
         }
 
@@ -195,7 +177,7 @@ namespace Ex03.GarageLogic
         {
             if (!LicenceIDExist(i_LicenceID))
             {
-                /// throw
+                throw new ArgumentException(s_LicenceIdNotFound);
             }
 
             return r_GarageVehicles[i_LicenceID].Vehicle;
@@ -205,7 +187,7 @@ namespace Ex03.GarageLogic
         {
             if (!LicenceIDExist(i_LicenceID))
             {
-                /// throw
+                throw new ArgumentException(s_LicenceIdNotFound);
             }
 
             return r_GarageVehicles[i_LicenceID];
@@ -219,12 +201,12 @@ namespace Ex03.GarageLogic
             {
                 vehicleStatus = eVehicleStatus.InRepair;
             }
-            
+
             else if (i_VehicleStatusFilter == 2)
             {
                 vehicleStatus = eVehicleStatus.Repaired;
             }
-            
+
             else /// (i_VehicleStatusFilter == 3)
             {
                 vehicleStatus = eVehicleStatus.Paid;
@@ -232,47 +214,5 @@ namespace Ex03.GarageLogic
 
             return vehicleStatus;
         }
-
-        public eVehicleStatus VehicleStatusConvertToEnum(int i_VehicleStatus)
-        {
-            eVehicleStatus vehicleStatusEnum;
-
-            switch (i_VehicleStatus)
-            {
-                case 1:
-                    vehicleStatusEnum = Garage.eVehicleStatus.InRepair;
-                    break;
-                case 2:
-                    vehicleStatusEnum = Garage.eVehicleStatus.Repaired;
-                    break;
-                case 3:
-                default:
-                    vehicleStatusEnum = Garage.eVehicleStatus.Paid;
-                    break;
-            }
-
-            return vehicleStatusEnum;
-        }
-
-        /*private static void InitGarageMenu()
-        {
-            StringBuilder garageMenu = new StringBuilder();
-
-            garageMenu.AppendLine("Please Enter the garage operation you want:");
-            garageMenu.AppendLine("1 - Refuel");
-            garageMenu.AppendLine("2 - Charge battery");
-            garageMenu.AppendLine("3 - Inflate wheels");
-            garageMenu.AppendLine("4 - Change status");
-            garageMenu.AppendLine("5 - Existence check");
-
-            s_GarageMenu = garageMenu.ToString();
-        }*/
     }
-
-    /*private void InitOperationsMessages()
-    {
-
-    }*/
-
-   
-}
+}  
