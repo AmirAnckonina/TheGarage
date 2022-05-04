@@ -70,19 +70,26 @@ namespace Ex03.ConsoleUI
         {
             string vehicleLicenceID, vehicleType, energyType;
 
-            vehicleType = r_ConsoleIOManager.GetVehicleType();
-            energyType = r_ConsoleIOManager.GetEnergyType();
-            vehicleLicenceID = r_ConsoleIOManager.GetVehicleLicenseID();    
-            if (!r_Garage.LicenceIDExist(vehicleLicenceID))
+            try
             {
-                r_Garage.AddNewVehicleToTheGarage(vehicleLicenceID, vehicleType, energyType);
-                CompleteVehicleDetailsProcedure(vehicleLicenceID);
-            }
+                vehicleType = r_ConsoleIOManager.GetVehicleType();
+                energyType = r_ConsoleIOManager.GetEnergyType();
+                vehicleLicenceID = r_ConsoleIOManager.GetVehicleLicenseID();    
+                if (!r_Garage.LicenceIDExist(vehicleLicenceID))
+                {
+                    r_Garage.AddNewVehicleToTheGarage(vehicleLicenceID, vehicleType, energyType);
+                    CompleteVehicleDetailsProcedure(vehicleLicenceID);
+                }
 
-            else
+                else
+                {
+                    r_ConsoleIOManager.VehicleAllReadyInTheGarageMessage();
+                    r_Garage.ChangeVehicleStatus(vehicleLicenceID, (int)Garage.eVehicleStatus.InRepair);
+                }
+            }
+            catch (Exception ex)
             {
-                r_ConsoleIOManager.VehicleAllReadyInTheGarageMessage();
-                r_Garage.ChangeVehicleStatus(vehicleLicenceID, (int)Garage.eVehicleStatus.InRepair);
+                r_ConsoleIOManager.PrintErrorMessage(ex.Message);
             }
         }
 
@@ -101,12 +108,16 @@ namespace Ex03.ConsoleUI
                     insertedInput = r_ConsoleIOManager.GetSingleDetail(currVehicleDetail.Value);
                     currVehicle.SetSingleDetail(currVehicleDetail.Key, insertedInput);
                 }
-                catch(FormatException ex)
+                catch(FormatException formatEx)
                 {
-                    /// ex.Message;
-                    ///r_ConsoleIOManager(ex.Message());
+                    r_ConsoleIOManager.PrintErrorMessage(formatEx.Message);
                     insertedInput = r_ConsoleIOManager.GetSingleDetail(currVehicleDetail.Value);
                     currVehicle.SetSingleDetail(currVehicleDetail.Key, insertedInput);
+                }
+                catch (Exception ex)
+                {
+                    r_ConsoleIOManager.PrintErrorMessage(ex.Message);
+                    break;
                 }
             }
 
@@ -119,56 +130,69 @@ namespace Ex03.ConsoleUI
                    currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
                 }
 
-                catch(FormatException ex)
+                catch(FormatException formatEx)
                 {
+                    r_ConsoleIOManager.PrintErrorMessage(formatEx.Message);
                     insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
                     currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
+                }
+                catch (Exception ex)
+                {
+                    r_ConsoleIOManager.PrintErrorMessage(ex.Message);
+                    break;
                 }
             }
 
         }
 
-        /// <summary>
-        /// Add here do-While loop for a single LicenceID execute operations until he don't want to
-        /// Then, After we finish the loop, change the VehicleStatus in the garage
-        /// </summary>
         public void SingleVehicleOperationsSession()
         {
             string vehicleLicenseID;
             int garageOperationNumber;
-            bool anotherOperation = false;
+            bool anotherOperation = true;
 
             vehicleLicenseID = r_ConsoleIOManager.GetVehicleLicenseID();
-            do
+            if (r_Garage.LicenceIDExist(vehicleLicenseID))
             {
-                try
+                do
                 {
                     garageOperationNumber = r_ConsoleIOManager.GetVehicleGarageOperation();
-                    SingleOperationForVehicle(vehicleLicenseID, garageOperationNumber);
+                    try
+                    {
+                        SingleOperationForVehicle(vehicleLicenseID, garageOperationNumber);
+                    }
+                    catch (ArgumentException argumentEx)
+                    {
+                       /// Case: trying to fill fuel in electric car, so a new operation will be suggested
+                       r_ConsoleIOManager.PrintErrorMessage(argumentEx.Message);
+                       garageOperationNumber = r_ConsoleIOManager.GetVehicleGarageOperation();
+                       SingleOperationForVehicle(vehicleLicenseID, garageOperationNumber);
+                    }
+                    catch (ValueOutOfRangeException valueRangeEx)
+                    {
+                       r_ConsoleIOManager.PrintErrorMessage(valueRangeEx.Message);
+                       SingleOperationForVehicle(vehicleLicenseID, garageOperationNumber);
+                    }
+    /*                catch (FormatException formatEx)
+                    {
+                        r_ConsoleIOManager.PrintErrorMessage(formatEx.Message);
+                    }*/
+                    catch (Exception ex)
+                    {
+                        r_ConsoleIOManager.PrintErrorMessage(ex.Message);
+                    }
+                    finally
+                    {
+                        anotherOperation = r_ConsoleIOManager.AskForAnotherOperationForVehicle();
+                    }
 
-                }
-                catch (ArgumentException Argumentex)
-                {
-                    Console.WriteLine(Argumentex.Message);
-                }
-                catch (FormatException formatEx)
-                {
-                    Console.WriteLine(formatEx.Message);
-                }
-                catch (ValueOutOfRangeException valueRangeEx)
-                {
-                    Console.WriteLine(valueRangeEx.Message);
-                }
-                catch (Exception ex)
-                {
-                    r_ConsoleIOManager.PrintErrorMessage(ex.Message);
-                }
-                finally
-                {
-                    anotherOperation = r_ConsoleIOManager.AsxIfAnotherOperationNeeded();
-                }
+                } while (anotherOperation);
+            }
 
-            } while (anotherOperation);
+            else
+            {
+                r_ConsoleIOManager.PrintErrorMessage(string.Format("Vehicle with license ID: {0} doesn't found in the garage", vehicleLicenseID));
+            }
 
         }
 
@@ -180,30 +204,22 @@ namespace Ex03.ConsoleUI
             {
                 case 1:
                     r_Garage.RefuelVehicle(i_LicenceID, r_ConsoleIOManager.GetFuelAmount(), r_ConsoleIOManager.GetFuelType());
-                    r_ConsoleIOManager.OperationCompletedMessage();
                     break;
 
                 case 2:
                     r_Garage.ChargeVehicleBattery(i_LicenceID, r_ConsoleIOManager.GetTimeToChargeInMinutes());
-                    r_ConsoleIOManager.OperationCompletedMessage();
                     break;
 
                 case 3:
                     r_Garage.InflateVehicleWheels(i_LicenceID);
-                    r_ConsoleIOManager.OperationCompletedMessage();
                     break;
 
-                case 4:
-                    r_Garage.LicenceIDExist(i_LicenceID);
-                    r_ConsoleIOManager.OperationCompletedMessage();
-                    break;
-
-               case 5:
+               case 4:
                     vehicleInfo = r_Garage.GetFullVehicleInformation(i_LicenceID);
                     r_ConsoleIOManager.PrintFullVehicleInfo(vehicleInfo); 
                     break;
 
-                case 6:
+                case 5:
                     r_Garage.ChangeVehicleStatus(i_LicenceID, r_ConsoleIOManager.GetVehicleStatus());
                     break;
 

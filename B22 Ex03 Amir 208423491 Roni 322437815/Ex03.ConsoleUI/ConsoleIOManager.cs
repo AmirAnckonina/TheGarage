@@ -27,8 +27,34 @@ namespace Ex03.ConsoleUI
 
             PrintRequestOfVehicleType();
             vehicleTypeChoice = Console.ReadLine();
+            while (!VehicleTypeChoiceValidation(vehicleTypeChoice))
+            {
+                PrintInvalidInputMessage();
+                PrintRequestOfVehicleType();
+                vehicleTypeChoice = Console.ReadLine();
+            }
 
             return vehicleTypeChoice;
+        }
+
+        public bool VehicleTypeChoiceValidation(string i_VehicleTypeChoice)
+        {
+            bool inputIsValid;
+            bool vehicleTypeChoiceIsValid;
+            int vehicleTypeChoiceNumber;
+
+            inputIsValid = int.TryParse(i_VehicleTypeChoice, out vehicleTypeChoiceNumber);
+            if (!inputIsValid || vehicleTypeChoiceNumber < 1 || vehicleTypeChoiceNumber > 5)
+            {
+                vehicleTypeChoiceIsValid = false;
+            }
+
+            else
+            {
+                vehicleTypeChoiceIsValid = true;
+            }
+
+            return vehicleTypeChoiceIsValid;
         }
 
         public static void PrintRequestOfVehicleType()
@@ -38,18 +64,46 @@ namespace Ex03.ConsoleUI
             vehicleTypeMessage.AppendLine("Enter the type of your vehicle:");
             vehicleTypeMessage.AppendLine("1 - Car");
             vehicleTypeMessage.AppendLine("2 - Motorcycle");
-            vehicleTypeMessage.Append("3 - Truck");
+            vehicleTypeMessage.AppendLine("3 - Truck");
+            vehicleTypeMessage.AppendLine("4 - Tractor");
+            vehicleTypeMessage.Append("5 - Mini-Bus");
             Console.WriteLine(vehicleTypeMessage);
         }
 
         public string GetEnergyType()
         {
-            string energyType;
+            string energyTypeChoice;
 
             PrintRequestForEnergyType();
-            energyType = Console.ReadLine();
+            energyTypeChoice = Console.ReadLine();
+            while (!EnergyTypeChoiceValidation(energyTypeChoice))
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForEnergyType();
+                energyTypeChoice = Console.ReadLine();
+            }
 
-            return energyType;
+            return energyTypeChoice;
+        }
+
+        public bool EnergyTypeChoiceValidation(string i_EnergyTypeChoice)
+        {
+            bool inputIsValid;
+            bool energyTypeChoiceIsValid;
+            int energyTypeChoiceNumber;
+
+            inputIsValid = int.TryParse(i_EnergyTypeChoice, out energyTypeChoiceNumber);
+            if (!inputIsValid || energyTypeChoiceNumber < 1 || energyTypeChoiceNumber > 3)
+            {
+                energyTypeChoiceIsValid = false;
+            }
+
+            else
+            {
+                energyTypeChoiceIsValid = true;
+            }
+
+            return energyTypeChoiceIsValid;
         }
 
         public static void PrintRequestForEnergyType()
@@ -58,7 +112,8 @@ namespace Ex03.ConsoleUI
 
             EnergyTypeMessage.AppendLine("Please specify the energy source type of your vehicle");
             EnergyTypeMessage.AppendLine("1 - Fuel");
-            EnergyTypeMessage.Append("2 - Electric");
+            EnergyTypeMessage.AppendLine("2 - Electric");
+            EnergyTypeMessage.Append("3 - Natural Gas");
             Console.WriteLine(EnergyTypeMessage);
         }
 
@@ -120,7 +175,7 @@ namespace Ex03.ConsoleUI
             return insertedInput;
         }
 
-        public static void PrintGarageMenu()
+        public static void PrintGarageOperationsMenu()
         {
             StringBuilder vehicleTreatmentMessage = new StringBuilder();
 
@@ -128,7 +183,7 @@ namespace Ex03.ConsoleUI
             vehicleTreatmentMessage.AppendLine("1 - Refuel");
             vehicleTreatmentMessage.AppendLine("2 - Charge battery");
             vehicleTreatmentMessage.AppendLine("3 - Inflate wheels");
-            vehicleTreatmentMessage.AppendLine("4 - Existence check");
+            vehicleTreatmentMessage.AppendLine("4 - Get full vehicle info");
             vehicleTreatmentMessage.AppendLine("5 - Change vehicle status");
             Console.WriteLine(vehicleTreatmentMessage);
         }
@@ -138,12 +193,12 @@ namespace Ex03.ConsoleUI
             int garageOperationChoice;
             bool inputIsValid;
 
-            PrintGarageMenu();
+            PrintGarageOperationsMenu();
             inputIsValid = int.TryParse(Console.ReadLine(), out garageOperationChoice);
             while (!inputIsValid || garageOperationChoice < 1 || garageOperationChoice > 5)
             {
                 PrintInvalidInputMessage();
-                PrintGarageMenu();
+                PrintGarageOperationsMenu();
                 inputIsValid = int.TryParse(Console.ReadLine(), out garageOperationChoice);
             }
 
@@ -841,23 +896,23 @@ namespace Ex03.ConsoleUI
             float fuleAmount;
             bool isInputValid;
 
-            PrintRequestForFuleAmount();
+            PrintRequestForFuelAmount();
             isInputValid = float.TryParse(Console.ReadLine(), out fuleAmount);
             while (!isInputValid)
             {
                 PrintInvalidInputMessage();
-                PrintRequestForFuleAmount();
+                PrintRequestForFuelAmount();
                 isInputValid = float.TryParse(Console.ReadLine(), out fuleAmount);
             }
 
             return fuleAmount;
         }
 
-        public static void PrintRequestForFuleAmount()
+        public static void PrintRequestForFuelAmount()
         {
             StringBuilder fuleAmountMessage = new StringBuilder();
 
-            fuleAmountMessage.Append("Please enter the fule amount");
+            fuleAmountMessage.Append("Please enter the fuel amount: ");
             Console.WriteLine(fuleAmountMessage);
         }
 
@@ -1239,7 +1294,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(vehicleInTheGarageMessage);
         }
 
-        public bool AsxIfAnotherOperationNeeded()
+        public bool AskForAnotherOperationForVehicle()
         {
             bool anotherOperation;
             bool isInputValid;

@@ -92,19 +92,23 @@ namespace Ex03.GarageLogic
 
         public void SetSingleDetail(string i_Key, string i_InsertedValue)
         {
-            bool parseSucceed = false;
             if (!m_GarageCardDetails.ContainsKey(i_Key))
             {
-                /// throw exception 
+                throw new Exception("Detail isn't recognized in the garage card details.");
             }
 
-            /// <====================================================>
             /// <====================================================>
 
             if (i_Key == "OwnerName")
             {
                 /// parseSucceed = OwnerNameParsing(i_InsertedValue);
-                m_OwnerName = i_InsertedValue;
+                /// m_OwnerName = i_InsertedValue;
+                /*/// if (i_InsertedValue.Length >= k_MaxModelNameLength)
+                {
+                    throw new FormatException("Invalid Model name");
+                }
+
+                m_ModelName = i_InsertedValue;*/
             }
 
             else if (i_Key == "OwnerPhone")
@@ -112,15 +116,6 @@ namespace Ex03.GarageLogic
                 /// parseSucceed = OwnerPhoneParsing(i_InsertedValue);
                 m_OwnerPhone = i_InsertedValue;
             }
-
-            /// <====================================================>
-            /// <====================================================>
-
-            if (!parseSucceed)
-            {
-                /// throw exception
-            }
-
         }
 
         public void InitGarageCardDictionary()

@@ -38,7 +38,7 @@ namespace Ex03.GarageLogic
 
         private void AddAddtionalDetailsToDictionary()
         {
-            m_AdditionalVehicleDetails.Add("CoolingCargo", "Please enter if the truck has cooling cargo: ");
+            m_AdditionalVehicleDetails.Add("CoolingCargo", "Please enter if the truck has cooling cargo: \n 1. Yes \n 2. No");
             m_AdditionalVehicleDetails.Add("CargoCapacity", "Please enter the truck cargo capacity: ");
         }
 
@@ -79,7 +79,7 @@ namespace Ex03.GarageLogic
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out coolinCargoChoice);
             if (!parseValueSucceed || !EnumRangeValidation(1, numOfOptions, (int)coolinCargoChoice))
             {
-                throw new FormatException("Invalid car color selection.");
+                throw new FormatException("Invalid cooling cargo option selection.");
             }
 
             m_HasCoolingCargo = coolinCargoChoice;
