@@ -7,12 +7,6 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        public struct OperationMessages
-        {
-            string requestMessage;
-            string completeMessage;
-        }
-
         public enum eVehicleStatus
         {
             InRepair = 1,
@@ -33,15 +27,13 @@ namespace Ex03.GarageLogic
 
         private readonly Dictionary<string, GarageCard> r_GarageVehicles;
         private readonly VehicleManufacturer r_VehicleManufacturer;
-        private static OperationMessages[] s_OperationsMessages;
         private static string s_GarageMenu;
         
-
         public Garage()
         {
             r_GarageVehicles = new Dictionary<string, GarageCard>();
             r_VehicleManufacturer = new VehicleManufacturer();
-            InitGarageMenu();
+            /// InitGarageMenu();
             /// InitOperationsMessages();
         }
 
@@ -88,7 +80,7 @@ namespace Ex03.GarageLogic
 
             else
             {
-
+                /// Add proper message and update status to InRepair
             }
 
         }
@@ -112,15 +104,17 @@ namespace Ex03.GarageLogic
         }*/
 
         /// 3
-        public void ChangeVehicleStatus(string i_LicenceID, eVehicleStatus i_NewVehicleStatus)
+        public void ChangeVehicleStatus(string i_LicenceID, int i_NewVehicleStatus)
         {
+            eVehicleStatus vehicleStatus = 0;
 
             if(!LicenceIDExist(i_LicenceID))
             {
                 /// throw new ArgumentException LicenceID not found.
             }
 
-            r_GarageVehicles[i_LicenceID].VehicleStatus = i_NewVehicleStatus;
+            /// Convertion -> ENum
+            r_GarageVehicles[i_LicenceID].VehicleStatus = vehicleStatus;
         }
 
         /// 4
@@ -150,7 +144,7 @@ namespace Ex03.GarageLogic
             electricEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as ElectricEnergy;
             if (electricEnergyOfCurrentVehicle == null)
             {
-                /// throw new ArgumentException(); EnergyType
+                throw new ArgumentException("The vehicle does not have electric energy."); 
             }
 
             electricEnergyOfCurrentVehicle.ChargeBattery(i_TimeToChargeInMinutes);
@@ -221,7 +215,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        private static void InitGarageMenu()
+        /*private static void InitGarageMenu()
         {
             StringBuilder garageMenu = new StringBuilder();
 
@@ -233,7 +227,7 @@ namespace Ex03.GarageLogic
             garageMenu.AppendLine("5 - Existence check");
 
             s_GarageMenu = garageMenu.ToString();
-        }
+        }*/
     }
 
     /*private void InitOperationsMessages()

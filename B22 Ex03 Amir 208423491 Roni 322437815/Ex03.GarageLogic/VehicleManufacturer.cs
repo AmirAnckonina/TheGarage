@@ -20,7 +20,6 @@ namespace Ex03.GarageLogic
         public Vehicle ManufactureNewVehicle(string i_LicenceID, string i_VehicleType, string i_EnergyType)
         {
             Vehicle newVehicle;
-            eVehicleType vehicleType;
 
             VehicleTypeSetup(i_VehicleType);
             EnergyTypeSetup(i_EnergyType);
@@ -142,7 +141,7 @@ namespace Ex03.GarageLogic
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out vehicleTypeChoice);
             if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfVehicleTypes, (int)vehicleTypeChoice))
             {
-                throw new FormatException("Invalid car color selection.");
+                throw new FormatException("Vehicle not supported in our vehicles factory");
             }
 
             m_VehicleType = vehicleTypeChoice;

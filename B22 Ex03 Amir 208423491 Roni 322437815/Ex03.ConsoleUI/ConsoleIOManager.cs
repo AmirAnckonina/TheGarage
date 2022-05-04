@@ -116,12 +116,19 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(vehicleTreatmentMessage);
         }
 
-        public string GetVehicleGarageOperation()
+        public int GetVehicleGarageOperation()
         {
-            string garageOperationChoice;
+            int garageOperationChoice;
+            bool inputIsValid;
 
             PrintGarageMenu();
-            garageOperationChoice = Console.ReadLine();
+            inputIsValid = int.TryParse(Console.ReadLine(), out garageOperationChoice);
+            while  (!inputIsValid || garageOperationChoice < 1 || garageOperationChoice > 5)
+            {
+                PrintInvalidInputMessage();
+                PrintGarageMenu();
+                inputIsValid = int.TryParse(Console.ReadLine(), out garageOperationChoice);
+            }
 
             return garageOperationChoice;
         }
@@ -853,30 +860,28 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public Garage.eVehicleStatus GetVehicleStatus()
+        public int GetVehicleStatus()
         {
-            Garage.eVehicleStatus vehicleStatusEnum;
-            int vehicleStatus;
+            int vehicleStatusChoice;
             bool isInputValid;
 
             PrintRequestForVehicleStatus();
-            isInputValid = int.TryParse(Console.ReadLine(), out vehicleStatus);
-            while(!isInputValid || !VehicleStatusValidation(vehicleStatus))
+            isInputValid = int.TryParse(Console.ReadLine(), out vehicleStatusChoice);
+            while(!isInputValid || !VehicleStatusValidation(vehicleStatusChoice))
             {
                 PrintInvalidInputMessage();
                 PrintRequestForVehicleStatus();
-                isInputValid = int.TryParse(Console.ReadLine(), out vehicleStatus);
+                isInputValid = int.TryParse(Console.ReadLine(), out vehicleStatusChoice);
             }
 
-            vehicleStatusEnum = VehicleStatusConvertToEnum(vehicleStatus);
-            return vehicleStatusEnum;
+            return vehicleStatusChoice;
         }
 
         public static void PrintRequestForVehicleStatus()
         {
             StringBuilder vehicleStatusMessage = new StringBuilder();
 
-            vehicleStatusMessage.AppendLine("Pleae enter the status of your vehicle");
+            vehicleStatusMessage.AppendLine("Pleae enter the requested status of the vehicle");
             vehicleStatusMessage.AppendLine("1 - InRepair");
             vehicleStatusMessage.AppendLine("2 - Repaired");
             vehicleStatusMessage.Append("3 - Paid");
@@ -1137,12 +1142,12 @@ namespace Ex03.ConsoleUI
             return isPrintAllVehicleChoisValid;
         }
 
-        public void TreatmentComplitedMessage()
+        public void OperationCompletedMessage()
         {
-            StringBuilder treatmentCompliteMessage = new StringBuilder();
+            StringBuilder operationSucceedMessage = new StringBuilder();
 
-            treatmentCompliteMessage.Append("The treatment completed!");
-            Console.WriteLine(treatmentCompliteMessage);
+            operationSucceedMessage.Append("The operation completed succuessfully.");
+            Console.WriteLine(operationSucceedMessage);
         }
         
          public void PrintAllVehicleGarageCardDetails(GarageCard i_VehicleGarageCard)

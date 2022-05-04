@@ -7,11 +7,11 @@ namespace Ex03.GarageLogic
 {
     public static class Parser
     {
-        public static bool EnumRangeValidation(int i_MinValue, int i_MaxValue, int i_ColorChoice)
+        public static bool EnumRangeValidation(int i_MinValue, int i_MaxValue, int i_InsertedValue)
         {
             bool inRange;
 
-            if (i_ColorChoice >= i_MinValue && i_ColorChoice <= i_MaxValue)
+            if (i_InsertedValue >= i_MinValue && i_InsertedValue <= i_MaxValue)
             {
                 inRange = true;
             }
