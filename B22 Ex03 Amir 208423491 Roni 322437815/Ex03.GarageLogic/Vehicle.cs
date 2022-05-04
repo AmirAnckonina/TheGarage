@@ -110,11 +110,11 @@ namespace Ex03.GarageLogic
         }
 
         private void ModelNameSetup(string i_InsertedValue)
-        {
-            /* if (i_InsertedValue.Length >= k_MaxModelNameLength)
-             {
-                 throw new FormatException("Invalid Model name");
-             }*/
+        {/*
+            if (i_InsertedValue.Length >= k_MaxModelNameLength)
+            {
+                throw new FormatException("Invalid Model name");
+            }*/
 
             m_ModelName = i_InsertedValue;
         }

@@ -26,13 +26,13 @@ namespace Ex03.GarageLogic
 
         private readonly Dictionary<string, GarageCard> r_GarageVehicles;
         private readonly VehicleManufacturer r_VehicleManufacturer;
-        private static string s_LicenceIdNotFound;
+        private static string s_LicenceIDNotFound;
 
         public Garage()
         {
             r_GarageVehicles = new Dictionary<string, GarageCard>();
             r_VehicleManufacturer = new VehicleManufacturer();
-            s_LicenceIdNotFound = "LicenceID not found.";
+            s_LicenceIDNotFound = "LicenceID not found.";
         }
 
         public Dictionary<string, GarageCard> GarageVehicles
@@ -99,7 +99,7 @@ namespace Ex03.GarageLogic
 
             if (!LicenceIDExist(i_LicenceID))
             {
-                throw new ArgumentException(s_LicenceIdNotFound);
+                throw new ArgumentException(s_LicenceIDNotFound);
             }
 
             vehicleStatus = VehicleStatusSetup(i_NewVehicleStatus);
@@ -111,7 +111,7 @@ namespace Ex03.GarageLogic
         {
             if (!LicenceIDExist(i_LicenceID))
             {
-                throw new ArgumentException(s_LicenceIdNotFound);
+                throw new ArgumentException(s_LicenceIDNotFound);
             }
 
             foreach (Wheel wheel in r_GarageVehicles[i_LicenceID].Vehicle.VehicleWheels)
@@ -127,7 +127,7 @@ namespace Ex03.GarageLogic
 
             if (!LicenceIDExist(i_LicenceID))
             {
-                throw new ArgumentException(s_LicenceIdNotFound);
+                throw new ArgumentException(s_LicenceIDNotFound);
             }
 
             electricEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as ElectricEnergy;
@@ -146,7 +146,7 @@ namespace Ex03.GarageLogic
 
             if (!LicenceIDExist(i_LicenceID))
             {
-                throw new ArgumentException(s_LicenceIdNotFound);
+                throw new ArgumentException(s_LicenceIDNotFound);
             }
 
             fuelEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as FuelEnergy;
@@ -160,7 +160,7 @@ namespace Ex03.GarageLogic
 
             if (!LicenceIDExist(i_LicneseID))
             {
-                throw new ArgumentException(s_LicenceIdNotFound);
+                throw new ArgumentException(s_LicenceIDNotFound);
             }
 
             allVehicleInfo.Append(r_GarageVehicles[i_LicneseID].GetGarageCardInfo());
@@ -177,7 +177,7 @@ namespace Ex03.GarageLogic
         {
             if (!LicenceIDExist(i_LicenceID))
             {
-                throw new ArgumentException(s_LicenceIdNotFound);
+                throw new ArgumentException(s_LicenceIDNotFound);
             }
 
             return r_GarageVehicles[i_LicenceID].Vehicle;
@@ -187,7 +187,7 @@ namespace Ex03.GarageLogic
         {
             if (!LicenceIDExist(i_LicenceID))
             {
-                throw new ArgumentException(s_LicenceIdNotFound);
+                throw new ArgumentException(s_LicenceIDNotFound);
             }
 
             return r_GarageVehicles[i_LicenceID];

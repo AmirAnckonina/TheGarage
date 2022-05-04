@@ -119,7 +119,7 @@ namespace Ex03.GarageLogic
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out vehicleTypeChoice);
             if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfVehicleTypes, (int)vehicleTypeChoice))
             {
-                throw new FormatException("Vehicle not supported in our vehicles factory");
+                throw new ArgumentException("Vehicle not supported in our vehicles factory");
             }
 
             m_VehicleType = vehicleTypeChoice;
@@ -134,7 +134,7 @@ namespace Ex03.GarageLogic
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out energyTypeChoice);
             if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfEnergySources, (int)energyTypeChoice))
             {
-                throw new FormatException("Invalid energy type.");
+                throw new ArgumentException("This energy source not manufactured in our vehicles factory");
             }
 
             m_EnergyType = energyTypeChoice;
