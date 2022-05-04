@@ -12,6 +12,8 @@ namespace Ex03.GarageLogic
         private Garage.eVehicleStatus m_VehicleStatus;
         private Vehicle m_Vehicle;
         private static Dictionary<string, string> m_GarageCardDetails;
+        public const int k_MaximumNameLength= 20;
+        public const int k_MaximumphoneNumberLength = 10;
 
         public GarageCard()
         { 
@@ -101,20 +103,34 @@ namespace Ex03.GarageLogic
 
             if (i_Key == "OwnerName")
             {
-                /// parseSucceed = OwnerNameParsing(i_InsertedValue);
-                /// m_OwnerName = i_InsertedValue;
-                /*/// if (i_InsertedValue.Length >= k_MaxModelNameLength)
+                bool parseSucceed;
+
+                parseSucceed = OwnerNameParsing(i_InsertedValue);
+                if(parseSucceed)
                 {
-                    throw new FormatException("Invalid Model name");
+                    m_OwnerName = i_InsertedValue;
                 }
 
-                m_ModelName = i_InsertedValue;*/
+                else
+                {
+                    throw new FormatException("Invalid owner name");
+                }
             }
 
             else if (i_Key == "OwnerPhone")
             {
-                /// parseSucceed = OwnerPhoneParsing(i_InsertedValue);
-                m_OwnerPhone = i_InsertedValue;
+                bool parseSucceed;
+
+                parseSucceed = OwnerPhoneNumberParsing(i_InsertedValue);
+                if(parseSucceed)
+                {
+                    m_OwnerPhone = i_InsertedValue;
+                }
+
+                else
+                {
+                    throw new FormatException("Invalid owner phone number");
+                }            
             }
         }
 
@@ -135,6 +151,40 @@ namespace Ex03.GarageLogic
             garageCardInfo.Append(m_Vehicle.GetVehicleInfo());
 
             return garageCardInfo;
+        }
+
+        public bool OwnerNameParsing(string i_InsertedValue)
+        {
+            bool isOwnerNameValid;
+
+            if(i_InsertedValue.Length <= k_MaximumNameLength && i_InsertedValue.All(char.IsLetter))
+            {
+                isOwnerNameValid = true;
+            }
+
+            else
+            {
+                isOwnerNameValid = false;
+            }
+
+            return isOwnerNameValid;
+        }
+
+        public bool OwnerPhoneNumberParsing(string i_InsertedValue)
+        {
+            bool isOwnerPhoneNumberValid;
+
+            if (i_InsertedValue.Length <= k_MaximumphoneNumberLength && i_InsertedValue.All(char.IsDigit))
+            {
+                isOwnerPhoneNumberValid = true;
+            }
+
+            else
+            {
+                isOwnerPhoneNumberValid = false;
+            }
+
+            return isOwnerPhoneNumberValid;
         }
     }
 }
