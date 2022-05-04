@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 {
     public class Car : Vehicle
     {
-        public enum eColor
+        public enum eCarColor
         {
             Red = 1,
             White,
@@ -51,7 +51,7 @@ namespace Ex03.GarageLogic
             internal const float k_CarWheelPSIAfterManufacture = 20;
         }
 
-        private eColor m_CarColor;
+        private eCarColor m_CarColor;
         private eDoorsNumber m_DoorsNumber;
 
         public Car(string i_LicenceID, Energy i_CarEnergy)
@@ -96,8 +96,8 @@ namespace Ex03.GarageLogic
         private void EcolorSetup(string i_InsertedValue)
         {
             bool parseValueSucceed;
-            eColor colorChoice;
-            int numOfColors = Enum.GetValues(typeof(eColor)).Length;
+            eCarColor colorChoice;
+            int numOfColors = Enum.GetValues(typeof(eCarColor)).Length;
 
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out colorChoice);
             if (!parseValueSucceed || !EnumRangeValidation(1, numOfColors, (int)colorChoice)) /// To Check Parser

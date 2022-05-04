@@ -135,7 +135,7 @@ namespace Ex03.GarageLogic
         {
             m_GarageCardDetails = new Dictionary<string, string>();
             m_GarageCardDetails.Add("OwnerName", "Please enter the owner name of the vehicle");
-            m_GarageCardDetails.Add("OwnerPhone", "Plede enter the phone number of the owner");
+            m_GarageCardDetails.Add("OwnerPhone", "Plese enter the phone number of the owner");
         }
     }
 }

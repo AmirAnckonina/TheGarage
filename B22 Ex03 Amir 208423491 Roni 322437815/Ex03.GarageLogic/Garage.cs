@@ -71,37 +71,28 @@ namespace Ex03.GarageLogic
             Vehicle newVehicle;
             GarageCard newGarageCard;
 
-            if (!LicenceIDExist(i_LicneseID))
-            {
                 newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_LicneseID, i_VehicleType, i_EnergyType);
                 newGarageCard = new GarageCard(newVehicle, eVehicleStatus.InRepair);
                 r_GarageVehicles.Add(i_LicneseID, newGarageCard);
-            }
-
-            else
-            {
-                /// Add proper message and update status to InRepair
-            }
-
         }
 
         /// 2 
-       /* public List<string> GetAllGarageVehiclesIDByStatus(string i_VehicleStatusFilter)
-        {
-            eVehicleStatus vehicleStatus;
+       //public List<string> GetAllGarageVehiclesIDByStatus(string i_VehicleStatusFilter)
+       // {
+       //     eVehicleStatus vehicleStatus;
 
-            VehicleStatusSetup(ref vehicleStatus ,i_VehicleStatusFilter);
-            List<string> garageVehiclesIDByStatus = new List<string>();
-            foreach (KeyValuePair<string, GarageCard> vehicleInGarage in r_GarageVehicles)
-            {
-                if (vehicleInGarage.Value.VehicleStatus == i_VehicleStatusFilter)
-                {
-                    garageVehiclesIDByStatus.Add(vehicleInGarage.Key);
-                }
-            }
+       //     VehicleStatusSetup(ref vehicleStatus ,i_VehicleStatusFilter);
+       //     List<string> garageVehiclesIDByStatus = new List<string>();
+       //     foreach (KeyValuePair<string, GarageCard> vehicleInGarage in r_GarageVehicles)
+       //     {
+       //         if (vehicleInGarage.Value.VehicleStatus == i_VehicleStatusFilter)
+       //         {
+       //             garageVehiclesIDByStatus.Add(vehicleInGarage.Key);
+       //         }
+       //     }
 
-            return garageVehiclesIDByStatus;
-        }*/
+       //     return garageVehiclesIDByStatus;
+       // }
 
         /// 3
         public void ChangeVehicleStatus(string i_LicenceID, int i_NewVehicleStatus)
@@ -113,8 +104,29 @@ namespace Ex03.GarageLogic
                 /// throw new ArgumentException LicenceID not found.
             }
 
-            /// Convertion -> ENum
+            vehicleStatus = VehicleStatusConvertToEnum(i_NewVehicleStatus);
             r_GarageVehicles[i_LicenceID].VehicleStatus = vehicleStatus;
+        }
+
+        public eVehicleStatus VehicleStatusConvertToEnum(int i_VehicleStatus)
+        {
+            eVehicleStatus vehicleStatusEnum;
+
+            switch (i_VehicleStatus)
+            {
+                case 1:
+                    vehicleStatusEnum = Garage.eVehicleStatus.InRepair;
+                    break;
+                case 2:
+                    vehicleStatusEnum = Garage.eVehicleStatus.Repaired;
+                    break;
+                case 3:
+                default:
+                    vehicleStatusEnum = Garage.eVehicleStatus.Paid;
+                    break;
+            }
+
+            return vehicleStatusEnum;
         }
 
         /// 4
@@ -211,7 +223,7 @@ namespace Ex03.GarageLogic
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out o_VehicleStatus);
             if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfEnergySources, (int)o_VehicleStatus))
             {
-                throw new FormatException("Invalid car color selection.");
+                throw new FormatException("Invalid vehicle status.");
             }
         }
 
