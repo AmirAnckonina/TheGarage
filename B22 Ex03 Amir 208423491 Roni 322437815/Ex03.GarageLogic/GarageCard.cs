@@ -103,34 +103,12 @@ namespace Ex03.GarageLogic
 
             if (i_Key == "OwnerName")
             {
-                bool parseSucceed;
-
-                parseSucceed = OwnerNameParsing(i_InsertedValue);
-                if(parseSucceed)
-                {
-                    m_OwnerName = i_InsertedValue;
-                }
-
-                else
-                {
-                    throw new FormatException("Invalid owner name");
-                }
+                
             }
 
             else if (i_Key == "OwnerPhone")
             {
-                bool parseSucceed;
-
-                parseSucceed = OwnerPhoneNumberParsing(i_InsertedValue);
-                if(parseSucceed)
-                {
-                    m_OwnerPhone = i_InsertedValue;
-                }
-
-                else
-                {
-                    throw new FormatException("Invalid owner phone number");
-                }            
+                           
             }
         }
 
@@ -153,7 +131,7 @@ namespace Ex03.GarageLogic
             return garageCardInfo;
         }
 
-        public bool OwnerNameParsing(string i_InsertedValue)
+        public bool OwnerNameContentValidation(string i_InsertedValue)
         {
             bool isOwnerNameValid;
 
@@ -170,7 +148,7 @@ namespace Ex03.GarageLogic
             return isOwnerNameValid;
         }
 
-        public bool OwnerPhoneNumberParsing(string i_InsertedValue)
+        public bool OwnerPhoneNumberContentValidation(string i_InsertedValue)
         {
             bool isOwnerPhoneNumberValid;
 
@@ -185,6 +163,32 @@ namespace Ex03.GarageLogic
             }
 
             return isOwnerPhoneNumberValid;
+        }
+
+        public void OwnerNameSetup(string i_InsertedValue)
+        {
+            bool parseSucceed;
+
+            parseSucceed = OwnerNameContentValidation(i_InsertedValue);
+            if (!parseSucceed)
+            {
+                throw new FormatException("Invalid owner name");
+            }
+
+            m_OwnerName = i_InsertedValue;
+        }
+
+        public void OwnerPhoneSetup(string i_InsertedValue)
+        {
+            bool parseSucceed;
+
+            parseSucceed = OwnerPhoneNumberContentValidation(i_InsertedValue);
+            if (!parseSucceed)
+            {
+                throw new FormatException("Invalid owner phone number");
+            }
+
+            m_OwnerPhone = i_InsertedValue;
         }
     }
 }

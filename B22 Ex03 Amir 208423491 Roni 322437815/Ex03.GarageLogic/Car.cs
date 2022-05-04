@@ -63,7 +63,7 @@ namespace Ex03.GarageLogic
         private void AddAddtionalDetailsToDictionary()
         {
             m_AdditionalVehicleDetails.Add("CarColor", "Please enter the Car Color:\n 1 - Red \n 2 - White \n 3 - Green \n 4 - Blue ");
-            m_AdditionalVehicleDetails.Add("CarDoorsNumber", "Please enter the Doors numbers in car:\n 2 - Two \n 3 - Three \n 4 - For \n 5 - Five ");
+            m_AdditionalVehicleDetails.Add("CarDoorsNumber", "Please enter the Doors numbers in car:\n 2 - Two \n 3 - Three \n 4 - Four \n 5 - Five ");
         }
 
         public override void SetSingleDetail(string i_Key, string i_InsertedValue)
