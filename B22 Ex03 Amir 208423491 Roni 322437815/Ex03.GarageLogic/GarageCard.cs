@@ -24,15 +24,7 @@ namespace Ex03.GarageLogic
             m_VehicleStatus = i_VehicleStatus;
             InitGarageCardDictionary();
         }
-/*
-        public GarageCard(string i_VehicleOwnerName, string i_VehicleOwnerPhone, Garage.eVehicleStatus i_VehicleStatus, Vehicle i_Vehicle)
-        {
-            m_VehicleOwnerName = i_VehicleOwnerName;
-            m_VehicleOwnerPhone = i_VehicleOwnerPhone;
-            m_VehicleStatus = i_VehicleStatus;
-            m_Vehicle = i_Vehicle;
-        }
-*/
+
         public string OwnerName
         {
             get
@@ -136,6 +128,18 @@ namespace Ex03.GarageLogic
             m_GarageCardDetails = new Dictionary<string, string>();
             m_GarageCardDetails.Add("OwnerName", "Please enter the owner name of the vehicle");
             m_GarageCardDetails.Add("OwnerPhone", "Plese enter the phone number of the owner");
+        }
+
+        public StringBuilder GetGarageCardInfo()
+        {
+            StringBuilder garageCardInfo = new StringBuilder();
+
+            garageCardInfo.AppendLine("Vehicle owner name: " + m_OwnerName);
+            garageCardInfo.AppendLine("Vehicle owner phone: " + m_OwnerPhone);
+            garageCardInfo.AppendLine("Vehicle current status in the garage: " + Enum.GetName(typeof(Garage.eVehicleStatus), m_VehicleStatus));
+            garageCardInfo.Append(m_Vehicle.GetVehicleInfo());
+
+            return garageCardInfo;
         }
     }
 }

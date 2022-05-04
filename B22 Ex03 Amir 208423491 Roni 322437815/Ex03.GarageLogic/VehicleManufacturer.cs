@@ -22,12 +22,7 @@ namespace Ex03.GarageLogic
             Vehicle newVehicle;
 
             VehicleTypeSetup(i_VehicleType);
-            EnergyTypeSetup(i_EnergyType);
-            if (!LicenceIDFormatValidation(i_LicenceID))
-            {
-                throw new FormatException("Invalid licenseID.");
-            }
-           
+            EnergyTypeSetup(i_EnergyType);           
             switch (m_VehicleType)
             {
                 case eVehicleType.Car:
@@ -113,23 +108,6 @@ namespace Ex03.GarageLogic
             newTruck = new Truck(i_LicenceID, newEnergySource);
 
             return newTruck;
-        }
-
-        private bool LicenceIDFormatValidation(string i_LicenseID)
-        {
-            bool licenceIDIsValid;
-
-            if(i_LicenseID.Length >= 5 && i_LicenseID.Length <= 8 && i_LicenseID.All(char.IsDigit))
-            {
-                licenceIDIsValid = true;
-            }
-
-            else
-            {
-                licenceIDIsValid = false;
-            }
-
-            return licenceIDIsValid;
         }
 
         private void VehicleTypeSetup(string i_InsertedValue)
