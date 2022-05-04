@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-
+        private const int k_MaxModelNameLength = 20;
         private readonly string r_LicenceID;
         private string m_ModelName;
         private Energy r_VehicleEnergy;
@@ -110,11 +110,11 @@ namespace Ex03.GarageLogic
         }
 
         private void ModelNameSetup(string i_InsertedValue)
-        {/*
-            if (i_InsertedValue.Length >= k_MaxModelNameLength)
+        {
+            if (i_InsertedValue.Length > k_MaxModelNameLength)
             {
                 throw new FormatException("Invalid Model name");
-            }*/
+            }
 
             m_ModelName = i_InsertedValue;
         }
