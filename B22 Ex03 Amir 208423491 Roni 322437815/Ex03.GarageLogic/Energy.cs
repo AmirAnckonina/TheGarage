@@ -25,6 +25,28 @@ namespace Ex03.GarageLogic
             m_EnergyLeftPercentage = (i_EnergyLeft / r_MaxEnergyCapacity) * 100;
         }
 
+        public float EnergyLeft
+        {
+            get
+            {
+                return m_EnergyLeft;
+            }
+
+            set
+            {
+                m_EnergyLeft = value;
+            }
+        }
+
+        public float MaxEnergyCapacity
+        {
+            get
+            {
+                return r_MaxEnergyCapacity;
+            }
+        }
+
+
         public float EnergyLeftPercentage
         {
             get
@@ -50,6 +72,10 @@ namespace Ex03.GarageLogic
             m_EnergyLeft = newEnergyAmount;
             m_EnergyLeftPercentage = (m_EnergyLeft / r_MaxEnergyCapacity) * 100;  
         }
+
+        public abstract StringBuilder GetEnergyInfo();
+
+
 
     }
 }

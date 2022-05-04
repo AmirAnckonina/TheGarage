@@ -147,5 +147,21 @@ namespace Ex03.GarageLogic
             return inRange;
         }
 
+        public abstract StringBuilder GetVehicleInfo();
+
+        public virtual StringBuilder GetBasicVehcileDetails()
+        {
+            StringBuilder infoOutput = new StringBuilder();
+
+            infoOutput.AppendLine("Vehicle license ID: " + r_LicenceID);
+            infoOutput.AppendLine("Vehicle model name: " + m_ModelName);
+            infoOutput.AppendLine("Wheels information: " + m_VehicleWheels[0].GetWheelDetails());
+            infoOutput.AppendLine("Energy source: " + r_VehicleEnergy.GetType().Name);
+            infoOutput.AppendLine("Energy source information: " + r_VehicleEnergy.GetEnergyInfo());
+
+            return infoOutput;
+        }
+
+        
     }
 }

@@ -123,7 +123,19 @@ namespace Ex03.GarageLogic
             m_DoorsNumber = doorsNumberChoice;
         }
 
-        
+        public override StringBuilder GetVehicleInfo()
+        {
+            StringBuilder infoOutput = new StringBuilder();
+
+            infoOutput.AppendLine("Vehicle type: " + this.GetType().Name);
+            infoOutput.AppendLine(GetBasicVehcileDetails().ToString());
+            infoOutput.AppendLine("Car color: " + Enum.GetName(typeof(eCarColor), m_CarColor));
+            infoOutput.AppendLine("Car doors number: " + Enum.GetName(typeof(eDoorsNumber), m_DoorsNumber));
+
+            return infoOutput;
+        }
+
+
 
 
 

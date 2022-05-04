@@ -104,5 +104,17 @@ namespace Ex03.GarageLogic
                 throw new FormatException("Invalid engine capacity selection.");
             }
         }
+
+        public override StringBuilder GetVehicleInfo()
+        {
+            StringBuilder infoOutput = new StringBuilder();
+
+            infoOutput.AppendLine("Vehicle type: " + this.GetType().Name);
+            infoOutput.AppendLine(GetBasicVehcileDetails().ToString());
+            infoOutput.AppendLine("Motorcycle license type: " + Enum.GetName(typeof(eMCLicenceType), m_MCLicenceType));
+            infoOutput.AppendLine("Motorcycle engine capacity" + m_EngineCapacity);
+
+            return infoOutput;
+        }
     }
 }
