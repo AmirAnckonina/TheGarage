@@ -205,164 +205,94 @@ namespace Ex03.ConsoleUI
             return garageOperationChoice;
         }
 
-        public string GetOwnerName()
+        public void VehicleAllReadyInTheGarageMessage()
         {
-            StringBuilder ownerName = new StringBuilder();
+            StringBuilder vehicleInTheGarageMessage = new StringBuilder();
 
-            PrintRequestForTheOwnerName();
-            ownerName.Append(Console.ReadLine());
-
-            while (!NameLengthValidation(ownerName))
-            {
-                PrintInvalidInputMessage();
-                PrintRequestForTheOwnerName();
-                ownerName.Append(Console.ReadLine());
-            }
-
-            return ownerName.ToString();
+            vehicleInTheGarageMessage.Append("The vehicle is all ready in the garage.");
+            Console.WriteLine(vehicleInTheGarageMessage);
         }
 
-        public string GetVehicleOwnerPhoneNumber()
+        public bool AskForAnotherOperationForVehicle()
         {
-            StringBuilder ownerPhoneNumber = new StringBuilder();
+            bool anotherOperation;
+            bool isInputValid;
+            int anotherOperationChoice;
 
-            PrintRequestForOwnerPhoneNumber();
-            ownerPhoneNumber.Append(Console.ReadLine());
-            while (!OwnerPhoneNumberValidation(ownerPhoneNumber))
+            PrintAnotherOperationMessage();
+            isInputValid = int.TryParse(Console.ReadLine(), out anotherOperationChoice);
+
+            while (!isInputValid || anotherOperationChoice < 1 || anotherOperationChoice > 2)
             {
                 PrintInvalidInputMessage();
-                ownerPhoneNumber.Clear();
-                PrintRequestForOwnerPhoneNumber();
-                ownerPhoneNumber.Append(Console.ReadLine());
+                PrintAnotherOperationMessage();
+                isInputValid = int.TryParse(Console.ReadLine(), out anotherOperationChoice);
             }
 
-            return ownerPhoneNumber.ToString();
-        }
-
-        public bool EnergyTypeValidation(int i_EnergyType)
-        {
-            bool isEnergyTypeValid;
-
-            if (i_EnergyType == 1 || i_EnergyType == 2)
+            if (anotherOperationChoice == 1)
             {
-                isEnergyTypeValid = true;
+                anotherOperation = true;
             }
 
             else
             {
-                isEnergyTypeValid = false;
+                anotherOperation = false;
             }
 
-            return isEnergyTypeValid;
+            return anotherOperation;
         }
 
-        public Energy.eEnergyType EnergyTypeConvertToEnum(int i_energyType)
+        public void PrintAnotherOperationMessage()
         {
-            Energy.eEnergyType energyTypeEnum;
+            StringBuilder anotherOperationMessage = new StringBuilder();
 
-            if (i_energyType == 1)
-            {
-                energyTypeEnum = Energy.eEnergyType.Fuel;
-            }
-
-            else
-            {
-                energyTypeEnum = Energy.eEnergyType.Electric;
-            }
-
-            return energyTypeEnum;
+            anotherOperationMessage.AppendLine("Do you want another operattion?");
+            anotherOperationMessage.AppendLine("1 - Yes");
+            anotherOperationMessage.Append("2 - No");
+            Console.WriteLine(anotherOperationMessage);
         }
 
-        public Car.eCarColor GetCarColor()
+        public int GetGarageOperation()
         {
-            int carColorChoose;
-            bool carColerIsValid;
-            Car.eCarColor carColor;
+            int actionInTheGarage;
+            bool isInputValid;
 
-            PrintRequestForCarColor();
-            carColerIsValid = int.TryParse(Console.ReadLine(), out carColorChoose);
-            while (!carColerIsValid || !CarColorValidation(carColorChoose))
+            PrintRequestForGarageOperation();
+            isInputValid = int.TryParse(Console.ReadLine(), out actionInTheGarage);
+            while (!isInputValid || actionInTheGarage < 1 || actionInTheGarage > 4)
             {
                 PrintInvalidInputMessage();
-                PrintRequestForCarColor();
-                carColerIsValid = int.TryParse(Console.ReadLine(), out carColorChoose);
+                PrintRequestForGarageOperation();
+                isInputValid = int.TryParse(Console.ReadLine(), out actionInTheGarage);
             }
 
-            carColor = ConvertChoiceToCarColor(carColorChoose);
-            return carColor;
+            return actionInTheGarage;
         }
 
-        public Car.eDoorsNumber GetDoorsNumberInCar()
+        public void PrintRequestForGarageOperation()
         {
-            int numberOfDoors;
-            bool carDoorsNumberIsValid;
-            Car.eDoorsNumber doorsCar;
+            StringBuilder actionInTheGarageMessage = new StringBuilder();
 
-            PrintRequesrForDoorsNumberInCar();
-            carDoorsNumberIsValid = int.TryParse(Console.ReadLine(), out numberOfDoors);
-            while (!carDoorsNumberIsValid || !DoorsNumberInCarValidation(numberOfDoors))
-            {
-                PrintInvalidInputMessage();
-                PrintRequesrForDoorsNumberInCar();
-                carDoorsNumberIsValid = int.TryParse(Console.ReadLine(), out numberOfDoors);
-            }
-
-            doorsCar = DoorsNumbersInCarConvertToEnum(numberOfDoors);
-            return doorsCar;
+            actionInTheGarageMessage.AppendLine("Choose which garage operation you need: ");
+            actionInTheGarageMessage.AppendLine("1 - Add new vehicle to the garage");
+            actionInTheGarageMessage.AppendLine("2 - Do some vehicle operation in the garage");
+            actionInTheGarageMessage.AppendLine("3 - Get garage vehicles by status");
+            actionInTheGarageMessage.AppendLine("4 - Go home");
+            Console.WriteLine(actionInTheGarageMessage);
         }
 
-        public static void PrintRequesrForDoorsNumberInCar()
+        public void PrintFullVehicleInfo(string i_VehicleInfo)
         {
-            StringBuilder doorsCarMessage = new StringBuilder();
+            StringBuilder fullVehicleInfoMessage = new StringBuilder();
 
-            doorsCarMessage.Append("Please enter the doors number in your car: ");
-            Console.WriteLine(doorsCarMessage);
+            fullVehicleInfoMessage.Append(string.Format("{0}", i_VehicleInfo));
+            Console.WriteLine(fullVehicleInfoMessage);
         }
 
-        public bool DoorsNumberInCarValidation(int i_DoorsCar)
+        public void PrintGeneralMessage(string i_GeneralMessage)
         {
-            bool isDoorValid;
-
-            if (i_DoorsCar == 2 || i_DoorsCar == 3 || i_DoorsCar == 4 || i_DoorsCar == 5)
-            {
-                isDoorValid = true;
-            }
-
-            else
-            {
-                isDoorValid = false;
-            }
-
-            return isDoorValid;
+            Console.WriteLine(i_GeneralMessage);
         }
-
-        public Car.eDoorsNumber DoorsNumbersInCarConvertToEnum(int i_DoorsCarNumber)
-        {
-            Car.eDoorsNumber doorsCarEnum;
-
-            if (i_DoorsCarNumber == 2)
-            {
-                doorsCarEnum = Car.eDoorsNumber.Two;
-            }
-
-            else if (i_DoorsCarNumber == 3)
-            {
-                doorsCarEnum = Car.eDoorsNumber.Three;
-            }
-
-            else if (i_DoorsCarNumber == 4)
-            {
-                doorsCarEnum = Car.eDoorsNumber.Four;
-            }
-
-            else /// i_DoorsCarNumber = 5
-            {
-                doorsCarEnum = Car.eDoorsNumber.Five;
-            }
-
-            return doorsCarEnum;
-        }
-
 
         public static void PrintInvalidInputMessage()
         {
@@ -371,499 +301,76 @@ namespace Ex03.ConsoleUI
             invalidInputMessage.Append("The input is not valid!");
             Console.WriteLine(invalidInputMessage);
         }
-
-        public bool VehicleTypeValidation(int i_VehicleType)
+        /// < ================================================================= >
+        
+        public int GetFuelType()
         {
-            bool IsVehicleTypeValid;
+            int fuelType;
+            bool inputIsValid;
 
-            if (i_VehicleType == 1 || i_VehicleType == 2 || i_VehicleType == 3)
+            PrintfuelTypeMessage();
+            inputIsValid = int.TryParse(Console.ReadLine(), out fuelType);
+            while (!inputIsValid || !fuelTypeValidation(fuelType))
             {
-                IsVehicleTypeValid = true;
+                PrintInvalidInputMessage();
+                PrintfuelTypeMessage();
+                inputIsValid = int.TryParse(Console.ReadLine(), out fuelType);
+            }
+
+            return fuelType;
+        }
+
+        public static void PrintfuelTypeMessage()
+        {
+            StringBuilder fuelTypeMessage = new StringBuilder();
+
+            fuelTypeMessage.AppendLine("Please enter the fuel type of your vehicle");
+            fuelTypeMessage.AppendLine("1 - Soler");
+            fuelTypeMessage.AppendLine("2 - Octan95");
+            fuelTypeMessage.AppendLine("3 - Octan96");
+            fuelTypeMessage.Append("4 - Octan98");
+            Console.WriteLine(fuelTypeMessage);
+        }
+
+        public bool fuelTypeValidation(int i_fuelTyoe)
+        {
+            bool isfuelTypeValid;
+
+            if (i_fuelTyoe >= 1 && i_fuelTyoe <= 4)
+            {
+                isfuelTypeValid = true;
             }
 
             else
             {
-                IsVehicleTypeValid = false;
+                isfuelTypeValid = false;
             }
 
-            return IsVehicleTypeValid;
+            return isfuelTypeValid;
         }
 
-        public VehicleManufacturer.eVehicleType ConvertChoiceToVehicleType(int i_VehicleType)
+        public FuelEnergy.eFuelType fuelTypeConvertToEnum(int i_fuelType)
         {
-            VehicleManufacturer.eVehicleType enumVehicleType;
+            FuelEnergy.eFuelType fuelTypeEnum;
 
-            if (i_VehicleType == 1)
-            {
-                enumVehicleType = VehicleManufacturer.eVehicleType.Car;
-            }
-
-            else if (i_VehicleType == 2)
-            {
-                enumVehicleType = VehicleManufacturer.eVehicleType.Motorcycle;
-            }
-
-            else  ///i_Vehicle == 3
-            {
-                enumVehicleType = VehicleManufacturer.eVehicleType.Truck;
-            }
-
-            return enumVehicleType;
-        }
-
-
-        public bool VehicleLicenseNumberValidation(StringBuilder i_VehicleLicenseNumber) ///check if the chars are numbers?
-        {
-            bool IsLicenseNumberValid;
-
-            if (i_VehicleLicenseNumber.Length == 7 || i_VehicleLicenseNumber.Length == 8)
-            {
-                IsLicenseNumberValid = true;
-            }
-
-            else
-            {
-                IsLicenseNumberValid = false;
-            }
-
-            return IsLicenseNumberValid;
-        }
-
-        public static void PrintRequestForTheOwnerName()
-        {
-            StringBuilder ownerNameMessage = new StringBuilder();
-
-            ownerNameMessage.Append("Please enter the owner name of the vehicle");
-            Console.WriteLine(ownerNameMessage);
-        }
-
-        public bool NameLengthValidation(StringBuilder i_Name)
-        {
-            bool isNameValid;
-
-            if (i_Name.Length <= k_MaximumOwnerNameLength)
-            {
-                isNameValid = true;
-            }
-
-            else
-            {
-                isNameValid = false;
-            }
-
-            return isNameValid;
-        }
-
-        public static void PrintRequestForOwnerPhoneNumber()
-        {
-            StringBuilder ownerPhoneNumberMessage = new StringBuilder();
-
-            ownerPhoneNumberMessage.Append("Pleas enter the vhicle's ownre phone number");
-            Console.WriteLine(ownerPhoneNumberMessage);
-        }
-
-        public bool OwnerPhoneNumberValidation(StringBuilder i_OwnerPhoneNumber)
-        {
-            bool isPhoneNumberValid;
-
-            if (i_OwnerPhoneNumber.Length == k_PhoneNumberLength)
-            {
-                isPhoneNumberValid = true;
-            }
-
-            else
-            {
-                isPhoneNumberValid = false;
-            }
-
-            return isPhoneNumberValid;
-        }
-
-        public static void PrintRequestForCarColor()
-        {
-            StringBuilder carColorMessage = new StringBuilder();
-
-            carColorMessage.AppendLine("Pleas enter the color of your vehicle:");
-            carColorMessage.AppendLine("1 - Red");
-            carColorMessage.AppendLine("2 - White");
-            carColorMessage.AppendLine("3 - Green");
-            carColorMessage.Append("4 - Blue");
-            Console.WriteLine(carColorMessage);
-        }
-
-        public bool CarColorValidation(int i_CarColor)
-        {
-            bool isCarColorValid;
-
-            if (i_CarColor == 1 || i_CarColor == 2 || i_CarColor == 3 || i_CarColor == 4)
-            {
-                isCarColorValid = true;
-            }
-
-            else
-            {
-                isCarColorValid = false;
-            }
-
-            return isCarColorValid;
-        }
-
-        public Car.eCarColor ConvertChoiceToCarColor(int i_CarColor)
-        {
-            Car.eCarColor carColorEnum;
-
-            if (i_CarColor == 1)
-            {
-                carColorEnum = Car.eCarColor.Red;
-            }
-
-            else if (i_CarColor == 2)
-            {
-                carColorEnum = Car.eCarColor.White;
-            }
-
-            else if (i_CarColor == 3)
-            {
-                carColorEnum = Car.eCarColor.Green;
-            }
-
-            else ///i_CarColor = 4
-            {
-                carColorEnum = Car.eCarColor.Blue;
-            }
-
-            return carColorEnum;
-        }
-
-        /* public Motorcycle.eMCLicenceType GetMotorcycleLicenceType()
-         {
-             int licenceTypeChoice;
-             bool inputIsValid;
-             Motorcycle.eMCLicenceType licenceType;
-
-             PrintRequestForLicenceType();
-             inputIsValid = int.TryParse(Console.ReadLine(), out licenceTypeChoice);
-             while (!inputIsValid || !LicenceTypeChoiceValidation(licenceTypeChoice))
-             {
-                 PrintInvalidInputMessage();
-                 PrintRequestForLicenceType();
-                 inputIsValid = int.TryParse(Console.ReadLine(), out licenceTypeChoice);
-             }
-
-             licenceType = ConvertChoiceToLicenceType(licenceTypeChoice);
-             return licenceType;
-         }*/
-
-        public bool LicenceTypeChoiceValidation(int i_LicenceTypeChoice)
-        {
-            bool licenceTypeChoiceIsValid;
-
-            if (i_LicenceTypeChoice >= 1 && i_LicenceTypeChoice <= 4)
-            {
-                licenceTypeChoiceIsValid = true;
-            }
-
-            else
-            {
-                licenceTypeChoiceIsValid = false;
-            }
-
-            return licenceTypeChoiceIsValid;
-        }
-
-        public Motorcycle.eMCLicenceType ConvertChoiceToLicenceType(int i_LicenceTypeChoice)
-        {
-            Motorcycle.eMCLicenceType licenceType;
-
-            switch (i_LicenceTypeChoice)
+            switch (i_fuelType)
             {
                 case 1:
-                    licenceType = Motorcycle.eMCLicenceType.A;
-                    break;
-
-                case 2:
-                    licenceType = Motorcycle.eMCLicenceType.A1;
-                    break;
-
-                case 3:
-                    licenceType = Motorcycle.eMCLicenceType.B1;
-                    break;
-
-                case 4:
-                default:
-                    licenceType = Motorcycle.eMCLicenceType.BB;
-                    break;
-
-            }
-
-            return licenceType;
-        }
-
-        /*public static void PrintRequestForLicenceType()
-        {
-            StringBuilder licenceTypeMessage = new StringBuilder();
-
-            "Please enter the motorcycle licence type: \n 1 - A \n 2 - A1 \n 3 - B1 \n 4 - BB \n"
-            Console.WriteLine(licenceTypeMessage);
-        }*/
-
-        public int GetMotorcycleEngineCapacity()
-        {
-            int engineCapacityCC;
-            bool inputIsValid;
-
-            PrintRequestForEngineCapacity();
-            inputIsValid = int.TryParse(Console.ReadLine(), out engineCapacityCC);
-            while (!inputIsValid)
-            {
-                PrintInvalidInputMessage();
-                PrintRequestForEngineCapacity();
-                inputIsValid = int.TryParse(Console.ReadLine(), out engineCapacityCC);
-            }
-
-            return engineCapacityCC;
-        }
-
-        public static void PrintRequestForEngineCapacity()
-        {
-            StringBuilder engineCapacityMessage = new StringBuilder();
-
-            engineCapacityMessage.Append("Please enter the motorcycle engine capcity: ");
-            Console.WriteLine(engineCapacityMessage);
-        }
-
-        public bool GetIfTruckHasCoolingCargo()
-        {
-            bool hasCoolingCargo;
-            int coolingCargoChoice;
-            bool inputIsValid;
-
-            PrintRequestForCoolingCargoOption();
-            inputIsValid = int.TryParse(Console.ReadLine(), out coolingCargoChoice);
-            while (!inputIsValid || !CoolingCargoChoiceValidation(coolingCargoChoice))
-            {
-                PrintInvalidInputMessage();
-                PrintRequestForCoolingCargoOption();
-                inputIsValid = int.TryParse(Console.ReadLine(), out coolingCargoChoice);
-            }
-
-            if (coolingCargoChoice == 1)
-            {
-                hasCoolingCargo = true;
-            }
-
-            else // == 2
-            {
-                hasCoolingCargo = false;
-            }
-
-            return hasCoolingCargo;
-        }
-
-        public bool CoolingCargoChoiceValidation(int i_CoolingCargoChoice)
-        {
-            bool coolingCargoChoiceIsValid;
-
-            if (i_CoolingCargoChoice == 1 || i_CoolingCargoChoice == 2)
-            {
-                coolingCargoChoiceIsValid = true;
-            }
-
-            else
-            {
-                coolingCargoChoiceIsValid = false;
-            }
-
-            return coolingCargoChoiceIsValid;
-        }
-
-        public static void PrintRequestForCoolingCargoOption()
-        {
-            StringBuilder CoolingCargoMessage = new StringBuilder();
-
-            CoolingCargoMessage.AppendLine("Please enter whether the truck has cooling cargo or not ");
-            CoolingCargoMessage.AppendLine("1 - Add cooling cargo in truck");
-            CoolingCargoMessage.AppendLine("2 - Do not add cooling cargo in truck");
-            Console.WriteLine(CoolingCargoMessage);
-        }
-
-        public float GetTruckCargoCapacity()
-        {
-            float cargoCapacity;
-            bool inputIsValid;
-
-            PrintRequestForCargoCapacity();
-            inputIsValid = float.TryParse(Console.ReadLine(), out cargoCapacity);
-            while (!inputIsValid)
-            {
-                PrintInvalidInputMessage();
-                PrintRequestForCargoCapacity();
-                inputIsValid = float.TryParse(Console.ReadLine(), out cargoCapacity);
-            }
-
-            return cargoCapacity;
-        }
-
-        public static void PrintRequestForCargoCapacity()
-        {
-            StringBuilder cargoCapacityMessage = new StringBuilder();
-
-            cargoCapacityMessage.Append("Please enter the truck cargo capcity: ");
-            Console.WriteLine(cargoCapacityMessage);
-        }
-
-        public string GetVehicleModelName()
-        {
-            StringBuilder vehicleModelName = new StringBuilder();
-
-            PrintRequestForVehicleModelName();
-            vehicleModelName.Append(Console.ReadLine());
-            while (!ModelNameLengthValidation(vehicleModelName))
-            {
-                PrintInvalidInputMessage();
-                PrintRequestForVehicleModelName();
-                vehicleModelName.Append(Console.ReadLine());
-            }
-
-            return vehicleModelName.ToString();
-        }
-
-        public bool ModelNameLengthValidation(StringBuilder i_ModelName)
-        {
-            bool modelNameLengthIsValid;
-
-            if (i_ModelName.Length < k_MaximumModelNameLength)
-            {
-                modelNameLengthIsValid = true;
-            }
-
-            else
-            {
-                modelNameLengthIsValid = false;
-            }
-
-            return modelNameLengthIsValid;
-        }
-
-        public static void PrintRequestForVehicleModelName()
-        {
-            StringBuilder modelNameMessage = new StringBuilder();
-
-            modelNameMessage.Append("Please enter the vehicle model name: ");
-            Console.WriteLine(modelNameMessage);
-        }
-
-        public string GetWheelManufacturerName()
-        {
-            StringBuilder wheelManufacturerName = new StringBuilder();
-
-            PrintRequestForWheelManufacturerName();
-            wheelManufacturerName.Append(Console.ReadLine());
-            while (!WheelManufacturerNameLengthValidation(wheelManufacturerName))
-            {
-                PrintInvalidInputMessage();
-                PrintRequestForWheelManufacturerName();
-                wheelManufacturerName.Append(Console.ReadLine());
-            }
-
-            return wheelManufacturerName.ToString();
-        }
-
-        public bool WheelManufacturerNameLengthValidation(StringBuilder i_WheelManufacturerName)
-        {
-            bool wheelManufacturerNameLengthIsValid;
-
-            if (i_WheelManufacturerName.Length <= k_MaximumWheelManufacturerNameLength)
-            {
-                wheelManufacturerNameLengthIsValid = true;
-            }
-
-            else
-            {
-                wheelManufacturerNameLengthIsValid = false;
-            }
-
-            return wheelManufacturerNameLengthIsValid;
-        }
-
-        public static void PrintRequestForWheelManufacturerName()
-        {
-            StringBuilder wheelManufacturerNameMessage = new StringBuilder();
-
-            wheelManufacturerNameMessage.Append("Please enter the wheel manufacturer name: ");
-            Console.WriteLine(wheelManufacturerNameMessage);
-        }
-
-        public FuelEnergy.eFuelType GetFuelType()
-        {
-            int fuleType;
-            bool inputIsValid;
-            FuelEnergy.eFuelType fuleTypeEnum;
-
-            PrintFuleTypeMessage();
-            inputIsValid = int.TryParse(Console.ReadLine(), out fuleType);
-            while (!inputIsValid || !FuleTypeValidation(fuleType))
-            {
-                PrintInvalidInputMessage();
-                PrintFuleTypeMessage();
-                inputIsValid = int.TryParse(Console.ReadLine(), out fuleType);
-            }
-
-            fuleTypeEnum = FuleTypeConvertToEnum(fuleType);
-            return fuleTypeEnum;
-        }
-
-        public static void PrintFuleTypeMessage()
-        {
-            StringBuilder fuleTypeMessage = new StringBuilder();
-
-            fuleTypeMessage.AppendLine("Please enter the fule type of your vehicle");
-            fuleTypeMessage.AppendLine("1 - Soler");
-            fuleTypeMessage.AppendLine("2 - Octan95");
-            fuleTypeMessage.AppendLine("3 - Octan96");
-            fuleTypeMessage.Append("4 - Octan98");
-            Console.WriteLine(fuleTypeMessage);
-        }
-
-        public bool FuleTypeValidation(int i_FuleTyoe)
-        {
-            bool isFuleTypeValid;
-
-            if (i_FuleTyoe >= 1 && i_FuleTyoe <= 4)
-            {
-                isFuleTypeValid = true;
-            }
-
-            else
-            {
-                isFuleTypeValid = false;
-            }
-
-            return isFuleTypeValid;
-        }
-
-        public FuelEnergy.eFuelType FuleTypeConvertToEnum(int i_FuleType)
-        {
-            FuelEnergy.eFuelType fuleTypeEnum;
-
-            switch (i_FuleType)
-            {
-                case 1:
-                    fuleTypeEnum = FuelEnergy.eFuelType.Soler;
+                    fuelTypeEnum = FuelEnergy.eFuelType.Soler;
                     break;
                 case 2:
-                    fuleTypeEnum = FuelEnergy.eFuelType.Octan95;
+                    fuelTypeEnum = FuelEnergy.eFuelType.Octan95;
                     break;
                 case 3:
-                    fuleTypeEnum = FuelEnergy.eFuelType.Octan96;
+                    fuelTypeEnum = FuelEnergy.eFuelType.Octan96;
                     break;
                 case 4:
                 default:
-                    fuleTypeEnum = FuelEnergy.eFuelType.Octan98;
+                    fuelTypeEnum = FuelEnergy.eFuelType.Octan98;
                     break;
             }
 
-            return fuleTypeEnum;
+            return fuelTypeEnum;
         }
 
         public int GetTimeToChargeInMinutes()
@@ -893,27 +400,27 @@ namespace Ex03.ConsoleUI
 
         public float GetFuelAmount()
         {
-            float fuleAmount;
+            float fuelAmount;
             bool isInputValid;
 
             PrintRequestForFuelAmount();
-            isInputValid = float.TryParse(Console.ReadLine(), out fuleAmount);
+            isInputValid = float.TryParse(Console.ReadLine(), out fuelAmount);
             while (!isInputValid)
             {
                 PrintInvalidInputMessage();
                 PrintRequestForFuelAmount();
-                isInputValid = float.TryParse(Console.ReadLine(), out fuleAmount);
+                isInputValid = float.TryParse(Console.ReadLine(), out fuelAmount);
             }
 
-            return fuleAmount;
+            return fuelAmount;
         }
 
         public static void PrintRequestForFuelAmount()
         {
-            StringBuilder fuleAmountMessage = new StringBuilder();
+            StringBuilder fuelAmountMessage = new StringBuilder();
 
-            fuleAmountMessage.Append("Please enter the fuel amount: ");
-            Console.WriteLine(fuleAmountMessage);
+            fuelAmountMessage.Append("Please enter the fuel amount: ");
+            Console.WriteLine(fuelAmountMessage);
         }
 
         public void PrintAllGarageVehiclesID(List<string> i_GarageVehiclesID)
@@ -1286,96 +793,6 @@ namespace Ex03.ConsoleUI
             return fuelType;
         }
 
-        public void VehicleAllReadyInTheGarageMessage()
-        {
-            StringBuilder vehicleInTheGarageMessage = new StringBuilder();
-
-            vehicleInTheGarageMessage.Append("The vehicle is all ready in the garage.");
-            Console.WriteLine(vehicleInTheGarageMessage);
-        }
-
-        public bool AskForAnotherOperationForVehicle()
-        {
-            bool anotherOperation;
-            bool isInputValid;
-            int anotherOperationChoics;
-
-            PrintAnotherOperationMessage();
-            isInputValid = int.TryParse(Console.ReadLine(), out anotherOperationChoics);
-
-            while (!isInputValid || anotherOperationChoics < 1 || anotherOperationChoics > 2)
-            {
-                PrintInvalidInputMessage();
-                PrintAnotherOperationMessage();
-                isInputValid = int.TryParse(Console.ReadLine(), out anotherOperationChoics);
-            }
-
-            if (anotherOperationChoics == 1)
-            {
-                anotherOperation = true;
-            }
-
-            else
-            {
-                anotherOperation = false;
-            }
-
-            return anotherOperation;
-        }
-
-        public void PrintAnotherOperationMessage()
-        {
-            StringBuilder anotherOperationMessage = new StringBuilder();
-
-            anotherOperationMessage.AppendLine("Do you want another operattion?");
-            anotherOperationMessage.AppendLine("1 - Yes");
-            anotherOperationMessage.Append("2 - No");
-            Console.WriteLine(anotherOperationMessage);
-        }
-
-        public int GetActionInTheGarage()
-        {
-            int actionInTheGarage;
-            bool isInputValid;
-
-            PrintRequestForActionInTheGarage();
-            isInputValid = int.TryParse(Console.ReadLine(), out actionInTheGarage);
-            while (!isInputValid || actionInTheGarage < 1 || actionInTheGarage > 4)
-            {
-                PrintInvalidInputMessage();
-                PrintRequestForActionInTheGarage();
-                isInputValid = int.TryParse(Console.ReadLine(), out actionInTheGarage);
-            }
-
-            return actionInTheGarage;
-        }
-
-        public void PrintRequestForActionInTheGarage()
-        {
-            StringBuilder actionInTheGarageMessage = new StringBuilder();
-
-            actionInTheGarageMessage.AppendLine("Choose what action do you want to do in the Garage");
-            actionInTheGarageMessage.AppendLine("1 - Add new vehicle to the garage");
-            actionInTheGarageMessage.AppendLine("2 - Do some vehicle operation in the garage");
-            actionInTheGarageMessage.AppendLine("3 - Get garage vehicles by status");
-            actionInTheGarageMessage.AppendLine("4 - Go home");
-            Console.WriteLine(actionInTheGarageMessage);
-        }
-
-        public void PrintFullVehicleInfo(string i_VehicleInfo)
-        {
-            StringBuilder fullVehicleInfoMessage = new StringBuilder();
-
-            fullVehicleInfoMessage.Append(string.Format("{0}", i_VehicleInfo));
-            Console.WriteLine(fullVehicleInfoMessage);
-        }
-
-        public void PrintErrorMessage(string i_ErrorMessage)
-        {
-            StringBuilder errorMessage = new StringBuilder();
-
-            errorMessage.Append(string.Format("{0}", i_ErrorMessage));
-        }
     }
 
 }

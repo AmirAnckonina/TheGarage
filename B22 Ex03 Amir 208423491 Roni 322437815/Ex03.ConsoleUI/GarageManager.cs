@@ -22,31 +22,34 @@ namespace Ex03.ConsoleUI
         public void Run()
         {
             int vehicleStatus;
-            List<string> garageVehiclesByStatus = new List<string>();
-            int actionInTheGarage;
-            bool goHome;
+            List<string> garageVehiclesByStatus; // = new List<string>();
+            int garageOperationChoice;
+            bool goHome = false;
+            
             do
             {
-                actionInTheGarage = r_ConsoleIOManager.GetActionInTheGarage();
-                switch (actionInTheGarage)
+                garageOperationChoice = r_ConsoleIOManager.GetGarageOperation();
+                switch (garageOperationChoice)
                 {
                     case 1:
                         AddVehicleToTheGarageProcedure();
-                        goHome = false;
                         break;
+
                     case 2:
                         SingleVehicleOperationsSession();
-                        goHome = false;
                         break;
+
                     case 3:
                         vehicleStatus = r_ConsoleIOManager.GetVehicleStatus();
                         garageVehiclesByStatus = r_Garage.GetAllGarageVehiclesIDByStatus(vehicleStatus);
                         r_ConsoleIOManager.PrintAllGarageVehiclesID(garageVehiclesByStatus);
-                        goHome = false;
                         break;
+
                     case 4:
-                    default:
                         goHome = true;
+                        break;
+
+                    default:
                         break;
                 }
 
@@ -54,18 +57,6 @@ namespace Ex03.ConsoleUI
           
         }
 
-        /// <summary>
-        /// Ask the user for Vehicle type,  LicenceID
-        /// Check if licenceID is Exist 
-        /// -> If yes, so ignore and get the next vehicle
-        /// -> If no, Crease basic vehicle with LicenceID, string VehicleType 
-        ///     -> AddVehicleToGarage (store in the dictionary)
-        ///     -> Complete manufacturing
-        ///     Continue with basic VehicleDetails 
-        ///     -> Specific manufacture details according to the vehicle type
-        ///     -> update GarageCard details
-        /// 
-        /// </summary>
         public void AddVehicleToTheGarageProcedure()
         {
             string vehicleLicenceID, vehicleType, energyType;
@@ -89,7 +80,7 @@ namespace Ex03.ConsoleUI
             }
             catch (Exception ex)
             {
-                r_ConsoleIOManager.PrintErrorMessage(ex.Message);
+                r_ConsoleIOManager.PrintGeneralMessage(ex.Message);
             }
         }
 
@@ -110,13 +101,13 @@ namespace Ex03.ConsoleUI
                 }
                 catch(FormatException formatEx)
                 {
-                    r_ConsoleIOManager.PrintErrorMessage(formatEx.Message);
+                    r_ConsoleIOManager.PrintGeneralMessage(formatEx.Message);
                     insertedInput = r_ConsoleIOManager.GetSingleDetail(currVehicleDetail.Value);
                     currVehicle.SetSingleDetail(currVehicleDetail.Key, insertedInput);
                 }
                 catch (Exception ex)
                 {
-                    r_ConsoleIOManager.PrintErrorMessage(ex.Message);
+                    r_ConsoleIOManager.PrintGeneralMessage(ex.Message);
                     break;
                 }
             }
@@ -132,13 +123,13 @@ namespace Ex03.ConsoleUI
 
                 catch(FormatException formatEx)
                 {
-                    r_ConsoleIOManager.PrintErrorMessage(formatEx.Message);
+                    r_ConsoleIOManager.PrintGeneralMessage(formatEx.Message);
                     insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
                     currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
                 }
                 catch (Exception ex)
                 {
-                    r_ConsoleIOManager.PrintErrorMessage(ex.Message);
+                    r_ConsoleIOManager.PrintGeneralMessage(ex.Message);
                     break;
                 }
             }
@@ -148,7 +139,7 @@ namespace Ex03.ConsoleUI
         public void SingleVehicleOperationsSession()
         {
             string vehicleLicenseID;
-            int garageOperationNumber;
+            int garageVehicleOperationNumber;
             bool anotherOperation = true;
 
             vehicleLicenseID = r_ConsoleIOManager.GetVehicleLicenseID();
@@ -156,30 +147,27 @@ namespace Ex03.ConsoleUI
             {
                 do
                 {
-                    garageOperationNumber = r_ConsoleIOManager.GetVehicleGarageOperation();
+                    r_ConsoleIOManager.PrintGeneralMessage(r_Garage.GetBasicInfoBeforeOperation(vehicleLicenseID));
+                    garageVehicleOperationNumber = r_ConsoleIOManager.GetVehicleGarageOperation();
                     try
                     {
-                        SingleOperationForVehicle(vehicleLicenseID, garageOperationNumber);
+                        SingleOperationForVehicle(vehicleLicenseID, garageVehicleOperationNumber);
                     }
                     catch (ArgumentException argumentEx)
                     {
                        /// Case: trying to fill fuel in electric car, so a new operation will be suggested
-                       r_ConsoleIOManager.PrintErrorMessage(argumentEx.Message);
-                       garageOperationNumber = r_ConsoleIOManager.GetVehicleGarageOperation();
-                       SingleOperationForVehicle(vehicleLicenseID, garageOperationNumber);
+                       r_ConsoleIOManager.PrintGeneralMessage(argumentEx.Message);
+                       garageVehicleOperationNumber = r_ConsoleIOManager.GetVehicleGarageOperation();
+                       SingleOperationForVehicle(vehicleLicenseID, garageVehicleOperationNumber);
                     }
                     catch (ValueOutOfRangeException valueRangeEx)
                     {
-                       r_ConsoleIOManager.PrintErrorMessage(valueRangeEx.Message);
-                       SingleOperationForVehicle(vehicleLicenseID, garageOperationNumber);
+                       r_ConsoleIOManager.PrintGeneralMessage(valueRangeEx.Message);
+                       SingleOperationForVehicle(vehicleLicenseID, garageVehicleOperationNumber);
                     }
-    /*                catch (FormatException formatEx)
-                    {
-                        r_ConsoleIOManager.PrintErrorMessage(formatEx.Message);
-                    }*/
                     catch (Exception ex)
                     {
-                        r_ConsoleIOManager.PrintErrorMessage(ex.Message);
+                        r_ConsoleIOManager.PrintGeneralMessage(ex.Message);
                     }
                     finally
                     {
@@ -191,7 +179,7 @@ namespace Ex03.ConsoleUI
 
             else
             {
-                r_ConsoleIOManager.PrintErrorMessage(string.Format("Vehicle with license ID: {0} doesn't found in the garage", vehicleLicenseID));
+                r_ConsoleIOManager.PrintGeneralMessage(string.Format("Vehicle with license ID: {0} doesn't found in the garage", vehicleLicenseID));
             }
 
         }

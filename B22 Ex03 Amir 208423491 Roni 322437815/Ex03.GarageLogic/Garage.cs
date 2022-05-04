@@ -140,9 +140,10 @@ namespace Ex03.GarageLogic
         }
 
         /// 6 
-        public void RefuelVehicle(string i_LicenceID, float i_FuelAmount, FuelEnergy.eFuelType i_FuelType)
+        public void RefuelVehicle(string i_LicenceID, float i_FuelAmount, int i_FuelTypeChoice)
         {
             FuelEnergy fuelEnergyOfCurrentVehicle;
+            FuelEnergy.eFuelType fuelType;
 
             if (!LicenceIDExist(i_LicenceID))
             {
@@ -150,7 +151,13 @@ namespace Ex03.GarageLogic
             }
 
             fuelEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as FuelEnergy;
-            fuelEnergyOfCurrentVehicle.Refuel(i_FuelAmount, i_FuelType);
+            if (fuelEnergyOfCurrentVehicle == null)
+            {
+                throw new ArgumentException("The vehicle does not have fuel energy source.");
+            }
+
+            fuelType = FuelTypeSetup(i_FuelTypeChoice);
+            fuelEnergyOfCurrentVehicle.Refuel(i_FuelAmount, fuelType);
         }
 
         /// 7
@@ -213,6 +220,48 @@ namespace Ex03.GarageLogic
             }
 
             return vehicleStatus;
+        }
+
+        private FuelEnergy.eFuelType FuelTypeSetup(int i_FuelTypeChoice)
+        {
+            FuelEnergy.eFuelType fuelType;
+
+            if (i_FuelTypeChoice == 1)
+            {
+                fuelType = FuelEnergy.eFuelType.Soler;
+            }
+
+            else if (i_FuelTypeChoice == 2)
+            {
+                fuelType = FuelEnergy.eFuelType.Octan95;
+            }
+
+            else if (i_FuelTypeChoice == 3)
+            {
+                fuelType = FuelEnergy.eFuelType.Octan96;
+            }
+
+            else
+            {
+                fuelType = FuelEnergy.eFuelType.Octan98;
+            }
+
+            return fuelType;
+        }
+
+        public string GetBasicInfoBeforeOperation(string i_VehicleLicenseID)
+        {
+            StringBuilder licenceIDAndVehicleTypeMessage = new StringBuilder();
+
+            if (!LicenceIDExist(i_VehicleLicenseID))
+            {
+                throw new ArgumentException(s_LicenceIDNotFound);
+            }
+
+            licenceIDAndVehicleTypeMessage.AppendLine("Vehicle licnese ID: " + i_VehicleLicenseID);
+            licenceIDAndVehicleTypeMessage.AppendLine("Vehicle type: " + r_GarageVehicles[i_VehicleLicenseID].Vehicle.GetType().Name);
+            licenceIDAndVehicleTypeMessage.Append("Energy source type: " + r_GarageVehicles[i_VehicleLicenseID].Vehicle.VehicleEnergy.GetType().Name);
+            return licenceIDAndVehicleTypeMessage.ToString();
         }
     }
 }  
