@@ -21,8 +21,33 @@ namespace Ex03.ConsoleUI
 
         public void Run()
         {
-            AddNewVehiclesToTheGarageProcedure();
-            GarageWorkDay();
+            int actionInTheGarage;
+            bool goHome;
+            do
+            {
+                actionInTheGarage = r_ConsoleIOManager.GetActionInTheGarage();
+                switch (actionInTheGarage)
+                {
+                    case 1:
+                        AddNewVehiclesToTheGarageProcedure();
+                        goHome = false;
+                        break;
+                    case 2:
+                        GarageWorkDay();
+                        goHome = false;
+                        break;
+                    case 3:
+                        // r_Garage.GetAllGarageVehiclesIDByStatus();
+                        goHome = false;
+                        break;
+                    case 4:
+                    default:
+                        goHome = true;
+                        break;
+                }
+
+            } while (!goHome);        
+          
         }
 
         /// <summary>
@@ -39,27 +64,22 @@ namespace Ex03.ConsoleUI
         /// </summary>
         public void AddNewVehiclesToTheGarageProcedure()
         {
-            bool endOfAddingVehiclesToGarage;
             string vehicleLicenceID, vehicleType, energyType;
 
-            do
-            {
                 vehicleType = r_ConsoleIOManager.GetVehicleType();
                 energyType = r_ConsoleIOManager.GetEnergyType();
-                vehicleLicenceID = r_ConsoleIOManager.GetVehicleLicenseID();
-                r_Garage.AddNewVehicleToTheGarage(vehicleLicenceID, vehicleType, energyType); 
-                if (!r_Garage.LicenceIDExist(vehicleLicenceID))
-                {
-                    CompleteVehicleDetailsProcedure(vehicleLicenceID);
-                }
-                else
-                {
-                   /// r_ConsoleIOManager.VehicleAlreadyInGarage()
-                }
+                vehicleLicenceID = r_ConsoleIOManager.GetVehicleLicenseID();    
+            if (!r_Garage.LicenceIDExist(vehicleLicenceID))
+            {
+                r_Garage.AddNewVehicleToTheGarage(vehicleLicenceID, vehicleType, energyType);
+                CompleteVehicleDetailsProcedure(vehicleLicenceID);
+            }
 
-                endOfAddingVehiclesToGarage = r_ConsoleIOManager.AskToEndAddingVehiclesToGarage();
-
-            } while (!endOfAddingVehiclesToGarage);
+            else
+            {
+                r_ConsoleIOManager.VehicleAllReadyInTheGarageMessage();
+                r_Garage.ChangeVehicleStatus(vehicleLicenceID, 1);
+            }
         }
 
         public void CompleteVehicleDetailsProcedure(string i_VehicleLicenceID)
@@ -77,10 +97,10 @@ namespace Ex03.ConsoleUI
                     insertedInput = r_ConsoleIOManager.GetSingleDetail(currVehicleDetail.Value);
                     currVehicle.SetSingleDetail(currVehicleDetail.Key, insertedInput);
                 }
-                catch
+                catch(FormatException ex)
                 {
                     /// ex.Message;
-                    /// r_ConsoleIOManager(ex.Message());
+                    ///r_ConsoleIOManager(ex.Message());
                     insertedInput = r_ConsoleIOManager.GetSingleDetail(currVehicleDetail.Value);
                     currVehicle.SetSingleDetail(currVehicleDetail.Key, insertedInput);
                 }
@@ -89,8 +109,17 @@ namespace Ex03.ConsoleUI
             currGarageCard = r_Garage.GetVehicleGarageCardByLicenceID(i_VehicleLicenceID);
             foreach (KeyValuePair<string, string> currGarageCardDetail in currGarageCard.GarageCardDetails)
             {
-                insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
-                currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
+                try
+                {
+                   insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
+                   currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
+                }
+
+                catch(FormatException ex)
+                {
+                    insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
+                    currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
+                }
             }
 
         }
@@ -102,12 +131,13 @@ namespace Ex03.ConsoleUI
             do
             {
                 SingleVehicleOperationsSession();
-                endOfWorkDay = r_ConsoleIOManager.AskToEndWorkday();
+                r_ConsoleIOManager.OperationCompletedMessage();
+                endOfWorkDay = r_ConsoleIOManager.AsxIfAnotherOperationNeeded();
 
             } while (!endOfWorkDay);
 
-          /*  vehicleStatusFilter = r_ConsoleIOManager.GetVehicleStatus();
-            r_ConsoleIOManager.PrintAllGarageVehiclesID(r_Garage.GetAllGarageVehiclesIDByStatus(vehicleStatusFilter));*/
+            /*  vehicleStatusFilter = r_ConsoleIOManager.GetVehicleStatus();
+              r_ConsoleIOManager.PrintAllGarageVehiclesID(r_Garage.GetAllGarageVehiclesIDByStatus(vehicleStatusFilter));*/
         }
 
         /// <summary>
@@ -118,7 +148,7 @@ namespace Ex03.ConsoleUI
         {
             string vehicleLicenseID;
             int garageOperationNumber;
-            bool vehicleFinished = false;
+            bool anothetOperation = false;
 
             vehicleLicenseID = r_ConsoleIOManager.GetVehicleLicenseID();
             do
@@ -127,6 +157,7 @@ namespace Ex03.ConsoleUI
                 {
                     garageOperationNumber = r_ConsoleIOManager.GetVehicleGarageOperation();
                     SingleOperationForVehicle(vehicleLicenseID, garageOperationNumber);
+
                 }
                 catch (ArgumentException Argumentex)
                 {
@@ -142,14 +173,15 @@ namespace Ex03.ConsoleUI
                 }
                 finally
                 {
-                    /// vehicleFinished = Ask the user if another operation needed;
+                    anothetOperation = r_ConsoleIOManager.AsxIfAnotherOperationNeeded();
                 }
 
-            } while (!vehicleFinished);
+            } while (anothetOperation);
             /// <====================================?
 
             /// After the loop:
-           /// r_Garage.ChangeVehicleStatus(vehicleLicenseID, Garage.eVehicleStatus.Repaired);
+           
+            r_Garage.ChangeVehicleStatus(vehicleLicenseID, 2);
 
             /// Ask for payment (Do you eant to pay now?)
             /// Change status to paid is owner paid.
@@ -185,6 +217,7 @@ namespace Ex03.ConsoleUI
                 default:
                     break;
             }
+            r_ConsoleIOManager.OperationCompletedMessage();
         }
 
        /* public int ExtractVehicleGarageOperation(string i_RawOperationChoice)

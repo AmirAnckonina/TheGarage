@@ -156,7 +156,7 @@ namespace Ex03.GarageLogic
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out energyTypeChoice);
             if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfEnergySources, (int)energyTypeChoice))
             {
-                throw new FormatException("Invalid car color selection.");
+                throw new FormatException("Invalid energy type.");
             }
 
             m_EnergyType = energyTypeChoice;

@@ -45,10 +45,10 @@ namespace Ex03.ConsoleUI
         public string GetEnergyType()
         {
             string energyType;
-           
+
             PrintRequestForEnergyType();
             energyType = Console.ReadLine();
-          
+
             return energyType;
         }
 
@@ -69,13 +69,13 @@ namespace Ex03.ConsoleUI
             PrintRequesOfVehicleLicenseNumber();
             vehicleLicenseNumber.Append(Console.ReadLine());
 
-           /* while (!VehicleLicenseNumberValidation(vehicleLicenseNumber))
-            {
-                PrintInvalidInputMessage();
-                PrintRequesOfVehicleLicenseNumber();
-                vehicleLicenseNumber.Clear();
-                vehicleLicenseNumber.Append(Console.ReadLine());
-            }*/
+            /* while (!VehicleLicenseNumberValidation(vehicleLicenseNumber))
+             {
+                 PrintInvalidInputMessage();
+                 PrintRequesOfVehicleLicenseNumber();
+                 vehicleLicenseNumber.Clear();
+                 vehicleLicenseNumber.Append(Console.ReadLine());
+             }*/
 
             return vehicleLicenseNumber.ToString();
         }
@@ -123,7 +123,7 @@ namespace Ex03.ConsoleUI
 
             PrintGarageMenu();
             inputIsValid = int.TryParse(Console.ReadLine(), out garageOperationChoice);
-            while  (!inputIsValid || garageOperationChoice < 1 || garageOperationChoice > 5)
+            while (!inputIsValid || garageOperationChoice < 1 || garageOperationChoice > 5)
             {
                 PrintInvalidInputMessage();
                 PrintGarageMenu();
@@ -132,8 +132,6 @@ namespace Ex03.ConsoleUI
 
             return garageOperationChoice;
         }
-
-
 
         public string GetOwnerName()
         {
@@ -158,7 +156,7 @@ namespace Ex03.ConsoleUI
 
             PrintRequestForOwnerPhoneNumber();
             ownerPhoneNumber.Append(Console.ReadLine());
-            while(!OwnerPhoneNumberValidation(ownerPhoneNumber))
+            while (!OwnerPhoneNumberValidation(ownerPhoneNumber))
             {
                 PrintInvalidInputMessage();
                 ownerPhoneNumber.Clear();
@@ -175,7 +173,7 @@ namespace Ex03.ConsoleUI
         {
             bool isEnergyTypeValid;
 
-            if(i_EnergyType == 1 || i_EnergyType == 2)
+            if (i_EnergyType == 1 || i_EnergyType == 2)
             {
                 isEnergyTypeValid = true;
             }
@@ -192,7 +190,7 @@ namespace Ex03.ConsoleUI
         {
             Energy.eEnergyType energyTypeEnum;
 
-            if(i_energyType == 1)
+            if (i_energyType == 1)
             {
                 energyTypeEnum = Energy.eEnergyType.Fuel;
             }
@@ -205,15 +203,15 @@ namespace Ex03.ConsoleUI
             return energyTypeEnum;
         }
 
-        public Car.eColor GetCarColor()
+        public Car.eCarColor GetCarColor()
         {
             int carColorChoose;
             bool carColerIsValid;
-            Car.eColor carColor;
+            Car.eCarColor carColor;
 
             PrintRequestForCarColor();
             carColerIsValid = int.TryParse(Console.ReadLine(), out carColorChoose);
-            while (!carColerIsValid || !CarColorValidation(carColorChoose)) 
+            while (!carColerIsValid || !CarColorValidation(carColorChoose))
             {
                 PrintInvalidInputMessage();
                 PrintRequestForCarColor();
@@ -255,7 +253,7 @@ namespace Ex03.ConsoleUI
         {
             bool isDoorValid;
 
-            if(i_DoorsCar == 2 || i_DoorsCar ==3 || i_DoorsCar == 4 || i_DoorsCar == 5 )
+            if (i_DoorsCar == 2 || i_DoorsCar == 3 || i_DoorsCar == 4 || i_DoorsCar == 5)
             {
                 isDoorValid = true;
             }
@@ -272,7 +270,7 @@ namespace Ex03.ConsoleUI
         {
             Car.eDoorsNumber doorsCarEnum;
 
-            if(i_DoorsCarNumber == 2)
+            if (i_DoorsCarNumber == 2)
             {
                 doorsCarEnum = Car.eDoorsNumber.Two;
             }
@@ -398,7 +396,7 @@ namespace Ex03.ConsoleUI
         {
             bool isPhoneNumberValid;
 
-            if(i_OwnerPhoneNumber.Length == k_PhoneNumberLength)
+            if (i_OwnerPhoneNumber.Length == k_PhoneNumberLength)
             {
                 isPhoneNumberValid = true;
             }
@@ -440,51 +438,51 @@ namespace Ex03.ConsoleUI
             return isCarColorValid;
         }
 
-        public Car.eColor ConvertChoiceToCarColor(int i_CarColor)
+        public Car.eCarColor ConvertChoiceToCarColor(int i_CarColor)
         {
-            Car.eColor carColorEnum;
+            Car.eCarColor carColorEnum;
 
-            if(i_CarColor == 1)
+            if (i_CarColor == 1)
             {
-                carColorEnum = Car.eColor.Red;
+                carColorEnum = Car.eCarColor.Red;
             }
 
             else if (i_CarColor == 2)
             {
-                carColorEnum = Car.eColor.White;
+                carColorEnum = Car.eCarColor.White;
             }
 
             else if (i_CarColor == 3)
             {
-                carColorEnum = Car.eColor.Green;
+                carColorEnum = Car.eCarColor.Green;
             }
 
             else ///i_CarColor = 4
             {
-                carColorEnum = Car.eColor.Blue;
+                carColorEnum = Car.eCarColor.Blue;
             }
 
             return carColorEnum;
         }
 
-       /* public Motorcycle.eMCLicenceType GetMotorcycleLicenceType()
-        {
-            int licenceTypeChoice;
-            bool inputIsValid;
-            Motorcycle.eMCLicenceType licenceType;
+        /* public Motorcycle.eMCLicenceType GetMotorcycleLicenceType()
+         {
+             int licenceTypeChoice;
+             bool inputIsValid;
+             Motorcycle.eMCLicenceType licenceType;
 
-            PrintRequestForLicenceType();
-            inputIsValid = int.TryParse(Console.ReadLine(), out licenceTypeChoice);
-            while (!inputIsValid || !LicenceTypeChoiceValidation(licenceTypeChoice))
-            {
-                PrintInvalidInputMessage();
-                PrintRequestForLicenceType();
-                inputIsValid = int.TryParse(Console.ReadLine(), out licenceTypeChoice);
-            }
+             PrintRequestForLicenceType();
+             inputIsValid = int.TryParse(Console.ReadLine(), out licenceTypeChoice);
+             while (!inputIsValid || !LicenceTypeChoiceValidation(licenceTypeChoice))
+             {
+                 PrintInvalidInputMessage();
+                 PrintRequestForLicenceType();
+                 inputIsValid = int.TryParse(Console.ReadLine(), out licenceTypeChoice);
+             }
 
-            licenceType = ConvertChoiceToLicenceType(licenceTypeChoice);
-            return licenceType;
-        }*/
+             licenceType = ConvertChoiceToLicenceType(licenceTypeChoice);
+             return licenceType;
+         }*/
 
         public bool LicenceTypeChoiceValidation(int i_LicenceTypeChoice)
         {
@@ -671,7 +669,7 @@ namespace Ex03.ConsoleUI
 
             else
             {
-                modelNameLengthIsValid = false; 
+                modelNameLengthIsValid = false;
             }
 
             return modelNameLengthIsValid;
@@ -734,7 +732,7 @@ namespace Ex03.ConsoleUI
 
             PrintFuleTypeMessage();
             inputIsValid = int.TryParse(Console.ReadLine(), out fuleType);
-            while(!inputIsValid || !FuleTypeValidation(fuleType))
+            while (!inputIsValid || !FuleTypeValidation(fuleType))
             {
                 PrintInvalidInputMessage();
                 PrintFuleTypeMessage();
@@ -778,7 +776,7 @@ namespace Ex03.ConsoleUI
         {
             FuelEnergy.eFuelType fuleTypeEnum;
 
-            switch(i_FuleType)
+            switch (i_FuleType)
             {
                 case 1:
                     fuleTypeEnum = FuelEnergy.eFuelType.Soler;
@@ -795,7 +793,7 @@ namespace Ex03.ConsoleUI
                     break;
             }
 
-            return fuleTypeEnum;              
+            return fuleTypeEnum;
         }
 
         public int GetTimeToChargeInMinutes()
@@ -805,7 +803,7 @@ namespace Ex03.ConsoleUI
 
             PrintRequestForTimeToCharge();
             inputIsValid = int.TryParse(Console.ReadLine(), out timeToChargeInMinutes);
-            while(!inputIsValid)
+            while (!inputIsValid)
             {
                 PrintInvalidInputMessage();
                 PrintRequestForTimeToCharge();
@@ -830,7 +828,7 @@ namespace Ex03.ConsoleUI
 
             PrintRequestForFuleAmount();
             isInputValid = float.TryParse(Console.ReadLine(), out fuleAmount);
-            while (!isInputValid) 
+            while (!isInputValid)
             {
                 PrintInvalidInputMessage();
                 PrintRequestForFuleAmount();
@@ -852,7 +850,7 @@ namespace Ex03.ConsoleUI
         {
             StringBuilder vehicleLicenceIDSingleEntityMessage = new StringBuilder();
 
-            foreach(string currLicenceID in i_GarageVehiclesID)
+            foreach (string currLicenceID in i_GarageVehiclesID)
             {
                 vehicleLicenceIDSingleEntityMessage.AppendFormat("LicenceID: {0}", currLicenceID);
                 Console.WriteLine(vehicleLicenceIDSingleEntityMessage);
@@ -867,7 +865,7 @@ namespace Ex03.ConsoleUI
 
             PrintRequestForVehicleStatus();
             isInputValid = int.TryParse(Console.ReadLine(), out vehicleStatusChoice);
-            while(!isInputValid || !VehicleStatusValidation(vehicleStatusChoice))
+            while (!isInputValid || !VehicleStatusValidation(vehicleStatusChoice))
             {
                 PrintInvalidInputMessage();
                 PrintRequestForVehicleStatus();
@@ -903,27 +901,6 @@ namespace Ex03.ConsoleUI
             }
 
             return isVehicleStatusValid;
-        }
-
-        public Garage.eVehicleStatus VehicleStatusConvertToEnum(int i_VehicleStatus)
-        {
-            Garage.eVehicleStatus vehicleStatusEnum;
-
-            switch (i_VehicleStatus)
-            {
-                case 1:
-                    vehicleStatusEnum = Garage.eVehicleStatus.InRepair;
-                    break;
-                case 2:
-                    vehicleStatusEnum = Garage.eVehicleStatus.Repaired;
-                    break;
-                case 3:
-                default:
-                    vehicleStatusEnum = Garage.eVehicleStatus.Paid;
-                    break;
-            }
-
-            return vehicleStatusEnum;
         }
 
         public bool AskToEndWorkday()
@@ -1036,9 +1013,9 @@ namespace Ex03.ConsoleUI
             return endAddingToGarageChoiceIsValid;
         }
 
-    
 
-        
+
+
 
         public bool VehicleTreeatmentValidation(int i_VehicleTreatment)
         {
@@ -1061,7 +1038,7 @@ namespace Ex03.ConsoleUI
         {
             Garage.eGarageOperations VehicleTreatmentEnum;
 
-            switch(i_VehicleTreatment)
+            switch (i_VehicleTreatment)
             {
                 case 1:
                     VehicleTreatmentEnum = Garage.eGarageOperations.Refuel;
@@ -1095,14 +1072,14 @@ namespace Ex03.ConsoleUI
 
             PrintRequestForPrintAllVehicle();
             isInputValid = int.TryParse(Console.ReadLine(), out printAllVehicleChoice);
-            while (!isInputValid || !PrintAllVehicleValidation(printAllVehicleChoice)) 
+            while (!isInputValid || !PrintAllVehicleValidation(printAllVehicleChoice))
             {
                 PrintInvalidInputMessage();
                 PrintRequestForPrintAllVehicle();
                 isInputValid = int.TryParse(Console.ReadLine(), out printAllVehicleChoice);
             }
-            
-            if(printAllVehicleChoice == 1)
+
+            if (printAllVehicleChoice == 1)
             {
                 PrintAllVehicle = true;
             }
@@ -1149,8 +1126,8 @@ namespace Ex03.ConsoleUI
             operationSucceedMessage.Append("The operation completed succuessfully.");
             Console.WriteLine(operationSucceedMessage);
         }
-        
-         public void PrintAllVehicleGarageCardDetails(GarageCard i_VehicleGarageCard)
+
+        public void PrintAllVehicleGarageCardDetails(GarageCard i_VehicleGarageCard)
         {
             StringBuilder vehicleGarageCardDetails = new StringBuilder();
 
@@ -1229,7 +1206,7 @@ namespace Ex03.ConsoleUI
 
                 case FuelEnergy.eFuelType.Octan98:
                     fuelType.AppendLine("Octan98");
-                     break;
+                    break;
 
                 case FuelEnergy.eFuelType.Soler:
                     fuelType.AppendLine("Soler");
@@ -1243,7 +1220,81 @@ namespace Ex03.ConsoleUI
             return fuelType;
         }
 
-        
+        public void VehicleAllReadyInTheGarageMessage()
+        {
+            StringBuilder vehicleInTheGarageMessage = new StringBuilder();
+
+            vehicleInTheGarageMessage.Append("The vehicle is all ready in the garage.");
+            Console.WriteLine(vehicleInTheGarageMessage);
+        }
+
+        public bool AsxIfAnotherOperationNeeded()
+        {
+            bool anotherOperation;
+            bool isInputValid;
+            int anotherOperationChoics;
+
+            PrintAnotherOperationMessage();
+            isInputValid = int.TryParse(Console.ReadLine(), out anotherOperationChoics);
+
+            while (!isInputValid || anotherOperationChoics < 1 || anotherOperationChoics > 2)
+            {
+                PrintInvalidInputMessage();
+                PrintAnotherOperationMessage();
+                isInputValid = int.TryParse(Console.ReadLine(), out anotherOperationChoics);
+            }
+
+            if (anotherOperationChoics == 1)
+            {
+                anotherOperation = true;
+            }
+
+            else
+            {
+                anotherOperation = false;
+            }
+
+            return anotherOperation;
+        }
+
+        public void PrintAnotherOperationMessage()
+        {
+            StringBuilder anotherOperationMessage = new StringBuilder();
+
+            anotherOperationMessage.AppendLine("Do you want another operattion?");
+            anotherOperationMessage.AppendLine("1 - Yes");
+            anotherOperationMessage.Append("2 - No");
+            Console.WriteLine(anotherOperationMessage);
+        }
+
+        public int GetActionInTheGarage()
+        {
+            int actionInTheGarage;
+            bool isInputValid;
+
+            PrintRequestForActionInTheGarage();
+            isInputValid = int.TryParse(Console.ReadLine(), out actionInTheGarage);
+            while (!isInputValid || actionInTheGarage < 1 || actionInTheGarage > 4)
+            {
+                PrintInvalidInputMessage();
+                PrintRequestForActionInTheGarage();
+                isInputValid = int.TryParse(Console.ReadLine(), out actionInTheGarage);
+            }
+
+            return actionInTheGarage;
+        }
+
+        public void PrintRequestForActionInTheGarage()
+        {
+            StringBuilder actionInTheGarageMessage = new StringBuilder();
+
+            actionInTheGarageMessage.AppendLine("Choose what action do you want to do in the Garage");
+            actionInTheGarageMessage.AppendLine("1 - Add new vehicle to the garage");
+            actionInTheGarageMessage.AppendLine("2 - Do some operation on vehicle");
+            actionInTheGarageMessage.AppendLine("3 - Get garage vehicles by status");
+            actionInTheGarageMessage.AppendLine("4 - Go home");
+            Console.WriteLine(actionInTheGarageMessage);
+        }
     }
 
 }
