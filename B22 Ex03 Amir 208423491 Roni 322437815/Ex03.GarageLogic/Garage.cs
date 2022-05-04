@@ -27,11 +27,22 @@ namespace Ex03.GarageLogic
 
         private readonly Dictionary<string, GarageCard> r_GarageVehicles;
         private readonly VehicleManufacturer r_VehicleManufacturer;
-
+        private static string s_GarageMenu;
+        
         public Garage()
         {
             r_GarageVehicles = new Dictionary<string, GarageCard>();
             r_VehicleManufacturer = new VehicleManufacturer();
+            /// InitGarageMenu();
+            /// InitOperationsMessages();
+        }
+
+        public string GarageMenu
+        {
+            get
+            {
+                return s_GarageMenu;
+            }
         }
 
         public Dictionary<string, GarageCard> GarageVehicles
@@ -60,14 +71,18 @@ namespace Ex03.GarageLogic
             Vehicle newVehicle;
             GarageCard newGarageCard;
 
-            if (LicenceIDExist(i_LicneseID))
+            if (!LicenceIDExist(i_LicneseID))
             {
-                /// throw argument expception
+                newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_LicneseID, i_VehicleType, i_EnergyType);
+                newGarageCard = new GarageCard(newVehicle, eVehicleStatus.InRepair);
+                r_GarageVehicles.Add(i_LicneseID, newGarageCard);
             }
 
-            newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_LicneseID, i_VehicleType, i_EnergyType);
-            newGarageCard = new GarageCard(newVehicle, eVehicleStatus.InRepair);
-            r_GarageVehicles.Add(i_LicneseID, newGarageCard);
+            else
+            {
+                /// Add proper message and update status to InRepair
+            }
+
         }
 
         /// 2 
@@ -89,15 +104,17 @@ namespace Ex03.GarageLogic
         }*/
 
         /// 3
-        public void ChangeVehicleStatus(string i_LicenceID, eVehicleStatus i_NewVehicleStatus)
+        public void ChangeVehicleStatus(string i_LicenceID, int i_NewVehicleStatus)
         {
+            eVehicleStatus vehicleStatus = 0;
 
             if(!LicenceIDExist(i_LicenceID))
             {
                 /// throw new ArgumentException LicenceID not found.
             }
 
-            r_GarageVehicles[i_LicenceID].VehicleStatus = i_NewVehicleStatus;
+            /// Convertion -> ENum
+            r_GarageVehicles[i_LicenceID].VehicleStatus = vehicleStatus;
         }
 
         /// 4
@@ -115,7 +132,7 @@ namespace Ex03.GarageLogic
         }
 
         /// 5
-        public void ChargeVehicle(string i_LicenceID, float i_TimeToChargeInMinutes)
+        public void ChargeVehicleBattery(string i_LicenceID, float i_TimeToChargeInMinutes)
         {
             ElectricEnergy electricEnergyOfCurrentVehicle;
 
@@ -127,7 +144,7 @@ namespace Ex03.GarageLogic
             electricEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as ElectricEnergy;
             if (electricEnergyOfCurrentVehicle == null)
             {
-                /// throw new ArgumentException(); EnergyType
+                throw new ArgumentException("The vehicle does not have electric energy."); 
             }
 
             electricEnergyOfCurrentVehicle.ChargeBattery(i_TimeToChargeInMinutes);
@@ -197,5 +214,26 @@ namespace Ex03.GarageLogic
                 throw new FormatException("Invalid car color selection.");
             }
         }
+
+        /*private static void InitGarageMenu()
+        {
+            StringBuilder garageMenu = new StringBuilder();
+
+            garageMenu.AppendLine("Please Enter the garage operation you want:");
+            garageMenu.AppendLine("1 - Refuel");
+            garageMenu.AppendLine("2 - Charge battery");
+            garageMenu.AppendLine("3 - Inflate wheels");
+            garageMenu.AppendLine("4 - Change status");
+            garageMenu.AppendLine("5 - Existence check");
+
+            s_GarageMenu = garageMenu.ToString();
+        }*/
     }
+
+    /*private void InitOperationsMessages()
+    {
+
+    }*/
+
+   
 }
