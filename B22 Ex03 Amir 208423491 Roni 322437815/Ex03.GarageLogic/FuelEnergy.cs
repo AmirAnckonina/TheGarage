@@ -15,7 +15,7 @@ namespace Ex03.GarageLogic
             Octan98,
             None
         }
-
+        
         private readonly eFuelType r_FuelType;
 
         public FuelEnergy(eFuelType i_FuelType, float i_MaxFuelCapacity, float i_FuelLeft)
@@ -41,5 +41,19 @@ namespace Ex03.GarageLogic
 
             base.LoadEnergy(i_FuelAmount);
         }
+
+        public override StringBuilder GetEnergyInfo()
+        {
+            StringBuilder infoOutput = new StringBuilder();
+
+            infoOutput.AppendLine("Fuel type: " + Enum.GetName(typeof(eFuelType), r_FuelType));
+            infoOutput.AppendLine("Fuel left: " + EnergyLeft + "Liter");
+            infoOutput.AppendLine("Fuel left in percentage: " + EnergyLeftPercentage + "%");
+            infoOutput.Append("Max fuel tank: " + MaxEnergyCapacity + "Liter");
+
+            return infoOutput;
+        }
     }
+
+
 }

@@ -59,5 +59,15 @@ namespace Ex03.GarageLogic
             m_WheelManufacturerName = i_WheelManufacturerName;
         }
         
+        public StringBuilder GetWheelDetails()
+        {
+            StringBuilder infoOutput = new StringBuilder();
+
+            infoOutput.AppendLine("Wheel manufacturer" + m_WheelManufacturerName);
+            infoOutput.AppendLine("Current PSI: " + m_currentPSI);
+            infoOutput.Append("Max manufacturer PSI" + r_MaxPSI);
+
+            return infoOutput;
+        }
     }
 }

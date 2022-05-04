@@ -16,5 +16,16 @@ namespace Ex03.GarageLogic
             /// Convert minutes to hours.
             base.LoadEnergy(i_TimeToChargeInMinutes / 60f);
         }
+
+        public override StringBuilder GetEnergyInfo()
+        {
+            StringBuilder infoOutput = new StringBuilder();
+
+            infoOutput.AppendLine("Battery left in hours: " + EnergyLeft + "h");
+            infoOutput.AppendLine("Battery left in percentage: " + EnergyLeftPercentage + "%");
+            infoOutput.Append("Full battery capacity in hours: " + MaxEnergyCapacity + "h");
+
+            return infoOutput;
+        }
     }
 }

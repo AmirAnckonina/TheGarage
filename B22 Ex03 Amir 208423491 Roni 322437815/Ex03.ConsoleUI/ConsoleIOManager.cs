@@ -205,11 +205,11 @@ namespace Ex03.ConsoleUI
             return energyTypeEnum;
         }
 
-        public Car.eColor GetCarColor()
+        public Car.eCarColor GetCarColor()
         {
             int carColorChoose;
             bool carColerIsValid;
-            Car.eColor carColor;
+            Car.eCarColor carColor;
 
             PrintRequestForCarColor();
             carColerIsValid = int.TryParse(Console.ReadLine(), out carColorChoose);
@@ -440,28 +440,28 @@ namespace Ex03.ConsoleUI
             return isCarColorValid;
         }
 
-        public Car.eColor ConvertChoiceToCarColor(int i_CarColor)
+        public Car.eCarColor ConvertChoiceToCarColor(int i_CarColor)
         {
-            Car.eColor carColorEnum;
+            Car.eCarColor carColorEnum;
 
             if(i_CarColor == 1)
             {
-                carColorEnum = Car.eColor.Red;
+                carColorEnum = Car.eCarColor.Red;
             }
 
             else if (i_CarColor == 2)
             {
-                carColorEnum = Car.eColor.White;
+                carColorEnum = Car.eCarColor.White;
             }
 
             else if (i_CarColor == 3)
             {
-                carColorEnum = Car.eColor.Green;
+                carColorEnum = Car.eCarColor.Green;
             }
 
             else ///i_CarColor = 4
             {
-                carColorEnum = Car.eColor.Blue;
+                carColorEnum = Car.eCarColor.Blue;
             }
 
             return carColorEnum;
