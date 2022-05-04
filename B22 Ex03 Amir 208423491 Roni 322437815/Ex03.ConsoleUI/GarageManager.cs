@@ -22,7 +22,7 @@ namespace Ex03.ConsoleUI
         public void Run()
         {
             AddNewVehiclesToTheGarageProcedure();
-            /// GarageWorkDay();
+            GarageWorkDay();
         }
 
         /// <summary>
@@ -82,131 +82,116 @@ namespace Ex03.ConsoleUI
 
         }
 
-
-       /* public void BasicDetailsInputsProcedure()
-        {
-            m_ManufactureDetails.VehicleType = r_ConsoleIOManager.GetVehicleType();
-            m_ManufactureDetails.ModelName = r_ConsoleIOManager.GetVehicleModelName();
-            m_ManufactureDetails.VehicleOwnerName = r_ConsoleIOManager.GetOwnerName();
-            m_ManufactureDetails.VehicleOwnerPhoneNumber = r_ConsoleIOManager.GetVehicleOwnerPhoneNumber();
-            m_ManufactureDetails.WheelManufacturerName = r_ConsoleIOManager.GetWheelManufacturerName();
-        }
-
-        public void CarDetailsInputsProcedure()
-        {
-            m_ManufactureDetails.EnergyType = r_ConsoleIOManager.GetEnergyType();
-            m_ManufactureDetails.CarColor = r_ConsoleIOManager.GetCarColor();
-            m_ManufactureDetails.DoorsNumberInCar = r_ConsoleIOManager.GetDoorsNumberInCar();
-        }
-
-        public void MotorcycleDetailsInputsProcedure()
-        {
-            m_ManufactureDetails.EnergyType = r_ConsoleIOManager.GetEnergyType();
-            m_ManufactureDetails.MotorcycleLicenceType = r_ConsoleIOManager.GetMotorcycleLicenceType();
-            m_ManufactureDetails.MotorcycleEngineCapacity = r_ConsoleIOManager.GetMotorcycleEngineCapacity();
-        }
-
-        public void TruckDetailsInputsProcedure()
-        {
-            m_ManufactureDetails.HasCoolingCargo = r_ConsoleIOManager.GetIfTruckHasCoolingCargo();
-            m_ManufactureDetails.CargoCapacity = r_ConsoleIOManager.GetTruckCargoCapacity();
-        }*/
-
-        /*public void GarageWorkDay()
+        public void GarageWorkDay()
         {
             bool endOfWorkDay;
-            bool printAllVehicleID;
-            string vehicleLicenceID;
-            Garage.eVehicleStatus vehicleStatusFilter;
-            Garage.eGarageOperations vehicleTreatment;
 
             do
             {
-                VehicleTreatmentsSession();
+                SingleVehicleOperationsSession();
                 endOfWorkDay = r_ConsoleIOManager.AskToEndWorkday();
 
             } while (!endOfWorkDay);
 
-            vehicleStatusFilter = r_ConsoleIOManager.GetVehicleStatus();
-            r_ConsoleIOManager.PrintAllGarageVehiclesID(r_Garage.GetAllGarageVehiclesIDByStatus(vehicleStatusFilter));
+          /*  vehicleStatusFilter = r_ConsoleIOManager.GetVehicleStatus();
+            r_ConsoleIOManager.PrintAllGarageVehiclesID(r_Garage.GetAllGarageVehiclesIDByStatus(vehicleStatusFilter));*/
         }
 
         /// <summary>
         /// Add here do-While loop for a single LicenceID execute operations until he don't want to
         /// Then, After we finish the loop, change the VehicleStatus in the garage
         /// </summary>
-        public void VehicleTreatmentsSession()
+        public void SingleVehicleOperationsSession()
         {
-            string vehicleLicenceID;
-            Garage.eGarageOperations vehicleOperation;
-            bool currentVehicleFinishAllOperations;
+            string vehicleLicenseID;
+            string rawOperationChoice;
+            int garageOperationNumber;
+            bool vehicleFinished;
 
-            vehicleLicenceID = r_ConsoleIOManager.GetVehicleLicenceID();
-            vehicleOperation = r_ConsoleIOManager.GetVehicleGarageOperation();
+            vehicleLicenseID = r_ConsoleIOManager.GetVehicleLicenseID();
+            rawOperationChoice = r_ConsoleIOManager.GetVehicleGarageOperation();
+            /*do 
+            {
+                try
+                {
+                    garageOperationNumber = ExtractVehicleGarageOperation(rawOperationChoice);
+                    SingleOperationForVehicle(vehicleLicenseID, garageOperationNumber);
+                }
+                catch (ArgumentException Argumentex)
+                {
+                    Console.WriteLine(Argumentex.Message);
+                }
+                catch (FormatException formatEx)
+                {
+                    Console.WriteLine(formatEx.Message);
+                }
+                catch (ValueOutOfRangeException valueRangeEx)
+                {
+                    Console.WriteLine(valueRangeEx.Message);
+                }
+                finally
+                {
+                    /// Ask the user if another operation needed
+                    /// currentVehicleFinishAllOperations = function in ConsoleIO that return wheter finish or not.
+                }
 
-            /// do {
-            try
-            {
-                SingleOperationForVehicle(vehicleLicenceID, vehicleOperation);
-            }
-            catch (ArgumentException Argumentex)
-            {
-                Console.WriteLine(Argumentex.Message);
-            }
-            catch (FormatException formatEx)
-            {
-                Console.WriteLine(formatEx.Message);
-            }
-            catch (ValueOutOfRangeException valueRangeEx)
-            {
-                Console.WriteLine(valueRangeEx.Message);
-            }
-            finally
-            {
-                /// Ask the user if another operation needed
-                /// currentVehicleFinishAllOperations = function in ConsoleIO that return wheter finish or not.
-            }
-            /// While condition (do-While Loop)
+            } while(!vehicleFinished);*/
             /// <====================================?
             
             /// After the loop:
-            r_Garage.ChangeVehicleStatus(vehicleLicenceID, Garage.eVehicleStatus.Repaired);
+            r_Garage.ChangeVehicleStatus(vehicleLicenseID, Garage.eVehicleStatus.Repaired);
 
             /// Ask for payment (Do you eant to pay now?)
             /// Change status to paid is owner paid.
         }
 
-        public void SingleOperationForVehicle(string i_LicenceID, Garage.eGarageOperations i_GarageOperation)
+        public void SingleOperationForVehicle(string i_LicenceID, int i_OperationNumber)
         {
-            switch (i_GarageOperation)
+            switch (i_OperationNumber)
             {
-                case Garage.eGarageOperations.Refuel:
+                case 1:
                     r_Garage.RefuelVehicle(i_LicenceID, r_ConsoleIOManager.GetFuelAmount(), r_ConsoleIOManager.GetFuelType());
                     r_ConsoleIOManager.TreatmentComplitedMessage();
                     break;
 
-                case Garage.eGarageOperations.ChargeBattery:
-                    r_Garage.ChargeVehicle(i_LicenceID, r_ConsoleIOManager.GetTimeToChargeInMinutes());
+                case 2:
+                    r_Garage.ChargeVehicleBattery(i_LicenceID, r_ConsoleIOManager.GetTimeToChargeInMinutes());
                     r_ConsoleIOManager.TreatmentComplitedMessage();
                     break;
 
-                case Garage.eGarageOperations.InflateWheels:
+                case 3:
                     r_Garage.InflateVehicleWheels(i_LicenceID);
                     r_ConsoleIOManager.TreatmentComplitedMessage();
                     break;
 
-                case Garage.eGarageOperations.ExistenceCheck:
+                case 4:
                     r_Garage.LicenceIDExist(i_LicenceID);
                     r_ConsoleIOManager.TreatmentComplitedMessage();
                     break;
 
-                case Garage.eGarageOperations.None:
+               /* case 5:
+                    r_Garage.ChangeVehicleStatus();*/
+
                 default:
                     break;
             }
         }
 
-        public void AdditionalVehicleDetailsProcedure()
+        public int ExtractVehicleGarageOperation(string i_RawOperationChoice)
+        {
+            int garageOperationNumber;
+            bool inputIsValid;
+
+            inputIsValid = int.TryParse(Console.ReadLine(), out garageOperationNumber);
+            if(!inputIsValid || garageOperationNumber < 1 || garageOperationNumber > 5)
+            {
+                throw new FormatException("Invalid garage operation choice.");
+            }
+          
+            return garageOperationNumber;
+        }
+
+       /* public void AdditionalVehicleDetailsProcedure()
         {
            *//* foreach ()*//*
         }*/

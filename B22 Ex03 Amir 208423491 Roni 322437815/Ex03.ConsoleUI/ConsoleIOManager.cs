@@ -103,6 +103,30 @@ namespace Ex03.ConsoleUI
             return insertedInput;
         }
 
+        public static void PrintGarageMenu()
+        {
+            StringBuilder vehicleTreatmentMessage = new StringBuilder();
+
+            vehicleTreatmentMessage.AppendLine("Enter the garage operation you need:");
+            vehicleTreatmentMessage.AppendLine("1 - Refuel");
+            vehicleTreatmentMessage.AppendLine("2 - Charge battery");
+            vehicleTreatmentMessage.AppendLine("3 - Inflate wheels");
+            vehicleTreatmentMessage.AppendLine("4 - Existence check");
+            vehicleTreatmentMessage.AppendLine("5 - Change vehicle status");
+            Console.WriteLine(vehicleTreatmentMessage);
+        }
+
+        public string GetVehicleGarageOperation()
+        {
+            string garageOperationChoice;
+
+            PrintGarageMenu();
+            garageOperationChoice = Console.ReadLine();
+
+            return garageOperationChoice;
+        }
+
+
 
         public string GetOwnerName()
         {
@@ -1007,38 +1031,9 @@ namespace Ex03.ConsoleUI
             return endAddingToGarageChoiceIsValid;
         }
 
-        public Garage.eGarageOperations GetVehicleGarageOperation()
-        {
-            int vehicleTreatment;
-            Garage.eGarageOperations vehicleTreatmentEnum;
-            bool isInputValid;
+    
 
-            PrintVehicleTreatmentMessage();
-            isInputValid = int.TryParse(Console.ReadLine(), out vehicleTreatment);
-            while(!isInputValid || !VehicleTreeatmentValidation(vehicleTreatment))
-            {
-                PrintInvalidInputMessage();
-                PrintVehicleTreatmentMessage();
-                isInputValid = int.TryParse(Console.ReadLine(), out vehicleTreatment);
-            }
-
-            vehicleTreatmentEnum = VehicleTreatmentConvertToEnum(vehicleTreatment);
-            return vehicleTreatmentEnum;
-        }
-
-        public static void PrintVehicleTreatmentMessage()
-        {
-            StringBuilder vehicleTreatmentMessage = new StringBuilder();
-
-            vehicleTreatmentMessage.AppendLine("Enter the vehicle care that you want:");
-            vehicleTreatmentMessage.AppendLine("1 - Refuel");
-            vehicleTreatmentMessage.AppendLine("2 - Charge battery");
-            vehicleTreatmentMessage.AppendLine("3 - Inflate wheels");
-            vehicleTreatmentMessage.AppendLine("4 - Change status");
-            vehicleTreatmentMessage.AppendLine("5 - Existence check");
-            vehicleTreatmentMessage.AppendLine("6 - None");
-            Console.WriteLine(vehicleTreatmentMessage);
-        }
+        
 
         public bool VehicleTreeatmentValidation(int i_VehicleTreatment)
         {
