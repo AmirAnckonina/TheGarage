@@ -69,15 +69,32 @@ namespace Ex03.ConsoleUI
             PrintRequesOfVehicleLicenseNumber();
             vehicleLicenseNumber.Append(Console.ReadLine());
 
-            /* while (!VehicleLicenseNumberValidation(vehicleLicenseNumber))
+             while (!LicenceIDFormatValidation(vehicleLicenseNumber))
              {
                  PrintInvalidInputMessage();
                  PrintRequesOfVehicleLicenseNumber();
                  vehicleLicenseNumber.Clear();
                  vehicleLicenseNumber.Append(Console.ReadLine());
-             }*/
+             }
 
             return vehicleLicenseNumber.ToString();
+        }
+
+        private bool LicenceIDFormatValidation(StringBuilder i_LicenseID)
+        {
+            bool licenceIDIsValid;
+
+            if (i_LicenseID.Length >= 5 && i_LicenseID.Length <= 8 && i_LicenseID.ToString().All(char.IsDigit))
+            {
+                licenceIDIsValid = true;
+            }
+
+            else
+            {
+                licenceIDIsValid = false;
+            }
+
+            return licenceIDIsValid;
         }
 
         public static void PrintRequesOfVehicleLicenseNumber()
@@ -166,8 +183,6 @@ namespace Ex03.ConsoleUI
 
             return ownerPhoneNumber.ToString();
         }
-
-
 
         public bool EnergyTypeValidation(int i_EnergyType)
         {
@@ -1013,10 +1028,6 @@ namespace Ex03.ConsoleUI
             return endAddingToGarageChoiceIsValid;
         }
 
-
-
-
-
         public bool VehicleTreeatmentValidation(int i_VehicleTreatment)
         {
             bool isVehicleTreatmentValid;
@@ -1294,6 +1305,21 @@ namespace Ex03.ConsoleUI
             actionInTheGarageMessage.AppendLine("3 - Get garage vehicles by status");
             actionInTheGarageMessage.AppendLine("4 - Go home");
             Console.WriteLine(actionInTheGarageMessage);
+        }
+
+        public void PrintFullVehicleInfo(string i_VehicleInfo)
+        {
+            StringBuilder fullVehicleInfoMessage = new StringBuilder();
+
+            fullVehicleInfoMessage.Append(string.Format("{0}", i_VehicleInfo));
+            Console.WriteLine(fullVehicleInfoMessage);
+        }
+
+        public void PrintErrorMessage(string i_ErrorMessage)
+        {
+            StringBuilder errorMessage = new StringBuilder();
+
+            errorMessage.Append(string.Format("{0}", i_ErrorMessage));
         }
     }
 

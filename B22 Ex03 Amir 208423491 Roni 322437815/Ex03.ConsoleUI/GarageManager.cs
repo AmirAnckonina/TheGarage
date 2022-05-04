@@ -21,6 +21,8 @@ namespace Ex03.ConsoleUI
 
         public void Run()
         {
+            int vehicleStatus;
+            List<string> garageVehiclesByStatus = new List<string>();
             int actionInTheGarage;
             bool goHome;
             do
@@ -37,7 +39,9 @@ namespace Ex03.ConsoleUI
                         goHome = false;
                         break;
                     case 3:
-                        // r_Garage.GetAllGarageVehiclesIDByStatus();
+                        vehicleStatus = r_ConsoleIOManager.GetVehicleStatus();
+                        garageVehiclesByStatus = r_Garage.GetAllGarageVehiclesIDByStatus(vehicleStatus);
+                        r_ConsoleIOManager.PrintAllGarageVehiclesID(garageVehiclesByStatus);
                         goHome = false;
                         break;
                     case 4:
@@ -157,7 +161,7 @@ namespace Ex03.ConsoleUI
                 }
                 catch (Exception ex)
                 {
-                    /// r_ConsoleIOManager.PrintErrorMessage(ex.Message);
+                    r_ConsoleIOManager.PrintErrorMessage(ex.Message);
                 }
                 finally
                 {
@@ -170,6 +174,8 @@ namespace Ex03.ConsoleUI
 
         public void SingleOperationForVehicle(string i_LicenceID, int i_OperationNumber)
         {
+            string vehicleInfo;
+
             switch (i_OperationNumber)
             {
                 case 1:
@@ -193,8 +199,8 @@ namespace Ex03.ConsoleUI
                     break;
 
                case 5:
-                    /// getAllVehicleInfo
-                    /// 
+                    vehicleInfo = r_Garage.GetFullVehicleInformation(i_LicenceID);
+                    r_ConsoleIOManager.PrintFullVehicleInfo(vehicleInfo); 
                     break;
 
                 case 6:
