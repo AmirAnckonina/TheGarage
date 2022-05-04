@@ -1290,7 +1290,7 @@ namespace Ex03.ConsoleUI
 
             actionInTheGarageMessage.AppendLine("Choose what action do you want to do in the Garage");
             actionInTheGarageMessage.AppendLine("1 - Add new vehicle to the garage");
-            actionInTheGarageMessage.AppendLine("2 - Do some operation on vehicle");
+            actionInTheGarageMessage.AppendLine("2 - Do some vehicle operation in the garage");
             actionInTheGarageMessage.AppendLine("3 - Get garage vehicles by status");
             actionInTheGarageMessage.AppendLine("4 - Go home");
             Console.WriteLine(actionInTheGarageMessage);

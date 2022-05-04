@@ -77,22 +77,22 @@ namespace Ex03.GarageLogic
         }
 
         /// 2 
-       //public List<string> GetAllGarageVehiclesIDByStatus(string i_VehicleStatusFilter)
-       // {
-       //     eVehicleStatus vehicleStatus;
+        public List<string> GetAllGarageVehiclesIDByStatus(int i_VehicleStatusFilter)
+        {
+            eVehicleStatus vehicleStatusFilter;
 
-       //     VehicleStatusSetup(ref vehicleStatus ,i_VehicleStatusFilter);
-       //     List<string> garageVehiclesIDByStatus = new List<string>();
-       //     foreach (KeyValuePair<string, GarageCard> vehicleInGarage in r_GarageVehicles)
-       //     {
-       //         if (vehicleInGarage.Value.VehicleStatus == i_VehicleStatusFilter)
-       //         {
-       //             garageVehiclesIDByStatus.Add(vehicleInGarage.Key);
-       //         }
-       //     }
+            vehicleStatusFilter = VehicleStatusSetup(i_VehicleStatusFilter);
+            List<string> garageVehiclesIDByStatus = new List<string>();
+            foreach (KeyValuePair<string, GarageCard> vehicleInGarage in r_GarageVehicles)
+            {
+                if (vehicleInGarage.Value.VehicleStatus == vehicleStatusFilter)
+                {
+                    garageVehiclesIDByStatus.Add(vehicleInGarage.Key);
+                }
+            }
 
-       //     return garageVehiclesIDByStatus;
-       // }
+            return garageVehiclesIDByStatus;
+        }
 
         /// 3
         public void ChangeVehicleStatus(string i_LicenceID, int i_NewVehicleStatus)
@@ -106,27 +106,6 @@ namespace Ex03.GarageLogic
 
             vehicleStatus = VehicleStatusConvertToEnum(i_NewVehicleStatus);
             r_GarageVehicles[i_LicenceID].VehicleStatus = vehicleStatus;
-        }
-
-        public eVehicleStatus VehicleStatusConvertToEnum(int i_VehicleStatus)
-        {
-            eVehicleStatus vehicleStatusEnum;
-
-            switch (i_VehicleStatus)
-            {
-                case 1:
-                    vehicleStatusEnum = Garage.eVehicleStatus.InRepair;
-                    break;
-                case 2:
-                    vehicleStatusEnum = Garage.eVehicleStatus.Repaired;
-                    break;
-                case 3:
-                default:
-                    vehicleStatusEnum = Garage.eVehicleStatus.Paid;
-                    break;
-            }
-
-            return vehicleStatusEnum;
         }
 
         /// 4
@@ -176,6 +155,23 @@ namespace Ex03.GarageLogic
             fuelEnergyOfCurrentVehicle.Refuel(i_FuelAmount, i_FuelType);
         }
 
+        /// 7
+        public string GetFullVehicleInformation(string i_LicneseID)
+        {
+            StringBuilder allVehicleInfo = new StringBuilder();
+
+           /* if (!LicenceIDExist(i_LicenceID))
+            {
+                /// throw new ArgumentException LicenceID not found.
+            }
+
+          allVehicleInfo.AppendLine(
+                r_GarageVehicles[i_LicneseID].Vehicle.GetVehicleInfo() + r_GarageVehicles[i_LicneseID].);*/
+
+            return allVehicleInfo.ToString();
+        }
+     
+
         public GarageCard GetVehicleGargaeCardByLicenceID(string i_LicenceID)
         {
             GarageCard vehicleGarageCard = null;
@@ -215,16 +211,47 @@ namespace Ex03.GarageLogic
             return r_GarageVehicles[i_LicenceID];
         }
 
-        private void VehicleStatusSetup(ref eVehicleStatus o_VehicleStatus, string i_InsertedValue)
+        private eVehicleStatus VehicleStatusSetup(int i_VehicleStatusFilter)
         {
-            bool parseValueSucceed;
-            int numOfEnergySources = Enum.GetValues(typeof(eVehicleStatus)).Length;
+            eVehicleStatus vehicleStatus;
 
-            parseValueSucceed = Enum.TryParse(i_InsertedValue, out o_VehicleStatus);
-            if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfEnergySources, (int)o_VehicleStatus))
+            if (i_VehicleStatusFilter == 1)
             {
-                throw new FormatException("Invalid vehicle status.");
+                vehicleStatus = eVehicleStatus.InRepair;
             }
+            
+            else if (i_VehicleStatusFilter == 2)
+            {
+                vehicleStatus = eVehicleStatus.Repaired;
+            }
+            
+            else /// (i_VehicleStatusFilter == 3)
+            {
+                vehicleStatus = eVehicleStatus.Paid;
+            }
+
+            return vehicleStatus;
+        }
+
+        public eVehicleStatus VehicleStatusConvertToEnum(int i_VehicleStatus)
+        {
+            eVehicleStatus vehicleStatusEnum;
+
+            switch (i_VehicleStatus)
+            {
+                case 1:
+                    vehicleStatusEnum = Garage.eVehicleStatus.InRepair;
+                    break;
+                case 2:
+                    vehicleStatusEnum = Garage.eVehicleStatus.Repaired;
+                    break;
+                case 3:
+                default:
+                    vehicleStatusEnum = Garage.eVehicleStatus.Paid;
+                    break;
+            }
+
+            return vehicleStatusEnum;
         }
 
         /*private static void InitGarageMenu()
