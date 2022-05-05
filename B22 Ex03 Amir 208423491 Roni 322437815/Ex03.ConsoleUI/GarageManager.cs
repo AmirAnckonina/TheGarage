@@ -25,7 +25,8 @@ namespace Ex03.ConsoleUI
             List<string> garageVehiclesByStatus; // = new List<string>();
             int garageOperationChoice;
             bool goHome = false;
-            
+
+            r_ConsoleIOManager.Welcome();
             do
             {
                 garageOperationChoice = r_ConsoleIOManager.GetGarageOperation();
@@ -207,7 +208,7 @@ namespace Ex03.ConsoleUI
                     r_ConsoleIOManager.PrintFullVehicleInfo(vehicleInfo); 
                     break;
 
-                case 5:
+               case 5:
                     r_Garage.ChangeVehicleStatus(i_LicenceID, r_ConsoleIOManager.GetVehicleStatus());
                     break;
 

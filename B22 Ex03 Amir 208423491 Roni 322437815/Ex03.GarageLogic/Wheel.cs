@@ -63,9 +63,9 @@ namespace Ex03.GarageLogic
         {
             StringBuilder infoOutput = new StringBuilder();
 
-            infoOutput.AppendLine("Wheel manufacturer" + m_WheelManufacturerName);
+            infoOutput.AppendLine("Wheel manufacturer: " + m_WheelManufacturerName);
             infoOutput.AppendLine("Current PSI: " + m_currentPSI);
-            infoOutput.Append("Max manufacturer PSI" + r_MaxPSI);
+            infoOutput.Append("Max manufacturer PSI: " + r_MaxPSI);
 
             return infoOutput;
         }
