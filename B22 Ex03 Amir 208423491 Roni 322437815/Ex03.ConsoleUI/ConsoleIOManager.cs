@@ -20,6 +20,14 @@ namespace Ex03.ConsoleUI
             welcomeMessage.Append("Welcome to the Garage!");
             Console.WriteLine(welcomeMessage);
         }
+        
+        public void Goodbye()
+        {
+            StringBuilder welcomeMessage = new StringBuilder();
+
+            welcomeMessage.Append("Thanks!");
+            Console.WriteLine(welcomeMessage);
+        }
 
         public string GetVehicleType()
         {
@@ -175,7 +183,7 @@ namespace Ex03.ConsoleUI
             return insertedInput;
         }
 
-        public static void PrintGarageOperationsMenu()
+        public static void PrintGarageVehicleOperationsMenu()
         {
             StringBuilder vehicleTreatmentMessage = new StringBuilder();
 
@@ -193,12 +201,12 @@ namespace Ex03.ConsoleUI
             int garageOperationChoice;
             bool inputIsValid;
 
-            PrintGarageOperationsMenu();
+            PrintGarageVehicleOperationsMenu();
             inputIsValid = int.TryParse(Console.ReadLine(), out garageOperationChoice);
             while (!inputIsValid || garageOperationChoice < 1 || garageOperationChoice > 5)
             {
                 PrintInvalidInputMessage();
-                PrintGarageOperationsMenu();
+                PrintGarageVehicleOperationsMenu();
                 inputIsValid = int.TryParse(Console.ReadLine(), out garageOperationChoice);
             }
 
@@ -209,7 +217,7 @@ namespace Ex03.ConsoleUI
         {
             StringBuilder vehicleInTheGarageMessage = new StringBuilder();
 
-            vehicleInTheGarageMessage.Append("The vehicle is all ready in the garage.");
+            vehicleInTheGarageMessage.Append("The vehicle is currently repairing in the garage.");
             Console.WriteLine(vehicleInTheGarageMessage);
         }
 
@@ -246,38 +254,38 @@ namespace Ex03.ConsoleUI
         {
             StringBuilder anotherOperationMessage = new StringBuilder();
 
-            anotherOperationMessage.AppendLine("Do you want another operattion?");
+            anotherOperationMessage.AppendLine("Do you want another operation for this vehicle?");
             anotherOperationMessage.AppendLine("1 - Yes");
             anotherOperationMessage.Append("2 - No");
             Console.WriteLine(anotherOperationMessage);
         }
 
-        public int GetGarageOperation()
+        public int GetGarageActionMainMenu()
         {
             int actionInTheGarage;
             bool isInputValid;
 
-            PrintRequestForGarageOperation();
+            PrintRequestForGarageActionMainMenu();
             isInputValid = int.TryParse(Console.ReadLine(), out actionInTheGarage);
             while (!isInputValid || actionInTheGarage < 1 || actionInTheGarage > 4)
             {
                 PrintInvalidInputMessage();
-                PrintRequestForGarageOperation();
+                PrintRequestForGarageActionMainMenu();
                 isInputValid = int.TryParse(Console.ReadLine(), out actionInTheGarage);
             }
 
             return actionInTheGarage;
         }
 
-        public static void PrintRequestForGarageOperation()
+        public static void PrintRequestForGarageActionMainMenu()
         {
             StringBuilder actionInTheGarageMessage = new StringBuilder();
 
-            actionInTheGarageMessage.AppendLine("Choose which garage operation you need: ");
+            actionInTheGarageMessage.AppendLine("Choose which garage action you need: ");
             actionInTheGarageMessage.AppendLine("1 - Add new vehicle to the garage");
             actionInTheGarageMessage.AppendLine("2 - Do some vehicle operation in the garage");
             actionInTheGarageMessage.AppendLine("3 - Get garage vehicles by status");
-            actionInTheGarageMessage.AppendLine("4 - Go home");
+            actionInTheGarageMessage.Append("4 - Go home");
             Console.WriteLine(actionInTheGarageMessage);
         }
 
@@ -394,19 +402,18 @@ namespace Ex03.ConsoleUI
         {
             StringBuilder fuelAmountMessage = new StringBuilder();
 
-            fuelAmountMessage.Append("Please enter the fuel amount: ");
+            fuelAmountMessage.Append("Please enter the fuel amount, in liters: ");
             Console.WriteLine(fuelAmountMessage);
         }
 
         public void PrintAllGarageVehiclesID(List<string> i_GarageVehiclesID)
         {
-            StringBuilder vehicleLicenceIDSingleEntityMessage = new StringBuilder();
+            /// StringBuilder vehicleLicenceIDSingleEntityMessage = new StringBuilder();
 
             foreach (string currLicenceID in i_GarageVehiclesID)
-            {
-                vehicleLicenceIDSingleEntityMessage.AppendFormat("LicenceID: {0}", currLicenceID);
-                Console.WriteLine(vehicleLicenceIDSingleEntityMessage);
-                vehicleLicenceIDSingleEntityMessage.Clear();
+            { 
+                Console.WriteLine(currLicenceID);
+               /// vehicleLicenceIDSingleEntityMessage.Clear();
             }
         }
 

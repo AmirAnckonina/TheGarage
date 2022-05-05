@@ -29,7 +29,7 @@ namespace Ex03.ConsoleUI
             r_ConsoleIOManager.Welcome();
             do
             {
-                garageOperationChoice = r_ConsoleIOManager.GetGarageOperation();
+                garageOperationChoice = r_ConsoleIOManager.GetGarageActionMainMenu();
                 switch (garageOperationChoice)
                 {
                     case 1:
@@ -54,7 +54,9 @@ namespace Ex03.ConsoleUI
                         break;
                 }
 
-            } while (!goHome);        
+            } while (!goHome);
+
+            r_ConsoleIOManager.Goodbye();
           
         }
 
@@ -146,9 +148,9 @@ namespace Ex03.ConsoleUI
             vehicleLicenseID = r_ConsoleIOManager.GetVehicleLicenseID();
             if (r_Garage.LicenceIDExist(vehicleLicenseID))
             {
+                r_ConsoleIOManager.PrintGeneralMessage(r_Garage.GetBasicInfoBeforeOperation(vehicleLicenseID));
                 do
                 {
-                    r_ConsoleIOManager.PrintGeneralMessage(r_Garage.GetBasicInfoBeforeOperation(vehicleLicenseID));
                     garageVehicleOperationNumber = r_ConsoleIOManager.GetVehicleGarageOperation();
                     try
                     {
@@ -158,8 +160,8 @@ namespace Ex03.ConsoleUI
                     {
                        /// Case: trying to fill fuel in electric car, so a new operation will be suggested
                        r_ConsoleIOManager.PrintGeneralMessage(argumentEx.Message);
-                       garageVehicleOperationNumber = r_ConsoleIOManager.GetVehicleGarageOperation();
-                       SingleOperationForVehicle(vehicleLicenseID, garageVehicleOperationNumber);
+                       /*garageVehicleOperationNumber = r_ConsoleIOManager.GetVehicleGarageOperation();
+                       SingleOperationForVehicle(vehicleLicenseID, garageVehicleOperationNumber);*/
                     }
                     catch (ValueOutOfRangeException valueRangeEx)
                     {
@@ -192,7 +194,7 @@ namespace Ex03.ConsoleUI
             switch (i_OperationNumber)
             {
                 case 1:
-                    r_Garage.RefuelVehicle(i_LicenceID, r_ConsoleIOManager.GetFuelAmount(), r_ConsoleIOManager.GetFuelType());
+                    r_Garage.RefuelVehicle(i_LicenceID, r_ConsoleIOManager.GetFuelType(), r_ConsoleIOManager.GetFuelAmount());
                     break;
 
                 case 2:

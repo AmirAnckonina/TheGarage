@@ -157,7 +157,7 @@ namespace Ex03.GarageLogic
             infoOutput.AppendLine("Vehicle model name: " + m_ModelName);
             infoOutput.AppendLine("Wheels information: " + m_VehicleWheels[0].GetWheelDetails());
             infoOutput.AppendLine("Energy source: " + r_VehicleEnergy.GetType().Name);
-            infoOutput.Append("Energy source information: " + r_VehicleEnergy.GetEnergyInfo());
+            infoOutput.Append(r_VehicleEnergy.GetEnergyInfo());
 
             return infoOutput;
         }
