@@ -12,8 +12,9 @@ namespace Ex03.GarageLogic
         private Garage.eVehicleStatus m_VehicleStatus;
         private Vehicle m_Vehicle;
         private static Dictionary<string, string> m_GarageCardDetails;
-        public const int k_MaximumNameLength= 20;
-        public const int k_MaximumphoneNumberLength = 10;
+        public const int k_MaxNameLength = 50;
+        public const int k_MaxPhoneNumberLength = 12;
+        public const int k_MinphoneNumberLength = 9;
 
         public GarageCard()
         { 
@@ -103,12 +104,12 @@ namespace Ex03.GarageLogic
 
             if (i_Key == "OwnerName")
             {
-                
+                OwnerNameSetup(i_InsertedValue);
             }
 
             else if (i_Key == "OwnerPhone")
             {
-                           
+                OwnerPhoneSetup(i_InsertedValue);  
             }
         }
 
@@ -123,10 +124,10 @@ namespace Ex03.GarageLogic
         {
             StringBuilder garageCardInfo = new StringBuilder();
 
+            garageCardInfo.AppendLine("Vehicle info: " + m_Vehicle.GetVehicleInfo());
             garageCardInfo.AppendLine("Vehicle owner name: " + m_OwnerName);
             garageCardInfo.AppendLine("Vehicle owner phone: " + m_OwnerPhone);
-            garageCardInfo.AppendLine("Vehicle current status in the garage: " + Enum.GetName(typeof(Garage.eVehicleStatus), m_VehicleStatus));
-            garageCardInfo.Append(m_Vehicle.GetVehicleInfo());
+            garageCardInfo.Append("Vehicle current status in the garage: " + Enum.GetName(typeof(Garage.eVehicleStatus), m_VehicleStatus));
 
             return garageCardInfo;
         }
@@ -135,8 +136,16 @@ namespace Ex03.GarageLogic
         {
             bool isOwnerNameValid;
 
-            if(i_InsertedValue.Length <= k_MaximumNameLength && i_InsertedValue.All(char.IsLetter))
+            if(i_InsertedValue.Length <= k_MaxNameLength)
             {
+                foreach (char ch in i_InsertedValue)
+                {
+                    if (!char.IsLetter(ch) || !char.IsWhiteSpace(ch))
+                    {
+                        isOwnerNameValid = false;
+                        break;
+                    }
+                }
                 isOwnerNameValid = true;
             }
 
@@ -152,7 +161,7 @@ namespace Ex03.GarageLogic
         {
             bool isOwnerPhoneNumberValid;
 
-            if (i_InsertedValue.Length <= k_MaximumphoneNumberLength && i_InsertedValue.All(char.IsDigit))
+            if (i_InsertedValue.Length <= k_MaxPhoneNumberLength && i_InsertedValue.Length >= k_MinphoneNumberLength && i_InsertedValue.All(char.IsDigit))
             {
                 isOwnerPhoneNumberValid = true;
             }
@@ -167,10 +176,7 @@ namespace Ex03.GarageLogic
 
         public void OwnerNameSetup(string i_InsertedValue)
         {
-            bool parseSucceed;
-
-            parseSucceed = OwnerNameContentValidation(i_InsertedValue);
-            if (!parseSucceed)
+            if (!OwnerNameContentValidation(i_InsertedValue))
             {
                 throw new FormatException("Invalid owner name");
             }
@@ -180,10 +186,7 @@ namespace Ex03.GarageLogic
 
         public void OwnerPhoneSetup(string i_InsertedValue)
         {
-            bool parseSucceed;
-
-            parseSucceed = OwnerPhoneNumberContentValidation(i_InsertedValue);
-            if (!parseSucceed)
+            if (!OwnerPhoneNumberContentValidation(i_InsertedValue))
             {
                 throw new FormatException("Invalid owner phone number");
             }
