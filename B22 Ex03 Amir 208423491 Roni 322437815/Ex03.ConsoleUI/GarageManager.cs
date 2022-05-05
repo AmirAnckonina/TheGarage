@@ -10,13 +10,11 @@ namespace Ex03.ConsoleUI
     {
         private readonly Garage r_Garage;
         private readonly ConsoleIOManager r_ConsoleIOManager;
-        private ManufactureDetails m_ManufactureDetails;
 
         public GarageManager()
         {
             r_Garage = new Garage();
             r_ConsoleIOManager = new ConsoleIOManager();
-            m_ManufactureDetails = new ManufactureDetails();
         }
 
         public void Run()
