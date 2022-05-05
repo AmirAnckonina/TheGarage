@@ -36,11 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Car.cs" />
-    <Compile Include="ElectricEnergy.cs" />
+    <Compile Include="Electric.cs" />
     <Compile Include="Energy.cs" />
-    <Compile Include="FuelEnergy.cs" />
+    <Compile Include="Fuel.cs" />
     <Compile Include="Garage.cs" />
-    <Compile Include="ManufactureDetails.cs" />
     <Compile Include="Motorcycle.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Truck.cs" />

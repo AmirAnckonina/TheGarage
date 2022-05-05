@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
 
         internal static class TruckFuelSpecifications
         {
-            internal const FuelEnergy.eFuelType k_TruckFuelType = FuelEnergy.eFuelType.Soler;
+            internal const Fuel.eFuelType k_TruckFuelType = Fuel.eFuelType.Soler;
             internal const float k_TruckMaxFuelCapacity = 120;
             internal const float k_TruckFuelAfterManufacture = 40;
         }

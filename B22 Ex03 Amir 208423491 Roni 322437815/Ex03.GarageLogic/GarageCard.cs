@@ -124,7 +124,7 @@ namespace Ex03.GarageLogic
         {
             StringBuilder garageCardInfo = new StringBuilder();
 
-            garageCardInfo.AppendLine("Vehicle info: " + m_Vehicle.GetVehicleInfo());
+            garageCardInfo.Append(m_Vehicle.GetVehicleInfo());
             garageCardInfo.AppendLine("Vehicle owner name: " + m_OwnerName);
             garageCardInfo.AppendLine("Vehicle owner phone: " + m_OwnerPhone);
             garageCardInfo.Append("Vehicle current status in the garage: " + Enum.GetName(typeof(Garage.eVehicleStatus), m_VehicleStatus));
@@ -138,15 +138,15 @@ namespace Ex03.GarageLogic
 
             if(i_InsertedValue.Length <= k_MaxNameLength)
             {
+                isOwnerNameValid = true;
                 foreach (char ch in i_InsertedValue)
                 {
-                    if (!char.IsLetter(ch) || !char.IsWhiteSpace(ch))
+                    if (!char.IsLetter(ch) && !char.IsWhiteSpace(ch))
                     {
                         isOwnerNameValid = false;
                         break;
                     }
                 }
-                isOwnerNameValid = true;
             }
 
             else

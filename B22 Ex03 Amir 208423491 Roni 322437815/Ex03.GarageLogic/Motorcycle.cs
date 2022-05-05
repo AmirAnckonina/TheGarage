@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
 
         internal static class MCFuelSpecifications
         {
-            internal const FuelEnergy.eFuelType k_MCFuelType = FuelEnergy.eFuelType.Octan98;
+            internal const Fuel.eFuelType k_MCFuelType = Fuel.eFuelType.Octan98;
             internal const float k_MCMaxFuelCapacity = 6.2f;
             internal const float k_MCFuelAfterManufacture = 2;
         }

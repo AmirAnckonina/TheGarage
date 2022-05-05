@@ -84,7 +84,7 @@ namespace Ex03.GarageLogic
                 {
                     if (vehicleInGarage.Value.VehicleStatus == vehicleStatusFilter)
                     {
-                        garageVehiclesIDByStatus.Add(vehicleInGarage.Key);
+                        garageVehiclesIDByStatus.Add("Licence ID: " + vehicleInGarage.Key);
                     }
                 }
             }
@@ -123,14 +123,14 @@ namespace Ex03.GarageLogic
         /// 5
         public void ChargeVehicleBattery(string i_LicenceID, float i_TimeToChargeInMinutes)
         {
-            ElectricEnergy electricEnergyOfCurrentVehicle;
+            Electric electricEnergyOfCurrentVehicle;
 
             if (!LicenceIDExist(i_LicenceID))
             {
                 throw new ArgumentException(s_LicenceIDNotFound);
             }
 
-            electricEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as ElectricEnergy;
+            electricEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as Electric;
             if (electricEnergyOfCurrentVehicle == null)
             {
                 throw new ArgumentException("The vehicle does not have electric energy.");
@@ -140,17 +140,17 @@ namespace Ex03.GarageLogic
         }
 
         /// 6 
-        public void RefuelVehicle(string i_LicenceID, float i_FuelAmount, int i_FuelTypeChoice)
+        public void RefuelVehicle(string i_LicenceID, int i_FuelTypeChoice, float i_FuelAmount)
         {
-            FuelEnergy fuelEnergyOfCurrentVehicle;
-            FuelEnergy.eFuelType fuelType;
+            Fuel fuelEnergyOfCurrentVehicle;
+            Fuel.eFuelType fuelType;
 
             if (!LicenceIDExist(i_LicenceID))
             {
                 throw new ArgumentException(s_LicenceIDNotFound);
             }
 
-            fuelEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as FuelEnergy;
+            fuelEnergyOfCurrentVehicle = r_GarageVehicles[i_LicenceID].Vehicle.VehicleEnergy as Fuel;
             if (fuelEnergyOfCurrentVehicle == null)
             {
                 throw new ArgumentException("The vehicle does not have fuel energy source.");
@@ -222,28 +222,28 @@ namespace Ex03.GarageLogic
             return vehicleStatus;
         }
 
-        private FuelEnergy.eFuelType FuelTypeSetup(int i_FuelTypeChoice)
+        private Fuel.eFuelType FuelTypeSetup(int i_FuelTypeChoice)
         {
-            FuelEnergy.eFuelType fuelType;
+            Fuel.eFuelType fuelType;
 
             if (i_FuelTypeChoice == 1)
             {
-                fuelType = FuelEnergy.eFuelType.Soler;
+                fuelType = Fuel.eFuelType.Soler;
             }
 
             else if (i_FuelTypeChoice == 2)
             {
-                fuelType = FuelEnergy.eFuelType.Octan95;
+                fuelType = Fuel.eFuelType.Octan95;
             }
 
             else if (i_FuelTypeChoice == 3)
             {
-                fuelType = FuelEnergy.eFuelType.Octan96;
+                fuelType = Fuel.eFuelType.Octan96;
             }
 
             else
             {
-                fuelType = FuelEnergy.eFuelType.Octan98;
+                fuelType = Fuel.eFuelType.Octan98;
             }
 
             return fuelType;

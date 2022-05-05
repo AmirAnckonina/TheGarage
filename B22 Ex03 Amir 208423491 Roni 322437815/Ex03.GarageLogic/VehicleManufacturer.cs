@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
                     break;
 
                 case eVehicleType.Truck:
-                    newVehicle = ManufactureNewTruck(i_LicenceID);
+                    newVehicle = ManufactureNewTruck(i_LicenceID, m_EnergyType);
                     break;
 
                 default:
@@ -52,7 +52,7 @@ namespace Ex03.GarageLogic
 
             if (i_EnergyType == Energy.eEnergyType.Fuel)
             {
-                    newEnergySource = new FuelEnergy(
+                    newEnergySource = new Fuel(
                     Car.CarFuelSpecifications.k_CarFuelType,
                     Car.CarFuelSpecifications.k_CarMaxFuelCapacity,
                     Car.CarFuelSpecifications.k_CarFuelAfterManufacture);
@@ -60,7 +60,7 @@ namespace Ex03.GarageLogic
 
             else /// Electric
             {
-                newEnergySource = new ElectricEnergy(
+                newEnergySource = new Electric(
                     Car.CarElectricSpecifications.k_CarMaxBatteryLoadInHours,
                     Car.CarElectricSpecifications.k_CarBatteryInHoursAfterManufacture);
             }
@@ -77,7 +77,7 @@ namespace Ex03.GarageLogic
 
             if (i_EnergyType == Energy.eEnergyType.Fuel)
             {
-                newEnergySource = new FuelEnergy(
+                newEnergySource = new Fuel(
                 Motorcycle.MCFuelSpecifications.k_MCFuelType,
                 Motorcycle.MCFuelSpecifications.k_MCMaxFuelCapacity,
                 Motorcycle.MCFuelSpecifications.k_MCFuelAfterManufacture);
@@ -85,7 +85,7 @@ namespace Ex03.GarageLogic
 
             else
             {
-                newEnergySource = new ElectricEnergy(
+                newEnergySource = new Electric(
                    Motorcycle.MCElectricSpecifications.k_MCMaxBatteryLoadInHours,
                    Motorcycle.MCElectricSpecifications.k_MCBatteryInHoursAfterManufacture);
             }
@@ -95,12 +95,17 @@ namespace Ex03.GarageLogic
             return newMotorcycle;
         }
         
-        public Truck ManufactureNewTruck(string i_LicenceID)
+        public Truck ManufactureNewTruck(string i_LicenceID, Energy.eEnergyType i_EnergyType)
         {
             Truck newTruck;
             Energy newEnergySource;
             
-            newEnergySource = new FuelEnergy(
+            if (i_EnergyType != Energy.eEnergyType.Fuel)
+            {
+                throw new ArgumentException("Truck doesn't support other energy source than fuel.");
+            }
+
+            newEnergySource = new Fuel(
             Truck.TruckFuelSpecifications.k_TruckFuelType,
             Truck.TruckFuelSpecifications.k_TruckMaxFuelCapacity,
             Truck.TruckFuelSpecifications.k_TruckFuelAfterManufacture);
