@@ -100,7 +100,7 @@ namespace Ex03.GarageLogic
             int numOfColors = Enum.GetValues(typeof(eCarColor)).Length;
 
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out colorChoice);
-            if (!parseValueSucceed || !EnumRangeValidation(1, numOfColors, (int)colorChoice)) /// To Check Parser
+            if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfColors, (int)colorChoice)) /// To Check Parser
             {
                 throw new FormatException("Invalid car color selection.");
             }
@@ -115,7 +115,7 @@ namespace Ex03.GarageLogic
             int numOfDoorsNumberOptions = Enum.GetValues(typeof(eDoorsNumber)).Length;
 
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out doorsNumberChoice);
-            if (!parseValueSucceed || !EnumRangeValidation(1, numOfDoorsNumberOptions, (int)doorsNumberChoice))
+            if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfDoorsNumberOptions, (int)doorsNumberChoice))
             {
                 throw new FormatException("Invalid car doors number selection.");
             }
