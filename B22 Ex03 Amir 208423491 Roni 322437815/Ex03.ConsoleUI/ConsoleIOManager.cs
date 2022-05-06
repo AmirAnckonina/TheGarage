@@ -70,60 +70,60 @@ namespace Ex03.ConsoleUI
             StringBuilder vehicleTypeMessage = new StringBuilder();
 
             vehicleTypeMessage.AppendLine("Enter the type of your vehicle:");
-            vehicleTypeMessage.AppendLine("1 - Car");
-            vehicleTypeMessage.AppendLine("2 - Motorcycle");
-            vehicleTypeMessage.AppendLine("3 - Truck");
-            vehicleTypeMessage.AppendLine("4 - Tractor");
-            vehicleTypeMessage.Append("5 - Mini-Bus");
+            vehicleTypeMessage.AppendLine("1 - Fuel Car");
+            vehicleTypeMessage.AppendLine("2 - Fuel Motorcycle");
+            vehicleTypeMessage.AppendLine("3 - Fuel Truck");
+            vehicleTypeMessage.AppendLine("4 - Electric Car");
+            vehicleTypeMessage.Append("5 - Electric Motorcycle");
             Console.WriteLine(vehicleTypeMessage);
         }
 
-        public string GetEnergyType()
-        {
-            string energyTypeChoice;
+        //public string GetEnergyType()
+        //{
+        //    string energyTypeChoice;
 
-            PrintRequestForEnergyType();
-            energyTypeChoice = Console.ReadLine();
-            while (!EnergyTypeChoiceValidation(energyTypeChoice))
-            {
-                PrintInvalidInputMessage();
-                PrintRequestForEnergyType();
-                energyTypeChoice = Console.ReadLine();
-            }
+        //    PrintRequestForEnergyType();
+        //    energyTypeChoice = Console.ReadLine();
+        //    while (!EnergyTypeChoiceValidation(energyTypeChoice))
+        //    {
+        //        PrintInvalidInputMessage();
+        //        PrintRequestForEnergyType();
+        //        energyTypeChoice = Console.ReadLine();
+        //    }
 
-            return energyTypeChoice;
-        }
+        //    return energyTypeChoice;
+        //}
 
-        public bool EnergyTypeChoiceValidation(string i_EnergyTypeChoice)
-        {
-            bool inputIsValid;
-            bool energyTypeChoiceIsValid;
-            int energyTypeChoiceNumber;
+        //public bool EnergyTypeChoiceValidation(string i_EnergyTypeChoice)
+        //{
+        //    bool inputIsValid;
+        //    bool energyTypeChoiceIsValid;
+        //    int energyTypeChoiceNumber;
 
-            inputIsValid = int.TryParse(i_EnergyTypeChoice, out energyTypeChoiceNumber);
-            if (!inputIsValid || energyTypeChoiceNumber < 1 || energyTypeChoiceNumber > 3)
-            {
-                energyTypeChoiceIsValid = false;
-            }
+        //    inputIsValid = int.TryParse(i_EnergyTypeChoice, out energyTypeChoiceNumber);
+        //    if (!inputIsValid || energyTypeChoiceNumber < 1 || energyTypeChoiceNumber > 3)
+        //    {
+        //        energyTypeChoiceIsValid = false;
+        //    }
 
-            else
-            {
-                energyTypeChoiceIsValid = true;
-            }
+        //    else
+        //    {
+        //        energyTypeChoiceIsValid = true;
+        //    }
 
-            return energyTypeChoiceIsValid;
-        }
+        //    return energyTypeChoiceIsValid;
+        //}
 
-        public static void PrintRequestForEnergyType()
-        {
-            StringBuilder EnergyTypeMessage = new StringBuilder();
+        //public static void PrintRequestForEnergyType()
+        //{
+        //    StringBuilder EnergyTypeMessage = new StringBuilder();
 
-            EnergyTypeMessage.AppendLine("Please specify the energy source type of your vehicle");
-            EnergyTypeMessage.AppendLine("1 - Fuel");
-            EnergyTypeMessage.AppendLine("2 - Electric");
-            EnergyTypeMessage.Append("3 - Natural Gas");
-            Console.WriteLine(EnergyTypeMessage);
-        }
+        //    EnergyTypeMessage.AppendLine("Please specify the energy source type of your vehicle");
+        //    EnergyTypeMessage.AppendLine("1 - Fuel");
+        //    EnergyTypeMessage.AppendLine("2 - Electric");
+        //    EnergyTypeMessage.Append("3 - Natural Gas");
+        //    Console.WriteLine(EnergyTypeMessage);
+        //}
 
         public string GetVehicleLicenseID()
         {
@@ -170,12 +170,7 @@ namespace Ex03.ConsoleUI
 
         public string GetSingleDetail(string i_RequestMessageValue)
         {
-            /// StringBuilder getDetailMessage = new StringBuilder();
             string insertedInput;
-
-
-            /* getDetailMessage.Append(string.Format("Please enter the {0} of your vehicle", i_RequestMessageValue));
-             Console.WriteLine(getDetailMessage);*/
 
             Console.WriteLine(i_RequestMessageValue);
             insertedInput = Console.ReadLine();
@@ -408,12 +403,9 @@ namespace Ex03.ConsoleUI
 
         public void PrintAllGarageVehiclesID(List<string> i_GarageVehiclesID)
         {
-            /// StringBuilder vehicleLicenceIDSingleEntityMessage = new StringBuilder();
-
             foreach (string currLicenceID in i_GarageVehiclesID)
             { 
                 Console.WriteLine(currLicenceID);
-               /// vehicleLicenceIDSingleEntityMessage.Clear();
             }
         }
 
@@ -469,7 +461,6 @@ namespace Ex03.ConsoleUI
             operationSucceedMessage.Append("The operation completed succuessfully.");
             Console.WriteLine(operationSucceedMessage);
         }
-
     }
 }
 

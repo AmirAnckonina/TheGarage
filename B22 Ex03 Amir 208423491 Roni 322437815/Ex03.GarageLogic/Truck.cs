@@ -77,7 +77,7 @@ namespace Ex03.GarageLogic
             int numOfOptions = Enum.GetValues(typeof(eHasCoolingCargo)).Length;
 
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out coolinCargoChoice);
-            if (!parseValueSucceed || !EnumRangeValidation(1, numOfOptions, (int)coolinCargoChoice))
+            if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfOptions, (int)coolinCargoChoice))
             {
                 throw new FormatException("Invalid cooling cargo option selection.");
             }

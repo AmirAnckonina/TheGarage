@@ -54,22 +54,20 @@ namespace Ex03.ConsoleUI
 
             } while (!goHome);
 
-            r_ConsoleIOManager.Goodbye();
-          
+            r_ConsoleIOManager.Goodbye();   
         }
 
         public void AddVehicleToTheGarageProcedure()
         {
-            string vehicleLicenceID, vehicleType, energyType;
+            string vehicleLicenceID, vehicleType;
 
             try
             {
                 vehicleType = r_ConsoleIOManager.GetVehicleType();
-                energyType = r_ConsoleIOManager.GetEnergyType();
                 vehicleLicenceID = r_ConsoleIOManager.GetVehicleLicenseID();    
                 if (!r_Garage.LicenceIDExist(vehicleLicenceID))
                 {
-                    r_Garage.AddNewVehicleToTheGarage(vehicleLicenceID, vehicleType, energyType);
+                    r_Garage.AddNewVehicleToTheGarage(vehicleLicenceID, vehicleType);
                     CompleteVehicleDetailsProcedure(vehicleLicenceID);
                 }
 
@@ -92,7 +90,6 @@ namespace Ex03.ConsoleUI
             string insertedInput;
 
             currVehicle = r_Garage.GetVehicleByLicenceID(i_VehicleLicenceID);
-            /// currVehicle = r_Garage[i_VehicleLicenceID].Vehicle;
             foreach (KeyValuePair<string, string> currVehicleDetail in currVehicle.AdditionalVehicleDetails)
             {
                 try

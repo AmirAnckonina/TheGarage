@@ -130,22 +130,22 @@ namespace Ex03.GarageLogic
 
         }
 
-        public bool EnumRangeValidation(int i_MinValue, int i_MaxValue, int i_ColorChoice)
-        {
-            bool inRange;
+        //public bool EnumRangeValidation(int i_MinValue, int i_MaxValue, int i_ColorChoice)
+        //{
+        //    bool inRange;
 
-            if (i_ColorChoice >= i_MinValue && i_ColorChoice <= i_MaxValue)
-            {
-                inRange = true;
-            }
+        //    if (i_ColorChoice >= i_MinValue && i_ColorChoice <= i_MaxValue)
+        //    {
+        //        inRange = true;
+        //    }
 
-            else
-            {
-                inRange = false;
-            }
+        //    else
+        //    {
+        //        inRange = false;
+        //    }
 
-            return inRange;
-        }
+        //    return inRange;
+        //}
 
         public abstract StringBuilder GetVehicleInfo();
 
