@@ -112,7 +112,7 @@ namespace Ex03.GarageLogic
             infoOutput.AppendLine("Vehicle type: " + this.GetType().Name);
             infoOutput.AppendLine(GetBasicVehcileDetails().ToString());
             infoOutput.AppendLine("Motorcycle license type: " + Enum.GetName(typeof(eMCLicenceType), m_MCLicenceType));
-            infoOutput.AppendLine("Motorcycle engine capacity" + m_EngineCapacity);
+            infoOutput.AppendLine("Motorcycle engine capacity: " + m_EngineCapacity);
 
             return infoOutput;
         }

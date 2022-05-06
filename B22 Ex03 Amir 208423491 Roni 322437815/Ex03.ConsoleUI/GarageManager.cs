@@ -28,6 +28,7 @@ namespace Ex03.ConsoleUI
             do
             {
                 garageOperationChoice = r_ConsoleIOManager.GetGarageActionMainMenu();
+                Console.Clear();
                 switch (garageOperationChoice)
                 {
                     case 1:
@@ -170,6 +171,7 @@ namespace Ex03.ConsoleUI
                     finally
                     {
                         anotherOperation = r_ConsoleIOManager.AskForAnotherOperationForVehicle();
+                        Console.Clear();
                     }
 
                 } while (anotherOperation);
