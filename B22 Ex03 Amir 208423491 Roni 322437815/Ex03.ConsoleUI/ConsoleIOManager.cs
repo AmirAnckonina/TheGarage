@@ -187,7 +187,7 @@ namespace Ex03.ConsoleUI
             vehicleTreatmentMessage.AppendLine("2 - Charge battery");
             vehicleTreatmentMessage.AppendLine("3 - Inflate wheels");
             vehicleTreatmentMessage.AppendLine("4 - Get full vehicle info");
-            vehicleTreatmentMessage.AppendLine("5 - Change vehicle status");
+            vehicleTreatmentMessage.Append("5 - Change vehicle status");
             Console.WriteLine(vehicleTreatmentMessage);
         }
 
