@@ -56,12 +56,13 @@ namespace Ex03.GarageLogic
         }
 
         /// 1
-        public void AddNewVehicleToTheGarage(string i_LicneseID, string i_VehicleType, string i_EnergyType)
+        /// Only one 
+        public void AddNewVehicleToTheGarage(string i_LicneseID, string i_VehicleType)
         {
             Vehicle newVehicle;
             GarageCard newGarageCard;
 
-            newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_LicneseID, i_VehicleType, i_EnergyType);
+            newVehicle = r_VehicleManufacturer.ManufactureNewVehicle(i_LicneseID, i_VehicleType);
             newGarageCard = new GarageCard(newVehicle, eVehicleStatus.InRepair);
             r_GarageVehicles.Add(i_LicneseID, newGarageCard);
         }

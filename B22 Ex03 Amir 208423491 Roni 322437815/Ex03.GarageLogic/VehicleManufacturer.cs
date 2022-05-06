@@ -9,32 +9,44 @@ namespace Ex03.GarageLogic
     {
         public enum eVehicleType
         {
-            Car = 1,
-            Motorcycle = 2,
-            Truck = 3
+            FuelCar = 1,
+            FuelMotorcycle = 2,
+            FuelTruck = 3,
+            ElectricCar = 4,
+            ElectricMotorcycle = 5
         }
 
-        private eVehicleType m_VehicleType;
-        private Energy.eEnergyType m_EnergyType;
+        /// private eVehicleType m_VehicleType;
+        /// private Energy.eEnergyType m_EnergyType;
 
-        public Vehicle ManufactureNewVehicle(string i_LicenceID, string i_VehicleType, string i_EnergyType)
+        public Vehicle ManufactureNewVehicle(string i_LicenceID, string i_VehicleType)
         {
+            eVehicleType vehicleType;
             Vehicle newVehicle;
+            Energy newEnergySource;
 
-            VehicleTypeSetup(i_VehicleType);
-            EnergyTypeSetup(i_EnergyType);           
-            switch (m_VehicleType)
+            /// VehicleTypeSetup(i_VehicleType);
+            /// EnergyTypeSetup(i_EnergyType);
+            vehicleType = VehicleAndEnergyTypeSetup(i_VehicleType);
+            newEnergySource = ProduceEnergyForVehicle(vehicleType);
+            switch (vehicleType)
             {
-                case eVehicleType.Car:
-                    newVehicle = ManufactureNewCar(i_LicenceID, m_EnergyType);
+                case eVehicleType.FuelCar:
+                case eVehicleType.ElectricCar:
+                    ///newVehicle = ManufactureNewCar(i_LicenceID, m_EnergyType);
+                    /// newVehicle = new Car(licanseID, newEnergyForVehicle);
+                    newVehicle = new Car(i_LicenceID, newEnergySource);
                     break;
 
-                case eVehicleType.Motorcycle:
-                    newVehicle = ManufactureNewMotorcycle(i_LicenceID, m_EnergyType);
+                case eVehicleType.FuelMotorcycle:
+                case eVehicleType.ElectricMotorcycle:
+                    /// newVehicle = ManufactureNewMotorcycle(i_LicenceID, m_EnergyType);
+                    newVehicle = new Motorcycle(i_LicenceID, newEnergySource);
                     break;
 
-                case eVehicleType.Truck:
-                    newVehicle = ManufactureNewTruck(i_LicenceID, m_EnergyType);
+                case eVehicleType.FuelTruck:
+                    /// newVehicle = ManufactureNewTruck(i_LicenceID, m_EnergyType);
+                    newVehicle = new Truck(i_LicenceID, newEnergySource);
                     break;
 
                 default:
@@ -45,7 +57,7 @@ namespace Ex03.GarageLogic
             return newVehicle;
         }
 
-        public Car ManufactureNewCar(string i_LicenceID, Energy.eEnergyType i_EnergyType)
+        /*public Car ManufactureNewCar(string i_LicenceID, Energy.eEnergyType i_EnergyType)
         {
             Car newCar;
             Energy newEnergySource;
@@ -113,9 +125,9 @@ namespace Ex03.GarageLogic
             newTruck = new Truck(i_LicenceID, newEnergySource);
 
             return newTruck;
-        }
+        }*/
 
-        private void VehicleTypeSetup(string i_InsertedValue)
+     /*   private void VehicleTypeSetup(string i_InsertedValue)
         {
             bool parseValueSucceed;
             eVehicleType vehicleTypeChoice;
@@ -143,6 +155,68 @@ namespace Ex03.GarageLogic
             }
 
             m_EnergyType = energyTypeChoice;
+        }*/
+
+        private eVehicleType VehicleAndEnergyTypeSetup(string i_InsertedValue)
+        {
+            bool parseValueSucceed;
+            eVehicleType vehicleType;
+            int numOfVehicleTypes = Enum.GetValues(typeof(eVehicleType)).Length;
+
+            parseValueSucceed = Enum.TryParse(i_InsertedValue, out vehicleType);
+            if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfVehicleTypes, (int)vehicleType))
+            {
+                throw new ArgumentException("This vehicle isn't manufactured in our vehicles factory");
+            }
+
+            return vehicleType;
+        }
+
+        private Energy ProduceEnergyForVehicle(eVehicleType i_VehicleType)
+        {
+            Energy newEnergySource;
+
+            switch(i_VehicleType)
+            {
+                case eVehicleType.FuelCar:
+                    newEnergySource = new Fuel(
+                    Car.CarFuelSpecifications.k_CarFuelType,
+                    Car.CarFuelSpecifications.k_CarMaxFuelCapacity,
+                    Car.CarFuelSpecifications.k_CarFuelAfterManufacture);
+                    break;
+
+                case eVehicleType.FuelMotorcycle:
+                        newEnergySource = new Fuel(
+                    Motorcycle.MCFuelSpecifications.k_MCFuelType,
+                    Motorcycle.MCFuelSpecifications.k_MCMaxFuelCapacity,
+                    Motorcycle.MCFuelSpecifications.k_MCFuelAfterManufacture);
+                    break;
+
+                case eVehicleType.FuelTruck:
+                            newEnergySource = new Fuel(
+                    Truck.TruckFuelSpecifications.k_TruckFuelType,
+                    Truck.TruckFuelSpecifications.k_TruckMaxFuelCapacity,
+                    Truck.TruckFuelSpecifications.k_TruckFuelAfterManufacture);
+                    break;
+
+                case eVehicleType.ElectricCar:
+                    newEnergySource = new Electric(
+                    Car.CarElectricSpecifications.k_CarMaxBatteryLoadInHours,
+                    Car.CarElectricSpecifications.k_CarBatteryInHoursAfterManufacture);
+                    break;
+
+                case eVehicleType.ElectricMotorcycle:
+                    newEnergySource = new Electric(
+                   Motorcycle.MCElectricSpecifications.k_MCMaxBatteryLoadInHours,
+                   Motorcycle.MCElectricSpecifications.k_MCBatteryInHoursAfterManufacture);
+                    break;
+
+                default:
+                    newEnergySource = null;
+                    throw new ArgumentException("This vehicle isn't manufactured in our vehicles factory");
+            }
+
+            return newEnergySource;
         }
     }
 }
