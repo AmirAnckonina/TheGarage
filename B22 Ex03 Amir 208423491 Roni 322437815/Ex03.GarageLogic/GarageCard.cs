@@ -100,8 +100,6 @@ namespace Ex03.GarageLogic
                 throw new Exception("Detail isn't recognized in the garage card details.");
             }
 
-            /// <====================================================>
-
             if (i_Key == "OwnerName")
             {
                 OwnerNameSetup(i_InsertedValue);
@@ -116,8 +114,8 @@ namespace Ex03.GarageLogic
         public void InitGarageCardDictionary()
         {
             m_GarageCardDetails = new Dictionary<string, string>();
-            m_GarageCardDetails.Add("OwnerName", "Please enter the owner name of the vehicle");
-            m_GarageCardDetails.Add("OwnerPhone", "Plese enter the phone number of the owner");
+            m_GarageCardDetails.Add("OwnerName", "Please enter the owner name of the vehicle:");
+            m_GarageCardDetails.Add("OwnerPhone", "Plese enter the phone number of the owner: ");
         }
 
         public StringBuilder GetGarageCardInfo()

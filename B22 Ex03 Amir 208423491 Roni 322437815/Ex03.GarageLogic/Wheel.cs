@@ -10,11 +10,7 @@ namespace Ex03.GarageLogic
         private string m_WheelManufacturerName;
         private float m_currentPSI;
         private readonly float r_MaxPSI;
-
-        public Wheel()
-        {
-
-        }
+        private const int k_MaxWheelManufacturerNameLength = 30;
 
         public Wheel(string i_WheelManufacturerName, float i_WheelMaxPSI, float i_WheelPSIAfterManufacture)
         {
@@ -51,10 +47,10 @@ namespace Ex03.GarageLogic
 
         private void WheelManufacturerNameSetup(string i_WheelManufacturerName)
         {
-           /* if (i_WheelManufacturerName.Length > k_MaxWheelManufacturerNameLength)
+            if (i_WheelManufacturerName.Length > k_MaxWheelManufacturerNameLength)
             {
                 throw new FormatException("Invalid Wheel manfacturer name.");
-            }*/
+            }
 
             m_WheelManufacturerName = i_WheelManufacturerName;
         }

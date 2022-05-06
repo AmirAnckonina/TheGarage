@@ -7,12 +7,6 @@ namespace Ex03.GarageLogic
 {
     public abstract class Energy
     {
-        public enum eEnergyType
-        {
-            Fuel = 1,
-            Electric = 2
-        }
-
         private float m_EnergyLeft;
         private float m_EnergyLeftPercentage;
         private readonly float r_MaxEnergyCapacity;
@@ -59,6 +53,8 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public abstract StringBuilder GetEnergyInfo();
+
         public void LoadEnergy(float i_EnergyAmountInHours)
         {
             float newEnergyAmount = m_EnergyLeft + i_EnergyAmountInHours;
@@ -72,10 +68,6 @@ namespace Ex03.GarageLogic
             m_EnergyLeft = newEnergyAmount;
             m_EnergyLeftPercentage = (m_EnergyLeft / r_MaxEnergyCapacity) * 100;  
         }
-
-        public abstract StringBuilder GetEnergyInfo();
-
-
 
     }
 }
