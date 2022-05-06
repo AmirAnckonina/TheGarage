@@ -28,8 +28,7 @@ namespace Ex03.GarageLogic
         }
 
         public ValueOutOfRangeException()
-        {
-        }
+        { }
 
         public ValueOutOfRangeException(float i_MinValue, float i_MaxValue, Exception i_InnerException = null)
             : base(string.Format(@"You exceeded the amount. Enter Amount between {0} and {1} ", i_MinValue, i_MaxValue), i_InnerException)

@@ -69,7 +69,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-
         private void EHasCoolingCargoSetup(string i_InsertedValue)
         {
             bool parseValueSucceed;

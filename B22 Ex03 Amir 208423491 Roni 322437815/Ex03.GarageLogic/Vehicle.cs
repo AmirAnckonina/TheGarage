@@ -7,12 +7,12 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        private const int k_MaxModelNameLength = 20;
+        private const int k_MaxModelNameLength = 30;
         private readonly string r_LicenceID;
         private string m_ModelName;
         private Energy r_VehicleEnergy;
         private List<Wheel> m_VehicleWheels;
-        protected static Dictionary<string, string> m_AdditionalVehicleDetails; /// Should be static
+        protected static Dictionary<string, string> m_AdditionalVehicleDetails;
 
         public Vehicle(string i_LicenceID, Energy i_VehicleEnergy)
         {
@@ -60,7 +60,7 @@ namespace Ex03.GarageLogic
 
             set
             {
-
+                m_VehicleWheels = value;
             }
         }
 
@@ -127,25 +127,7 @@ namespace Ex03.GarageLogic
             {
                 m_VehicleWheels.Add(new Wheel(i_WheelManufacturerName, i_WheelMaxPSI, i_WheelPSIAfterManufacture));
             }
-
         }
-
-        //public bool EnumRangeValidation(int i_MinValue, int i_MaxValue, int i_ColorChoice)
-        //{
-        //    bool inRange;
-
-        //    if (i_ColorChoice >= i_MinValue && i_ColorChoice <= i_MaxValue)
-        //    {
-        //        inRange = true;
-        //    }
-
-        //    else
-        //    {
-        //        inRange = false;
-        //    }
-
-        //    return inRange;
-        //}
 
         public abstract StringBuilder GetVehicleInfo();
 
@@ -160,8 +142,6 @@ namespace Ex03.GarageLogic
             infoOutput.Append(r_VehicleEnergy.GetEnergyInfo());
 
             return infoOutput;
-        }
-
-        
+        }   
     }
 }
