@@ -20,7 +20,7 @@ namespace Ex03.ConsoleUI
         public void Run()
         {
             int vehicleStatus;
-            List<string> garageVehiclesByStatus; // = new List<string>();
+            List<string> garageVehiclesByStatus; 
             int garageOperationChoice;
             bool goHome = false;
 
@@ -131,8 +131,8 @@ namespace Ex03.ConsoleUI
                     r_ConsoleIOManager.PrintGeneralMessage(ex.Message);
                     break;
                 }
-            }
 
+            }
         }
 
         public void SingleVehicleOperationsSession()
