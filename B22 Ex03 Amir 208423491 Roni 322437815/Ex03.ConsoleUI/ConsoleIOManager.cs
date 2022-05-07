@@ -78,60 +78,12 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(vehicleTypeMessage);
         }
 
-        //public string GetEnergyType()
-        //{
-        //    string energyTypeChoice;
-
-        //    PrintRequestForEnergyType();
-        //    energyTypeChoice = Console.ReadLine();
-        //    while (!EnergyTypeChoiceValidation(energyTypeChoice))
-        //    {
-        //        PrintInvalidInputMessage();
-        //        PrintRequestForEnergyType();
-        //        energyTypeChoice = Console.ReadLine();
-        //    }
-
-        //    return energyTypeChoice;
-        //}
-
-        //public bool EnergyTypeChoiceValidation(string i_EnergyTypeChoice)
-        //{
-        //    bool inputIsValid;
-        //    bool energyTypeChoiceIsValid;
-        //    int energyTypeChoiceNumber;
-
-        //    inputIsValid = int.TryParse(i_EnergyTypeChoice, out energyTypeChoiceNumber);
-        //    if (!inputIsValid || energyTypeChoiceNumber < 1 || energyTypeChoiceNumber > 3)
-        //    {
-        //        energyTypeChoiceIsValid = false;
-        //    }
-
-        //    else
-        //    {
-        //        energyTypeChoiceIsValid = true;
-        //    }
-
-        //    return energyTypeChoiceIsValid;
-        //}
-
-        //public static void PrintRequestForEnergyType()
-        //{
-        //    StringBuilder EnergyTypeMessage = new StringBuilder();
-
-        //    EnergyTypeMessage.AppendLine("Please specify the energy source type of your vehicle");
-        //    EnergyTypeMessage.AppendLine("1 - Fuel");
-        //    EnergyTypeMessage.AppendLine("2 - Electric");
-        //    EnergyTypeMessage.Append("3 - Natural Gas");
-        //    Console.WriteLine(EnergyTypeMessage);
-        //}
-
         public string GetVehicleLicenseID()
         {
             StringBuilder vehicleLicenseNumber = new StringBuilder();
 
             PrintRequesOfVehicleLicenseNumber();
             vehicleLicenseNumber.Append(Console.ReadLine());
-
             while (!LicenceIDFormatValidation(vehicleLicenseNumber))
             {
                 PrintInvalidInputMessage();
@@ -224,7 +176,6 @@ namespace Ex03.ConsoleUI
 
             PrintAnotherOperationMessage();
             isInputValid = int.TryParse(Console.ReadLine(), out anotherOperationChoice);
-
             while (!isInputValid || anotherOperationChoice < 1 || anotherOperationChoice > 2)
             {
                 PrintInvalidInputMessage();
