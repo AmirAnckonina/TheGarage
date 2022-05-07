@@ -86,7 +86,7 @@ namespace Ex03.GarageLogic
             int numOfOptions = Enum.GetValues(typeof(eMCLicenceType)).Length;
 
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out MCLicenseTypeChoice);
-            if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfOptions, (int)MCLicenseTypeChoice))
+            if (!parseValueSucceed || !EnumValidator.EnumRangeValidation(1, numOfOptions, (int)MCLicenseTypeChoice))
             {
                 throw new FormatException("Invalid car color selection.");
             }

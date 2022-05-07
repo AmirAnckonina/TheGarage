@@ -14,16 +14,6 @@ namespace Ex03.GarageLogic
             Paid,
         }
 
-        public enum eGarageOperations
-        {
-            Refuel = 1,
-            ChargeBattery,
-            InflateWheels,
-            ChangeStatus,
-            ExistenceCheck,
-            None
-        }
-
         private readonly Dictionary<string, GarageCard> r_GarageVehicles;
         private readonly VehicleManufacturer r_VehicleManufacturer;
         private static string s_LicenceIDNotFound;
@@ -49,14 +39,13 @@ namespace Ex03.GarageLogic
             {
                 return r_GarageVehicles[i_LicenseID];
             }
+
             set
             {
                 r_GarageVehicles[i_LicenseID] = value;
             }
         }
 
-        /// 1
-        /// Only one 
         public void AddNewVehicleToTheGarage(string i_LicneseID, string i_VehicleType)
         {
             Vehicle newVehicle;
@@ -67,7 +56,6 @@ namespace Ex03.GarageLogic
             r_GarageVehicles.Add(i_LicneseID, newGarageCard);
         }
 
-        /// 2 
         public List<string> GetAllGarageVehiclesIDByStatus(int i_VehicleStatusFilter)
         {
             eVehicleStatus vehicleStatusFilter;
@@ -93,7 +81,6 @@ namespace Ex03.GarageLogic
             return garageVehiclesIDByStatus;
         }
 
-        /// 3
         public void ChangeVehicleStatus(string i_LicenceID, int i_NewVehicleStatus)
         {
             eVehicleStatus vehicleStatus;
@@ -107,7 +94,6 @@ namespace Ex03.GarageLogic
             r_GarageVehicles[i_LicenceID].VehicleStatus = vehicleStatus;
         }
 
-        /// 4
         public void InflateVehicleWheels(string i_LicenceID)
         {
             if (!LicenceIDExist(i_LicenceID))
@@ -121,7 +107,6 @@ namespace Ex03.GarageLogic
             }
         }
 
-        /// 5
         public void ChargeVehicleBattery(string i_LicenceID, float i_TimeToChargeInMinutes)
         {
             Electric electricEnergyOfCurrentVehicle;
@@ -140,7 +125,6 @@ namespace Ex03.GarageLogic
             electricEnergyOfCurrentVehicle.ChargeBattery(i_TimeToChargeInMinutes);
         }
 
-        /// 6 
         public void RefuelVehicle(string i_LicenceID, int i_FuelTypeChoice, float i_FuelAmount)
         {
             Fuel fuelEnergyOfCurrentVehicle;
@@ -161,7 +145,6 @@ namespace Ex03.GarageLogic
             fuelEnergyOfCurrentVehicle.Refuel(i_FuelAmount, fuelType);
         }
 
-        /// 7
         public string GetFullVehicleInformation(string i_LicneseID)
         {
             StringBuilder allVehicleInfo = new StringBuilder();
@@ -199,6 +182,21 @@ namespace Ex03.GarageLogic
             }
 
             return r_GarageVehicles[i_LicenceID];
+        }
+
+        public string GetBasicInfoBeforeOperation(string i_VehicleLicenseID)
+        {
+            StringBuilder licenceIDAndVehicleTypeMessage = new StringBuilder();
+
+            if (!LicenceIDExist(i_VehicleLicenseID))
+            {
+                throw new ArgumentException(s_LicenceIDNotFound);
+            }
+
+            licenceIDAndVehicleTypeMessage.AppendLine("Vehicle licnese ID: " + i_VehicleLicenseID);
+            licenceIDAndVehicleTypeMessage.AppendLine("Vehicle type: " + r_GarageVehicles[i_VehicleLicenseID].Vehicle.GetType().Name);
+            licenceIDAndVehicleTypeMessage.Append("Energy source type: " + r_GarageVehicles[i_VehicleLicenseID].Vehicle.VehicleEnergy.GetType().Name);
+            return licenceIDAndVehicleTypeMessage.ToString();
         }
 
         private eVehicleStatus VehicleStatusSetup(int i_VehicleStatusFilter)
@@ -248,21 +246,6 @@ namespace Ex03.GarageLogic
             }
 
             return fuelType;
-        }
-
-        public string GetBasicInfoBeforeOperation(string i_VehicleLicenseID)
-        {
-            StringBuilder licenceIDAndVehicleTypeMessage = new StringBuilder();
-
-            if (!LicenceIDExist(i_VehicleLicenseID))
-            {
-                throw new ArgumentException(s_LicenceIDNotFound);
-            }
-
-            licenceIDAndVehicleTypeMessage.AppendLine("Vehicle licnese ID: " + i_VehicleLicenseID);
-            licenceIDAndVehicleTypeMessage.AppendLine("Vehicle type: " + r_GarageVehicles[i_VehicleLicenseID].Vehicle.GetType().Name);
-            licenceIDAndVehicleTypeMessage.Append("Energy source type: " + r_GarageVehicles[i_VehicleLicenseID].Vehicle.VehicleEnergy.GetType().Name);
-            return licenceIDAndVehicleTypeMessage.ToString();
         }
     }
 }  

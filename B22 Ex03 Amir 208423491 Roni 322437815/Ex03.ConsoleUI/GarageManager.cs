@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
@@ -70,6 +68,7 @@ namespace Ex03.ConsoleUI
                 {
                     r_Garage.AddNewVehicleToTheGarage(vehicleLicenceID, vehicleType);
                     CompleteVehicleDetailsProcedure(vehicleLicenceID);
+                    CompleteGarageCardDetailsProcedure(vehicleLicenceID);
                 }
 
                 else
@@ -87,7 +86,6 @@ namespace Ex03.ConsoleUI
         public void CompleteVehicleDetailsProcedure(string i_VehicleLicenceID)
         {
             Vehicle currVehicle;
-            GarageCard currGarageCard;
             string insertedInput;
 
             currVehicle = r_Garage.GetVehicleByLicenceID(i_VehicleLicenceID);
@@ -110,17 +108,23 @@ namespace Ex03.ConsoleUI
                     break;
                 }
             }
+        }
+
+        public void CompleteGarageCardDetailsProcedure(string i_VehicleLicenceID)
+        {
+            GarageCard currGarageCard;
+            string insertedInput;
 
             currGarageCard = r_Garage.GetVehicleGarageCardByLicenceID(i_VehicleLicenceID);
             foreach (KeyValuePair<string, string> currGarageCardDetail in currGarageCard.GarageCardDetails)
             {
                 try
                 {
-                   insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
-                   currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
+                    insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
+                    currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
                 }
 
-                catch(FormatException formatEx)
+                catch (FormatException formatEx)
                 {
                     r_ConsoleIOManager.PrintGeneralMessage(formatEx.Message);
                     insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
@@ -131,7 +135,6 @@ namespace Ex03.ConsoleUI
                     r_ConsoleIOManager.PrintGeneralMessage(ex.Message);
                     break;
                 }
-
             }
         }
 
@@ -145,6 +148,7 @@ namespace Ex03.ConsoleUI
             if (r_Garage.LicenceIDExist(vehicleLicenseID))
             {
                 r_ConsoleIOManager.PrintGeneralMessage(r_Garage.GetBasicInfoBeforeOperation(vehicleLicenseID));
+                /// Give the user to do several operations for the vehicle one by one.
                 do
                 {
                     garageVehicleOperationNumber = r_ConsoleIOManager.GetVehicleGarageOperation();
@@ -152,20 +156,16 @@ namespace Ex03.ConsoleUI
                     {
                         SingleOperationForVehicle(vehicleLicenseID, garageVehicleOperationNumber);
                     }
-                    catch (ArgumentException argumentEx)
-                    {
-                       /// Case: trying to fill fuel in electric car, so a new operation will be suggested
-                       r_ConsoleIOManager.PrintGeneralMessage(argumentEx.Message);
-                       /*garageVehicleOperationNumber = r_ConsoleIOManager.GetVehicleGarageOperation();
-                       SingleOperationForVehicle(vehicleLicenseID, garageVehicleOperationNumber);*/
-                    }
                     catch (ValueOutOfRangeException valueRangeEx)
                     {
-                       r_ConsoleIOManager.PrintGeneralMessage(valueRangeEx.Message);
-                       SingleOperationForVehicle(vehicleLicenseID, garageVehicleOperationNumber);
+                           /// In case the amount exceeded the maximun.
+                           r_ConsoleIOManager.PrintGeneralMessage(valueRangeEx.Message);
+                           SingleOperationForVehicle(vehicleLicenseID, garageVehicleOperationNumber);
                     }
-                    catch (Exception ex)
+                    catch (Exception ex) /// Including Argument and Format Exceptions case.
                     {
+                        /// In case user trying to refuel in electric car,
+                        /// so a new operation will be suggested via Finally block.
                         r_ConsoleIOManager.PrintGeneralMessage(ex.Message);
                     }
                     finally
@@ -217,7 +217,5 @@ namespace Ex03.ConsoleUI
 
             r_ConsoleIOManager.OperationCompletedMessage();
         }
-
-
     } 
 }

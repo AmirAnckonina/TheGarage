@@ -15,7 +15,7 @@ namespace Ex03.GarageLogic
         {
             r_MaxEnergyCapacity = i_MaxEnergyCapacity;
             m_EnergyLeft = i_EnergyLeft;
-            /// Percentage representaion.
+            /// -> Percentage representaion calculation.
             m_EnergyLeftPercentage = (i_EnergyLeft / r_MaxEnergyCapacity) * 100;
         }
 
@@ -39,7 +39,6 @@ namespace Ex03.GarageLogic
                 return r_MaxEnergyCapacity;
             }
         }
-
 
         public float EnergyLeftPercentage
         {
@@ -68,6 +67,5 @@ namespace Ex03.GarageLogic
             m_EnergyLeft = newEnergyAmount;
             m_EnergyLeftPercentage = (m_EnergyLeft / r_MaxEnergyCapacity) * 100;  
         }
-
     }
 }
