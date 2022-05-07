@@ -7,19 +7,14 @@ namespace Ex03.GarageLogic
 {
     public class GarageCard
     {
+        private const int k_MaxNameLength = 50;
+        private const int k_MaxPhoneNumberLength = 12;
+        private const int k_MinphoneNumberLength = 9;
+        private static Dictionary<string, string> s_GarageCardDetails;
         private string m_OwnerName;
         private string m_OwnerPhone;
         private Garage.eVehicleStatus m_VehicleStatus;
         private Vehicle m_Vehicle;
-        private static Dictionary<string, string> m_GarageCardDetails;
-        public const int k_MaxNameLength = 50;
-        public const int k_MaxPhoneNumberLength = 12;
-        public const int k_MinphoneNumberLength = 9;
-
-        public GarageCard()
-        { 
-            /// empty C'tor
-        }
 
         public GarageCard(Vehicle i_Vehicle, Garage.eVehicleStatus i_VehicleStatus)
         {
@@ -84,18 +79,13 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_GarageCardDetails;
-            }
-
-            set
-            {
-                m_GarageCardDetails = value;
+                return s_GarageCardDetails;
             }
         }
 
         public void SetSingleDetail(string i_Key, string i_InsertedValue)
         {
-            if (!m_GarageCardDetails.ContainsKey(i_Key))
+            if (!s_GarageCardDetails.ContainsKey(i_Key))
             {
                 throw new Exception("Detail isn't recognized in the garage card details.");
             }
@@ -113,9 +103,9 @@ namespace Ex03.GarageLogic
 
         public void InitGarageCardDictionary()
         {
-            m_GarageCardDetails = new Dictionary<string, string>();
-            m_GarageCardDetails.Add("OwnerName", "Please enter the owner name of the vehicle:");
-            m_GarageCardDetails.Add("OwnerPhone", "Plese enter the phone number of the owner: ");
+            s_GarageCardDetails = new Dictionary<string, string>();
+            s_GarageCardDetails.Add("OwnerName", "Please enter the owner name of the vehicle:");
+            s_GarageCardDetails.Add("OwnerPhone", "Plese enter the phone number of the owner: ");
         }
 
         public StringBuilder GetGarageCardInfo()
@@ -130,7 +120,7 @@ namespace Ex03.GarageLogic
             return garageCardInfo;
         }
 
-        public bool OwnerNameContentValidation(string i_InsertedValue)
+        private bool OwnerNameContentValidation(string i_InsertedValue)
         {
             bool isOwnerNameValid;
 
@@ -155,7 +145,7 @@ namespace Ex03.GarageLogic
             return isOwnerNameValid;
         }
 
-        public bool OwnerPhoneNumberContentValidation(string i_InsertedValue)
+        private bool OwnerPhoneNumberContentValidation(string i_InsertedValue)
         {
             bool isOwnerPhoneNumberValid;
 
@@ -172,7 +162,7 @@ namespace Ex03.GarageLogic
             return isOwnerPhoneNumberValid;
         }
 
-        public void OwnerNameSetup(string i_InsertedValue)
+        private void OwnerNameSetup(string i_InsertedValue)
         {
             if (!OwnerNameContentValidation(i_InsertedValue))
             {
@@ -182,7 +172,7 @@ namespace Ex03.GarageLogic
             m_OwnerName = i_InsertedValue;
         }
 
-        public void OwnerPhoneSetup(string i_InsertedValue)
+        private void OwnerPhoneSetup(string i_InsertedValue)
         {
             if (!OwnerPhoneNumberContentValidation(i_InsertedValue))
             {

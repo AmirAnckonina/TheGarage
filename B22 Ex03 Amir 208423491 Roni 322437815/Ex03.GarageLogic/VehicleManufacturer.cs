@@ -55,7 +55,7 @@ namespace Ex03.GarageLogic
             int numOfVehicleTypes = Enum.GetValues(typeof(eVehicleType)).Length;
 
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out vehicleType);
-            if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfVehicleTypes, (int)vehicleType))
+            if (!parseValueSucceed || !EnumValidator.EnumRangeValidation(1, numOfVehicleTypes, (int)vehicleType))
             {
                 throw new ArgumentException("This vehicle isn't manufactured in our vehicles factory");
             }

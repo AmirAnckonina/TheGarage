@@ -6,7 +6,7 @@ using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
 {
-    class ConsoleIOManager
+    public class ConsoleIOManager
     {
         public const int k_MaximumOwnerNameLength = 20;
         public const int k_PhoneNumberLength = 10;
@@ -65,66 +65,6 @@ namespace Ex03.ConsoleUI
             return vehicleTypeChoiceIsValid;
         }
 
-        public static void PrintRequestOfVehicleType()
-        {
-            StringBuilder vehicleTypeMessage = new StringBuilder();
-
-            vehicleTypeMessage.AppendLine("Enter the type of your vehicle:");
-            vehicleTypeMessage.AppendLine("1 - Fuel Car");
-            vehicleTypeMessage.AppendLine("2 - Fuel Motorcycle");
-            vehicleTypeMessage.AppendLine("3 - Fuel Truck");
-            vehicleTypeMessage.AppendLine("4 - Electric Car");
-            vehicleTypeMessage.Append("5 - Electric Motorcycle");
-            Console.WriteLine(vehicleTypeMessage);
-        }
-
-        //public string GetEnergyType()
-        //{
-        //    string energyTypeChoice;
-
-        //    PrintRequestForEnergyType();
-        //    energyTypeChoice = Console.ReadLine();
-        //    while (!EnergyTypeChoiceValidation(energyTypeChoice))
-        //    {
-        //        PrintInvalidInputMessage();
-        //        PrintRequestForEnergyType();
-        //        energyTypeChoice = Console.ReadLine();
-        //    }
-
-        //    return energyTypeChoice;
-        //}
-
-        //public bool EnergyTypeChoiceValidation(string i_EnergyTypeChoice)
-        //{
-        //    bool inputIsValid;
-        //    bool energyTypeChoiceIsValid;
-        //    int energyTypeChoiceNumber;
-
-        //    inputIsValid = int.TryParse(i_EnergyTypeChoice, out energyTypeChoiceNumber);
-        //    if (!inputIsValid || energyTypeChoiceNumber < 1 || energyTypeChoiceNumber > 3)
-        //    {
-        //        energyTypeChoiceIsValid = false;
-        //    }
-
-        //    else
-        //    {
-        //        energyTypeChoiceIsValid = true;
-        //    }
-
-        //    return energyTypeChoiceIsValid;
-        //}
-
-        //public static void PrintRequestForEnergyType()
-        //{
-        //    StringBuilder EnergyTypeMessage = new StringBuilder();
-
-        //    EnergyTypeMessage.AppendLine("Please specify the energy source type of your vehicle");
-        //    EnergyTypeMessage.AppendLine("1 - Fuel");
-        //    EnergyTypeMessage.AppendLine("2 - Electric");
-        //    EnergyTypeMessage.Append("3 - Natural Gas");
-        //    Console.WriteLine(EnergyTypeMessage);
-        //}
-
         public string GetVehicleLicenseID()
         {
             StringBuilder vehicleLicenseNumber = new StringBuilder();
@@ -143,31 +83,6 @@ namespace Ex03.ConsoleUI
             return vehicleLicenseNumber.ToString();
         }
 
-        private bool LicenceIDFormatValidation(StringBuilder i_LicenseID)
-        {
-            bool licenceIDIsValid;
-
-            if (i_LicenseID.Length >= 5 && i_LicenseID.Length <= 8 && i_LicenseID.ToString().All(char.IsDigit))
-            {
-                licenceIDIsValid = true;
-            }
-
-            else
-            {
-                licenceIDIsValid = false;
-            }
-
-            return licenceIDIsValid;
-        }
-
-        public static void PrintRequesOfVehicleLicenseNumber()
-        {
-            StringBuilder vehicleLicenseNumberMessage = new StringBuilder();
-
-            vehicleLicenseNumberMessage.Append("Please enter the license number of the vehicle:");
-            Console.WriteLine(vehicleLicenseNumberMessage);
-        }
-
         public string GetSingleDetail(string i_RequestMessageValue)
         {
             string insertedInput;
@@ -176,19 +91,6 @@ namespace Ex03.ConsoleUI
             insertedInput = Console.ReadLine();
 
             return insertedInput;
-        }
-
-        public static void PrintGarageVehicleOperationsMenu()
-        {
-            StringBuilder vehicleTreatmentMessage = new StringBuilder();
-
-            vehicleTreatmentMessage.AppendLine("Enter the garage operation you need:");
-            vehicleTreatmentMessage.AppendLine("1 - Refuel");
-            vehicleTreatmentMessage.AppendLine("2 - Charge battery");
-            vehicleTreatmentMessage.AppendLine("3 - Inflate wheels");
-            vehicleTreatmentMessage.AppendLine("4 - Get full vehicle info");
-            vehicleTreatmentMessage.Append("5 - Change vehicle status");
-            Console.WriteLine(vehicleTreatmentMessage);
         }
 
         public int GetVehicleGarageOperation()
@@ -245,16 +147,6 @@ namespace Ex03.ConsoleUI
             return anotherOperation;
         }
 
-        public void PrintAnotherOperationMessage()
-        {
-            StringBuilder anotherOperationMessage = new StringBuilder();
-
-            anotherOperationMessage.AppendLine("Do you want another operation for this vehicle?");
-            anotherOperationMessage.AppendLine("1 - Yes");
-            anotherOperationMessage.Append("2 - No");
-            Console.WriteLine(anotherOperationMessage);
-        }
-
         public int GetGarageActionMainMenu()
         {
             int actionInTheGarage;
@@ -272,18 +164,6 @@ namespace Ex03.ConsoleUI
             return actionInTheGarage;
         }
 
-        public static void PrintRequestForGarageActionMainMenu()
-        {
-            StringBuilder actionInTheGarageMessage = new StringBuilder();
-
-            actionInTheGarageMessage.AppendLine("Choose which garage action you need: ");
-            actionInTheGarageMessage.AppendLine("1 - Add new vehicle to the garage");
-            actionInTheGarageMessage.AppendLine("2 - Do some vehicle operation in the garage");
-            actionInTheGarageMessage.AppendLine("3 - Get garage vehicles by status");
-            actionInTheGarageMessage.Append("4 - Go home");
-            Console.WriteLine(actionInTheGarageMessage);
-        }
-
         public void PrintFullVehicleInfo(string i_VehicleInfo)
         {
             StringBuilder fullVehicleInfoMessage = new StringBuilder();
@@ -295,14 +175,6 @@ namespace Ex03.ConsoleUI
         public void PrintGeneralMessage(string i_GeneralMessage)
         {
             Console.WriteLine(i_GeneralMessage);
-        }
-
-        public static void PrintInvalidInputMessage()
-        {
-            StringBuilder invalidInputMessage = new StringBuilder();
-
-            invalidInputMessage.Append("The input is not valid!");
-            Console.WriteLine(invalidInputMessage);
         }
 
         public int GetFuelType()
@@ -322,35 +194,6 @@ namespace Ex03.ConsoleUI
             return fuelType;
         }
 
-        public static void PrintFuelTypeMessage()
-        {
-            StringBuilder fuelTypeMessage = new StringBuilder();
-
-            fuelTypeMessage.AppendLine("Please enter the fuel type of your vehicle");
-            fuelTypeMessage.AppendLine("1 - Soler");
-            fuelTypeMessage.AppendLine("2 - Octan95");
-            fuelTypeMessage.AppendLine("3 - Octan96");
-            fuelTypeMessage.Append("4 - Octan98");
-            Console.WriteLine(fuelTypeMessage);
-        }
-
-        public bool FuelTypeValidation(int i_fuelTyoe)
-        {
-            bool isfuelTypeValid;
-
-            if (i_fuelTyoe >= 1 && i_fuelTyoe <= 4)
-            {
-                isfuelTypeValid = true;
-            }
-
-            else
-            {
-                isfuelTypeValid = false;
-            }
-
-            return isfuelTypeValid;
-        }
-
         public int GetTimeToChargeInMinutes()
         {
             int timeToChargeInMinutes;
@@ -366,14 +209,6 @@ namespace Ex03.ConsoleUI
             }
 
             return timeToChargeInMinutes;
-        }
-
-        public static void PrintRequestForTimeToCharge()
-        {
-            StringBuilder TimeToChargeMessage = new StringBuilder();
-
-            TimeToChargeMessage.Append("Please enter the number of minutes to charge your vehicle");
-            Console.WriteLine(TimeToChargeMessage);
         }
 
         public float GetFuelAmount()
@@ -393,22 +228,6 @@ namespace Ex03.ConsoleUI
             return fuelAmount;
         }
 
-        public static void PrintRequestForFuelAmount()
-        {
-            StringBuilder fuelAmountMessage = new StringBuilder();
-
-            fuelAmountMessage.Append("Please enter the fuel amount, in liters: ");
-            Console.WriteLine(fuelAmountMessage);
-        }
-
-        public void PrintAllGarageVehiclesID(List<string> i_GarageVehiclesID)
-        {
-            foreach (string currLicenceID in i_GarageVehiclesID)
-            { 
-                Console.WriteLine(currLicenceID);
-            }
-        }
-
         public int GetVehicleStatus()
         {
             int vehicleStatusChoice;
@@ -426,7 +245,81 @@ namespace Ex03.ConsoleUI
             return vehicleStatusChoice;
         }
 
-        public static void PrintRequestForVehicleStatus()
+        public void OperationCompletedMessage()
+        {
+            StringBuilder operationSucceedMessage = new StringBuilder();
+
+            operationSucceedMessage.Append("The operation completed successfully.");
+            Console.WriteLine(operationSucceedMessage);
+        }
+
+        public void PrintAllGarageVehiclesID(List<string> i_GarageVehiclesID)
+        {
+            foreach (string currLicenceID in i_GarageVehiclesID)
+            { 
+                Console.WriteLine(currLicenceID);
+            }
+        }
+
+        private static void PrintRequestForGarageActionMainMenu()
+        {
+            StringBuilder actionInTheGarageMessage = new StringBuilder();
+
+            actionInTheGarageMessage.AppendLine("Choose which garage action you need: ");
+            actionInTheGarageMessage.AppendLine("1 - Add new vehicle to the garage");
+            actionInTheGarageMessage.AppendLine("2 - Do some vehicle operation in the garage");
+            actionInTheGarageMessage.AppendLine("3 - Get garage vehicles by status");
+            actionInTheGarageMessage.Append("4 - Go home");
+            Console.WriteLine(actionInTheGarageMessage);
+        }
+
+        private static void PrintAnotherOperationMessage()
+        {
+            StringBuilder anotherOperationMessage = new StringBuilder();
+
+            anotherOperationMessage.AppendLine("Do you want another operation for this vehicle?");
+            anotherOperationMessage.AppendLine("1 - Yes");
+            anotherOperationMessage.Append("2 - No");
+            Console.WriteLine(anotherOperationMessage);
+        }
+
+        private static void PrintInvalidInputMessage()
+        {
+            StringBuilder invalidInputMessage = new StringBuilder();
+
+            invalidInputMessage.Append("The input is not valid!");
+            Console.WriteLine(invalidInputMessage);
+        }
+
+        private static void PrintFuelTypeMessage()
+        {
+            StringBuilder fuelTypeMessage = new StringBuilder();
+
+            fuelTypeMessage.AppendLine("Please enter the fuel type of your vehicle");
+            fuelTypeMessage.AppendLine("1 - Soler");
+            fuelTypeMessage.AppendLine("2 - Octan95");
+            fuelTypeMessage.AppendLine("3 - Octan96");
+            fuelTypeMessage.Append("4 - Octan98");
+            Console.WriteLine(fuelTypeMessage);
+        }
+
+        private static void PrintRequestForTimeToCharge()
+        {
+            StringBuilder TimeToChargeMessage = new StringBuilder();
+
+            TimeToChargeMessage.Append("Please enter the number of minutes to charge your vehicle");
+            Console.WriteLine(TimeToChargeMessage);
+        }
+
+        private static void PrintRequestForFuelAmount()
+        {
+            StringBuilder fuelAmountMessage = new StringBuilder();
+
+            fuelAmountMessage.Append("Please enter the fuel amount, in liters: ");
+            Console.WriteLine(fuelAmountMessage);
+        }
+
+        private static void PrintRequestForVehicleStatus()
         {
             StringBuilder vehicleStatusMessage = new StringBuilder();
 
@@ -437,7 +330,75 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(vehicleStatusMessage);
         }
 
-        public bool VehicleStatusValidation(int i_VehicleStatus)
+        private static void PrintRequestOfVehicleType()
+        {
+            StringBuilder vehicleTypeMessage = new StringBuilder();
+
+            vehicleTypeMessage.AppendLine("Enter the type of your vehicle:");
+            vehicleTypeMessage.AppendLine("1 - Fuel Car");
+            vehicleTypeMessage.AppendLine("2 - Fuel Motorcycle");
+            vehicleTypeMessage.AppendLine("3 - Fuel Truck");
+            vehicleTypeMessage.AppendLine("4 - Electric Car");
+            vehicleTypeMessage.Append("5 - Electric Motorcycle");
+            Console.WriteLine(vehicleTypeMessage);
+        }
+
+        private static void PrintRequesOfVehicleLicenseNumber()
+        {
+            StringBuilder vehicleLicenseNumberMessage = new StringBuilder();
+
+            vehicleLicenseNumberMessage.Append("Please enter the license number of the vehicle:");
+            Console.WriteLine(vehicleLicenseNumberMessage);
+        }
+
+        private static void PrintGarageVehicleOperationsMenu()
+        {
+            StringBuilder vehicleTreatmentMessage = new StringBuilder();
+
+            vehicleTreatmentMessage.AppendLine("Enter the garage operation you need:");
+            vehicleTreatmentMessage.AppendLine("1 - Refuel");
+            vehicleTreatmentMessage.AppendLine("2 - Charge battery");
+            vehicleTreatmentMessage.AppendLine("3 - Inflate wheels");
+            vehicleTreatmentMessage.AppendLine("4 - Get full vehicle info");
+            vehicleTreatmentMessage.Append("5 - Change vehicle status");
+            Console.WriteLine(vehicleTreatmentMessage);
+        }
+
+        private bool FuelTypeValidation(int i_fuelTyoe)
+        {
+            bool isfuelTypeValid;
+
+            if (i_fuelTyoe >= 1 && i_fuelTyoe <= 4)
+            {
+                isfuelTypeValid = true;
+            }
+
+            else
+            {
+                isfuelTypeValid = false;
+            }
+
+            return isfuelTypeValid;
+        }
+
+        private bool LicenceIDFormatValidation(StringBuilder i_LicenseID)
+        {
+            bool licenceIDIsValid;
+
+            if (i_LicenseID.Length >= 5 && i_LicenseID.Length <= 8 && i_LicenseID.ToString().All(char.IsDigit))
+            {
+                licenceIDIsValid = true;
+            }
+
+            else
+            {
+                licenceIDIsValid = false;
+            }
+
+            return licenceIDIsValid;
+        }
+
+        private bool VehicleStatusValidation(int i_VehicleStatus)
         {
             bool isVehicleStatusValid;
 
@@ -454,13 +415,6 @@ namespace Ex03.ConsoleUI
             return isVehicleStatusValid;
         }
 
-        public void OperationCompletedMessage()
-        {
-            StringBuilder operationSucceedMessage = new StringBuilder();
-
-            operationSucceedMessage.Append("The operation completed succuessfully.");
-            Console.WriteLine(operationSucceedMessage);
-        }
     }
 }
 

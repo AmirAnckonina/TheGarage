@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    public static class Parser
+    public static class EnumValidator
     {
         public static bool EnumRangeValidation(int i_MinValue, int i_MaxValue, int i_InsertedValue)
         {
@@ -23,7 +23,5 @@ namespace Ex03.GarageLogic
 
             return inRange;
         }
-
- 
     }
 }

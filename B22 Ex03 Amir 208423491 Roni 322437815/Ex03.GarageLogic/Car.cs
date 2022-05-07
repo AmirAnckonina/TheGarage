@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 {
     public class Car : Vehicle
     {
-        public enum eCarColor
+        private enum eCarColor
         {
             Red = 1,
             White,
@@ -16,19 +16,13 @@ namespace Ex03.GarageLogic
             None
         }
 
-        public enum eDoorsNumber
+        private enum eDoorsNumber
         {
             Two = 1,
             Three,
             Four,
             Five,
             None
-        }
-
-        public enum eCarManufactureDetails
-        {
-            Color,
-            DoorsNumber
         }
 
         internal static class CarFuelSpecifications
@@ -60,7 +54,7 @@ namespace Ex03.GarageLogic
             AddAddtionalDetailsToDictionary();
         }
 
-        private void AddAddtionalDetailsToDictionary()
+        private static void AddAddtionalDetailsToDictionary()
         {
             m_AdditionalVehicleDetails.Add("CarColor", "Please enter the Car Color:\n 1 - Red \n 2 - White \n 3 - Green \n 4 - Blue ");
             m_AdditionalVehicleDetails.Add("CarDoorsNumber", "Please specify the doors number in the car:\n 1 - Car with two doors \n 2 - Car with three doors \n 3 - Car with four doors \n 4 - Car with five doors ");
@@ -100,7 +94,7 @@ namespace Ex03.GarageLogic
             int numOfColors = Enum.GetValues(typeof(eCarColor)).Length;
 
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out colorChoice);
-            if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfColors, (int)colorChoice)) /// To Check Parser
+            if (!parseValueSucceed || !EnumValidator.EnumRangeValidation(1, numOfColors, (int)colorChoice)) /// To Check Parser
             {
                 throw new FormatException("Invalid car color selection.");
             }
@@ -115,7 +109,7 @@ namespace Ex03.GarageLogic
             int numOfDoorsNumberOptions = Enum.GetValues(typeof(eDoorsNumber)).Length;
 
             parseValueSucceed = Enum.TryParse(i_InsertedValue, out doorsNumberChoice);
-            if (!parseValueSucceed || !Parser.EnumRangeValidation(1, numOfDoorsNumberOptions, (int)doorsNumberChoice))
+            if (!parseValueSucceed || !EnumValidator.EnumRangeValidation(1, numOfDoorsNumberOptions, (int)doorsNumberChoice))
             {
                 throw new FormatException("Invalid car doors number selection.");
             }
