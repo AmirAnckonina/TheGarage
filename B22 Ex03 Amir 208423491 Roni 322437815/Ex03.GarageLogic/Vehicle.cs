@@ -129,9 +129,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public abstract StringBuilder GetVehicleInfo();
-
-        public virtual StringBuilder GetBasicVehcileDetails()
+        public virtual StringBuilder GetVehicleInfo()
         {
             StringBuilder infoOutput = new StringBuilder();
 
@@ -140,6 +138,7 @@ namespace Ex03.GarageLogic
             infoOutput.AppendLine("Wheels information: " + m_VehicleWheels[0].GetWheelDetails());
             infoOutput.AppendLine("Energy source: " + r_VehicleEnergy.GetType().Name);
             infoOutput.Append(r_VehicleEnergy.GetEnergyInfo());
+            infoOutput.AppendLine();
 
             return infoOutput;
         }   
