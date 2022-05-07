@@ -101,7 +101,7 @@ namespace Ex03.GarageLogic
             StringBuilder infoOutput = new StringBuilder();
 
             infoOutput.AppendLine("Vehicle type: " + this.GetType().Name);
-            infoOutput.AppendLine(GetBasicVehcileDetails().ToString());
+            infoOutput.Append(base.GetVehicleInfo());
             infoOutput.AppendLine("Truck has cooling cargo: " + Enum.GetName(typeof(eHasCoolingCargo), m_HasCoolingCargo));
             infoOutput.AppendLine("Truck cargo capacity: " + m_CargoCapcity);
 

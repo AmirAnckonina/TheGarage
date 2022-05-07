@@ -115,7 +115,7 @@ namespace Ex03.GarageLogic
             garageCardInfo.Append(m_Vehicle.GetVehicleInfo());
             garageCardInfo.AppendLine("Vehicle owner name: " + m_OwnerName);
             garageCardInfo.AppendLine("Vehicle owner phone: " + m_OwnerPhone);
-            garageCardInfo.Append("Vehicle current status in the garage: " + Enum.GetName(typeof(Garage.eVehicleStatus), m_VehicleStatus));
+            garageCardInfo.AppendLine("Vehicle current status in the garage: " + Enum.GetName(typeof(Garage.eVehicleStatus), m_VehicleStatus));
 
             return garageCardInfo;
         }

@@ -45,39 +45,6 @@ namespace Ex03.ConsoleUI
             return vehicleTypeChoice;
         }
 
-        public bool VehicleTypeChoiceValidation(string i_VehicleTypeChoice)
-        {
-            bool inputIsValid;
-            bool vehicleTypeChoiceIsValid;
-            int vehicleTypeChoiceNumber;
-
-            inputIsValid = int.TryParse(i_VehicleTypeChoice, out vehicleTypeChoiceNumber);
-            if (!inputIsValid || vehicleTypeChoiceNumber < 1 || vehicleTypeChoiceNumber > 5)
-            {
-                vehicleTypeChoiceIsValid = false;
-            }
-
-            else
-            {
-                vehicleTypeChoiceIsValid = true;
-            }
-
-            return vehicleTypeChoiceIsValid;
-        }
-      
-        public static void PrintRequestOfVehicleType()
-        {
-            StringBuilder vehicleTypeMessage = new StringBuilder();
-
-            vehicleTypeMessage.AppendLine("Enter the type of your vehicle:");
-            vehicleTypeMessage.AppendLine("1 - Fuel Car");
-            vehicleTypeMessage.AppendLine("2 - Fuel Motorcycle");
-            vehicleTypeMessage.AppendLine("3 - Fuel Truck");
-            vehicleTypeMessage.AppendLine("4 - Electric Car");
-            vehicleTypeMessage.Append("5 - Electric Motorcycle");
-            Console.WriteLine(vehicleTypeMessage);
-        }
-      
         public string GetVehicleLicenseID()
         {
             StringBuilder vehicleLicenseNumber = new StringBuilder();
@@ -426,6 +393,25 @@ namespace Ex03.ConsoleUI
             return isVehicleStatusValid;
         }
 
+        private bool VehicleTypeChoiceValidation(string i_VehicleTypeChoice)
+        {
+            bool inputIsValid;
+            bool vehicleTypeChoiceIsValid;
+            int vehicleTypeChoiceNumber;
+
+            inputIsValid = int.TryParse(i_VehicleTypeChoice, out vehicleTypeChoiceNumber);
+            if (!inputIsValid || vehicleTypeChoiceNumber < 1 || vehicleTypeChoiceNumber > 5)
+            {
+                vehicleTypeChoiceIsValid = false;
+            }
+
+            else
+            {
+                vehicleTypeChoiceIsValid = true;
+            }
+
+            return vehicleTypeChoiceIsValid;
+        }
     }
 }
 
