@@ -18,7 +18,7 @@ namespace Ex03.ConsoleUI
         public void Run()
         {
             int vehicleStatus;
-            List<string> garageVehiclesByStatus;
+            List<string> garageVehiclesByStatus; 
             int garageOperationChoice;
             bool goHome = false;
 

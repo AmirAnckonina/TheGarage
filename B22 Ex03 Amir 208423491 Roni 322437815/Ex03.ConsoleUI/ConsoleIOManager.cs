@@ -64,14 +64,26 @@ namespace Ex03.ConsoleUI
 
             return vehicleTypeChoiceIsValid;
         }
+      
+        public static void PrintRequestOfVehicleType()
+        {
+            StringBuilder vehicleTypeMessage = new StringBuilder();
 
+            vehicleTypeMessage.AppendLine("Enter the type of your vehicle:");
+            vehicleTypeMessage.AppendLine("1 - Fuel Car");
+            vehicleTypeMessage.AppendLine("2 - Fuel Motorcycle");
+            vehicleTypeMessage.AppendLine("3 - Fuel Truck");
+            vehicleTypeMessage.AppendLine("4 - Electric Car");
+            vehicleTypeMessage.Append("5 - Electric Motorcycle");
+            Console.WriteLine(vehicleTypeMessage);
+        }
+      
         public string GetVehicleLicenseID()
         {
             StringBuilder vehicleLicenseNumber = new StringBuilder();
 
             PrintRequesOfVehicleLicenseNumber();
             vehicleLicenseNumber.Append(Console.ReadLine());
-
             while (!LicenceIDFormatValidation(vehicleLicenseNumber))
             {
                 PrintInvalidInputMessage();
@@ -126,7 +138,6 @@ namespace Ex03.ConsoleUI
 
             PrintAnotherOperationMessage();
             isInputValid = int.TryParse(Console.ReadLine(), out anotherOperationChoice);
-
             while (!isInputValid || anotherOperationChoice < 1 || anotherOperationChoice > 2)
             {
                 PrintInvalidInputMessage();
