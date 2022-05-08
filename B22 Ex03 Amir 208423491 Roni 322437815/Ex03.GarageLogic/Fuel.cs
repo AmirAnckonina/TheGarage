@@ -13,7 +13,6 @@ namespace Ex03.GarageLogic
             Octan95,
             Octan96,
             Octan98,
-            None
         }
         
         private readonly eFuelType r_FuelType;

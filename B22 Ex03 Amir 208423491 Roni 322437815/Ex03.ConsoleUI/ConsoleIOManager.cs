@@ -8,10 +8,10 @@ namespace Ex03.ConsoleUI
 {
     public class ConsoleIOManager
     {
-        public const int k_MaximumOwnerNameLength = 20;
-        public const int k_PhoneNumberLength = 10;
-        public const int k_MaximumModelNameLength = 20;
-        public const int k_MaximumWheelManufacturerNameLength = 20;
+        private const int k_MaximumOwnerNameLength = 20;
+        private const int k_PhoneNumberLength = 10;
+        private const int k_MaximumModelNameLength = 20;
+        private const int k_MaximumWheelManufacturerNameLength = 20;
 
         public void Welcome()
         {
@@ -342,11 +342,11 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(vehicleTreatmentMessage);
         }
 
-        private bool FuelTypeValidation(int i_fuelTyoe)
+        private bool FuelTypeValidation(int i_FuelType)
         {
             bool isfuelTypeValid;
 
-            if (i_fuelTyoe >= 1 && i_fuelTyoe <= 4)
+            if (i_FuelType >= 1 && i_FuelType <= 4)
             {
                 isfuelTypeValid = true;
             }

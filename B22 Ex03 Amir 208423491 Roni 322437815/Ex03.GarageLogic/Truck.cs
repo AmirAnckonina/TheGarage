@@ -38,8 +38,8 @@ namespace Ex03.GarageLogic
 
         private void AddAddtionalDetailsToDictionary()
         {
-            m_AdditionalVehicleDetails.Add("CoolingCargo", "Please enter if the truck has cooling cargo: \n 1. Yes \n 2. No");
-            m_AdditionalVehicleDetails.Add("CargoCapacity", "Please enter the truck cargo capacity: ");
+            s_AdditionalVehicleDetails.Add("CoolingCargo", "Please enter if the truck has cooling cargo: \n 1. Yes \n 2. No");
+            s_AdditionalVehicleDetails.Add("CargoCapacity", "Please enter the truck cargo capacity: ");
         }
 
         public override void SetSingleDetail(string i_Key, string i_InsertedValue)
