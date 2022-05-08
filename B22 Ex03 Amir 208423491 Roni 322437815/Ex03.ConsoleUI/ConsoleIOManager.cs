@@ -51,7 +51,7 @@ namespace Ex03.ConsoleUI
 
             PrintRequesOfVehicleLicenseNumber();
             vehicleLicenseNumber.Append(Console.ReadLine());
-            while (!LicenceIDFormatValidation(vehicleLicenseNumber))
+            while (!LicenseIDFormatValidation(vehicleLicenseNumber))
             {
                 PrintInvalidInputMessage();
                 PrintRequesOfVehicleLicenseNumber();
@@ -233,9 +233,9 @@ namespace Ex03.ConsoleUI
 
         public void PrintAllGarageVehiclesID(List<string> i_GarageVehiclesID)
         {
-            foreach (string currLicenceID in i_GarageVehiclesID)
+            foreach (string currLicenseID in i_GarageVehiclesID)
             { 
-                Console.WriteLine(currLicenceID);
+                Console.WriteLine(currLicenseID);
             }
         }
 
@@ -359,21 +359,21 @@ namespace Ex03.ConsoleUI
             return isfuelTypeValid;
         }
 
-        private bool LicenceIDFormatValidation(StringBuilder i_LicenseID)
+        private bool LicenseIDFormatValidation(StringBuilder i_LicenseID)
         {
-            bool licenceIDIsValid;
+            bool LicenseIDIsValid;
 
             if (i_LicenseID.Length >= 5 && i_LicenseID.Length <= 8 && i_LicenseID.ToString().All(char.IsDigit))
             {
-                licenceIDIsValid = true;
+                LicenseIDIsValid = true;
             }
 
             else
             {
-                licenceIDIsValid = false;
+                LicenseIDIsValid = false;
             }
 
-            return licenceIDIsValid;
+            return LicenseIDIsValid;
         }
 
         private bool VehicleStatusValidation(int i_VehicleStatus)
