@@ -46,10 +46,10 @@ namespace Ex03.GarageLogic
 
         private void AddAddtionalDetailsToDictionary()
         {
-            m_AdditionalVehicleDetails.Add(
+            s_AdditionalVehicleDetails.Add(
                 "MClicenseID", 
                 "Please enter the motorcycle licence type: \n 1 - A \n 2 - A1 \n 3 - B1 \n 4 - BB");
-            m_AdditionalVehicleDetails.Add("MCEngineCapacity", "Please enter the motorcycle engine capacity: ");
+            s_AdditionalVehicleDetails.Add("MCEngineCapacity", "Please enter the motorcycle engine capacity: ");
         }
 
         public override void SetSingleDetail(string i_Key, string i_InsertedValue)

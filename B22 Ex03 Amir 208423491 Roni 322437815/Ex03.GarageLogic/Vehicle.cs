@@ -10,9 +10,9 @@ namespace Ex03.GarageLogic
         private const int k_MaxModelNameLength = 30;
         private readonly string r_LicenceID;
         private string m_ModelName;
-        private Energy r_VehicleEnergy;
+        private readonly Energy r_VehicleEnergy;
         private List<Wheel> m_VehicleWheels;
-        protected static Dictionary<string, string> m_AdditionalVehicleDetails;
+        protected static Dictionary<string, string> s_AdditionalVehicleDetails;
 
         public Vehicle(string i_LicenceID, Energy i_VehicleEnergy)
         {
@@ -81,24 +81,24 @@ namespace Ex03.GarageLogic
         {
             get
             {
-                return m_AdditionalVehicleDetails;
+                return s_AdditionalVehicleDetails;
             }
             set
             {
-                m_AdditionalVehicleDetails = value;
+                s_AdditionalVehicleDetails = value;
             }
         }
 
         public void InitDictionary()
         {
-            m_AdditionalVehicleDetails = new Dictionary<string, string>();
-            m_AdditionalVehicleDetails.Add("ModelName", "Please enter the vehicle model name: ");
-            m_AdditionalVehicleDetails.Add("WheelManufcaturer", "Please enter the wheel manufacturer name: ");
+            s_AdditionalVehicleDetails = new Dictionary<string, string>();
+            s_AdditionalVehicleDetails.Add("ModelName", "Please enter the vehicle model name: ");
+            s_AdditionalVehicleDetails.Add("WheelManufcaturer", "Please enter the wheel manufacturer name: ");
         }
 
         public virtual void SetSingleDetail(string i_Key, string i_InsertedValue)
         {
-            if (!m_AdditionalVehicleDetails.ContainsKey(i_Key))
+            if (!s_AdditionalVehicleDetails.ContainsKey(i_Key))
             {
                 throw new FormatException("Detail not found in car manufacture required details.");
             }

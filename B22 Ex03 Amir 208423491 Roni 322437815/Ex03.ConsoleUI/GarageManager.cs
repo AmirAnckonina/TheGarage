@@ -130,11 +130,7 @@ namespace Ex03.ConsoleUI
                     insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
                     currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
                 }
-                catch (Exception ex)
-                {
-                    r_ConsoleIOManager.PrintGeneralMessage(ex.Message);
-                    break;
-                }
+
             }
         }
 
@@ -142,7 +138,7 @@ namespace Ex03.ConsoleUI
         {
             string vehicleLicenseID;
             int garageVehicleOperationNumber;
-            bool anotherOperation = true;
+            bool anotherOperation;
 
             vehicleLicenseID = r_ConsoleIOManager.GetVehicleLicenseID();
             if (r_Garage.LicenceIDExist(vehicleLicenseID))

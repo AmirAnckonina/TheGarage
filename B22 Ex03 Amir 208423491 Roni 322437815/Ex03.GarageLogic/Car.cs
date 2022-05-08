@@ -13,7 +13,6 @@ namespace Ex03.GarageLogic
             White,
             Green,
             Blue,
-            None
         }
 
         private enum eDoorsNumber
@@ -22,7 +21,6 @@ namespace Ex03.GarageLogic
             Three,
             Four,
             Five,
-            None
         }
 
         internal static class CarFuelSpecifications
@@ -56,8 +54,8 @@ namespace Ex03.GarageLogic
 
         private static void AddAddtionalDetailsToDictionary()
         {
-            m_AdditionalVehicleDetails.Add("CarColor", "Please enter the Car Color:\n 1 - Red \n 2 - White \n 3 - Green \n 4 - Blue ");
-            m_AdditionalVehicleDetails.Add("CarDoorsNumber", "Please specify the doors number in the car:\n 1 - Car with two doors \n 2 - Car with three doors \n 3 - Car with four doors \n 4 - Car with five doors ");
+            s_AdditionalVehicleDetails.Add("CarColor", "Please enter the Car Color:\n 1 - Red \n 2 - White \n 3 - Green \n 4 - Blue ");
+            s_AdditionalVehicleDetails.Add("CarDoorsNumber", "Please specify the doors number in the car:\n 1 - Car with two doors \n 2 - Car with three doors \n 3 - Car with four doors \n 4 - Car with five doors ");
         }
 
         public override void SetSingleDetail(string i_Key, string i_InsertedValue)
