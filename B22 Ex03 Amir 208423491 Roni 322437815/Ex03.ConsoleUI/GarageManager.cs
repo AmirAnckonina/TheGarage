@@ -58,23 +58,23 @@ namespace Ex03.ConsoleUI
 
         public void AddVehicleToTheGarageProcedure()
         {
-            string vehicleLicenceID, vehicleType;
+            string vehicleLicenseID, vehicleType;
 
             try
             {
                 vehicleType = r_ConsoleIOManager.GetVehicleType();
-                vehicleLicenceID = r_ConsoleIOManager.GetVehicleLicenseID();    
-                if (!r_Garage.LicenceIDExist(vehicleLicenceID))
+                vehicleLicenseID = r_ConsoleIOManager.GetVehicleLicenseID();    
+                if (!r_Garage.LicenseIDExist(vehicleLicenseID))
                 {
-                    r_Garage.AddNewVehicleToTheGarage(vehicleLicenceID, vehicleType);
-                    CompleteVehicleDetailsProcedure(vehicleLicenceID);
-                    CompleteGarageCardDetailsProcedure(vehicleLicenceID);
+                    r_Garage.AddNewVehicleToTheGarage(vehicleLicenseID, vehicleType);
+                    CompleteVehicleDetailsProcedure(vehicleLicenseID);
+                    CompleteGarageCardDetailsProcedure(vehicleLicenseID);
                 }
 
                 else
                 {
                     r_ConsoleIOManager.VehicleAllReadyInTheGarageMessage();
-                    r_Garage.ChangeVehicleStatus(vehicleLicenceID, (int)Garage.eVehicleStatus.InRepair);
+                    r_Garage.ChangeVehicleStatus(vehicleLicenseID, (int)Garage.eVehicleStatus.InRepair);
                 }
             }
             catch (Exception ex)
@@ -83,13 +83,13 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public void CompleteVehicleDetailsProcedure(string i_VehicleLicenceID)
+        public void CompleteVehicleDetailsProcedure(string i_VehicleLicenseID)
         {
             Vehicle currVehicle;
             string insertedInput;
             bool invalidInput;
 
-            currVehicle = r_Garage.GetVehicleByLicenceID(i_VehicleLicenceID);
+            currVehicle = r_Garage.GetVehicleByLicenseID(i_VehicleLicenseID);
             foreach (KeyValuePair<string, string> currVehicleDetail in currVehicle.AdditionalVehicleDetails)
             {
                 invalidInput = false;
@@ -112,13 +112,13 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public void CompleteGarageCardDetailsProcedure(string i_VehicleLicenceID)
+        public void CompleteGarageCardDetailsProcedure(string i_VehicleLicenseID)
         {
             GarageCard currGarageCard;
             string insertedInput;
             bool invalidInput;
 
-            currGarageCard = r_Garage.GetVehicleGarageCardByLicenceID(i_VehicleLicenceID);
+            currGarageCard = r_Garage.GetVehicleGarageCardByLicenseID(i_VehicleLicenseID);
             foreach (KeyValuePair<string, string> currGarageCardDetail in currGarageCard.GarageCardDetails)
             {
                 invalidInput = false;
@@ -148,7 +148,7 @@ namespace Ex03.ConsoleUI
             bool anotherOperation;
 
             vehicleLicenseID = r_ConsoleIOManager.GetVehicleLicenseID();
-            if (r_Garage.LicenceIDExist(vehicleLicenseID))
+            if (r_Garage.LicenseIDExist(vehicleLicenseID))
             {
                 r_ConsoleIOManager.PrintGeneralMessage(r_Garage.GetBasicInfoBeforeOperation(vehicleLicenseID));
                 /// Give the user to do several operations for the vehicle one by one.
@@ -179,31 +179,31 @@ namespace Ex03.ConsoleUI
 
         }
 
-        public void SingleOperationForVehicle(string i_LicenceID, int i_OperationNumber)
+        public void SingleOperationForVehicle(string i_LicenseID, int i_OperationNumber)
         {
             string vehicleInfo;
 
             switch (i_OperationNumber)
             {
                 case 1:
-                    r_Garage.RefuelVehicle(i_LicenceID, r_ConsoleIOManager.GetFuelType(), r_ConsoleIOManager.GetFuelAmount());
+                    r_Garage.RefuelVehicle(i_LicenseID, r_ConsoleIOManager.GetFuelType(), r_ConsoleIOManager.GetFuelAmount());
                     break;
 
                 case 2:
-                    r_Garage.ChargeVehicleBattery(i_LicenceID, r_ConsoleIOManager.GetTimeToChargeInMinutes());
+                    r_Garage.ChargeVehicleBattery(i_LicenseID, r_ConsoleIOManager.GetTimeToChargeInMinutes());
                     break;
 
                 case 3:
-                    r_Garage.InflateVehicleWheels(i_LicenceID);
+                    r_Garage.InflateVehicleWheels(i_LicenseID);
                     break;
 
                case 4:
-                    vehicleInfo = r_Garage.GetFullVehicleInformation(i_LicenceID);
+                    vehicleInfo = r_Garage.GetFullVehicleInformation(i_LicenseID);
                     r_ConsoleIOManager.PrintFullVehicleInfo(vehicleInfo); 
                     break;
 
                case 5:
-                    r_Garage.ChangeVehicleStatus(i_LicenceID, r_ConsoleIOManager.GetVehicleStatus());
+                    r_Garage.ChangeVehicleStatus(i_LicenseID, r_ConsoleIOManager.GetVehicleStatus());
                     break;
 
                 default:

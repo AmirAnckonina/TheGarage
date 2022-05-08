@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
             ElectricMotorcycle = 5
         }
 
-        public Vehicle ManufactureNewVehicle(string i_LicenceID, string i_VehicleType)
+        public Vehicle ManufactureNewVehicle(string i_LicenseID, string i_VehicleType)
         {
             eVehicleType vehicleType;
             Vehicle newVehicle;
@@ -28,16 +28,16 @@ namespace Ex03.GarageLogic
             {
                 case eVehicleType.FuelCar:
                 case eVehicleType.ElectricCar:
-                    newVehicle = new Car(i_LicenceID, newEnergySource);
+                    newVehicle = new Car(i_LicenseID, newEnergySource);
                     break;
 
                 case eVehicleType.FuelMotorcycle:
                 case eVehicleType.ElectricMotorcycle:
-                    newVehicle = new Motorcycle(i_LicenceID, newEnergySource);
+                    newVehicle = new Motorcycle(i_LicenseID, newEnergySource);
                     break;
 
                 case eVehicleType.FuelTruck:
-                    newVehicle = new Truck(i_LicenceID, newEnergySource);
+                    newVehicle = new Truck(i_LicenseID, newEnergySource);
                     break;
 
                 default:

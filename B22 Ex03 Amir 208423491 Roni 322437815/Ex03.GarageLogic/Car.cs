@@ -46,8 +46,8 @@ namespace Ex03.GarageLogic
         private eCarColor m_CarColor;
         private eDoorsNumber m_DoorsNumber;
 
-        public Car(string i_LicenceID, Energy i_CarEnergy)
-            : base(i_LicenceID, i_CarEnergy)
+        public Car(string i_LicenseID, Energy i_CarEnergy)
+            : base(i_LicenseID, i_CarEnergy)
         {
             AddAddtionalDetailsToDictionary();
         }

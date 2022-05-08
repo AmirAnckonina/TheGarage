@@ -8,15 +8,15 @@ namespace Ex03.GarageLogic
     public abstract class Vehicle
     {
         private const int k_MaxModelNameLength = 30;
-        private readonly string r_LicenceID;
+        private readonly string r_LicenseID;
         private string m_ModelName;
         private readonly Energy r_VehicleEnergy;
         private List<Wheel> m_VehicleWheels;
         protected static Dictionary<string, string> s_AdditionalVehicleDetails;
 
-        public Vehicle(string i_LicenceID, Energy i_VehicleEnergy)
+        public Vehicle(string i_LicenseID, Energy i_VehicleEnergy)
         {
-            r_LicenceID = i_LicenceID;
+            r_LicenseID = i_LicenseID;
             r_VehicleEnergy = i_VehicleEnergy;
             InitDictionary();
         }
@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public string LicenceID
+        public string LicenseID
         {
             get
             {
@@ -133,7 +133,7 @@ namespace Ex03.GarageLogic
         {
             StringBuilder infoOutput = new StringBuilder();
 
-            infoOutput.AppendLine("Vehicle license ID: " + r_LicenceID);
+            infoOutput.AppendLine("Vehicle license ID: " + r_LicenseID);
             infoOutput.AppendLine("Vehicle model name: " + m_ModelName);
             infoOutput.AppendLine("Wheels information: " + m_VehicleWheels[0].GetWheelDetails());
             infoOutput.AppendLine("Energy source: " + r_VehicleEnergy.GetType().Name);

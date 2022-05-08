@@ -30,8 +30,8 @@ namespace Ex03.GarageLogic
         private eHasCoolingCargo m_HasCoolingCargo;
         private  float m_CargoCapcity;
 
-        public Truck(string i_LicenceID, Energy i_TruckEnergy)
-            : base(i_LicenceID, i_TruckEnergy)
+        public Truck(string i_LicenseID, Energy i_TruckEnergy)
+            : base(i_LicenseID, i_TruckEnergy)
         {
             AddAddtionalDetailsToDictionary();
         }
