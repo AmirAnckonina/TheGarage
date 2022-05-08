@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
 {
     public class Motorcycle : Vehicle
     {
-        public enum eMCLicenseType
+        private enum eMCLicenceType
         {
             A = 1,
             A1,

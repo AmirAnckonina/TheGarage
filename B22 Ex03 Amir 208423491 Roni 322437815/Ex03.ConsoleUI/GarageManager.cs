@@ -105,8 +105,6 @@ namespace Ex03.ConsoleUI
                     {
                         r_ConsoleIOManager.PrintGeneralMessage(formatEx.Message);
                         invalidInput = false;
-                        /// insertedInput = r_ConsoleIOManager.GetSingleDetail(currVehicleDetail.Value);
-                        /// currVehicle.SetSingleDetail(currVehicleDetail.Key, insertedInput);
                     }
                 }
             }
@@ -134,8 +132,6 @@ namespace Ex03.ConsoleUI
                     {
                         r_ConsoleIOManager.PrintGeneralMessage(formatEx.Message);
                         invalidInput = false;
-                        /// insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
-                        /// currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
                     }
                 }
             }
