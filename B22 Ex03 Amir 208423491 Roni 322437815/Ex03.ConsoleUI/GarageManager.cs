@@ -87,25 +87,27 @@ namespace Ex03.ConsoleUI
         {
             Vehicle currVehicle;
             string insertedInput;
+            bool invalidInput;
 
             currVehicle = r_Garage.GetVehicleByLicenceID(i_VehicleLicenceID);
             foreach (KeyValuePair<string, string> currVehicleDetail in currVehicle.AdditionalVehicleDetails)
             {
-                try
+                invalidInput = false;
+                while(!invalidInput)
                 {
-                    insertedInput = r_ConsoleIOManager.GetSingleDetail(currVehicleDetail.Value);
-                    currVehicle.SetSingleDetail(currVehicleDetail.Key, insertedInput);
-                }
-                catch(FormatException formatEx)
-                {
-                    r_ConsoleIOManager.PrintGeneralMessage(formatEx.Message);
-                    insertedInput = r_ConsoleIOManager.GetSingleDetail(currVehicleDetail.Value);
-                    currVehicle.SetSingleDetail(currVehicleDetail.Key, insertedInput);
-                }
-                catch (Exception ex)
-                {
-                    r_ConsoleIOManager.PrintGeneralMessage(ex.Message);
-                    break;
+                    try
+                    {
+                        insertedInput = r_ConsoleIOManager.GetSingleDetail(currVehicleDetail.Value);
+                        currVehicle.SetSingleDetail(currVehicleDetail.Key, insertedInput);
+                        invalidInput = true;
+                    }
+                    catch(FormatException formatEx)
+                    {
+                        r_ConsoleIOManager.PrintGeneralMessage(formatEx.Message);
+                        invalidInput = false;
+                        /// insertedInput = r_ConsoleIOManager.GetSingleDetail(currVehicleDetail.Value);
+                        /// currVehicle.SetSingleDetail(currVehicleDetail.Key, insertedInput);
+                    }
                 }
             }
         }
@@ -114,23 +116,28 @@ namespace Ex03.ConsoleUI
         {
             GarageCard currGarageCard;
             string insertedInput;
+            bool invalidInput;
 
             currGarageCard = r_Garage.GetVehicleGarageCardByLicenceID(i_VehicleLicenceID);
             foreach (KeyValuePair<string, string> currGarageCardDetail in currGarageCard.GarageCardDetails)
             {
-                try
+                invalidInput = false;
+                while (!invalidInput)
                 {
-                    insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
-                    currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
+                    try
+                    {
+                        insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
+                        currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
+                        invalidInput = true;
+                    }
+                    catch (FormatException formatEx)
+                    {
+                        r_ConsoleIOManager.PrintGeneralMessage(formatEx.Message);
+                        invalidInput = false;
+                        /// insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
+                        /// currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
+                    }
                 }
-
-                catch (FormatException formatEx)
-                {
-                    r_ConsoleIOManager.PrintGeneralMessage(formatEx.Message);
-                    insertedInput = r_ConsoleIOManager.GetSingleDetail(currGarageCardDetail.Value);
-                    currGarageCard.SetSingleDetail(currGarageCardDetail.Key, insertedInput);
-                }
-
             }
         }
 
@@ -152,16 +159,8 @@ namespace Ex03.ConsoleUI
                     {
                         SingleOperationForVehicle(vehicleLicenseID, garageVehicleOperationNumber);
                     }
-                    catch (ValueOutOfRangeException valueRangeEx)
+                    catch (Exception ex) /// Including Argument, OutOfRange and Format Exceptions cases.
                     {
-                           /// In case the amount exceeded the maximun.
-                           r_ConsoleIOManager.PrintGeneralMessage(valueRangeEx.Message);
-                           SingleOperationForVehicle(vehicleLicenseID, garageVehicleOperationNumber);
-                    }
-                    catch (Exception ex) /// Including Argument and Format Exceptions case.
-                    {
-                        /// In case user trying to refuel in electric car,
-                        /// so a new operation will be suggested via Finally block.
                         r_ConsoleIOManager.PrintGeneralMessage(ex.Message);
                     }
                     finally
