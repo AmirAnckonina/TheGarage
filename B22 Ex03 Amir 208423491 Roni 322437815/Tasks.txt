@@ -1,8 +1,0 @@
-1. Parser class with generic parsing try -> sending sring which is the inserted value and Type -> the needed type after parsing.
-	* The return value will be the parsed variable.
-Test it.
-
-2. all messages stor in string.Format
-3.crate message with all garage operations
-4. convert choice to operation?
-
